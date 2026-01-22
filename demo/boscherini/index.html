@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa Boscherini | L'Esperienza Autentica</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- AOS Library CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Icone -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bosch-green': '#2F3E34',      /* Verde scuro profondo */
+                        'bosch-sage': '#A3B18A',       /* Salvia */
+                        'bosch-wood': '#9C6644',       /* Legno caldo */
+                        'bosch-cream': '#FDFCF6',      /* Sfondo caldo */
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Lato"', 'sans-serif'],
+                    },
+                    animation: {
+                        'ken-burns': 'kenBurns 30s ease-in-out infinite alternate',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        kenBurns: {
+                            '0%': { transform: 'scale(1)' },
+                            '100%': { transform: 'scale(1.15)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Override base AOS settings for smoother feel */
+        body[data-aos-duration='1000'] [data-aos], 
+        [data-aos][data-aos][data-aos-duration='1000'] {
+            transition-duration: 1000ms;
+        }
+
+        /* Stile Input Form */
+        .form-input {
+            background-color: transparent;
+            border-bottom: 1px solid #A3B18A;
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            border-bottom-color: #2F3E34;
+            outline: none;
+            padding-left: 10px;
+        }
+        
+        /* Mobile Menu Transition */
+        #mobileMenu {
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        #mobileMenu.open {
+            max-height: 300px;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="font-sans text-stone-700 bg-bosch-cream antialiased overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-bosch-cream/90 backdrop-blur-md border-b border-stone-200 py-4 transition-all shadow-sm">
+        <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="text-2xl font-serif font-bold text-bosch-green tracking-tight relative z-50">
+                Casa<span class="text-bosch-wood">Boscherini</span>.
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8 text-xs font-bold uppercase tracking-widest text-stone-600 items-center">
+                <a href="#storia" class="hover:text-bosch-wood transition-colors hover:underline decoration-bosch-wood decoration-2 underline-offset-4">La Storia</a>
+                <a href="#custodi" class="hover:text-bosch-wood transition-colors hover:underline decoration-bosch-wood decoration-2 underline-offset-4">I Cani</a>
+                <a href="#gallery" class="hover:text-bosch-wood transition-colors hover:underline decoration-bosch-wood decoration-2 underline-offset-4">La cucina</a>
+                <a href="#prenota" class="px-6 py-2 bg-bosch-green text-white rounded-full hover:bg-stone-800 transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-0.5">
+                    Prenota Tavolo
+                </a>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-bosch-green relative z-50 focus:outline-none">
+                <i data-lucide="menu" id="menuIcon"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="md:hidden bg-bosch-cream w-full border-b border-stone-200 absolute top-full left-0 shadow-xl">
+            <div class="flex flex-col p-6 space-y-6 text-center text-sm font-bold uppercase tracking-widest text-stone-600">
+                <a href="#storia" onclick="toggleMobileMenu()" class="hover:text-bosch-wood">La Storia</a>
+                <a href="#custodi" onclick="toggleMobileMenu()" class="hover:text-bosch-wood">I Cani</a>
+                <a href="#gallery" onclick="toggleMobileMenu()" class="hover:text-bosch-wood">Gallery</a>
+                <a href="#prenota" onclick="toggleMobileMenu()" class="text-bosch-green">Prenota Tavolo</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative h-screen flex items-center justify-center px-6 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <!-- Ken Burns Effect applied here -->
+            <img src="img/hero.jpg" 
+                 class="w-full h-full object-cover brightness-50 animate-ken-burns will-change-transform" alt="Tavolo Rustico">
+        </div>
+
+        <div class="relative z-10 text-center max-w-4xl text-white mt-10">
+            <div data-aos="fade-up" data-aos-duration="1200">
+                <p class="font-serif italic text-2xl text-bosch-sage mb-4 tracking-wide">Un solo tavolo. Un'esperienza unica.</p>
+                <h1 class="text-5xl md:text-7xl font-serif font-bold mb-8 leading-tight drop-shadow-lg">
+                    L'Anima Rustica<br/><span class="text-stone-300">incontra il Gourmet</span>
+                </h1>
+                <p class="text-stone-200 text-lg md:text-xl font-light max-w-2xl mx-auto mb-12 leading-relaxed opacity-90">
+                    Benvenuti nella nostra casa di campagna. Dove il tempo rallenta, i sapori sono veri e l'accoglienza ha quattro zampe.
+                </p>
+                <div class="flex flex-col md:flex-row justify-center gap-4">
+                    <a href="#prenota" class="px-10 py-4 bg-white text-bosch-green font-bold rounded-full hover:bg-bosch-sage hover:text-white transition-all duration-300 shadow-2xl hover:shadow-white/20 transform hover:-translate-y-1">
+                        Verifica Disponibilità
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 animate-float text-white/60">
+            <i data-lucide="chevron-down" class="w-10 h-10"></i>
+        </div>
+    </header>
+
+    <!-- La Storia -->
+    <section id="storia" class="py-24 bg-bosch-cream overflow-hidden">
+        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            <div class="relative" data-aos="fade-right" data-aos-duration="1200">
+                <div class="absolute -top-4 -left-4 w-full h-full border-2 border-bosch-wood rounded-tr-3xl rounded-bl-3xl z-0"></div>
+                <img src="img/interno2.jpg" 
+                     alt="Interno Casa" 
+                     class="relative z-10 shadow-2xl rounded-tr-3xl rounded-bl-3xl w-full h-[500px] object-cover transition-transform duration-700 hover:scale-[1.02]">
+            </div>
+
+            <div data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+                <span class="text-bosch-wood font-bold uppercase tracking-widest text-xs mb-2 block">Chi Siamo</span>
+                <h2 class="text-bosch-green font-serif text-4xl md:text-5xl mb-6 leading-tight">Più che un ristorante,<br/>è casa nostra.</h2>
+                <p class="text-stone-600 mb-6 leading-relaxed text-lg font-light">
+                    Non ci sono turni da rispettare qui. C'è solo un tavolo, un camino scoppiettante e la voglia di condividere la nostra passione per la terra.
+                </p>
+                <p class="text-stone-600 mb-8 leading-relaxed text-lg font-light">
+                    In cucina trasformiamo ingredienti poveri in piatti gourmet, curando ogni dettaglio con amore. È un lusso semplice, fatto di silenzio e sapori autentici.
+                </p>
+                <div class="flex items-center space-x-4 border-l-4 border-bosch-sage pl-6">
+                    <div class="font-serif italic text-bosch-green text-xl">La Famiglia Boscherini</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- I Tre Labrador -->
+    <section id="custodi" class="py-24 bg-white border-y border-stone-100">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <div data-aos="fade-up" data-aos-duration="1000">
+                <h2 class="font-serif text-3xl md:text-4xl text-bosch-green mb-4">I veri padroni di casa</h2>
+                <p class="text-stone-500 mb-16 max-w-xl mx-auto text-lg font-light">L'accoglienza a Casa Boscherini non sarebbe la stessa senza le nostre tre code scodinzolanti.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <!-- Beppe -->
+                <div class="group cursor-pointer" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden border-4 border-bosch-sage/20 p-2 group-hover:border-bosch-wood transition-all duration-500 relative">
+                        <img src="img/beppe.jpg" class="w-full h-full object-cover rounded-full transform group-hover:scale-110 transition-transform duration-700" alt="Labrador 1">
+                    </div>
+                    <h3 class="text-2xl font-serif font-bold text-bosch-green group-hover:text-bosch-wood transition-colors">Beppe</h3>
+                    <p class="text-xs text-stone-400 uppercase tracking-widest mt-2">Il Sommelier</p>
+                </div>
+                <!-- Piera -->
+                <div class="group cursor-pointer" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden border-4 border-bosch-sage/20 p-2 group-hover:border-bosch-wood transition-all duration-500 relative">
+                        <img src="img/piera.jpg" class="w-full h-full object-cover rounded-full transform group-hover:scale-110 transition-transform duration-700" alt="Labrador 2">
+                    </div>
+                    <h3 class="text-2xl font-serif font-bold text-bosch-green group-hover:text-bosch-wood transition-colors">Piera</h3>
+                    <p class="text-xs text-stone-400 uppercase tracking-widest mt-2">La Regina</p>
+                </div>
+                <!-- Giotto -->
+                <div class="group cursor-pointer" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden border-4 border-bosch-sage/20 p-2 group-hover:border-bosch-wood transition-all duration-500 relative">
+                        <img src="img/vanda.jpg" class="w-full h-full object-cover rounded-full transform group-hover:scale-110 transition-transform duration-700" alt="Labrador 3">
+                    </div>
+                    <h3 class="text-2xl font-serif font-bold text-bosch-green group-hover:text-bosch-wood transition-colors">Vanda</h3>
+                    <p class="text-xs text-stone-400 uppercase tracking-widest mt-2">L'Assaggiatrice</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="py-24 bg-stone-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-down" data-aos-duration="1000">
+                <span class="text-bosch-wood font-bold uppercase tracking-widest text-xs">Qualche piatto</span>
+                <h2 class="text-4xl md:text-5xl font-serif text-bosch-green mt-2">I Nostri Sapori</h2>
+                <p class="text-stone-500 max-w-lg mx-auto mt-4 font-light">
+                    La bellezza della semplicità, dall'orto al piatto.
+                </p>
+            </div>
+
+            <!-- Griglia Gallery -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+                <!-- Helper per le card -->
+                <!-- Card Img -->
+                <div class="relative overflow-hidden rounded-xl h-72 shadow-lg group cursor-pointer" data-aos="fade-up" data-aos-delay="0">
+                    <img src="img/piatto1.jpg" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="Piatto">
+                    <div class="absolute inset-0 bg-gradient-to-t from-bosch-green/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                        <span class="text-white font-serif italic text-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Nome Piatto</span>
+                    </div>
+                </div>
+
+                <div class="relative overflow-hidden rounded-xl h-72 shadow-lg group cursor-pointer" data-aos="fade-up" data-aos-delay="100">
+                    <img src="img/piatto2.jpg" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="Piatto">
+                    <div class="absolute inset-0 bg-gradient-to-t from-bosch-green/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                        <span class="text-white font-serif italic text-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Nome Piatto</span>
+                    </div>
+                </div>
+
+                <div class="relative overflow-hidden rounded-xl h-72 shadow-lg group cursor-pointer" data-aos="fade-up" data-aos-delay="200">
+                    <img src="img/piatto3.jpg" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="Piatto">
+                    <div class="absolute inset-0 bg-gradient-to-t from-bosch-green/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                        <span class="text-white font-serif italic text-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Nome Piatto</span>
+                    </div>
+                </div>
+
+                <div class="relative overflow-hidden rounded-xl h-72 shadow-lg group cursor-pointer" data-aos="fade-up" data-aos-delay="300">
+                    <img src="img/piatto4.jpg" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="Piatto">
+                    <div class="absolute inset-0 bg-gradient-to-t from-bosch-green/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                        <span class="text-white font-serif italic text-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Nome Piatto</span>
+                    </div>
+                </div>
+
+                 <div class="relative overflow-hidden rounded-xl h-72 shadow-lg group cursor-pointer hidden md:block" data-aos="fade-up" data-aos-delay="400">
+                    <img src="img/piatto5.jpg" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="Piatto">
+                     <div class="absolute inset-0 bg-gradient-to-t from-bosch-green/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                        <span class="text-white font-serif italic text-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Nome Piatto</span>
+                    </div>
+                </div>
+
+                <div class="relative overflow-hidden rounded-xl h-72 shadow-lg group cursor-pointer hidden md:block" data-aos="fade-up" data-aos-delay="500">
+                    <img src="img/piatto6.jpg" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="Piatto">
+                     <div class="absolute inset-0 bg-gradient-to-t from-bosch-green/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                        <span class="text-white font-serif italic text-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Nome Piatto</span>
+                    </div>
+                </div>
+
+                <div class="relative overflow-hidden rounded-xl h-72 shadow-lg group cursor-pointer hidden md:block" data-aos="fade-up" data-aos-delay="500">
+                    <img src="img/piatto7.jpg" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="Piatto">
+                     <div class="absolute inset-0 bg-gradient-to-t from-bosch-green/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                        <span class="text-white font-serif italic text-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Nome Piatto</span>
+                    </div>
+                </div>
+
+                <div class="relative overflow-hidden rounded-xl h-72 shadow-lg group cursor-pointer hidden md:block" data-aos="fade-up" data-aos-delay="500">
+                    <img src="img/piatto8.jpg" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="Piatto">
+                     <div class="absolute inset-0 bg-gradient-to-t from-bosch-green/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                        <span class="text-white font-serif italic text-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Nome Piatto</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRENOTAZIONE -->
+    <section id="prenota" class="py-32 bg-bosch-green text-white relative overflow-hidden">
+        <!-- Abstract Background Shapes -->
+        <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-stone-500/10 rounded-full blur-[120px] pointer-events-none animate-pulse"></div>
+        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-black/20 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-5xl mx-auto px-6 relative z-10">
+            <div class="grid md:grid-cols-2 gap-16">
+                <!-- Info -->
+                <div data-aos="fade-right" data-aos-duration="1000">
+                    <h2 class="text-5xl font-serif mb-6">Prenota il <br/>Tavolo Unico.</h2>
+                    <p class="text-bosch-sage text-lg mb-10 font-light">
+                        Il calendario è spesso pieno, ma ogni tanto si libera una data. Cerca il tuo giorno fortunato.
+                    </p>
+
+                    <div class="space-y-8">
+                        <div class="flex items-start group">
+                            <div class="p-4 bg-white/5 border border-white/10 rounded-full mr-5 group-hover:bg-bosch-wood group-hover:text-white transition-colors duration-300">
+                                <i data-lucide="calendar-check" class="text-bosch-sage group-hover:text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Una sola prenotazione</h4>
+                                <p class="text-sm text-stone-300 mt-1 font-light">Tutta la casa è per voi.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start group">
+                            <div class="p-4 bg-white/5 border border-white/10 rounded-full mr-5 group-hover:bg-bosch-wood group-hover:text-white transition-colors duration-300">
+                                <i data-lucide="clock" class="text-bosch-sage group-hover:text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Nessuna fretta</h4>
+                                <p class="text-sm text-stone-300 mt-1 font-light">Arrivate per l'aperitivo, restate finché volete.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calendar & Form -->
+                <div class="bg-white text-stone-800 rounded-3xl p-8 shadow-2xl relative" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    
+                    <!-- Decorazione angolo -->
+                    <div class="absolute -top-3 -right-3 w-20 h-20 bg-bosch-sage/20 rounded-full blur-xl"></div>
+
+                    <div id="calendarView">
+                        <div class="flex justify-between items-center mb-6 border-b border-stone-100 pb-4">
+                            <h4 class="font-serif text-xl font-bold text-bosch-green" id="currentMonthDisplay">Gennaio 2026</h4>
+                            <div class="flex gap-2">
+                                <button onclick="changeMonth(-1)" class="p-2 hover:bg-stone-100 rounded-full transition-colors"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
+                                <button onclick="changeMonth(1)" class="p-2 hover:bg-stone-100 rounded-full transition-colors"><i data-lucide="chevron-right" class="w-5 h-5"></i></button>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-7 gap-2 text-center text-xs font-bold text-stone-400 mb-2">
+                            <div>L</div><div>M</div><div>M</div><div>G</div><div>V</div><div>S</div><div>D</div>
+                        </div>
+                        <div id="calendarGrid" class="grid grid-cols-7 gap-2"></div>
+                        <div class="mt-6 flex items-center justify-center space-x-4 text-xs">
+                            <div class="flex items-center"><span class="w-3 h-3 bg-bosch-green rounded-full mr-2"></span> Libero</div>
+                            <div class="flex items-center"><span class="w-3 h-3 bg-stone-200 rounded-full mr-2"></span> Occupato</div>
+                        </div>
+                    </div>
+
+                    <div id="bookingForm" class="hidden animate-in fade-in slide-in-from-bottom-4 duration-500">
+                        <div class="flex items-center mb-6">
+                            <button onclick="backToCalendar()" class="text-stone-400 hover:text-stone-800 mr-4 transition-colors">
+                                <i data-lucide="arrow-left"></i>
+                            </button>
+                            <div>
+                                <p class="text-xs text-stone-500 uppercase font-bold">Richiesta per il</p>
+                                <h3 class="font-serif text-2xl text-bosch-green" id="selectedDateDisplay">--</h3>
+                            </div>
+                        </div>
+                        <form class="space-y-6" onsubmit="event.preventDefault(); submitForm();">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="col-span-2">
+                                    <label class="text-xs font-bold uppercase text-stone-400">Nome e Cognome</label>
+                                    <input type="text" class="w-full py-2 form-input" placeholder="Mario Rossi" required>
+                                </div>
+                                <div>
+                                    <label class="text-xs font-bold uppercase text-stone-400">Ospiti</label>
+                                    <select class="w-full py-2 form-input bg-transparent cursor-pointer">
+                                        <option>2 Persone</option>
+                                        <option>3 Persone</option>
+                                        <option>4 Persone</option>
+                                        <option>5+ (Contattaci)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="text-xs font-bold uppercase text-stone-400">Orario</label>
+                                    <select class="w-full py-2 form-input bg-transparent cursor-pointer">
+                                        <option>12:30 (Pranzo)</option>
+                                        <option>20:00 (Cena)</option>
+                                    </select>
+                                </div>
+                                <div class="col-span-2">
+                                    <label class="text-xs font-bold uppercase text-stone-400">Allergie / Note</label>
+                                    <textarea class="w-full py-2 form-input resize-none" rows="2" placeholder="Vegetariani, celiaci, ecc..."></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="w-full py-4 bg-bosch-green text-white font-bold rounded-xl hover:bg-stone-800 transition-all shadow-lg hover:shadow-xl transform active:scale-95">Invia Richiesta</button>
+                        </form>
+                    </div>
+                    
+                    <div id="successMessage" class="hidden text-center py-10 animate-in zoom-in duration-300">
+                        <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i data-lucide="check" class="w-10 h-10"></i>
+                        </div>
+                        <h3 class="font-serif text-2xl text-bosch-green mb-2">Richiesta Inviata!</h3>
+                        <p class="text-stone-500 mb-6">Edoardo ti contatterà a breve su WhatsApp per confermare.</p>
+                        <button onclick="location.reload()" class="text-sm underline text-stone-400 hover:text-bosch-green">Torna alla home</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-stone-900 text-stone-500 py-12 text-center text-sm border-t border-stone-800">
+        <p class="font-serif text-2xl text-white mb-4">Casa<span class="text-bosch-wood">Boscherini</span></p>
+        <div class="flex justify-center space-x-6 my-6">
+            <i data-lucide="instagram" class="w-6 h-6 hover:text-white cursor-pointer transition-colors transform hover:scale-110"></i>
+            <i data-lucide="facebook" class="w-6 h-6 hover:text-white cursor-pointer transition-colors transform hover:scale-110"></i>
+        </div>
+        <p class="opacity-60">Loc. Campagna, Toscana - Made with love for Boscherini</p>
+    </footer>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        // Init AOS
+        AOS.init({
+            once: true, // Animation happens only once
+            offset: 100, // Trigger point
+            easing: 'ease-out-cubic',
+        });
+
+        lucide.createIcons();
+
+        // --- Mobile Menu Logic ---
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('open');
+        }
+
+        // --- Calendar Logic (Mantieni il tuo codice esistente, è ottimo) ---
+        const calendarGrid = document.getElementById('calendarGrid');
+        const bookingForm = document.getElementById('bookingForm');
+        const calendarView = document.getElementById('calendarView');
+        const selectedDateDisplay = document.getElementById('selectedDateDisplay');
+        const successMessage = document.getElementById('successMessage');
+        const currentMonthDisplay = document.getElementById('currentMonthDisplay');
+
+        let date = new Date(2026, 0, 1);
+
+        function renderCalendar() {
+            calendarGrid.innerHTML = '';
+            const year = date.getFullYear();
+            const month = date.getMonth();
+            const monthNames = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"];
+            currentMonthDisplay.innerText = `${monthNames[month]} ${year}`;
+
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const startingDay = firstDay === 0 ? 6 : firstDay - 1; 
+
+            for(let i=0; i<startingDay; i++) {
+                calendarGrid.appendChild(document.createElement('div'));
+            }
+
+            for(let i=1; i<=daysInMonth; i++) {
+                const btn = document.createElement('button');
+                btn.innerText = i;
+                btn.className = "h-10 w-10 rounded-full flex items-center justify-center text-sm transition-all";
+                const isBusy = (i + month) % 3 === 0 || i % 7 === 0;
+                if(isBusy) {
+                    btn.classList.add("text-stone-300", "bg-stone-100", "cursor-not-allowed");
+                    btn.disabled = true;
+                } else {
+                    btn.classList.add("hover:bg-bosch-green", "hover:text-white", "text-stone-700", "font-bold", "bg-white", "border", "border-stone-100", "hover:scale-110");
+                    btn.onclick = () => openForm(i, monthNames[month]);
+                }
+                calendarGrid.appendChild(btn);
+            }
+        }
+
+        function changeMonth(delta) {
+            date.setMonth(date.getMonth() + delta);
+            renderCalendar();
+        }
+
+        function openForm(day, month) {
+            selectedDateDisplay.innerText = `${day} ${month}`;
+            calendarView.classList.add('hidden');
+            bookingForm.classList.remove('hidden');
+        }
+
+        function backToCalendar() {
+            bookingForm.classList.add('hidden');
+            calendarView.classList.remove('hidden');
+        }
+
+        function submitForm() {
+            bookingForm.classList.add('hidden');
+            successMessage.classList.remove('hidden');
+        }
+
+        renderCalendar();
+    </script>
+</body>
+</html>
