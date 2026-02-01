@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dental Clinique Pavia - Clinica Dentistica Specializzata</title>
+
+    <!-- Tailwind CSS & Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(14, 165, 233, 0.1)',
+                        'glow': '0 0 15px rgba(56, 189, 248, 0.3)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #075985;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #e0f2fe;
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased">
+
+    <!-- NAVBAR (Uguale alla Home ma con link relativi corretti) -->
+    <nav class="glass-nav fixed w-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 h-20 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3">
+                <img src="img/logo.png" alt="Dental Clinique" class="h-10 md:h-12 w-auto object-contain">
+            </a>
+
+            <div class="hidden md:flex items-center gap-8 font-medium text-sm text-brand-800">
+                <a href="sedi.html" class="text-brand-500 font-semibold">Le Nostre Sedi</a>
+                <a href="#trattamenti" class="hover:text-brand-500 transition">Trattamenti</a>
+            </div>
+
+            <div class="hidden md:flex items-center gap-5">
+                <div class="text-right hidden lg:block">
+                    <span class="block text-xs text-brand-400 font-semibold uppercase">Pavia</span>
+                    <span class="block text-lg font-bold text-brand-900 leading-none font-mono">0382-123456</span>
+                </div>
+                <a href="#contatti"
+                    class="bg-brand-500 hover:bg-brand-600 text-white px-7 py-3 rounded-full text-sm font-bold shadow-soft transition-transform transform hover:-translate-y-0.5">
+                    Prenota a Pavia
+                </a>
+            </div>
+
+            <!-- Mobile Menu Btn -->
+            <button id="mobile-menu-btn" class="md:hidden text-brand-900 text-2xl focus:outline-none p-2">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu"
+            class="hidden md:hidden absolute top-20 left-0 w-full bg-white border-t border-brand-100 shadow-xl">
+            <div class="flex flex-col p-6 gap-4 font-medium text-brand-800">
+                <a href="index.html" class="py-2 border-b border-brand-50">Home</a>
+                <a href="sedi.html" class="py-2 border-b border-brand-50 font-bold text-brand-500">Torna alle Sedi</a>
+                <a href="tel:0382123456"
+                    class="text-center py-3 bg-brand-500 text-white rounded-xl font-bold mt-2">Chiama Clinica Pavia</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO DELLA SEDE -->
+    <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-brand-900 overflow-hidden">
+        <!-- Immagine Sfondo Sede (Scurita) -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
+                class="w-full h-full object-cover opacity-20">
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-900 via-brand-900/80 to-transparent"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <div
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-800 border border-brand-600 text-brand-200 text-xs font-bold uppercase tracking-wider mb-6">
+                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span> Clinica Aperta Adesso
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">Dental Clinique Pavia</h1>
+            <p class="text-xl text-brand-200 max-w-2xl mx-auto mb-10">
+                Il tuo centro odontoiatrico di fiducia in Corso Cavour. <br>
+                Tecnologia avanzata, parcheggio riservato e orario continuato.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="tel:0382123456"
+                    class="bg-white text-brand-900 px-8 py-4 rounded-xl font-bold hover:bg-brand-50 transition shadow-lg flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-phone"></i> 0382-123456
+                </a>
+                <a href="https://maps.google.com" target="_blank"
+                    class="bg-brand-700/50 text-white border border-brand-500 px-8 py-4 rounded-xl font-bold hover:bg-brand-700 transition flex items-center justify-center gap-2 backdrop-blur-sm">
+                    <i class="fa-solid fa-diamond-turn-right"></i> Portami Qui
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- INFO E ORARI (Layout Asimmetrico) -->
+    <section class="py-16 bg-white -mt-10 relative z-20">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-3 gap-8">
+
+                <!-- Colonna Sx: Info -->
+                <div class="lg:col-span-2 space-y-8">
+                    <!-- Intro -->
+                    <div class="bg-white p-8 rounded-3xl shadow-soft border border-brand-100">
+                        <h2 class="text-2xl font-bold text-brand-900 mb-4">La Struttura</h2>
+                        <p class="text-brand-700 leading-relaxed mb-6">
+                            La sede di Pavia si sviluppa su 250mq dedicati alla salute orale. Dispone di 4 sale
+                            operative, una sala chirurgica sterile per l'implantologia avanzata e una sala relax
+                            post-intervento.
+                            La struttura è priva di barriere architettoniche.
+                        </p>
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div class="flex items-center gap-3 text-brand-800">
+                                <div
+                                    class="w-8 h-8 rounded-full bg-brand-50 flex items-center justify-center text-brand-500">
+                                    <i class="fa-solid fa-wifi"></i></div>
+                                <span>Wi-Fi Pazienti Gratuito</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-brand-800">
+                                <div
+                                    class="w-8 h-8 rounded-full bg-brand-50 flex items-center justify-center text-brand-500">
+                                    <i class="fa-solid fa-square-parking"></i></div>
+                                <span>Parcheggio Convenzionato</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-brand-800">
+                                <div
+                                    class="w-8 h-8 rounded-full bg-brand-50 flex items-center justify-center text-brand-500">
+                                    <i class="fa-solid fa-elevator"></i></div>
+                                <span>Ascensore / Accesso Disabili</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Sede -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            class="rounded-2xl shadow-sm h-48 object-cover w-full">
+                        <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            class="rounded-2xl shadow-sm h-48 object-cover w-full">
+                    </div>
+                </div>
+
+                <!-- Colonna Dx: Orari e Contatti (Sticky) -->
+                <div class="lg:col-span-1">
+                    <div class="bg-brand-50 p-8 rounded-3xl border border-brand-200 sticky top-24">
+                        <h3 class="text-xl font-bold text-brand-900 mb-6 flex items-center gap-2">
+                            <i class="fa-regular fa-clock text-brand-500"></i> Orari Pavia
+                        </h3>
+                        <ul class="space-y-4 text-sm text-brand-800 mb-8">
+                            <li class="flex justify-between border-b border-brand-200 pb-2">
+                                <span>Lun - Ven</span>
+                                <span class="font-bold">09:00 - 20:00</span>
+                            </li>
+                            <li class="flex justify-between border-b border-brand-200 pb-2">
+                                <span>Sabato</span>
+                                <span class="font-bold">09:00 - 13:00</span>
+                            </li>
+                            <li class="flex justify-between text-brand-400">
+                                <span>Domenica</span>
+                                <span>Chiuso</span>
+                            </li>
+                        </ul>
+
+                        <h3 class="text-xl font-bold text-brand-900 mb-4">Contatti Diretti</h3>
+                        <p class="text-brand-600 text-sm mb-6">
+                            Corso Cavour 32, 27100 Pavia (PV)<br>
+                            Email: <a href="mailto:pavia@dentalclinique.net"
+                                class="underline">pavia@dentalclinique.net</a>
+                        </p>
+
+                        <a href="tel:0382123456"
+                            class="block w-full py-4 bg-brand-600 text-white font-bold text-center rounded-xl hover:bg-brand-700 transition shadow-lg mb-3">
+                            <i class="fa-solid fa-phone mr-2"></i> Chiama Sede
+                        </a>
+                        <a href="https://wa.me/39333000000"
+                            class="block w-full py-4 bg-white text-green-600 border border-green-200 font-bold text-center rounded-xl hover:bg-green-50 transition">
+                            <i class="fa-brands fa-whatsapp mr-2"></i> WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- TRATTAMENTI DISPONIBILI A PAVIA -->
+    <section class="py-20 bg-white" id="trattamenti">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-brand-500 font-bold uppercase tracking-widest text-xs">Cosa facciamo</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-brand-900 mt-2">Servizi Attivi in Sede</h2>
+                <p class="text-brand-600 mt-4 max-w-2xl mx-auto">
+                    Questa clinica è attrezzata per gestire ogni tipo di esigenza odontoiatrica, dall'igiene quotidiana
+                    alla chirurgia complessa, senza doverti spostare.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Servizio 1: Implantologia (Highlight) -->
+                <div class="bg-brand-50 rounded-3xl p-8 border border-brand-100 hover:shadow-lg transition group">
+                    <div
+                        class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-brand-600 text-2xl mb-6 shadow-sm group-hover:bg-brand-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-screwdriver"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-900 mb-3">Implantologia Avanzata</h3>
+                    <p class="text-brand-800/70 mb-4 leading-relaxed">
+                        Riabilitazioni complete (All-on-4/6) e impianti a carico immediato. Grazie alla TAC in sede,
+                        pianifichiamo l'intervento al millimetro.
+                    </p>
+                    <ul class="text-sm text-brand-600 space-y-2 mb-6">
+                        <li><i class="fa-solid fa-check text-brand-400 mr-2"></i>Garanzia 20 anni</li>
+                        <li><i class="fa-solid fa-check text-brand-400 mr-2"></i>Passaporto Implantare</li>
+                    </ul>
+                </div>
+
+                <!-- Servizio 2: Pronto Soccorso -->
+                <div class="bg-white rounded-3xl p-8 border border-brand-100 hover:shadow-lg transition group">
+                    <div
+                        class="w-14 h-14 bg-brand-50 rounded-2xl flex items-center justify-center text-red-500 text-2xl mb-6 shadow-sm group-hover:bg-red-500 group-hover:text-white transition">
+                        <i class="fa-solid fa-truck-medical"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-900 mb-3">Pronto Soccorso Dentistico</h3>
+                    <p class="text-brand-800/70 mb-4 leading-relaxed">
+                        Gestione immediata di dolore acuto, ascessi o traumi. Servizio disponibile durante tutto
+                        l'orario di apertura della clinica.
+                    </p>
+                    <a href="tel:0382123456" class="inline-block text-sm font-bold text-red-500 hover:underline">Chiama
+                        per urgenze <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                </div>
+
+                <!-- Servizio 3: Ortodonzia -->
+                <div class="bg-white rounded-3xl p-8 border border-brand-100 hover:shadow-lg transition group">
+                    <div
+                        class="w-14 h-14 bg-brand-50 rounded-2xl flex items-center justify-center text-brand-600 text-2xl mb-6 shadow-sm group-hover:bg-brand-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-teeth"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-900 mb-3">Ortodonzia Invisibile</h3>
+                    <p class="text-brand-800/70 mb-4 leading-relaxed">
+                        Allineamento dentale con mascherine trasparenti per adulti e bambini. Scansione digitale delle
+                        impronte (niente pasta fastidiosa).
+                    </p>
+                </div>
+
+                <!-- Servizio 4: Estetica -->
+                <div class="bg-white rounded-3xl p-8 border border-brand-100 hover:shadow-lg transition group">
+                    <div
+                        class="w-14 h-14 bg-brand-50 rounded-2xl flex items-center justify-center text-brand-600 text-2xl mb-6 shadow-sm group-hover:bg-brand-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-gem"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-900 mb-3">Estetica Dentale</h3>
+                    <p class="text-brand-800/70 mb-4 leading-relaxed">
+                        Faccette in ceramica, sbiancamento professionale a LED e ricostruzioni estetiche per un sorriso
+                        perfetto.
+                    </p>
+                </div>
+
+                <!-- Servizio 5: Igiene -->
+                <div class="bg-white rounded-3xl p-8 border border-brand-100 hover:shadow-lg transition group">
+                    <div
+                        class="w-14 h-14 bg-brand-50 rounded-2xl flex items-center justify-center text-brand-600 text-2xl mb-6 shadow-sm group-hover:bg-brand-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-pump-soap"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-900 mb-3">Igiene e Prevenzione</h3>
+                    <p class="text-brand-800/70 mb-4 leading-relaxed">
+                        Pulizia dei denti profonda, ablazione tartaro e piani di prevenzione personalizzati per evitare
+                        la carie.
+                    </p>
+                </div>
+
+                <!-- Servizio 6: Diagnostica -->
+                <div class="bg-white rounded-3xl p-8 border border-brand-100 hover:shadow-lg transition group">
+                    <div
+                        class="w-14 h-14 bg-brand-50 rounded-2xl flex items-center justify-center text-brand-600 text-2xl mb-6 shadow-sm group-hover:bg-brand-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-x-ray"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-900 mb-3">Diagnostica 3D</h3>
+                    <p class="text-brand-800/70 mb-4 leading-relaxed">
+                        Eseguiamo TAC Dentalscan, Panoramiche e Radiografie endorali direttamente in sede durante la
+                        prima visita.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Banner CTA intermedio -->
+            <div
+                class="mt-12 p-8 bg-brand-900 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+                <div>
+                    <h4 class="text-2xl font-bold text-white mb-2">Hai bisogno di un preventivo?</h4>
+                    <p class="text-brand-200">La prima visita e il preventivo sono senza impegno.</p>
+                </div>
+                <a href="#contatti"
+                    class="bg-white text-brand-900 px-8 py-3 rounded-xl font-bold hover:bg-brand-50 transition shadow-lg whitespace-nowrap">
+                    Richiedi Visita a Pavia
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- EQUIPE MEDICA DELLA SEDE -->
+    <section class="py-20 bg-brand-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-brand-900 mb-12 text-center">I Medici di Pavia</h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Medico 1 -->
+                <div class="bg-white p-6 rounded-2xl text-center shadow-sm hover:shadow-lg transition">
+                    <div class="w-24 h-24 mx-auto bg-brand-100 rounded-full mb-4 overflow-hidden">
+                        <!-- Placeholder Medico -->
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-bold text-brand-900 text-lg">Dr. Mario Rossi</h3>
+                    <p class="text-brand-500 text-xs font-bold uppercase mb-2">Direttore Sanitario</p>
+                    <p class="text-brand-800/60 text-sm">Specialista in Implantologia e Chirurgia Orale.</p>
+                </div>
+
+                <!-- Medico 2 -->
+                <div class="bg-white p-6 rounded-2xl text-center shadow-sm hover:shadow-lg transition">
+                    <div class="w-24 h-24 mx-auto bg-brand-100 rounded-full mb-4 overflow-hidden">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-bold text-brand-900 text-lg">Dr.ssa Anna Bianchi</h3>
+                    <p class="text-brand-500 text-xs font-bold uppercase mb-2">Ortodonzista</p>
+                    <p class="text-brand-800/60 text-sm">Specialista in Ortodonzia invisibile e Pedodonzia.</p>
+                </div>
+
+                <!-- Medico 3 -->
+                <div class="bg-white p-6 rounded-2xl text-center shadow-sm hover:shadow-lg transition">
+                    <div class="w-24 h-24 mx-auto bg-brand-100 rounded-full mb-4 overflow-hidden">
+                        <img src="https://randomuser.me/api/portraits/men/85.jpg" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-bold text-brand-900 text-lg">Dr. Luca Verdi</h3>
+                    <p class="text-brand-500 text-xs font-bold uppercase mb-2">Odontoiatra</p>
+                    <p class="text-brand-800/60 text-sm">Specialista in Conservativa ed Endodonzia.</p>
+                </div>
+
+                <!-- Igienista -->
+                <div class="bg-white p-6 rounded-2xl text-center shadow-sm hover:shadow-lg transition">
+                    <div class="w-24 h-24 mx-auto bg-brand-100 rounded-full mb-4 overflow-hidden">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-bold text-brand-900 text-lg">Elena Neri</h3>
+                    <p class="text-brand-500 text-xs font-bold uppercase mb-2">Igienista Dentale</p>
+                    <p class="text-brand-800/60 text-sm">Prevenzione e Igiene orale professionale.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FOOTER CLEAN -->
+    <footer class="bg-brand-900 text-brand-100 pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12 mb-12 border-b border-brand-800 pb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-6 text-white">
+                        <i class="fa-solid fa-tooth text-brand-400 text-2xl"></i>
+                        <span class="font-bold text-xl">Dental Clinique</span>
+                    </div>
+                    <p class="text-brand-200 text-sm leading-relaxed">
+                        Sede Legale: Via San Francesco 1/a, Pisa<br>
+                        P.IVA 02061240509<br>
+                        Email: info@dentalclinique.net
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-5">Pazienti</h4>
+                    <ul class="space-y-3 text-sm text-brand-200">
+                        <li><a href="sedi.html" class="hover:text-white transition">Le Nostre Sedi</a></li>
+                        <li><a href="#" class="hover:text-white transition">Convenzioni Dirette</a></li>
+                        <li><a href="#" class="hover:text-white transition">Metodi di Pagamento</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-5">Trattamenti</h4>
+                    <ul class="space-y-3 text-sm text-brand-200">
+                        <li><a href="implantologia.html" class="hover:text-white transition">Implantologia</a></li>
+                        <li><a href="#" class="hover:text-white transition">Ortodonzia Invisibile</a></li>
+                        <li><a href="#" class="hover:text-white transition">Faccette Estetiche</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-5">Urgenze</h4>
+                    <p class="text-brand-200 text-sm mb-4">Il servizio di pronto soccorso è attivo durante l'orario di
+                        apertura.</p>
+                    <a href="tel:800561444"
+                        class="inline-block bg-brand-800 text-white px-4 py-2 rounded-lg font-bold border border-brand-600 hover:bg-brand-700 transition">
+                        Chiama 800-561444
+                    </a>
+                </div>
+            </div>
+            <div class="text-center text-xs text-brand-400 font-medium">
+                © 2024 Dental Clinique S.p.A. - All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Script Hamburger Menu
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+
+</html>

@@ -1,814 +1,603 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" class="scroll-smooth">
+<!-- HEAD COMUNE DA INSERIRE IN TUTTE LE PAGINE -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dental Clinique - Studio Dentistico d'Eccellenza</title>
+    <title>Dental Clinique - Eccellenza Italiana</title>
+
+    <!-- Tailwind CSS & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',  // Sfondi light
+                            100: '#e0f2fe',
+                            200: '#bae6fd', // Aggiunto per bordi leggeri
+                            400: '#38bdf8', // Azzurro Ciano (Accenti)
+                            500: '#0ea5e9',
+                            600: '#0284c7', // Blu Principale
+                            800: '#075985', // Testo scuro
+                            900: '#0c4a6e', // Footer/Nav
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(14, 165, 233, 0.1)', // Ombra azzurrina delicata
+                        'glow': '0 0 15px rgba(56, 189, 248, 0.3)'
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        body {
+            background-color: #ffffff;
+            color: #075985;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        /* Base brand-800 */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #e0f2fe;
         }
 
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        .fade-in-up {
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        .fade-in {
-            animation: fadeIn 1s ease-out forwards;
-        }
-
-        .slide-in-left {
-            animation: slideInLeft 0.8s ease-out forwards;
-        }
-
-        .slide-in-right {
-            animation: slideInRight 0.8s ease-out forwards;
-        }
-
-        .animate-on-scroll {
-            opacity: 0;
-        }
-
-        .animate-on-scroll.visible {
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        .gradient-bg {
-            background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
-        }
-
-        .service-card {
-            transition: all 0.3s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .stat-number {
-            transition: all 0.5s ease;
-        }
-
-        .nav-link {
-            position: relative;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #0ea5e9;
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .hero-pattern {
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-
-        @keyframes floating {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .btn-primary {
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transition: left 0.5s ease;
-            z-index: -1;
-        }
-
-        .btn-primary:hover::before {
-            left: 100%;
+        /* Gradiente Luminoso per la Hero */
+        .hero-light {
+            background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);
         }
     </style>
 </head>
+
 <body class="font-sans antialiased">
-    <!-- Navigation -->
-    <nav class="bg-white shadow-lg fixed w-full top-0 z-50 fade-in">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <div class="flex items-center">
-                    <span class="text-3xl font-bold text-sky-600">
-                        <i class="fas fa-tooth mr-2"></i>Dental Clinique
-                    </span>
+
+    <!-- NAVBAR RESPONSIVE -->
+    <nav class="glass-nav fixed w-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 h-20 flex justify-between items-center">
+
+            <!-- LOGO -->
+            <a href="index.html" class="flex items-center gap-3">
+                <img src="img/logo.png" alt="Dental Clinique" class="h-10 md:h-12 w-auto object-contain">
+            </a>
+
+            <!-- MENU DESKTOP (Visibile solo da PC) -->
+            <div class="hidden md:flex items-center gap-8 font-medium text-sm text-brand-800">
+                <a href="index.html" class="text-brand-500 font-semibold">Home</a>
+                <a href="sedi.html" class="hover:text-brand-500 transition">Le Nostre Sedi</a>
+                <a href="implantologia.html" class="hover:text-brand-500 transition">Trattamenti</a>
+                <a href="#chi-siamo" class="hover:text-brand-500 transition">Chi Siamo</a>
+            </div>
+
+            <!-- CTA DESKTOP (Visibile solo da PC) -->
+            <div class="hidden md:flex items-center gap-5">
+                <div class="text-right hidden lg:block">
+                    <span class="block text-xs text-brand-400 font-semibold uppercase">Numero Verde</span>
+                    <span class="block text-lg font-bold text-brand-900 leading-none font-mono">800-561444</span>
                 </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="nav-link text-gray-700 hover:text-sky-600 font-medium">Home</a>
-                    <a href="#servizi" class="nav-link text-gray-700 hover:text-sky-600 font-medium">Servizi</a>
-                    <a href="#tecnologia" class="nav-link text-gray-700 hover:text-sky-600 font-medium">Tecnologia</a>
-                    <a href="#team" class="nav-link text-gray-700 hover:text-sky-600 font-medium">Team</a>
-                    <a href="#sedi" class="nav-link text-gray-700 hover:text-sky-600 font-medium">Sedi</a>
-                    <a href="#contatti" class="nav-link text-gray-700 hover:text-sky-600 font-medium">Contatti</a>
-                </div>
-                <div class="hidden md:block">
-                    <a href="#prenota" class="btn-primary bg-sky-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-sky-700 transition duration-300">
-                        Prenota Visita
+                <a href="#contatti"
+                    class="bg-brand-500 hover:bg-brand-600 text-white px-7 py-3 rounded-full text-sm font-bold shadow-soft transition-transform transform hover:-translate-y-0.5">
+                    Prenota Ora
+                </a>
+            </div>
+
+            <!-- BOTTONE HAMBURGER (Visibile solo su MOBILE) -->
+            <button id="mobile-menu-btn" class="md:hidden text-brand-900 text-2xl focus:outline-none p-2">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- PANNELLO MENU MOBILE (Nascosto di default) -->
+        <div id="mobile-menu"
+            class="hidden md:hidden absolute top-20 left-0 w-full bg-white border-t border-brand-100 shadow-xl">
+            <div class="flex flex-col p-6 gap-4 font-medium text-brand-800">
+                <a href="index.html" class="py-2 border-b border-brand-50 hover:text-brand-500">Home</a>
+                <a href="sedi.html" class="py-2 border-b border-brand-50 hover:text-brand-500">Le Nostre Sedi</a>
+                <a href="implantologia.html" class="py-2 border-b border-brand-50 hover:text-brand-500">Trattamenti</a>
+                <a href="#chi-siamo" class="py-2 border-b border-brand-50 hover:text-brand-500">Chi Siamo</a>
+
+                <!-- CTA Mobile -->
+                <div class="mt-4 flex flex-col gap-3">
+                    <a href="tel:800561444"
+                        class="text-center py-3 border border-brand-200 text-brand-600 rounded-xl font-bold">
+                        <i class="fa-solid fa-phone mr-2"></i> Chiama 800-561444
+                    </a>
+                    <a href="#contatti" class="text-center py-3 bg-brand-500 text-white rounded-xl font-bold shadow-lg">
+                        Prenota Ora
                     </a>
                 </div>
-                <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="text-gray-700">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
-            <div class="px-4 pt-2 pb-4 space-y-2">
-                <a href="#home" class="block py-2 text-gray-700 hover:text-sky-600">Home</a>
-                <a href="#servizi" class="block py-2 text-gray-700 hover:text-sky-600">Servizi</a>
-                <a href="#tecnologia" class="block py-2 text-gray-700 hover:text-sky-600">Tecnologia</a>
-                <a href="#team" class="block py-2 text-gray-700 hover:text-sky-600">Team</a>
-                <a href="#sedi" class="block py-2 text-gray-700 hover:text-sky-600">Sedi</a>
-                <a href="#contatti" class="block py-2 text-gray-700 hover:text-sky-600">Contatti</a>
-                <a href="#prenota" class="block py-2 text-sky-600 font-semibold">Prenota Visita</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="gradient-bg hero-pattern pt-32 pb-20 px-4">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="text-white slide-in-left">
-                    <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-                        Il Tuo Sorriso è la Nostra Missione
-                    </h1>
-                    <p class="text-xl mb-8 text-sky-100">
-                        Eccellenza odontoiatrica con tecnologie all'avanguardia e un team di specialisti dedicati al tuo benessere.
-                    </p>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#prenota" class="btn-primary bg-white text-sky-600 px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition duration-300 inline-flex items-center">
-                            <i class="fas fa-calendar-check mr-2"></i>
-                            Prenota Ora
-                        </a>
-                        <a href="#servizi" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:text-sky-600 transition duration-300 inline-flex items-center">
-                            <i class="fas fa-info-circle mr-2"></i>
-                            Scopri di Più
-                        </a>
-                    </div>
-                </div>
-                <div class="slide-in-right">
-                    <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=800" alt="Dental Clinic" class="rounded-3xl shadow-2xl floating">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="bg-white py-16 px-4">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="text-center animate-on-scroll">
-                    <div class="text-5xl font-bold text-sky-600 mb-2">
-                        <span class="stat-number" data-target="25000">0</span>+
-                    </div>
-                    <p class="text-gray-600 font-medium">Pazienti Soddisfatti</p>
-                </div>
-                <div class="text-center animate-on-scroll" style="animation-delay: 0.1s;">
-                    <div class="text-5xl font-bold text-sky-600 mb-2">
-                        <span class="stat-number" data-target="15">0</span>
-                    </div>
-                    <p class="text-gray-600 font-medium">Sedi in Italia</p>
-                </div>
-                <div class="text-center animate-on-scroll" style="animation-delay: 0.2s;">
-                    <div class="text-5xl font-bold text-sky-600 mb-2">
-                        <span class="stat-number" data-target="50">0</span>+
-                    </div>
-                    <p class="text-gray-600 font-medium">Specialisti</p>
-                </div>
-                <div class="text-center animate-on-scroll" style="animation-delay: 0.3s;">
-                    <div class="text-5xl font-bold text-sky-600 mb-2">
-                        <span class="stat-number" data-target="30">0</span>+
-                    </div>
-                    <p class="text-gray-600 font-medium">Anni di Esperienza</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="servizi" class="bg-gray-50 py-20 px-4">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16 animate-on-scroll">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">I Nostri Servizi</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                    Offriamo un'ampia gamma di trattamenti odontoiatrici per tutta la famiglia
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Service Card 1 -->
-                <div class="service-card bg-white rounded-2xl p-8 shadow-lg animate-on-scroll">
-                    <div class="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-tooth text-sky-600 text-3xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Odontoiatria Conservativa</h3>
-                    <p class="text-gray-600 mb-4">
-                        Cura delle carie, otturazioni estetiche e ricostruzioni dentali con materiali di ultima generazione.
-                    </p>
-                    <a href="#" class="text-sky-600 font-semibold hover:text-sky-700 inline-flex items-center">
-                        Scopri di più <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                </div>
-
-                <!-- Service Card 2 -->
-                <div class="service-card bg-white rounded-2xl p-8 shadow-lg animate-on-scroll" style="animation-delay: 0.1s;">
-                    <div class="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-smile-beam text-sky-600 text-3xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Implantologia</h3>
-                    <p class="text-gray-600 mb-4">
-                        Impianti dentali di qualità superiore per ripristinare il tuo sorriso in modo permanente e naturale.
-                    </p>
-                    <a href="#" class="text-sky-600 font-semibold hover:text-sky-700 inline-flex items-center">
-                        Scopri di più <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                </div>
-
-                <!-- Service Card 3 -->
-                <div class="service-card bg-white rounded-2xl p-8 shadow-lg animate-on-scroll" style="animation-delay: 0.2s;">
-                    <div class="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-star text-sky-600 text-3xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Estetica Dentale</h3>
-                    <p class="text-gray-600 mb-4">
-                        Sbiancamento professionale, faccette e trattamenti estetici per un sorriso perfetto e luminoso.
-                    </p>
-                    <a href="#" class="text-sky-600 font-semibold hover:text-sky-700 inline-flex items-center">
-                        Scopri di più <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                </div>
-
-                <!-- Service Card 4 -->
-                <div class="service-card bg-white rounded-2xl p-8 shadow-lg animate-on-scroll" style="animation-delay: 0.3s;">
-                    <div class="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-align-justify text-sky-600 text-3xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Ortodonzia</h3>
-                    <p class="text-gray-600 mb-4">
-                        Apparecchi tradizionali e invisibili per adulti e bambini. Sorriso perfettamente allineato.
-                    </p>
-                    <a href="#" class="text-sky-600 font-semibold hover:text-sky-700 inline-flex items-center">
-                        Scopri di più <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                </div>
-
-                <!-- Service Card 5 -->
-                <div class="service-card bg-white rounded-2xl p-8 shadow-lg animate-on-scroll" style="animation-delay: 0.4s;">
-                    <div class="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-child text-sky-600 text-3xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Pedodonzia</h3>
-                    <p class="text-gray-600 mb-4">
-                        Cure dentali dedicate ai bambini in un ambiente accogliente e rassicurante.
-                    </p>
-                    <a href="#" class="text-sky-600 font-semibold hover:text-sky-700 inline-flex items-center">
-                        Scopri di più <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                </div>
-
-                <!-- Service Card 6 -->
-                <div class="service-card bg-white rounded-2xl p-8 shadow-lg animate-on-scroll" style="animation-delay: 0.5s;">
-                    <div class="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-procedures text-sky-600 text-3xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Chirurgia Orale</h3>
-                    <p class="text-gray-600 mb-4">
-                        Estrazioni, chirurgia parodontale e interventi complessi con tecniche minimamente invasive.
-                    </p>
-                    <a href="#" class="text-sky-600 font-semibold hover:text-sky-700 inline-flex items-center">
-                        Scopri di più <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Technology Section -->
-    <section id="tecnologia" class="bg-white py-20 px-4">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="animate-on-scroll">
-                    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800" alt="Tecnologia dentale" class="rounded-3xl shadow-2xl">
-                </div>
-                <div class="animate-on-scroll">
-                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Tecnologia All'Avanguardia</h2>
-                    <p class="text-xl text-gray-600 mb-8">
-                        Investiamo costantemente nelle tecnologie più avanzate per garantirti trattamenti precisi, rapidi e confortevoli.
-                    </p>
-                    <div class="space-y-6">
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 bg-sky-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-camera text-sky-600 text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-xl font-bold text-gray-800 mb-2">Scanner Intraorale 3D</h4>
-                                <p class="text-gray-600">Impronte digitali precise e confortevoli, senza paste fastidiose.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 bg-sky-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-x-ray text-sky-600 text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-xl font-bold text-gray-800 mb-2">Radiografia Digitale</h4>
-                                <p class="text-gray-600">Diagnostica accurata con riduzione del 90% delle radiazioni.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 bg-sky-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-microscope text-sky-600 text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-xl font-bold text-gray-800 mb-2">Microscopio Operatorio</h4>
-                                <p class="text-gray-600">Precisione estrema per interventi minimamente invasivi.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Team Section -->
-    <section id="team" class="bg-gray-50 py-20 px-4">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16 animate-on-scroll">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Il Nostro Team</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                    Un team di professionisti altamente qualificati al tuo servizio
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white rounded-2xl overflow-hidden shadow-lg service-card animate-on-scroll">
-                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400" alt="Dentista" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Dr. Marco Rossi</h3>
-                        <p class="text-sky-600 font-semibold mb-4">Direttore Sanitario</p>
-                        <p class="text-gray-600 mb-4">Specialista in Implantologia e Chirurgia Orale con oltre 20 anni di esperienza.</p>
-                        <div class="flex space-x-3">
-                            <a href="#" class="text-sky-600 hover:text-sky-700"><i class="fab fa-linkedin text-xl"></i></a>
-                            <a href="#" class="text-sky-600 hover:text-sky-700"><i class="fab fa-facebook text-xl"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl overflow-hidden shadow-lg service-card animate-on-scroll" style="animation-delay: 0.1s;">
-                    <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400" alt="Dentista" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Dr.ssa Laura Bianchi</h3>
-                        <p class="text-sky-600 font-semibold mb-4">Ortodontista</p>
-                        <p class="text-gray-600 mb-4">Esperta in ortodonzia invisibile e trattamenti estetici per adulti e bambini.</p>
-                        <div class="flex space-x-3">
-                            <a href="#" class="text-sky-600 hover:text-sky-700"><i class="fab fa-linkedin text-xl"></i></a>
-                            <a href="#" class="text-sky-600 hover:text-sky-700"><i class="fab fa-facebook text-xl"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl overflow-hidden shadow-lg service-card animate-on-scroll" style="animation-delay: 0.2s;">
-                    <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400" alt="Dentista" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Dr. Giuseppe Verdi</h3>
-                        <p class="text-sky-600 font-semibold mb-4">Endodontista</p>
-                        <p class="text-gray-600 mb-4">Specialista in endodonzia e conservativa con focus su trattamenti indolore.</p>
-                        <div class="flex space-x-3">
-                            <a href="#" class="text-sky-600 hover:text-sky-700"><i class="fab fa-linkedin text-xl"></i></a>
-                            <a href="#" class="text-sky-600 hover:text-sky-700"><i class="fab fa-facebook text-xl"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Locations Section -->
-    <section id="sedi" class="bg-white py-20 px-4">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16 animate-on-scroll">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Le Nostre Sedi</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                    Presenti in tutta Italia per essere sempre vicini a te
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-3 lg:grid-cols-5 gap-6">
-                <div class="bg-gray-50 rounded-xl p-6 text-center service-card animate-on-scroll">
-                    <i class="fas fa-map-marker-alt text-sky-600 text-3xl mb-4"></i>
-                    <h4 class="font-bold text-gray-800 mb-2">Livorno</h4>
-                    <p class="text-gray-600 text-sm">Via Roma 123</p>
-                </div>
-                <div class="bg-gray-50 rounded-xl p-6 text-center service-card animate-on-scroll" style="animation-delay: 0.1s;">
-                    <i class="fas fa-map-marker-alt text-sky-600 text-3xl mb-4"></i>
-                    <h4 class="font-bold text-gray-800 mb-2">Pisa</h4>
-                    <p class="text-gray-600 text-sm">Corso Italia 45</p>
-                </div>
-                <div class="bg-gray-50 rounded-xl p-6 text-center service-card animate-on-scroll" style="animation-delay: 0.2s;">
-                    <i class="fas fa-map-marker-alt text-sky-600 text-3xl mb-4"></i>
-                    <h4 class="font-bold text-gray-800 mb-2">Lucca</h4>
-                    <p class="text-gray-600 text-sm">Via Fillungo 78</p>
-                </div>
-                <div class="bg-gray-50 rounded-xl p-6 text-center service-card animate-on-scroll" style="animation-delay: 0.3s;">
-                    <i class="fas fa-map-marker-alt text-sky-600 text-3xl mb-4"></i>
-                    <h4 class="font-bold text-gray-800 mb-2">Firenze</h4>
-                    <p class="text-gray-600 text-sm">Viale Europa 234</p>
-                </div>
-                <div class="bg-gray-50 rounded-xl p-6 text-center service-card animate-on-scroll" style="animation-delay: 0.4s;">
-                    <i class="fas fa-map-marker-alt text-sky-600 text-3xl mb-4"></i>
-                    <h4 class="font-bold text-gray-800 mb-2">Siena</h4>
-                    <p class="text-gray-600 text-sm">Via dei Montanini 56</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="bg-gradient-to-r from-sky-600 to-cyan-500 py-20 px-4">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16 animate-on-scroll">
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Cosa Dicono i Nostri Pazienti</h2>
-                <p class="text-xl text-sky-100 max-w-2xl mx-auto">
-                    La soddisfazione dei nostri pazienti è la nostra priorità
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white rounded-2xl p-8 shadow-lg animate-on-scroll">
-                    <div class="flex items-center mb-4">
-                        <i class="fas fa-star text-yellow-400 text-xl"></i>
-                        <i class="fas fa-star text-yellow-400 text-xl"></i>
-                        <i class="fas fa-star text-yellow-400 text-xl"></i>
-                        <i class="fas fa-star text-yellow-400 text-xl"></i>
-                        <i class="fas fa-star text-yellow-400 text-xl"></i>
-                    </div>
-                    <p class="text-gray-600 mb-6 italic">
-                        "Professionalità eccezionale! Ho ritrovato il piacere di sorridere grazie all'impianto dentale. Personale gentile e struttura modernissima."
-                    </p>
-                    <div class="flex items-center">
-                        <img src="https://i.pravatar.cc/150?img=1" alt="Patient" class="w-12 h-12 rounded-full mr-4">
-                        <div>
-                            <h5 class="font-bold text-gray-800">Maria G.</h5>
-                            <p class="text-gray-500 text-sm">Paziente dal 2020</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl p-8 shadow-lg animate-on-scroll" style="animation-delay: 0.1s;">
-                    <div class="flex items-center mb-4">
-                        <i class="fas fa-star text-yellow-400 text-xl"></i>
-                        <i class="fas fa-star text-yellow-400 text-xl"></i>
-                        <i class="fas fa-star text-yellow-400 text-xl"></i>
-                        <i class="fas fa-star text-yellow-400 text-xl"></i>
-                        <i class="fas fa-star text-yellow-400 text-xl"></i>
-                    </div>
-                    <p class="text-gray-600 mb-6 italic">
-                        "Il Dr. Rossi è fantastico! Ha curato mio figlio con pazienza e professionalità. Ora non ha più paura del dentista!"
-                    </p>
-                    <div class="flex items-center">
-                        <img src="https://i.pravatar.cc/150?img=5" alt="Patient" class="w-12 h-12 rounded-full mr-4">
-                        <div>
-                            <h5 class="font-bold text-gray-800">Alessandro P.</h5>
-                            <p class="text-gray-500 text-sm">Paziente dal 2019</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl p-8 shadow-lg animate-on-scroll" style="animation-delay: 0.2s;">
-                    <div class="flex items-center mb-4">
-                        <i class="fas fa-star text-yellow-400 text-xl"></i>
-                        <i class="fas fa-star text-yellow-400 text-xl"></i>
-                        <i class="fas fa-star text-yellow-400 text-xl"></i>
-                        <i class="fas fa-star text-yellow-400 text-xl"></i>
-                        <i class="fas fa-star text-yellow-400 text-xl"></i>
-                    </div>
-                    <p class="text-gray-600 mb-6 italic">
-                        "Sbiancamento dentale perfetto! Risultati visibili già dalla prima seduta. Consiglio vivamente Dental Clinique!"
-                    </p>
-                    <div class="flex items-center">
-                        <img src="https://i.pravatar.cc/150?img=9" alt="Patient" class="w-12 h-12 rounded-full mr-4">
-                        <div>
-                            <h5 class="font-bold text-gray-800">Francesca L.</h5>
-                            <p class="text-gray-500 text-sm">Paziente dal 2021</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contatti" class="bg-gray-50 py-20 px-4">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-2 gap-12">
-                <div class="animate-on-scroll">
-                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Contattaci</h2>
-                    <p class="text-xl text-gray-600 mb-8">
-                        Siamo qui per rispondere a tutte le tue domande. Contattaci per prenotare una visita o richiedere informazioni.
-                    </p>
-
-                    <div class="space-y-6">
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 bg-sky-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-phone text-sky-600 text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-xl font-bold text-gray-800 mb-1">Telefono</h4>
-                                <p class="text-gray-600">+39 0586 123456</p>
-                                <p class="text-gray-600">Lun-Ven: 9:00-19:00</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 bg-sky-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-envelope text-sky-600 text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-xl font-bold text-gray-800 mb-1">Email</h4>
-                                <p class="text-gray-600">info@dentalclinique.it</p>
-                                <p class="text-gray-600">prenotazioni@dentalclinique.it</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 bg-sky-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-clock text-sky-600 text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-xl font-bold text-gray-800 mb-1">Orari</h4>
-                                <p class="text-gray-600">Lun-Ven: 9:00-13:00 / 14:00-19:00</p>
-                                <p class="text-gray-600">Sab: 9:00-13:00</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="prenota" class="bg-white rounded-2xl p-8 shadow-xl animate-on-scroll">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Prenota una Visita</h3>
-                    <form class="space-y-4">
-                        <div>
-                            <label class="block text-gray-700 font-medium mb-2">Nome e Cognome</label>
-                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-600 focus:border-transparent" placeholder="Il tuo nome">
-                        </div>
-
-                        <div>
-                            <label class="block text-gray-700 font-medium mb-2">Email</label>
-                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-600 focus:border-transparent" placeholder="tua@email.com">
-                        </div>
-
-                        <div>
-                            <label class="block text-gray-700 font-medium mb-2">Telefono</label>
-                            <input type="tel" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-600 focus:border-transparent" placeholder="+39 123 456 7890">
-                        </div>
-
-                        <div>
-                            <label class="block text-gray-700 font-medium mb-2">Sede Preferita</label>
-                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-600 focus:border-transparent">
-                                <option>Livorno</option>
-                                <option>Pisa</option>
-                                <option>Lucca</option>
-                                <option>Firenze</option>
-                                <option>Siena</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label class="block text-gray-700 font-medium mb-2">Servizio</label>
-                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-600 focus:border-transparent">
-                                <option>Visita Generale</option>
-                                <option>Odontoiatria Conservativa</option>
-                                <option>Implantologia</option>
-                                <option>Estetica Dentale</option>
-                                <option>Ortodonzia</option>
-                                <option>Pedodonzia</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label class="block text-gray-700 font-medium mb-2">Messaggio</label>
-                            <textarea rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-600 focus:border-transparent" placeholder="Dettagli aggiuntivi..."></textarea>
-                        </div>
-
-                        <button type="submit" class="btn-primary w-full bg-sky-600 text-white py-4 rounded-lg font-bold hover:bg-sky-700 transition duration-300">
-                            <i class="fas fa-paper-plane mr-2"></i>
-                            Invia Richiesta
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12 px-4">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <h3 class="text-2xl font-bold mb-4">
-                        <i class="fas fa-tooth mr-2"></i>Dental Clinique
-                    </h3>
-                    <p class="text-gray-400">
-                        Il tuo sorriso è la nostra missione. Eccellenza odontoiatrica dal 1995.
-                    </p>
-                </div>
-
-                <div>
-                    <h4 class="text-lg font-bold mb-4">Servizi</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white">Odontoiatria Conservativa</a></li>
-                        <li><a href="#" class="hover:text-white">Implantologia</a></li>
-                        <li><a href="#" class="hover:text-white">Estetica Dentale</a></li>
-                        <li><a href="#" class="hover:text-white">Ortodonzia</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="text-lg font-bold mb-4">Link Utili</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white">Chi Siamo</a></li>
-                        <li><a href="#" class="hover:text-white">Blog</a></li>
-                        <li><a href="#" class="hover:text-white">FAQ</a></li>
-                        <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="text-lg font-bold mb-4">Seguici</h4>
-                    <div class="flex space-x-4">
-                        <a href="#" class="w-10 h-10 bg-sky-600 rounded-full flex items-center justify-center hover:bg-sky-700 transition">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-sky-600 rounded-full flex items-center justify-center hover:bg-sky-700 transition">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-sky-600 rounded-full flex items-center justify-center hover:bg-sky-700 transition">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-sky-600 rounded-full flex items-center justify-center hover:bg-sky-700 transition">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
-                <p>&copy; 2026 Dental Clinique. Tutti i diritti riservati. P.IVA: 01234567890</p>
-            </div>
-        </div>
-    </footer>
-
     <script>
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        // Logica per aprire/chiudere il menu mobile
+        const menuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
 
-        mobileMenuBtn.addEventListener('click', () => {
+        menuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
-        });
 
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Counter animation
-        const animateCounter = (element, target) => {
-            let current = 0;
-            const increment = target / 100;
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    element.textContent = target;
-                    clearInterval(timer);
-                } else {
-                    element.textContent = Math.floor(current);
-                }
-            }, 20);
-        };
-
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const target = parseInt(entry.target.getAttribute('data-target'));
-                    animateCounter(entry.target, target);
-                    statsObserver.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.stat-number').forEach(el => {
-            statsObserver.observe(el);
-        });
-
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const offset = 80;
-                    const targetPosition = target.offsetTop - offset;
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                    // Close mobile menu if open
-                    mobileMenu.classList.add('hidden');
-                }
-            });
-        });
-
-        // Navbar background on scroll
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.classList.add('shadow-xl');
+            // Cambio icona da Hamburger (bars) a X (xmark) quando aperto
+            const icon = menuBtn.querySelector('i');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
             } else {
-                nav.classList.remove('shadow-xl');
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
             }
         });
     </script>
+
+
+    <!-- HERO SECTION LUMINOSA (MOBILE FRIENDLY) -->
+    <section class="hero-light pt-28 pb-16 lg:pt-48 lg:pb-32 relative overflow-hidden">
+
+        <!-- Background Elements -->
+        <div
+            class="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-100 rounded-full blur-3xl opacity-50 translate-x-1/3 -translate-y-1/4">
+        </div>
+        <div
+            class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-brand-50 rounded-full blur-3xl opacity-60 -translate-x-1/4 translate-y-1/4">
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <!-- Grid modificata: Flex column su mobile, Grid su desktop -->
+            <div class="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+
+                <!-- COLONNA TESTO (Sotto su mobile, Sinistra su desktop) -->
+                <div class="max-w-2xl text-center lg:text-left">
+
+                    <!-- Badge -->
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-50 border border-brand-200 text-brand-600 text-xs font-bold uppercase tracking-wider mb-6 shadow-sm mx-auto lg:mx-0">
+                        <span class="flex h-2 w-2 relative">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
+                        </span>
+                        Eccellenza Italiana dal 2004
+                    </div>
+
+                    <h1 class="text-4xl lg:text-6xl font-bold text-brand-900 leading-[1.1] mb-6">
+                        Il sorriso perfetto<br>
+                        <span class="text-brand-500">è alla tua portata.</span>
+                    </h1>
+
+                    <p class="text-brand-800 text-lg mb-8 leading-relaxed font-light opacity-80">
+                        Nessuna finanziaria, solo il rapporto umano tra medico e paziente.
+                        Tecnologia avanzata in ambienti sterili e luminosi.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="sedi.html"
+                            class="bg-brand-600 text-white px-8 py-4 rounded-xl font-bold shadow-lg shadow-brand-500/20 hover:bg-brand-700 transition text-center">
+                            Trova la tua Clinica
+                        </a>
+                        <a href="implantologia.html"
+                            class="bg-white border border-brand-200 text-brand-600 px-8 py-4 rounded-xl font-bold hover:bg-brand-50 hover:border-brand-300 transition text-center shadow-sm">
+                            Scopri Implantologia
+                        </a>
+                    </div>
+
+                    <!-- Trust Badges -->
+                    <div
+                        class="mt-8 flex flex-wrap justify-center lg:justify-start items-center gap-4 lg:gap-6 text-sm font-medium text-brand-800/60">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-check-circle text-brand-400"></i> No Franchising
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-check-circle text-brand-400"></i> Pagamenti Diretti
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-check-circle text-brand-400"></i> Garanzia 20 anni
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COLONNA IMMAGINE (Sopra su mobile, Destra su desktop) -->
+                <div class="relative w-full max-w-md lg:max-w-none mx-auto">
+                    <!-- Decorazione sfondo rotante -->
+                    <div
+                        class="absolute inset-0 bg-brand-500 rounded-[2rem] rotate-3 lg:rotate-6 opacity-10 scale-95 lg:scale-100">
+                    </div>
+
+                    <!-- Immagine Principale -->
+                    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Studio Dentistico"
+                        class="relative rounded-[2rem] shadow-xl shadow-brand-900/10 border-4 border-white z-10 w-full h-64 lg:h-auto object-cover object-center">
+
+                    <!-- Floating Card (Adattata per mobile: inside bottom-right) -->
+                    <div
+                        class="absolute -bottom-4 -right-4 lg:-bottom-8 lg:-left-8 bg-white p-4 lg:p-5 rounded-2xl shadow-xl z-20 flex items-center gap-3 lg:gap-4 border border-brand-50 scale-90 lg:scale-100">
+                        <div class="bg-brand-50 p-2 lg:p-3 rounded-full text-brand-500">
+                            <i class="fa-solid fa-star text-lg lg:text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-brand-900 font-bold text-lg lg:text-xl leading-none">4.7/5</p>
+                            <p class="text-brand-400 text-[10px] lg:text-xs font-bold uppercase tracking-wide">
+                                Recensioni Google</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CARDS FEATURES (White on Brand-50) -->
+    <section class="py-24 bg-white relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-brand-900 mb-4">Perché sceglierci?</h2>
+                <p class="text-brand-800/70">La trasparenza è il nostro valore fondante. Ecco cosa ci distingue dalle
+                    catene low-cost.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div
+                    class="bg-brand-50 p-8 rounded-3xl border border-brand-100 hover:border-brand-300 hover:bg-white hover:shadow-soft transition-all duration-300 group">
+                    <div
+                        class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-brand-500 text-2xl mb-6 shadow-sm group-hover:scale-110 transition">
+                        <i class="fa-solid fa-hand-holding-dollar"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-900 mb-3">Rate Senza Banche</h3>
+                    <p class="text-brand-800/70 leading-relaxed">Paga direttamente in clinica. Nessuna busta paga
+                        richiesta, nessun interesse, nessuna attesa per l'approvazione.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div
+                    class="bg-brand-50 p-8 rounded-3xl border border-brand-100 hover:border-brand-300 hover:bg-white hover:shadow-soft transition-all duration-300 group">
+                    <div
+                        class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-brand-500 text-2xl mb-6 shadow-sm group-hover:scale-110 transition">
+                        <i class="fa-solid fa-user-doctor"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-900 mb-3">Dentisti Selezionati</h3>
+                    <p class="text-brand-800/70 leading-relaxed">Non siamo un franchising. I nostri medici sono
+                        selezionati per curriculum ed esperienza specifica.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div
+                    class="bg-brand-50 p-8 rounded-3xl border border-brand-100 hover:border-brand-300 hover:bg-white hover:shadow-soft transition-all duration-300 group">
+                    <div
+                        class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-brand-500 text-2xl mb-6 shadow-sm group-hover:scale-110 transition">
+                        <i class="fa-solid fa-microscope"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-900 mb-3">Tecnologia in Sede</h3>
+                    <p class="text-brand-800/70 leading-relaxed">TAC 3D Dentalscan in ogni clinica. Diagnosi immediata
+                        senza doversi recare in centri radiologici esterni.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- GALLERY "VITA IN CLINICA" -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-brand-900 mb-4">Tecnologia e Accoglienza</h2>
+                <p class="text-brand-600 max-w-2xl mx-auto">
+                    Ambienti sterili, macchinari di ultima generazione e un'atmosfera rilassante. 
+                    Guarda dove ci prendiamo cura del tuo sorriso.
+                </p>
+            </div>
+
+            <!-- Grid 6 Immagini (2 righe x 3 colonne) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Foto 1 -->
+                <div class="group relative h-72 rounded-3xl overflow-hidden cursor-pointer shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-900/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end p-6">
+                        <span class="text-white font-bold text-lg">Sale Operatorie Sterili</span>
+                    </div>
+                </div>
+
+                <!-- Foto 2 -->
+                <div class="group relative h-72 rounded-3xl overflow-hidden cursor-pointer shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-900/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end p-6">
+                        <span class="text-white font-bold text-lg">TAC 3D Dentalscan</span>
+                    </div>
+                </div>
+
+                <!-- Foto 3 -->
+                <div class="group relative h-72 rounded-3xl overflow-hidden cursor-pointer shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-900/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end p-6">
+                        <span class="text-white font-bold text-lg">Staff Specializzato</span>
+                    </div>
+                </div>
+
+                <!-- Foto 4 -->
+                <div class="group relative h-72 rounded-3xl overflow-hidden cursor-pointer shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-900/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end p-6">
+                        <span class="text-white font-bold text-lg">Reception Accogliente</span>
+                    </div>
+                </div>
+
+                <!-- Foto 5 -->
+                <div class="group relative h-72 rounded-3xl overflow-hidden cursor-pointer shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1598256989306-03313fa75251?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-900/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end p-6">
+                        <span class="text-white font-bold text-lg">Microscopi di Precisione</span>
+                    </div>
+                </div>
+
+                <!-- Foto 6 -->
+                <div class="group relative h-72 rounded-3xl overflow-hidden cursor-pointer shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1478479405421-ce83c92fb3ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-900/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end p-6">
+                        <span class="text-white font-bold text-lg">Sorrisi Reali</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+            <!-- SEZIONE RECENSIONI (Social Proof) -->
+    <section class="py-24 bg-brand-50 relative overflow-hidden">
+        <!-- Decorazione Sfondo -->
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-brand-200 to-transparent"></div>
+        
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-brand-500 font-bold uppercase tracking-widest text-xs">Dicono di noi</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-brand-900 mt-2">Pazienti Felici, Sorrisi Reali</h2>
+                <div class="flex justify-center items-center gap-2 mt-4">
+                    <div class="flex text-yellow-400 text-xl">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                    <span class="font-bold text-brand-800">4.7/5 media recensioni</span>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <!-- Review 1 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-brand-100 relative hover:-translate-y-1 transition duration-300">
+                    <i class="fa-solid fa-quote-left text-brand-100 text-6xl absolute top-4 left-4 -z-0"></i>
+                    <p class="text-brand-800 relative z-10 italic mb-6 leading-relaxed">
+                        "Ho fatto un impianto a carico immediato. La mattina sono entrata senza denti e la sera ero a cena con gli amici. Zero dolore."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-brand-100 rounded-full flex items-center justify-center text-brand-600 font-bold text-xl">M</div>
+                        <div>
+                            <h4 class="font-bold text-brand-900">Maria Rossi</h4>
+                            <p class="text-xs text-brand-400 font-bold uppercase">Paziente Pavia</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-brand-100 relative hover:-translate-y-1 transition duration-300">
+                    <i class="fa-solid fa-quote-left text-brand-100 text-6xl absolute top-4 left-4 -z-0"></i>
+                    <p class="text-brand-800 relative z-10 italic mb-6 leading-relaxed">
+                        "Finalmente una clinica dove posso pagare a rate senza passare dalla finanziaria. Onesti, trasparenti e pulitissimi."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-brand-100 rounded-full flex items-center justify-center text-brand-600 font-bold text-xl">L</div>
+                        <div>
+                            <h4 class="font-bold text-brand-900">Luca Bianchi</h4>
+                            <p class="text-xs text-brand-400 font-bold uppercase">Paziente Pisa</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-brand-100 relative hover:-translate-y-1 transition duration-300">
+                    <i class="fa-solid fa-quote-left text-brand-100 text-6xl absolute top-4 left-4 -z-0"></i>
+                    <p class="text-brand-800 relative z-10 italic mb-6 leading-relaxed">
+                        "Avevo il terrore del dentista. Qui mi hanno fatto sentire a casa. Sedazione cosciente top, non ho sentito nulla."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-brand-100 rounded-full flex items-center justify-center text-brand-600 font-bold text-xl">G</div>
+                        <div>
+                            <h4 class="font-bold text-brand-900">Giulia Verdi</h4>
+                            <p class="text-xs text-brand-400 font-bold uppercase">Paziente Fornacette</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottone Google Reviews -->
+            <div class="text-center">
+                <a href="https://www.google.com/maps" target="_blank" 
+                   class="inline-flex items-center gap-3 bg-white text-brand-800 px-8 py-4 rounded-xl border border-brand-200 font-bold hover:bg-brand-50 hover:border-brand-300 transition shadow-sm group">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/960px-Google_%22G%22_logo.svg.png" alt="Google" class="w-6 h-6">
+                    Leggi altre 800+ recensioni su Google
+                    <i class="fa-solid fa-arrow-right text-brand-400 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+        <!-- SEZIONE LISTA SEDI (Visuale) -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-brand-900 mb-4">Siamo vicini a te</h2>
+                    <p class="text-brand-600 max-w-xl">
+                        Le cliniche Dental Clinique sono presenti in Toscana e Nord Italia. 
+                        Strutture moderne, parcheggio facile e orari flessibili.
+                    </p>
+                </div>
+                <a href="sedi.html" class="hidden md:inline-flex items-center font-bold text-brand-500 hover:text-brand-600 transition group">
+                    Vedi mappa completa <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+            <!-- Grid Sedi con Immagini -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Sede 1: Pavia -->
+                <a href="sede-pavia.html" class="group block bg-white rounded-3xl overflow-hidden border border-brand-100 shadow-sm hover:shadow-xl transition duration-300">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                        <span class="absolute top-4 right-4 bg-white/90 backdrop-blur px-2 py-1 rounded-md text-xs font-bold text-green-600">
+                            Aperto
+                        </span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-brand-900 mb-1">Pavia</h3>
+                        <p class="text-sm text-brand-500 mb-4"><i class="fa-solid fa-location-dot mr-1"></i> Corso Cavour 32</p>
+                        <span class="inline-block text-sm font-bold text-brand-600 border-b-2 border-brand-100 group-hover:border-brand-500 transition">Vedi orari e info</span>
+                    </div>
+                </a>
+
+                <!-- Sede 2: Fornacette -->
+                <a href="sedi.html" class="group block bg-white rounded-3xl overflow-hidden border border-brand-100 shadow-sm hover:shadow-xl transition duration-300">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://lh3.googleusercontent.com/p/AF1QipNVAvpTn3Px_11pGdFxUZwRFHfxKKR_4gOxLHtL=s680-w680-h510-rw" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-brand-900 mb-1">Fornacette</h3>
+                        <p class="text-sm text-brand-500 mb-4"><i class="fa-solid fa-location-dot mr-1"></i> Via Tosco Romagnola</p>
+                        <span class="inline-block text-sm font-bold text-brand-600 border-b-2 border-brand-100 group-hover:border-brand-500 transition">Vedi orari e info</span>
+                    </div>
+                </a>
+
+                <!-- Sede 3: Pisa -->
+                <a href="sedi.html" class="group block bg-white rounded-3xl overflow-hidden border border-brand-100 shadow-sm hover:shadow-xl transition duration-300">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AHVAweqzs5CpdK71FyB6utj6eME9xf1fFqZXtiM0zLnCsxmQATGJiNmMuA8A4aQhMiCrce9jusBOOJl7FbI1OT1jII08UkFxTl84XHhI__YcqgoLDBwgGQcKb1-dMHzOEItGRcOfsA6I=s680-w680-h510-rw" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-brand-900 mb-1">Pisa Centro</h3>
+                        <p class="text-sm text-brand-500 mb-4"><i class="fa-solid fa-location-dot mr-1"></i> Via San Francesco</p>
+                        <span class="inline-block text-sm font-bold text-brand-600 border-b-2 border-brand-100 group-hover:border-brand-500 transition">Vedi orari e info</span>
+                    </div>
+                </a>
+
+                <!-- Altre Sedi (Card Riepilogativa) -->
+                <a href="sedi.html" class="group block bg-brand-50 rounded-3xl overflow-hidden border border-brand-100 shadow-sm hover:shadow-xl transition duration-300 flex flex-col h-full">
+                    <div class="h-48 flex items-center justify-center bg-brand-100 text-brand-400 group-hover:bg-brand-200 transition">
+                        <i class="fa-solid fa-map-location-dot text-6xl"></i>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-center">
+                        <h3 class="text-xl font-bold text-brand-900 mb-2">Altre Cliniche</h3>
+                        <p class="text-sm text-brand-600 mb-4 leading-relaxed">Lucca, Livorno, Alessandria e altre sedi in arrivo.</p>
+                        <span class="inline-block text-sm font-bold text-brand-600 border-b-2 border-brand-200 group-hover:border-brand-500 transition w-fit">Scopri tutte</span>
+                    </div>
+                </a>
+
+            </div>
+            
+            <!-- CTA Mobile -->
+            <div class="mt-8 text-center md:hidden">
+                <a href="sedi.html" class="inline-block w-full py-3 bg-brand-50 text-brand-600 font-bold rounded-xl border border-brand-200">
+                    Vedi tutte le sedi
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- BANNER CTA FINALE -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="bg-brand-600 rounded-[2.5rem] p-8 md:p-16 text-center text-white relative overflow-hidden shadow-2xl shadow-brand-500/30">
+                <!-- Cerchi decorativi sfondo -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
+                <div class="absolute bottom-0 left-0 w-64 h-64 bg-white opacity-10 rounded-full translate-y-1/2 -translate-x-1/2 blur-2xl"></div>
+
+                <div class="relative z-10 max-w-3xl mx-auto">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-6">Prima visita e preventivo senza impegno</h2>
+                    <p class="text-brand-100 text-lg mb-10">
+                        Vieni a conoscerci. Valuteremo insieme la salute della tua bocca e ti proporremo un piano di cura personalizzato, con pagamenti su misura per te.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="tel:800561444" class="bg-white text-brand-600 px-8 py-4 rounded-xl font-bold hover:bg-brand-50 transition shadow-lg">
+                            <i class="fa-solid fa-phone mr-2"></i> Chiama 800-561444
+                        </a>
+                        <a href="https://wa.me/393331234567" class="bg-brand-700 text-white border border-brand-500 px-8 py-4 rounded-xl font-bold hover:bg-brand-800 transition">
+                            <i class="fa-brands fa-whatsapp mr-2"></i> Scrivici su WhatsApp
+                        </a>
+                    </div>
+                    <p class="mt-6 text-sm text-brand-200 opacity-80">
+                        *Direttore Sanitario visualizzabile in sede. Informativa Privacy disponibile.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FOOTER CLEAN -->
+    <footer class="bg-brand-900 text-brand-100 pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12 mb-12 border-b border-brand-800 pb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-6 text-white">
+                        <i class="fa-solid fa-tooth text-brand-400 text-2xl"></i>
+                        <span class="font-bold text-xl">Dental Clinique</span>
+                    </div>
+                    <p class="text-brand-200 text-sm leading-relaxed">
+                        Sede Legale: Via San Francesco 1/a, Pisa<br>
+                        P.IVA 02061240509<br>
+                        Email: info@dentalclinique.net
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-5">Pazienti</h4>
+                    <ul class="space-y-3 text-sm text-brand-200">
+                        <li><a href="sedi.html" class="hover:text-white transition">Le Nostre Sedi</a></li>
+                        <li><a href="#" class="hover:text-white transition">Convenzioni Dirette</a></li>
+                        <li><a href="#" class="hover:text-white transition">Metodi di Pagamento</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-5">Trattamenti</h4>
+                    <ul class="space-y-3 text-sm text-brand-200">
+                        <li><a href="implantologia.html" class="hover:text-white transition">Implantologia</a></li>
+                        <li><a href="#" class="hover:text-white transition">Ortodonzia Invisibile</a></li>
+                        <li><a href="#" class="hover:text-white transition">Faccette Estetiche</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-5">Urgenze</h4>
+                    <p class="text-brand-200 text-sm mb-4">Il servizio di pronto soccorso è attivo durante l'orario di
+                        apertura.</p>
+                    <a href="tel:800561444"
+                        class="inline-block bg-brand-800 text-white px-4 py-2 rounded-lg font-bold border border-brand-600 hover:bg-brand-700 transition">
+                        Chiama 800-561444
+                    </a>
+                </div>
+            </div>
+            <div class="text-center text-xs text-brand-400 font-medium">
+                © 2024 Dental Clinique S.p.A. - All rights reserved.
+            </div>
+        </div>
+    </footer>
 </body>
+
 </html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="it">
+<!-- HEAD COMUNE DA INSERIRE IN TUTTE LE PAGINE -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',  // Sfondi light
+                            100: '#e0f2fe',
+                            400: '#38bdf8', // Azzurro Ciano (Accenti)
+                            500: '#0ea5e9',
+                            600: '#0284c7', // Blu Principale
+                            800: '#075985', // Testo scuro
+                            900: '#0c4a6e', // Footer/Nav
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-nav { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+        .hero-gradient { background: linear-gradient(135deg, #0f172a 0%, #0c4a6e 100%); }
+    </style>
+</head>
+
+<body class="font-sans text-slate-600 antialiased bg-white">
+    
+    <!-- NAVBAR PREMIUM -->
+    <nav class="glass-nav fixed w-full z-50 border-b border-slate-100 shadow-sm">
+        <div class="container mx-auto px-6 h-20 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 bg-brand-600 rounded-lg flex items-center justify-center text-white text-xl shadow-brand-400/50 shadow-lg group-hover:scale-105 transition">
+                    <i class="fa-solid fa-tooth"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-bold text-slate-800 tracking-tight leading-none block">Dental Clinique</span>
+                    <span class="text-[10px] font-bold text-brand-500 uppercase tracking-widest">Medical Group</span>
+                </div>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center gap-8 font-medium text-sm">
+                <a href="index.html" class="text-brand-600">Home</a>
+                <a href="sedi.html" class="text-slate-600 hover:text-brand-600 transition">Le Nostre Sedi</a>
+                <a href="implantologia.html" class="text-slate-600 hover:text-brand-600 transition">Trattamenti</a>
+                <a href="#chi-siamo" class="text-slate-600 hover:text-brand-600 transition">Chi Siamo</a>
+            </div>
+
+            <!-- CTA -->
+            <div class="hidden md:flex items-center gap-4">
+                <div class="text-right hidden lg:block">
+                    <span class="block text-xs text-slate-400 font-medium">Emergenze 24h</span>
+                    <span class="block text-lg font-bold text-slate-800 leading-none">800-561444</span>
+                </div>
+                <a href="#contatti" class="bg-brand-600 hover:bg-brand-700 text-white px-6 py-2.5 rounded-full text-sm font-semibold shadow-lg shadow-brand-500/30 transition transform hover:-translate-y-0.5">
+                    Prenota Ora
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Servizio -->
+    <header class="bg-brand-50 pt-32 pb-20">
+        <div class="container mx-auto px-6 text-center max-w-4xl">
+            <span class="text-brand-600 font-bold uppercase tracking-widest text-sm mb-4 block">Eccellenza Chirurgica</span>
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">Implantologia a Carico Immediato</h1>
+            <p class="text-xl text-slate-600 mb-8">Denti fissi in meno di 24 ore. Utilizziamo solo impianti certificati e garantiti 20 anni, anche in casi di poco osso.</p>
+            <a href="#prenota" class="bg-brand-600 text-white px-8 py-4 rounded-xl font-bold shadow-lg hover:bg-brand-700 transition">Richiedi Consulto Gratuito</a>
+        </div>
+    </header>
+
+    <!-- Contenuto Tecnico -->
+    <section class="py-16">
+        <div class="container mx-auto px-6 max-w-5xl">
+            
+            <!-- Vantaggio 1 -->
+            <div class="flex flex-col md:flex-row gap-12 items-center mb-16">
+                <div class="md:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="rounded-2xl shadow-xl">
+                </div>
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4">Tecnica All-on-4 / All-on-6</h3>
+                    <p class="text-slate-600 mb-4">La soluzione definitiva per chi ha perso tutti i denti o porta la dentiera mobile. Inseriamo 4 o 6 impianti su cui viene avvitata una protesi fissa (Toronto Bridge).</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center"><i class="fa-solid fa-check-circle text-brand-500 mr-2"></i> Nessun palato finto (senti i sapori)</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check-circle text-brand-500 mr-2"></i> Stabilità totale masticatoria</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check-circle text-brand-500 mr-2"></i> Estetica naturale immediata</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Sezione Garanzia -->
+            <div class="bg-slate-900 rounded-2xl p-8 md:p-12 text-white text-center">
+                <i class="fa-solid fa-certificate text-5xl text-brand-400 mb-6"></i>
+                <h2 class="text-3xl font-bold mb-4">Garanzia di 20 Anni</h2>
+                <p class="text-slate-300 max-w-2xl mx-auto mb-8">Utilizziamo esclusivamente Titanio Grado 4 puro. Ogni impianto è accompagnato da Passaporto Implantare Internazionale che ne certifica la provenienza (UE o USA).</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-16 bg-slate-50">
+        <div class="container mx-auto px-6 max-w-3xl">
+            <h2 class="text-3xl font-bold text-center text-slate-900 mb-12">Domande Frequenti</h2>
+            
+            <div class="space-y-4">
+                <details class="bg-white p-6 rounded-xl shadow-sm cursor-pointer group">
+                    <summary class="font-bold text-slate-900 flex justify-between items-center">
+                        Fa male l'intervento?
+                        <i class="fa-solid fa-chevron-down text-brand-500 group-open:rotate-180 transition"></i>
+                    </summary>
+                    <p class="mt-4 text-slate-600">Assolutamente no. Operiamo in anestesia locale e, su richiesta, con sedazione cosciente. Il dolore post-operatorio è gestibile con normali analgesici.</p>
+                </details>
+
+                <details class="bg-white p-6 rounded-xl shadow-sm cursor-pointer group">
+                    <summary class="font-bold text-slate-900 flex justify-between items-center">
+                        Quanto costa un impianto completo?
+                        <i class="fa-solid fa-chevron-down text-brand-500 group-open:rotate-180 transition"></i>
+                    </summary>
+                    <p class="mt-4 text-slate-600">Ogni bocca è diversa. Dental Clinique non usa listini generici ma crea preventivi su misura dopo una visita con TAC 3D. Offriamo però pagamenti rateali diretti senza interessi.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER (Copia da index.html) -->
+</body>
+</html>
