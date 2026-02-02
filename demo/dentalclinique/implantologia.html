@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="it">
-<!-- HEAD COMUNE DA INSERIRE IN TUTTE LE PAGINE -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trattamenti | Dental Clinique - Eccellenza in Odontoiatria</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -14,127 +15,295 @@
                     fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
                     colors: {
                         brand: {
-                            50: '#f0f9ff',  // Sfondi light
+                            50: '#f0f9ff',
                             100: '#e0f2fe',
-                            400: '#38bdf8', // Azzurro Ciano (Accenti)
+                            400: '#38bdf8',
                             500: '#0ea5e9',
-                            600: '#0284c7', // Blu Principale
-                            800: '#075985', // Testo scuro
-                            900: '#0c4a6e', // Footer/Nav
+                            600: '#0284c7',
+                            800: '#075985',
+                            900: '#0c4a6e',
                         }
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(14, 165, 233, 0.1)',
                     }
                 }
             }
         }
     </script>
     <style>
-        .glass-nav { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
-        .hero-gradient { background: linear-gradient(135deg, #0f172a 0%, #0c4a6e 100%); }
+        .glass-nav { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid #e0f2fe; }
+        .bg-mesh { background-color: #ffffff; background-image: radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.05) 0px, transparent 50%), radial-gradient(at 100% 0%, rgba(56, 189, 248, 0.05) 0px, transparent 50%); }
     </style>
 </head>
 
-<body class="font-sans text-slate-600 antialiased bg-white">
-    
-    <!-- NAVBAR PREMIUM -->
-    <nav class="glass-nav fixed w-full z-50 border-b border-slate-100 shadow-sm">
+<body class="font-sans text-slate-600 antialiased bg-mesh">
+
+   <nav class="glass-nav fixed w-full z-50 transition-all duration-300">
         <div class="container mx-auto px-6 h-20 flex justify-between items-center">
-            <!-- Logo -->
-            <a href="index.html" class="flex items-center gap-2 group">
-                <div class="w-10 h-10 bg-brand-600 rounded-lg flex items-center justify-center text-white text-xl shadow-brand-400/50 shadow-lg group-hover:scale-105 transition">
-                    <i class="fa-solid fa-tooth"></i>
-                </div>
-                <div>
-                    <span class="text-xl font-bold text-slate-800 tracking-tight leading-none block">Dental Clinique</span>
-                    <span class="text-[10px] font-bold text-brand-500 uppercase tracking-widest">Medical Group</span>
-                </div>
+
+            <!-- LOGO -->
+            <a href="index.html" class="flex items-center gap-3">
+                <img src="img/logo.png" alt="Dental Clinique" class="h-10 md:h-12 w-auto object-contain">
             </a>
 
-            <!-- Desktop Links -->
-            <div class="hidden md:flex items-center gap-8 font-medium text-sm">
-                <a href="index.html" class="text-brand-600">Home</a>
-                <a href="sedi.html" class="text-slate-600 hover:text-brand-600 transition">Le Nostre Sedi</a>
-                <a href="implantologia.html" class="text-slate-600 hover:text-brand-600 transition">Trattamenti</a>
-                <a href="#chi-siamo" class="text-slate-600 hover:text-brand-600 transition">Chi Siamo</a>
+            <!-- MENU DESKTOP (Visibile solo da PC) -->
+            <div class="hidden md:flex items-center gap-8 font-medium text-sm text-brand-800">
+                <a href="index.html" class="hover:text-brand-500 font-semibold">Home</a>
+                <a href="sedi.html" class="hover:text-brand-500 transition">Le Nostre Sedi</a>
+                <a href="implantologia.html" class="text-brand-500 transition">Trattamenti</a>
+                <a href="#chi-siamo" class="hover:text-brand-500 transition">Chi Siamo</a>
             </div>
 
-            <!-- CTA -->
-            <div class="hidden md:flex items-center gap-4">
+            <!-- CTA DESKTOP (Visibile solo da PC) -->
+            <div class="hidden md:flex items-center gap-5">
                 <div class="text-right hidden lg:block">
-                    <span class="block text-xs text-slate-400 font-medium">Emergenze 24h</span>
-                    <span class="block text-lg font-bold text-slate-800 leading-none">800-561444</span>
+                    <span class="block text-xs text-brand-400 font-semibold uppercase">Numero Verde</span>
+                    <span class="block text-lg font-bold text-brand-900 leading-none font-mono">800-561444</span>
                 </div>
-                <a href="#contatti" class="bg-brand-600 hover:bg-brand-700 text-white px-6 py-2.5 rounded-full text-sm font-semibold shadow-lg shadow-brand-500/30 transition transform hover:-translate-y-0.5">
+                <a href="contatti.html"
+                    class="bg-brand-500 hover:bg-brand-600 text-white px-7 py-3 rounded-full text-sm font-bold shadow-soft transition-transform transform hover:-translate-y-0.5">
                     Prenota Ora
                 </a>
+            </div>
+
+            <!-- BOTTONE HAMBURGER (Visibile solo su MOBILE) -->
+            <button id="mobile-menu-btn" class="md:hidden text-brand-900 text-2xl focus:outline-none p-2">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- PANNELLO MENU MOBILE (Nascosto di default) -->
+        <div id="mobile-menu"
+            class="hidden md:hidden absolute top-20 left-0 w-full bg-white border-t border-brand-100 shadow-xl">
+            <div class="flex flex-col p-6 gap-4 font-medium text-brand-800">
+                <a href="index.html" class="py-2 border-b border-brand-50 hover:text-brand-500">Home</a>
+                <a href="sedi.html" class="py-2 border-b border-brand-50 hover:text-brand-500">Le Nostre Sedi</a>
+                <a href="implantologia.html" class="py-2 border-b border-brand-50 text-brand-500">Trattamenti</a>
+                <a href="#chi-siamo" class="py-2 border-b border-brand-50 hover:text-brand-500">Chi Siamo</a>
+
+                <!-- CTA Mobile -->
+                <div class="mt-4 flex flex-col gap-3">
+                    <a href="tel:800561444"
+                        class="text-center py-3 border border-brand-200 text-brand-600 rounded-xl font-bold">
+                        <i class="fa-solid fa-phone mr-2"></i> Chiama 800-561444
+                    </a>
+                    <a href="contatti.html" class="text-center py-3 bg-brand-500 text-white rounded-xl font-bold shadow-lg">
+                        Prenota Ora
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Header Servizio -->
-    <header class="bg-brand-50 pt-32 pb-20">
-        <div class="container mx-auto px-6 text-center max-w-4xl">
-            <span class="text-brand-600 font-bold uppercase tracking-widest text-sm mb-4 block">Eccellenza Chirurgica</span>
-            <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">Implantologia a Carico Immediato</h1>
-            <p class="text-xl text-slate-600 mb-8">Denti fissi in meno di 24 ore. Utilizziamo solo impianti certificati e garantiti 20 anni, anche in casi di poco osso.</p>
-            <a href="#prenota" class="bg-brand-600 text-white px-8 py-4 rounded-xl font-bold shadow-lg hover:bg-brand-700 transition">Richiedi Consulto Gratuito</a>
-        </div>
-    </header>
+    <script>
+        // Logica per aprire/chiudere il menu mobile
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
 
-    <!-- Contenuto Tecnico -->
-    <section class="py-16">
-        <div class="container mx-auto px-6 max-w-5xl">
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+
+            // Cambio icona da Hamburger (bars) a X (xmark) quando aperto
+            const icon = menuBtn.querySelector('i');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            }
+        });
+    </script>
+
+    <section class="relative pt-44 pb-32 text-center rounded-b-[3rem] shadow-lg overflow-hidden z-20">
+        <!-- Immagine di Sfondo -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" 
+                 class="w-full h-full object-cover" alt="Reception Dental Clinique">
+            <!-- Overlay Sfumato Blu -->
+            <div class="absolute inset-0 bg-brand-900/80 mix-blend-multiply"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-brand-900/50 to-brand-900/90"></div>
+        </div>
+
+        <!-- Contenuto -->
+        <div class="container mx-auto px-6 relative z-10">
+            <span class="text-brand-200 font-bold uppercase tracking-widest text-xs mb-4 block">Specializzazioni</span>
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">Trattamenti d'Eccellenza</h1>
+            <p class="text-lg text-brand-100 max-w-2xl mx-auto leading-relaxed">
+                Dalla prevenzione quotidiana alla chirurgia robotica guidata. In Dental Clinique combiniamo esperienza medica e tecnologie di ultima generazione.
+            </p>
+        </div>
+    </section>
+
+
+    <section class="pb-24">
+        <div class="container mx-auto px-6">
             
-            <!-- Vantaggio 1 -->
-            <div class="flex flex-col md:flex-row gap-12 items-center mb-16">
-                <div class="md:w-1/2">
-                    <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="rounded-2xl shadow-xl">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <div class="bg-white p-8 rounded-3xl shadow-soft border border-brand-100 hover:-translate-y-2 transition-transform duration-300">
+                    <div class="w-16 h-16 bg-brand-50 rounded-2xl flex items-center justify-center text-brand-600 text-3xl mb-6">
+                        <i class="fa-solid fa-tooth"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-brand-900 mb-3">Implantologia Carico Immediato</h3>
+                    <p class="text-slate-600 mb-6">Recupera il sorriso in 24 ore. Utilizziamo tecniche All-on-4® e All-on-6® per riabilitazioni fisse totali, anche con poco osso.</p>
+                    <ul class="space-y-2 mb-8 text-sm">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> Denti fissi subito</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> Chirurgia computer-guidata</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> Garanzia 20 anni certificata</li>
+                    </ul>
+                    <a href="implantologia.html" class="text-brand-600 font-bold flex items-center gap-2 hover:gap-4 transition-all">
+                        Scopri di più <i class="fa-solid fa-arrow-right-long"></i>
+                    </a>
                 </div>
-                <div class="md:w-1/2">
-                    <h3 class="text-2xl font-bold text-slate-900 mb-4">Tecnica All-on-4 / All-on-6</h3>
-                    <p class="text-slate-600 mb-4">La soluzione definitiva per chi ha perso tutti i denti o porta la dentiera mobile. Inseriamo 4 o 6 impianti su cui viene avvitata una protesi fissa (Toronto Bridge).</p>
-                    <ul class="space-y-2">
-                        <li class="flex items-center"><i class="fa-solid fa-check-circle text-brand-500 mr-2"></i> Nessun palato finto (senti i sapori)</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check-circle text-brand-500 mr-2"></i> Stabilità totale masticatoria</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check-circle text-brand-500 mr-2"></i> Estetica naturale immediata</li>
+
+                <div class="bg-white p-8 rounded-3xl shadow-soft border border-brand-100 hover:-translate-y-2 transition-transform duration-300">
+                    <div class="w-16 h-16 bg-brand-50 rounded-2xl flex items-center justify-center text-brand-600 text-3xl mb-6">
+                        <i class="fa-solid fa-mask-face"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-brand-900 mb-3">Ortodonzia Invisibile</h3>
+                    <p class="text-slate-600 mb-6">Allinea i tuoi denti senza il fastidio del metallo. Mascherine trasparenti e personalizzate, quasi invisibili ad occhio nudo.</p>
+                    <ul class="space-y-2 mb-8 text-sm">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> Scansione 3D (niente impronte)</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> Risultato prevedibile</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> Ideale per adulti e ragazzi</li>
+                    </ul>
+                    <a href="#" class="text-brand-600 font-bold flex items-center gap-2 hover:gap-4 transition-all">
+                        Scopri di più <i class="fa-solid fa-arrow-right-long"></i>
+                    </a>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl shadow-soft border border-brand-100 hover:-translate-y-2 transition-transform duration-300">
+                    <div class="w-16 h-16 bg-brand-50 rounded-2xl flex items-center justify-center text-brand-600 text-3xl mb-6">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-brand-900 mb-3">Estetica e Faccette</h3>
+                    <p class="text-slate-600 mb-6">Sbiancamento professionale a LED e faccette in ceramica ultra-sottili per correggere forma, colore e spaziatura dei denti.</p>
+                    <ul class="space-y-2 mb-8 text-sm">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> Digital Smile Design</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> Faccette non invasive</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> Sbiancamento rapido</li>
+                    </ul>
+                    <a href="#" class="text-brand-600 font-bold flex items-center gap-2 hover:gap-4 transition-all">
+                        Scopri di più <i class="fa-solid fa-arrow-right-long"></i>
+                    </a>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl shadow-soft border border-brand-100 hover:-translate-y-2 transition-transform duration-300">
+                    <div class="w-16 h-16 bg-brand-50 rounded-2xl flex items-center justify-center text-brand-600 text-3xl mb-6">
+                        <i class="fa-solid fa-shield-virus"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-brand-900 mb-3">Cura della Piorrea</h3>
+                    <p class="text-slate-600 mb-6">Trattamento avanzato della malattia parodontale per salvare i tuoi denti naturali. Protocolli laser e micro-chirurgia.</p>
+                    <ul class="space-y-2 mb-8 text-sm">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> Test del DNA batterico</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> Terapia laser non invasiva</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> Mantenimento programmato</li>
+                    </ul>
+                    <a href="#" class="text-brand-600 font-bold flex items-center gap-2 hover:gap-4 transition-all">
+                        Scopri di più <i class="fa-solid fa-arrow-right-long"></i>
+                    </a>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl shadow-soft border border-brand-100 hover:-translate-y-2 transition-transform duration-300">
+                    <div class="w-16 h-16 bg-brand-50 rounded-2xl flex items-center justify-center text-brand-600 text-3xl mb-6">
+                        <i class="fa-solid fa-x-ray"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-brand-900 mb-3">Diagnostica Avanzata</h3>
+                    <p class="text-slate-600 mb-6">Tutte le cliniche sono dotate di TAC Cone Beam 3D per diagnosi istantanee e precise senza dover uscire dalla struttura.</p>
+                    <ul class="space-y-2 mb-8 text-sm">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> Panoramica Digitale</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> TAC 3D a bassa dose</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> Referti immediati</li>
+                    </ul>
+                    <a href="#" class="text-brand-600 font-bold flex items-center gap-2 hover:gap-4 transition-all">
+                        Scopri di più <i class="fa-solid fa-arrow-right-long"></i>
+                    </a>
+                </div>
+
+                <div class="bg-red-50 p-8 rounded-3xl border border-red-100 hover:-translate-y-2 transition-transform duration-300">
+                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-red-500 text-3xl mb-6 shadow-sm">
+                        <i class="fa-solid fa-briefcase-medical"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-3">Urgenze Odontoiatriche</h3>
+                    <p class="text-slate-600 mb-6">Mal di denti, traumi o protesi rotte? Gestiamo le emergenze in giornata con orario continuato e accesso prioritario.</p>
+                    <ul class="space-y-2 mb-8 text-sm">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-red-500"></i> Visita immediata</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-red-500"></i> Sedazione cosciente</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-red-500"></i> Risoluzione del dolore</li>
+                    </ul>
+                    <a href="tel:800561444" class="text-red-500 font-bold flex items-center gap-2 hover:gap-4 transition-all">
+                        Chiama Ora <i class="fa-solid fa-phone"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-brand-900 text-white overflow-hidden relative">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-10 text-center md:text-left">
+                <div class="max-w-2xl">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Tecnologia Certificata in ogni Sede</h2>
+                    <p class="text-brand-200 text-lg">Indipendentemente dalla sede che sceglierai (Pisa, Lucca, Viareggio...), troverai gli stessi standard qualitativi e le medesime tecnologie d'avanguardia.</p>
+                </div>
+                <div class="flex gap-4">
+                    <a href="sedi.html" class="bg-brand-500 text-white px-8 py-4 rounded-xl font-bold hover:bg-brand-600 transition">Trova la Sede vicina</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER CLEAN -->
+    <footer class="bg-brand-900 text-brand-100 pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12 mb-12 border-b border-brand-800 pb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-6 text-white">
+                        <i class="fa-solid fa-tooth text-brand-400 text-2xl"></i>
+                        <span class="font-bold text-xl">Dental Clinique</span>
+                    </div>
+                    <p class="text-brand-200 text-sm leading-relaxed">
+                        Sede Legale: Via San Francesco 1/a, Pisa<br>
+                        P.IVA 02061240509<br>
+                        Email: info@dentalclinique.net
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-5">Pazienti</h4>
+                    <ul class="space-y-3 text-sm text-brand-200">
+                        <li><a href="sedi.html" class="hover:text-white transition">Le Nostre Sedi</a></li>
+                        <li><a href="#" class="hover:text-white transition">Convenzioni Dirette</a></li>
+                        <li><a href="#" class="hover:text-white transition">Metodi di Pagamento</a></li>
                     </ul>
                 </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-5">Trattamenti</h4>
+                    <ul class="space-y-3 text-sm text-brand-200">
+                        <li><a href="implantologia.html" class="hover:text-white transition">Implantologia</a></li>
+                        <li><a href="#" class="hover:text-white transition">Ortodonzia Invisibile</a></li>
+                        <li><a href="#" class="hover:text-white transition">Faccette Estetiche</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-5">Urgenze</h4>
+                    <p class="text-brand-200 text-sm mb-4">Il servizio di pronto soccorso è attivo durante l'orario di
+                        apertura.</p>
+                    <a href="tel:800561444"
+                        class="inline-block bg-brand-800 text-white px-4 py-2 rounded-lg font-bold border border-brand-600 hover:bg-brand-700 transition">
+                        Chiama 800-561444
+                    </a>
+                </div>
             </div>
-
-            <!-- Sezione Garanzia -->
-            <div class="bg-slate-900 rounded-2xl p-8 md:p-12 text-white text-center">
-                <i class="fa-solid fa-certificate text-5xl text-brand-400 mb-6"></i>
-                <h2 class="text-3xl font-bold mb-4">Garanzia di 20 Anni</h2>
-                <p class="text-slate-300 max-w-2xl mx-auto mb-8">Utilizziamo esclusivamente Titanio Grado 4 puro. Ogni impianto è accompagnato da Passaporto Implantare Internazionale che ne certifica la provenienza (UE o USA).</p>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="py-16 bg-slate-50">
-        <div class="container mx-auto px-6 max-w-3xl">
-            <h2 class="text-3xl font-bold text-center text-slate-900 mb-12">Domande Frequenti</h2>
-            
-            <div class="space-y-4">
-                <details class="bg-white p-6 rounded-xl shadow-sm cursor-pointer group">
-                    <summary class="font-bold text-slate-900 flex justify-between items-center">
-                        Fa male l'intervento?
-                        <i class="fa-solid fa-chevron-down text-brand-500 group-open:rotate-180 transition"></i>
-                    </summary>
-                    <p class="mt-4 text-slate-600">Assolutamente no. Operiamo in anestesia locale e, su richiesta, con sedazione cosciente. Il dolore post-operatorio è gestibile con normali analgesici.</p>
-                </details>
-
-                <details class="bg-white p-6 rounded-xl shadow-sm cursor-pointer group">
-                    <summary class="font-bold text-slate-900 flex justify-between items-center">
-                        Quanto costa un impianto completo?
-                        <i class="fa-solid fa-chevron-down text-brand-500 group-open:rotate-180 transition"></i>
-                    </summary>
-                    <p class="mt-4 text-slate-600">Ogni bocca è diversa. Dental Clinique non usa listini generici ma crea preventivi su misura dopo una visita con TAC 3D. Offriamo però pagamenti rateali diretti senza interessi.</p>
-                </details>
+            <div class="text-center text-xs text-brand-400 font-medium">
+                © 2024 Dental Clinique S.p.A. - All rights reserved.
             </div>
         </div>
-    </section>
 
-    <!-- FOOTER (Copia da index.html) -->
 </body>
 </html>

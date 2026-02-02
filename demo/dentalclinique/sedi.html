@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dental Clinique - Eccellenza Italiana</title>
-    
+
     <!-- Tailwind CSS & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <script>
         tailwind.config = {
             theme: {
@@ -36,54 +38,124 @@
         }
     </script>
     <style>
-        body { background-color: #ffffff; color: #075985; } /* Base brand-800 */
-        .glass-nav { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid #e0f2fe; }
+        body {
+            background-color: #ffffff;
+            color: #075985;
+        }
+
+        /* Base brand-800 */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #e0f2fe;
+        }
+
         /* Gradiente Luminoso per la Hero */
-        .hero-light { background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%); }
+        .hero-light {
+            background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);
+        }
     </style>
 </head>
+
 <body class="font-sans antialiased bg-brand-50">
-    
-     <!-- NAVBAR -->
+
     <nav class="glass-nav fixed w-full z-50 transition-all duration-300">
         <div class="container mx-auto px-6 h-20 flex justify-between items-center">
-            <!-- Logo -->
-            <a href="index.html" class="flex items-center gap-2.5">
-                <div class="w-10 h-10 bg-brand-500 rounded-xl flex items-center justify-center text-white shadow-glow">
-                    <i class="fa-solid fa-tooth text-lg"></i>
-                </div>
-                <div>
-                    <span class="text-xl font-bold text-brand-900 leading-none block">Dental Clinique</span>
-                    <span class="text-[11px] font-bold text-brand-500 uppercase tracking-[0.2em]">Medical Group</span>
-                </div>
+
+            <!-- LOGO -->
+            <a href="index.html" class="flex items-center gap-3">
+                <img src="img/logo.png" alt="Dental Clinique" class="h-10 md:h-12 w-auto object-contain">
             </a>
 
-            <!-- Menu Desktop -->
+            <!-- MENU DESKTOP (Visibile solo da PC) -->
             <div class="hidden md:flex items-center gap-8 font-medium text-sm text-brand-800">
-                <a href="index.html" class="text-brand-500 font-semibold">Home</a>
-                <a href="sedi.html" class="hover:text-brand-500 transition">Le Nostre Sedi</a>
+                <a href="index.html" class="hover:text-brand-500 font-semibold">Home</a>
+                <a href="sedi.html" class="text-brand-500 transition">Le Nostre Sedi</a>
                 <a href="implantologia.html" class="hover:text-brand-500 transition">Trattamenti</a>
                 <a href="#chi-siamo" class="hover:text-brand-500 transition">Chi Siamo</a>
             </div>
 
-            <!-- CTA -->
+            <!-- CTA DESKTOP (Visibile solo da PC) -->
             <div class="hidden md:flex items-center gap-5">
                 <div class="text-right hidden lg:block">
                     <span class="block text-xs text-brand-400 font-semibold uppercase">Numero Verde</span>
                     <span class="block text-lg font-bold text-brand-900 leading-none font-mono">800-561444</span>
                 </div>
-                <a href="#contatti" class="bg-brand-500 hover:bg-brand-600 text-white px-7 py-3 rounded-full text-sm font-bold shadow-soft transition-transform transform hover:-translate-y-0.5">
+                <a href="contatti.html"
+                    class="bg-brand-500 hover:bg-brand-600 text-white px-7 py-3 rounded-full text-sm font-bold shadow-soft transition-transform transform hover:-translate-y-0.5">
                     Prenota Ora
                 </a>
+            </div>
+
+            <!-- BOTTONE HAMBURGER (Visibile solo su MOBILE) -->
+            <button id="mobile-menu-btn" class="md:hidden text-brand-900 text-2xl focus:outline-none p-2">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- PANNELLO MENU MOBILE (Nascosto di default) -->
+        <div id="mobile-menu"
+            class="hidden md:hidden absolute top-20 left-0 w-full bg-white border-t border-brand-100 shadow-xl">
+            <div class="flex flex-col p-6 gap-4 font-medium text-brand-800">
+                <a href="index.html" class="py-2 border-b border-brand-50 hover:text-brand-500">Home</a>
+                <a href="sedi.html" class="py-2 border-b border-brand-50 text-brand-500">Le Nostre Sedi</a>
+                <a href="implantologia.html" class="py-2 border-b border-brand-50 hover:text-brand-500">Trattamenti</a>
+                <a href="#chi-siamo" class="py-2 border-b border-brand-50 hover:text-brand-500">Chi Siamo</a>
+
+                <!-- CTA Mobile -->
+                <div class="mt-4 flex flex-col gap-3">
+                    <a href="tel:800561444"
+                        class="text-center py-3 border border-brand-200 text-brand-600 rounded-xl font-bold">
+                        <i class="fa-solid fa-phone mr-2"></i> Chiama 800-561444
+                    </a>
+                    <a href="contatti.html" class="text-center py-3 bg-brand-500 text-white rounded-xl font-bold shadow-lg">
+                        Prenota Ora
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Header Semplice -->
-    <section class="pt-40 pb-12 bg-white text-center rounded-b-[3rem] shadow-sm">
-        <div class="container mx-auto px-6">
-            <h1 class="text-4xl md:text-5xl font-bold text-brand-900 mb-4">Le Nostre Sedi</h1>
-            <p class="text-lg text-brand-600 max-w-2xl mx-auto">Presenti in Toscana e Nord Italia. Seleziona la clinica più vicina.</p>
+    <script>
+        // Logica per aprire/chiudere il menu mobile
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+
+            // Cambio icona da Hamburger (bars) a X (xmark) quando aperto
+            const icon = menuBtn.querySelector('i');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            }
+        });
+    </script>
+
+
+
+    <section class="relative pt-44 pb-32 text-center rounded-b-[3rem] shadow-lg overflow-hidden z-20">
+        <!-- Immagine di Sfondo -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://www.studiodentisticolombardo.it/wp-content/uploads/Studio-dentistico-lombardo-ambulatorio.webp" 
+                 class="w-full h-full object-cover" alt="Reception Dental Clinique">
+            <!-- Overlay Sfumato Blu -->
+            <div class="absolute inset-0 bg-brand-900/80 mix-blend-multiply"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-brand-900/50 to-brand-900/90"></div>
+        </div>
+
+        <!-- Contenuto -->
+        <div class="container mx-auto px-6 relative z-10">
+            <span class="text-brand-200 font-bold uppercase tracking-widest text-xs mb-4 block">Specializzazioni</span>
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">Le Nostre Sedi</h1>
+            <p class="text-lg text-brand-100 max-w-2xl mx-auto leading-relaxed">
+                Presenti in Toscana e Nord Italia. Seleziona la clinica
+                più vicina.
+            </p>
         </div>
     </section>
 
@@ -91,59 +163,17 @@
     <section class="py-16">
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <!-- CARD PAVIA -->
-                <article class="bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-lg transition-all border border-brand-100 group">
+
+
+                <!-- CARD PISA -->
+                <article
+                    class="bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-lg transition-all border border-brand-100 group">
                     <div class="h-56 bg-brand-100 relative overflow-hidden">
-                        <!-- Placeholder Immagine -->
                         <div class="absolute inset-0 bg-brand-200/50 flex items-center justify-center text-brand-400">
                             <i class="fa-solid fa-hospital text-4xl opacity-50"></i>
                         </div>
-                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AHVAweot5wHJ3tk383Fp2dhkzQSdWN9yMuXyo438TvZPfq-vMFPIOxe-0ch5FS4xfgMNtF9mVYir8TI4DOpaDquutAZW47kOQJGPNVXuHWg1aPrvkE2YLckp6zVsm-vM4CQhBbKbtOrl=s680-w680-h510-rw" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition duration-700">
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold text-brand-900 mb-2">Pavia</h3>
-                        <p class="text-brand-600 mb-6 flex items-start gap-2">
-                            <i class="fa-solid fa-location-dot mt-1 text-brand-400"></i> Corso Cavour 32
-                        </p>
-                        <div class="flex gap-3">
-                            <a href="sede-pavia.html" class="flex-1 py-3 bg-brand-500 text-white font-bold text-center rounded-xl hover:bg-brand-600 transition">Vedi Orari</a>
-                            <a href="tel:800561444" class="w-12 flex items-center justify-center bg-brand-50 text-brand-600 rounded-xl hover:bg-brand-100 transition border border-brand-200">
-                                <i class="fa-solid fa-phone"></i>
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- CARD FORNACETTE -->
-                <article class="bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-lg transition-all border border-brand-100 group">
-                    <div class="h-56 bg-brand-100 relative overflow-hidden">
-                         <div class="absolute inset-0 bg-brand-200/50 flex items-center justify-center text-brand-400">
-                            <i class="fa-solid fa-hospital text-4xl opacity-50"></i>
-                        </div>
-                        <img src="https://lh3.googleusercontent.com/p/AF1QipOpyF6snZY4JnBgyWfOBKf4IEwYx5I-Sx5tJAw0=s680-w680-h510-rw" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition duration-700">
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold text-brand-900 mb-2">Fornacette</h3>
-                        <p class="text-brand-600 mb-6 flex items-start gap-2">
-                            <i class="fa-solid fa-location-dot mt-1 text-brand-400"></i> Via Tosco Romagnola 338
-                        </p>
-                        <div class="flex gap-3">
-                            <button class="flex-1 py-3 bg-brand-50 text-brand-600 font-bold text-center rounded-xl hover:bg-brand-100 transition border border-brand-200">Dettagli</button>
-                            <a href="tel:0587398116" class="w-12 flex items-center justify-center bg-brand-50 text-brand-600 rounded-xl hover:bg-brand-100 transition border border-brand-200">
-                                <i class="fa-solid fa-phone"></i>
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- CARD PISA -->
-                <article class="bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-lg transition-all border border-brand-100 group">
-                    <div class="h-56 bg-brand-100 relative overflow-hidden">
-                         <div class="absolute inset-0 bg-brand-200/50 flex items-center justify-center text-brand-400">
-                            <i class="fa-solid fa-hospital text-4xl opacity-50"></i>
-                        </div>
-                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AHVAweqzs5CpdK71FyB6utj6eME9xf1fFqZXtiM0zLnCsxmQATGJiNmMuA8A4aQhMiCrce9jusBOOJl7FbI1OT1jII08UkFxTl84XHhI__YcqgoLDBwgGQcKb1-dMHzOEItGRcOfsA6I=s680-w680-h510-rw" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition duration-700">
+                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AHVAweqzs5CpdK71FyB6utj6eME9xf1fFqZXtiM0zLnCsxmQATGJiNmMuA8A4aQhMiCrce9jusBOOJl7FbI1OT1jII08UkFxTl84XHhI__YcqgoLDBwgGQcKb1-dMHzOEItGRcOfsA6I=s680-w680-h510-rw"
+                            class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition duration-700">
                     </div>
                     <div class="p-8">
                         <h3 class="text-2xl font-bold text-brand-900 mb-2">Pisa</h3>
@@ -151,18 +181,123 @@
                             <i class="fa-solid fa-location-dot mt-1 text-brand-400"></i> Via San Francesco 1/a
                         </p>
                         <div class="flex gap-3">
-                            <button class="flex-1 py-3 bg-brand-50 text-brand-600 font-bold text-center rounded-xl hover:bg-brand-100 transition border border-brand-200">Dettagli</button>
-                            <a href="tel:800561444" class="w-12 flex items-center justify-center bg-brand-50 text-brand-600 rounded-xl hover:bg-brand-100 transition border border-brand-200">
+                            <a href="sede-pisa.html"
+                                class="flex-1 py-3 bg-brand-500 text-white font-bold text-center rounded-xl hover:bg-brand-600 transition">Dettagli</a>
+                            <a href="tel:800561444"
+                                class="w-12 flex items-center justify-center bg-brand-50 text-brand-600 rounded-xl hover:bg-brand-100 transition border border-brand-200">
                                 <i class="fa-solid fa-phone"></i>
                             </a>
                         </div>
                     </div>
                 </article>
 
+                <!-- CARD PAVIA -->
+                <article
+                    class="bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-lg transition-all border border-brand-100 group">
+                    <div class="h-56 bg-brand-100 relative overflow-hidden">
+                        <!-- Placeholder Immagine -->
+                        <div class="absolute inset-0 bg-brand-200/50 flex items-center justify-center text-brand-400">
+                            <i class="fa-solid fa-hospital text-4xl opacity-50"></i>
+                        </div>
+                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AHVAweot5wHJ3tk383Fp2dhkzQSdWN9yMuXyo438TvZPfq-vMFPIOxe-0ch5FS4xfgMNtF9mVYir8TI4DOpaDquutAZW47kOQJGPNVXuHWg1aPrvkE2YLckp6zVsm-vM4CQhBbKbtOrl=s680-w680-h510-rw"
+                            class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition duration-700">
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-brand-900 mb-2">Pavia</h3>
+                        <p class="text-brand-600 mb-6 flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot mt-1 text-brand-400"></i> Corso Cavour 32
+                        </p>
+                        <div class="flex gap-3">
+                            <button
+                                class="flex-1 py-3 bg-brand-50 text-brand-600 font-bold text-center rounded-xl hover:bg-brand-100 transition border border-brand-200">Dettagli</button>
+                            <a href="tel:0587398116"
+                                class="w-12 flex items-center justify-center bg-brand-50 text-brand-600 rounded-xl hover:bg-brand-100 transition border border-brand-200">
+                                <i class="fa-solid fa-phone"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CARD FORNACETTE -->
+                <article
+                    class="bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-lg transition-all border border-brand-100 group">
+                    <div class="h-56 bg-brand-100 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-brand-200/50 flex items-center justify-center text-brand-400">
+                            <i class="fa-solid fa-hospital text-4xl opacity-50"></i>
+                        </div>
+                        <img src="https://lh3.googleusercontent.com/p/AF1QipOpyF6snZY4JnBgyWfOBKf4IEwYx5I-Sx5tJAw0=s680-w680-h510-rw"
+                            class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition duration-700">
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-brand-900 mb-2">Fornacette</h3>
+                        <p class="text-brand-600 mb-6 flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot mt-1 text-brand-400"></i> Via Tosco Romagnola 338
+                        </p>
+                        <div class="flex gap-3">
+                            <button
+                                class="flex-1 py-3 bg-brand-50 text-brand-600 font-bold text-center rounded-xl hover:bg-brand-100 transition border border-brand-200">Dettagli</button>
+                            <a href="tel:0587398116"
+                                class="w-12 flex items-center justify-center bg-brand-50 text-brand-600 rounded-xl hover:bg-brand-100 transition border border-brand-200">
+                                <i class="fa-solid fa-phone"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+
+
             </div>
         </div>
     </section>
 
-    <!-- FOOTER (Copia da index.html) -->
+    <!-- FOOTER CLEAN -->
+    <footer class="bg-brand-900 text-brand-100 pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12 mb-12 border-b border-brand-800 pb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-6 text-white">
+                        <i class="fa-solid fa-tooth text-brand-400 text-2xl"></i>
+                        <span class="font-bold text-xl">Dental Clinique</span>
+                    </div>
+                    <p class="text-brand-200 text-sm leading-relaxed">
+                        Sede Legale: Via San Francesco 1/a, Pisa<br>
+                        P.IVA 02061240509<br>
+                        Email: info@dentalclinique.net
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-5">Pazienti</h4>
+                    <ul class="space-y-3 text-sm text-brand-200">
+                        <li><a href="sedi.html" class="hover:text-white transition">Le Nostre Sedi</a></li>
+                        <li><a href="#" class="hover:text-white transition">Convenzioni Dirette</a></li>
+                        <li><a href="#" class="hover:text-white transition">Metodi di Pagamento</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-5">Trattamenti</h4>
+                    <ul class="space-y-3 text-sm text-brand-200">
+                        <li><a href="implantologia.html" class="hover:text-white transition">Implantologia</a></li>
+                        <li><a href="#" class="hover:text-white transition">Ortodonzia Invisibile</a></li>
+                        <li><a href="#" class="hover:text-white transition">Faccette Estetiche</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-5">Urgenze</h4>
+                    <p class="text-brand-200 text-sm mb-4">Il servizio di pronto soccorso è attivo durante l'orario di
+                        apertura.</p>
+                    <a href="tel:800561444"
+                        class="inline-block bg-brand-800 text-white px-4 py-2 rounded-lg font-bold border border-brand-600 hover:bg-brand-700 transition">
+                        Chiama 800-561444
+                    </a>
+                </div>
+            </div>
+            <div class="text-center text-xs text-brand-400 font-medium">
+                © 2024 Dental Clinique S.p.A. - All rights reserved.
+            </div>
+        </div>
 </body>
+
 </html>
