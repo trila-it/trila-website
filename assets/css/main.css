@@ -32,8 +32,8 @@
 :root {
   --nav-color: #313336;  /* The default color of the main navmenu links */
   --nav-hover-color: #1f7a63; /* Applied to main navmenu links when they are hovered over or active */
-  --nav-mobile-background-color: #fff8e1; /* Used as the background color for mobile navigation menu */
-  --nav-dropdown-background-color: #fff8e1; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
+  --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
+  --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
   --nav-dropdown-color: #313336; /* Used for navigation links of the dropdown items in the navigation menu. */
   --nav-dropdown-hover-color: #1f7a63; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
