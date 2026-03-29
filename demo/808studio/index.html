@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>808 Studio | Recording & Production – Rho, Milano</title>
+  <meta name="description" content="808 Studio – Studio di registrazione professionale a Rho (Milano). Recording, Mix & Master, Noleggio Sala." />
+  <link rel="icon" href="img/logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+  <style>
+    :root {
+      --red: #e8192c;
+      --red-dark: #b5121f;
+      --red-glow: rgba(232,25,44,0.28);
+      --bg:  #080808;
+      --bg2: #111111;
+      --bg3: #1a1a1a;
+      --white: #ffffff;
+      --gray: #888888;
+      --gray-l: #cccccc;
+      --border: rgba(255,255,255,0.07);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    html, body { overflow-x:hidden; }
+    body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--white); cursor:none; }
+
+    /* ── CURSOR ── */
+    #cur-dot {
+      position:fixed; width:6px; height:6px; background:var(--red);
+      border-radius:50%; pointer-events:none; z-index:9999;
+      margin:-3px 0 0 -3px; top:0; left:0;
+    }
+    #cur-ring {
+      position:fixed; width:30px; height:30px;
+      border:1.5px solid rgba(232,25,44,0.5); border-radius:50%;
+      pointer-events:none; z-index:9998; margin:-15px 0 0 -15px; top:0; left:0;
+      transition:width .2s,height .2s,margin .2s,border-color .2s;
+    }
+    #cur-ring.on { width:48px; height:48px; margin:-24px 0 0 -24px; border-color:var(--red); }
+
+    /* ── UTILS ── */
+    .wrap { max-width:1120px; margin:0 auto; padding:0 24px; }
+    .sec  { padding:100px 0; }
+    .tag  {
+      display:inline-flex; align-items:center; gap:10px;
+      font-size:.72rem; font-weight:600; letter-spacing:.18em;
+      text-transform:uppercase; color:var(--red); margin-bottom:14px;
+    }
+    .tag::before { content:''; display:block; width:24px; height:2px; background:var(--red); }
+    h1,h2,h3,h4 { font-family:'Bebas Neue',sans-serif; letter-spacing:.03em; }
+    .sec-title { font-size:clamp(2.4rem,6vw,4.2rem); line-height:1.02; margin-bottom:18px; }
+    .muted { color:var(--gray); }
+
+    /* ── NAVBAR ── */
+    #nav {
+      position:fixed; top:0; left:0; right:0; z-index:800;
+      padding:20px 0; transition:all .4s;
+    }
+    #nav.scrolled {
+      padding:13px 0; background:rgba(8,8,8,.92);
+      backdrop-filter:blur(18px); border-bottom:1px solid var(--border);
+    }
+    .nav-in { display:flex; align-items:center; justify-content:space-between; }
+    .nav-logo img { height:40px; }
+    .nav-links { display:flex; gap:32px; list-style:none; }
+    .nav-links a {
+      color:var(--gray-l); text-decoration:none; font-size:.82rem;
+      font-weight:500; letter-spacing:.1em; text-transform:uppercase;
+      transition:color .2s; position:relative;
+    }
+    .nav-links a::after {
+      content:''; position:absolute; bottom:-4px; left:0;
+      width:0; height:1.5px; background:var(--red); transition:width .3s;
+    }
+    .nav-links a:hover { color:var(--white); }
+    .nav-links a:hover::after { width:100%; }
+    .nav-cta {
+      background:var(--red) !important; color:var(--white) !important;
+      padding:9px 22px; border-radius:100px;
+      font-weight:600 !important;
+    }
+    .nav-cta:hover { box-shadow:0 0 20px var(--red-glow) !important; }
+    .nav-cta::after { display:none !important; }
+    .nav-ham { display:none; flex-direction:column; gap:5px; cursor:pointer; z-index:1100; position:relative; }
+    .nav-ham span { display:block; width:24px; height:2px; background:var(--white); transition:transform .35s, opacity .25s; }
+    .nav-ham.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .nav-ham.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+    .nav-ham.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+    @media(max-width:768px){ .nav-links{display:none} .nav-ham{display:flex} }
+
+    /* ── MOBILE FULLSCREEN MENU ── */
+    #mob-menu {
+      display:none;
+      position:fixed; inset:0; z-index:1000;
+      background:var(--bg);
+      flex-direction:column;
+      align-items:center; justify-content:center;
+      gap:0;
+    }
+    #mob-menu.active { display:flex; }
+    #mob-menu::before {
+      content:'';
+      position:absolute; inset:0;
+      background: radial-gradient(ellipse at 50% 60%, rgba(232,25,44,.12) 0%, transparent 70%);
+      pointer-events:none;
+    }
+    .mob-link {
+      display:block; width:100%; text-align:center;
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(3rem,10vw,5.5rem);
+      color:var(--white); text-decoration:none;
+      letter-spacing:.05em;
+      padding:16px 0;
+      border-bottom:1px solid rgba(255,255,255,.05);
+      position:relative; overflow:hidden;
+      transition:color .2s;
+      opacity:0; transform:translateY(30px); /* animated in by GSAP */
+    }
+    .mob-link:first-child { border-top:1px solid rgba(255,255,255,.05); }
+    .mob-link:hover { color:var(--red); }
+    .mob-link::after {
+      content:''; position:absolute; left:0; top:0; bottom:0;
+      width:3px; background:var(--red);
+      transform:scaleY(0); transform-origin:bottom;
+      transition:transform .25s ease;
+    }
+    .mob-link:hover::after { transform:scaleY(1); }
+    .mob-cta-wrap {
+      margin-top:36px;
+      opacity:0; transform:translateY(20px);
+    }
+    .mob-cta {
+      position:relative; overflow:hidden;
+      background:var(--red); color:var(--white);
+      padding:15px 44px; border-radius:100px;
+      font-size:.8rem; font-weight:700;
+      letter-spacing:.15em; text-transform:uppercase;
+      text-decoration:none; display:inline-block;
+      transition:box-shadow .3s;
+    }
+    .mob-cta::after {
+      content:''; position:absolute; top:0; left:-100%; width:60%; height:100%;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);
+      transition:left .5s ease;
+    }
+    .mob-cta:hover { box-shadow:0 0 28px var(--red-glow); color:var(--white); }
+    .mob-cta:hover::after { left:160%; }
+    .mob-footer {
+      position:absolute; bottom:32px; left:0; right:0;
+      text-align:center; font-size:.7rem;
+      color:var(--gray); letter-spacing:.15em; text-transform:uppercase;
+      opacity:0;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      position:relative; min-height:100vh;
+      display:flex; align-items:center; justify-content:center; overflow:hidden;
+    }
+    #hero-cv {
+      position:absolute; inset:0; width:100%; height:100%;
+      z-index:0; pointer-events:none;
+    }
+    .hero-body {
+      position:relative; z-index:2; text-align:center;
+      padding:130px 24px 200px;
+    }
+    .hero-pill {
+      display:inline-flex; align-items:center; gap:8px;
+      background:rgba(232,25,44,.08); border:1px solid rgba(232,25,44,.25);
+      color:var(--red); font-size:.7rem; font-weight:600;
+      letter-spacing:.18em; text-transform:uppercase;
+      padding:6px 16px; border-radius:100px; margin-bottom:30px;
+    }
+    .hero-pill .blink {
+      width:6px; height:6px; background:var(--red); border-radius:50%;
+      animation:blink 1.6s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+    .h-sub {
+      font-size:clamp(.85rem,2vw,1rem); color:var(--gray);
+      letter-spacing:.12em; text-transform:uppercase;
+      margin:22px 0 8px;
+    }
+    .h-typed {
+      display:block; min-height:1.6em;
+      font-size:clamp(.95rem,2.2vw,1.1rem);
+      color:var(--red); font-weight:600;
+      letter-spacing:.08em; text-transform:uppercase;
+      margin-bottom:38px;
+    }
+    .typed-cursor { color:var(--red); }
+    .h-btns { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:56px; }
+
+    /* EQ bars */
+    .eq { display:flex; align-items:flex-end; justify-content:center; gap:4px; height:28px; }
+    .eq span {
+      width:3px; background:var(--red); border-radius:2px; opacity:.65;
+      animation:eq 1s ease-in-out infinite alternate;
+    }
+    .eq span:nth-child(1){height:35%;animation-duration:.56s}
+    .eq span:nth-child(2){height:68%;animation-duration:.83s}
+    .eq span:nth-child(3){height:92%;animation-duration:.67s}
+    .eq span:nth-child(4){height:52%;animation-duration:1.05s}
+    .eq span:nth-child(5){height:100%;animation-duration:.75s}
+    .eq span:nth-child(6){height:78%;animation-duration:.61s}
+    .eq span:nth-child(7){height:45%;animation-duration:.91s}
+    .eq span:nth-child(8){height:85%;animation-duration:.72s}
+    .eq span:nth-child(9){height:58%;animation-duration:.88s}
+    .eq span:nth-child(10){height:70%;animation-duration:.64s}
+    .eq span:nth-child(11){height:38%;animation-duration:1.0s}
+    .eq span:nth-child(12){height:62%;animation-duration:.79s}
+    @keyframes eq { to { height:8%; opacity:.2; } }
+
+    /* Stats bar */
+    .hero-stats {
+      position:absolute; bottom:40px; left:0; right:0; z-index:2;
+      display:flex; justify-content:center; gap:16px;
+      padding:0 24px;
+    }
+    .stat {
+      display:flex; flex-direction:column; align-items:center;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(232,25,44,.2);
+      border-radius:10px;
+      padding:18px 28px;
+      backdrop-filter:blur(12px);
+      transition:border-color .3s, background .3s;
+      min-width:100px;
+    }
+    .stat:hover {
+      border-color:rgba(232,25,44,.6);
+      background:rgba(232,25,44,.07);
+    }
+    .stat-n {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:2.2rem; line-height:1;
+      background:linear-gradient(135deg,#fff 30%,var(--red));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    .stat-l {
+      font-size:.62rem; color:rgba(255,255,255,.5);
+      letter-spacing:.14em; text-transform:uppercase; margin-top:5px;
+    }
+    @media(max-width:600px){
+      .hero-stats { gap:10px; bottom:30px; }
+      .stat { padding:14px 16px; min-width:0; flex:1; }
+      .stat-n { font-size:1.8rem; }
+    }
+
+    /* Scroll line */
+    .scroll-hint {
+      position:absolute; bottom:195px; left:50%; transform:translateX(-50%);
+      z-index:2; display:flex; flex-direction:column; align-items:center; gap:6px;
+    }
+    .scroll-hint span { font-size:.62rem; color:var(--gray); letter-spacing:.15em; text-transform:uppercase; }
+    .s-line {
+      width:1px; height:36px;
+      background:linear-gradient(to bottom, var(--red), transparent);
+      animation:sline 2s ease-in-out infinite;
+    }
+    @keyframes sline { 0%,100%{opacity:.3;transform:scaleY(.5);transform-origin:top} 50%{opacity:1;transform:scaleY(1)} }
+
+    /* ── LOGO ANIMATION ── */
+    .la-wrap {
+      position: relative;
+      width: clamp(220px, 38vw, 300px);
+      height: clamp(220px, 38vw, 300px);
+      margin: 0 auto 16px;
+      overflow: visible;
+    }
+    .la-img-l, .la-img-r {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .la-img-l { clip-path: polygon(0 0, 51% 0, 51% 100%, 0 100%); }
+    .la-img-r { clip-path: polygon(49% 0, 100% 0, 100% 100%, 49% 100%); }
+    /* shockwave rings */
+    .shock {
+      position: absolute; top:50%; left:50%;
+      width: 100%; height: 100%;
+      margin-left: -50%; margin-top: -50%;
+      border-radius: 50%;
+      border: 2px solid var(--red);
+      transform: scale(0); opacity: 0;
+      pointer-events: none;
+    }
+    /* central glow blob */
+    .la-glow {
+      position: absolute; top:50%; left:50%;
+      width: 60%; height: 60%;
+      margin-left: -30%; margin-top: -30%;
+      background: radial-gradient(circle, rgba(232,25,44,.9) 0%, transparent 70%);
+      border-radius: 50%; opacity: 0; pointer-events: none;
+      filter: blur(20px);
+    }
+
+    /* ── BUTTONS ── */
+    .btn-p {
+      position:relative; overflow:hidden;
+      background:var(--red); color:var(--white);
+      padding:15px 38px; border-radius:100px;
+      font-size:.78rem; font-weight:700;
+      letter-spacing:.14em; text-transform:uppercase; text-decoration:none;
+      display:inline-flex; align-items:center; gap:10px;
+      transition:box-shadow .3s, transform .25s;
+    }
+    .btn-p::after {
+      content:''; position:absolute; top:0; left:-100%; width:60%; height:100%;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);
+      transition:left .55s ease;
+    }
+    .btn-p:hover { box-shadow:0 0 28px var(--red-glow), 0 0 60px rgba(232,25,44,.18); transform:translateY(-2px); color:var(--white); }
+    .btn-p:hover::after { left:160%; }
+
+    .btn-o {
+      position:relative;
+      background:transparent; color:var(--white);
+      border:1px solid rgba(255,255,255,.22);
+      padding:14px 38px; border-radius:100px;
+      font-size:.78rem; font-weight:500;
+      letter-spacing:.14em; text-transform:uppercase; text-decoration:none;
+      display:inline-flex; align-items:center; gap:10px;
+      transition:border-color .25s, background .25s, transform .25s;
+    }
+    .btn-o:hover { border-color:rgba(255,255,255,.55); background:rgba(255,255,255,.06); transform:translateY(-2px); color:var(--white); }
+
+    /* ── SERVICES ── */
+    #servizi { background:var(--bg); }
+    .srv-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:56px; }
+    @media(max-width:768px){ .srv-grid{grid-template-columns:1fr} }
+    .srv-card {
+      background:var(--bg2); padding:44px 32px;
+      position:relative; overflow:hidden; transition:background .3s;
+    }
+    .srv-card::before {
+      content:''; position:absolute; top:0; left:0; width:100%; height:3px;
+      background:var(--red); transform:scaleX(0); transform-origin:left; transition:transform .4s ease;
+    }
+    .srv-card:hover::before { transform:scaleX(1); }
+    .srv-card:hover { background:var(--bg3); }
+    .srv-num {
+      position:absolute; top:16px; right:20px;
+      font-family:'Bebas Neue',sans-serif; font-size:5rem;
+      color:rgba(255,255,255,.04); line-height:1; user-select:none; pointer-events:none;
+    }
+    .srv-icon {
+      width:52px; height:52px;
+      background:rgba(232,25,44,.09); border:1px solid rgba(232,25,44,.2);
+      border-radius:10px; display:flex; align-items:center; justify-content:center;
+      font-size:1.2rem; color:var(--red); margin-bottom:22px;
+      transition:background .3s,box-shadow .3s;
+    }
+    .srv-card:hover .srv-icon { background:rgba(232,25,44,.16); box-shadow:0 0 22px var(--red-glow); }
+    .srv-card h3 { font-size:1.6rem; margin-bottom:12px; }
+    .srv-card p { font-size:.88rem; line-height:1.75; color:var(--gray); margin-bottom:22px; }
+    .srv-list { list-style:none; display:flex; flex-direction:column; gap:9px; }
+    .srv-list li { display:flex; align-items:center; gap:9px; font-size:.82rem; color:var(--gray-l); }
+    .srv-list li i { color:var(--red); font-size:.6rem; flex-shrink:0; }
+
+    /* ── STUDIO (about) ── */
+    #studio { background:var(--bg2); padding:100px 0; }
+    .stu-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+    @media(max-width:900px){ .stu-grid{grid-template-columns:1fr;gap:50px} }
+    .stu-text p { font-size:.92rem; line-height:1.8; color:var(--gray-l); margin-bottom:15px; }
+    .stu-hi { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:32px; }
+    .hi-item {
+      background:var(--bg3); border:1px solid var(--border);
+      border-radius:8px; padding:16px;
+    }
+    .hi-item i { color:var(--red); margin-bottom:7px; display:block; }
+    .hi-item span { font-size:.8rem; color:var(--gray-l); line-height:1.5; }
+    .stu-vis { position:relative; }
+    .stu-img-main {
+      width:100%; aspect-ratio:4/3; object-fit:cover;
+      border-radius:8px; filter:brightness(.82) contrast(1.05);
+      display:block; background:var(--bg3);
+    }
+    .stu-img-sm {
+      position:absolute; bottom:-22px; right:-22px; width:44%;
+      aspect-ratio:1; object-fit:cover; border-radius:8px;
+      border:4px solid var(--bg2); filter:brightness(.82); background:var(--bg3);
+    }
+    @media(max-width:580px){ .stu-img-sm{display:none} }
+
+    /* ── GALLERY ── */
+    #gallery { background:var(--bg); padding:100px 0; }
+    .gal-grid {
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:8px; margin-top:46px;
+    }
+    .gal-item { position:relative; overflow:hidden; border-radius:6px; cursor:pointer; }
+    .gal-item:nth-child(1) { grid-column:span 8; aspect-ratio:16/7; }
+    .gal-item:nth-child(2) { grid-column:span 4; aspect-ratio:3/2; }
+    .gal-item:nth-child(3),
+    .gal-item:nth-child(4),
+    .gal-item:nth-child(5) { grid-column:span 4; aspect-ratio:1; }
+    .gal-item img {
+      width:100%; height:100%; object-fit:cover; display:block;
+      filter:brightness(.65) grayscale(15%);
+      transition:filter .5s,transform .6s;
+    }
+    .gal-item:hover img { filter:brightness(.85) grayscale(0%); transform:scale(1.05); }
+    .gal-ov {
+      position:absolute; inset:0;
+      background:linear-gradient(to top, rgba(232,25,44,.55) 0%, transparent 55%);
+      opacity:0; transition:opacity .4s;
+      display:flex; align-items:flex-end; padding:18px;
+    }
+    .gal-item:hover .gal-ov { opacity:1; }
+    .gal-ov span { font-size:.75rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; }
+    /* fallback bg if img missing */
+    .gal-item:nth-child(odd)  { background:var(--bg3); }
+    .gal-item:nth-child(even) { background:#161616; }
+    @media(max-width:768px){
+      .gal-grid { grid-template-columns:1fr 1fr; }
+      .gal-item:nth-child(1),.gal-item:nth-child(2),
+      .gal-item:nth-child(3),.gal-item:nth-child(4),
+      .gal-item:nth-child(5) { grid-column:span 1; aspect-ratio:4/3; }
+    }
+
+    /* ── PRICING ── */
+    #pricing { background:var(--bg2); padding:100px 0; }
+    .pri-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:56px; }
+    @media(max-width:768px){ .pri-grid{grid-template-columns:1fr} }
+    .pri-card { background:var(--bg3); padding:44px 32px; position:relative; transition:transform .3s; }
+    .pri-card.feat {
+      background:var(--bg); border:1px solid rgba(232,25,44,.35);
+      z-index:1;
+    }
+    .pri-card.feat::before {
+      content:'PIÙ SCELTO'; position:absolute; top:0; left:50%;
+      transform:translate(-50%,-50%);
+      background:var(--red); color:var(--white);
+      font-size:.62rem; font-weight:700; letter-spacing:.15em;
+      padding:4px 14px; border-radius:100px;
+    }
+    .pri-card:hover { transform:translateY(-5px); }
+    .pri-dur { font-size:.72rem; color:var(--red); letter-spacing:.15em; text-transform:uppercase; font-weight:600; margin-bottom:6px; }
+    .pri-name { font-size:1.4rem; margin-bottom:22px; }
+    .pri-price { font-family:'Bebas Neue',sans-serif; font-size:3.2rem; line-height:1; margin-bottom:4px; }
+    .pri-price sup { font-size:1.4rem; vertical-align:top; margin-top:8px; color:var(--red); }
+    .pri-desc { font-size:.78rem; color:var(--gray); margin-bottom:28px; }
+    .pri-list { list-style:none; display:flex; flex-direction:column; gap:11px; margin-bottom:32px; }
+    .pri-list li { display:flex; align-items:center; gap:9px; font-size:.83rem; color:var(--gray-l); }
+    .pri-list li i { color:var(--red); font-size:.7rem; }
+    .pri-list li.off { opacity:.3; }
+    .pri-list li.off i { color:var(--gray); }
+    .btn-pri {
+      display:block; width:100%; text-align:center;
+      padding:13px; border-radius:100px;
+      font-size:.75rem; font-weight:700;
+      letter-spacing:.14em; text-transform:uppercase;
+      text-decoration:none; transition:all .25s;
+    }
+    .btn-pri-o { border:1px solid rgba(255,255,255,.18); color:rgba(255,255,255,.6); }
+    .btn-pri-o:hover { border-color:var(--red); color:var(--white); background:rgba(232,25,44,.08); }
+    .btn-pri-s {
+      position:relative; overflow:hidden;
+      background:var(--red); color:var(--white);
+    }
+    .btn-pri-s::after {
+      content:''; position:absolute; top:0; left:-100%; width:60%; height:100%;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);
+      transition:left .5s ease;
+    }
+    .btn-pri-s:hover { box-shadow:0 0 22px var(--red-glow); color:var(--white); }
+    .btn-pri-s:hover::after { left:160%; }
+
+    /* ── CONTACT ── */
+    #contatti { background:var(--bg); padding:100px 0; }
+    .con-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; margin-top:56px; }
+    @media(max-width:900px){ .con-grid{grid-template-columns:1fr;gap:50px} }
+    .ci { display:flex; gap:18px; align-items:flex-start; margin-bottom:28px; }
+    .ci-icon {
+      width:44px; height:44px; flex-shrink:0;
+      background:rgba(232,25,44,.08); border:1px solid rgba(232,25,44,.2);
+      border-radius:8px; display:flex; align-items:center; justify-content:center;
+      color:var(--red);
+    }
+    .ci h4 { font-size:.7rem; font-family:'Inter',sans-serif; font-weight:600; letter-spacing:.15em; text-transform:uppercase; color:var(--gray); margin-bottom:4px; }
+    .ci p, .ci a { font-size:.92rem; color:var(--gray-l); text-decoration:none; transition:color .2s; }
+    .ci a:hover { color:var(--white); }
+    .socials { display:flex; gap:10px; margin-top:36px; }
+    .soc {
+      width:42px; height:42px; background:var(--bg2); border:1px solid var(--border);
+      border-radius:8px; display:flex; align-items:center; justify-content:center;
+      color:var(--gray); text-decoration:none; transition:all .2s;
+    }
+    .soc:hover { background:var(--red); border-color:var(--red); color:var(--white); transform:translateY(-2px); }
+    .book-card {
+      background:var(--bg2); border:1px solid var(--border);
+      border-radius:12px; padding:44px 36px;
+    }
+    .book-card h3 { font-size:1.9rem; margin-bottom:8px; }
+    .book-card > p { font-size:.88rem; color:var(--gray); line-height:1.7; margin-bottom:30px; }
+    .book-opts { display:flex; flex-direction:column; gap:11px; }
+    .book-btn {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:15px 18px; border-radius:8px; text-decoration:none; transition:all .2s;
+    }
+    .book-btn-left { display:flex; align-items:center; gap:12px; }
+    .book-btn-left i { font-size:1.1rem; }
+    .book-btn strong { display:block; font-size:.88rem; font-weight:600; color:var(--white); }
+    .book-btn small { font-size:.73rem; color:var(--gray); }
+    .book-btn .arr { font-size:.82rem; color:var(--gray); }
+    .bb-ig { background:linear-gradient(135deg,rgba(131,58,180,.12),rgba(252,176,69,.12)); border:1px solid rgba(252,176,69,.2); }
+    .bb-ig:hover { border-color:rgba(252,176,69,.45); }
+    .bb-wa { background:rgba(37,211,102,.08); border:1px solid rgba(37,211,102,.18); }
+    .bb-wa:hover { border-color:rgba(37,211,102,.4); }
+    .bb-em { background:rgba(232,25,44,.06); border:1px solid rgba(232,25,44,.18); }
+    .bb-em:hover { border-color:rgba(232,25,44,.4); }
+
+    /* ── FOOTER ── */
+    #footer { background:var(--bg2); border-top:1px solid var(--border); padding:60px 0 60px; }
+    .ft-top { display:grid; grid-template-columns:2fr 1fr 1fr; gap:60px; padding-bottom:44px; border-bottom:1px solid var(--border); }
+    @media(max-width:768px){ .ft-top{grid-template-columns:1fr 1fr;gap:36px} .ft-brand{grid-column:span 2} }
+    .ft-brand img { height:38px; margin-bottom:14px; display:block; }
+    .ft-brand p { font-size:.83rem; color:var(--gray); line-height:1.7; max-width:260px; }
+    .ft-col h4 { font-size:.72rem; font-family:'Inter',sans-serif; font-weight:600; letter-spacing:.15em; text-transform:uppercase; color:var(--gray); margin-bottom:18px; }
+    .ft-col ul { list-style:none; display:flex; flex-direction:column; gap:9px; }
+    .ft-col ul li, .ft-col ul li a { font-size:.85rem; color:var(--gray); text-decoration:none; transition:color .2s; }
+    .ft-col ul li a:hover { color:var(--white); }
+    .ft-bot { display:flex; justify-content:space-between; align-items:center; padding-top:28px; flex-wrap:wrap; gap:10px; }
+    .ft-bot p { font-size:.75rem; color:var(--gray); }
+    .trila-badge {
+      display:inline-flex; align-items:center; gap:6px; font-size:.7rem;
+      color:var(--gray); background:var(--bg3); border:1px solid var(--border);
+      padding:5px 12px; border-radius:100px; text-decoration:none; transition:border-color .2s;
+    }
+    .trila-badge:hover { border-color:rgba(255,255,255,.18); color:var(--gray-l); }
+    .trila-badge .dot {
+      width:6px; height:6px; background:var(--red); border-radius:50%;
+      animation:blink 2s ease-in-out infinite;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="cur-dot"></div>
+  <div id="cur-ring"></div>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="wrap nav-in">
+      <a href="#" class="nav-logo">
+        <img src="img/logo.png" alt="808 Studio" onerror="this.src='img/logo.png'">
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#servizi">Servizi</a></li>
+        <li><a href="#studio">Studio</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#pricing">Prezzi</a></li>
+        <li><a href="#contatti" class="nav-cta">Prenota</a></li>
+      </ul>
+      <div class="nav-ham" id="ham"><span></span><span></span><span></span></div>
+    </div>
+  </nav>
+
+  <!-- MOBILE FULLSCREEN MENU -->
+  <div id="mob-menu">
+    <a href="#servizi"  class="mob-link">Servizi</a>
+    <a href="#studio"   class="mob-link">Studio</a>
+    <a href="#gallery"  class="mob-link">Gallery</a>
+    <a href="#pricing"  class="mob-link">Prezzi</a>
+    <div class="mob-cta-wrap">
+      <a href="#contatti" class="mob-cta">Prenota una sessione</a>
+    </div>
+    <div class="mob-footer">808 Studio · Rho, Milano</div>
+  </div>
+
+  <!-- HERO -->
+  <section id="hero">
+    <canvas id="hero-cv"></canvas>
+
+    <div class="hero-body">
+      <div class="hero-pill">
+        <span class="blink"></span>
+        Studio di registrazione &nbsp;·&nbsp; Rho, Milano
+      </div>
+
+      <!-- LOGO ANIMATION -->
+      <div class="la-wrap" id="laWrap">
+        <img class="la-img-l" src="img/logo.png" onerror="this.src='img/logo.png'" alt="808 Studio">
+        <img class="la-img-r" src="img/logo.png" onerror="this.src='img/logo.png'" alt="808 Studio">
+        <div class="shock s1"></div>
+        <div class="shock s2"></div>
+        <div class="shock s3"></div>
+        <div class="la-glow"></div>
+      </div>
+
+      <p class="h-sub">Recording &nbsp;·&nbsp; Mix &amp; Master &nbsp;·&nbsp; Room Rental</p>
+      <span class="h-typed"><span id="typed-h"></span></span>
+
+      <div class="h-btns">
+        <a href="#contatti" class="btn-p"><i class="fa-solid fa-calendar-days"></i> Prenota una sessione</a>
+        <a href="#servizi"  class="btn-o"><i class="fa-solid fa-play"></i> Scopri i servizi</a>
+      </div>
+
+      <div class="eq">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <div class="s-line"></div>
+      <span>Scroll</span>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-n">500+</div><div class="stat-l">Sessioni</div></div>
+      <div class="stat"><div class="stat-n">50+</div><div class="stat-l">Artisti</div></div>
+      <div class="stat"><div class="stat-n">4</div><div class="stat-l">Anni</div></div>
+      <div class="stat"><div class="stat-n">Rho</div><div class="stat-l">Milano</div></div>
+    </div>
+  </section>
+
+  <!-- SERVIZI -->
+  <section id="servizi" class="sec">
+    <div class="wrap">
+      <div class="tag" data-aos="fade-up">I nostri servizi</div>
+      <h2 class="sec-title" data-aos="fade-up" data-aos-delay="50">Cosa facciamo<br>per te</h2>
+      <p class="muted" data-aos="fade-up" data-aos-delay="100" style="max-width:480px;line-height:1.75;font-size:.92rem">
+        Dalla prima nota al master finale. Lavoriamo con artisti emergenti e producer per portare la musica al livello successivo.
+      </p>
+
+      <div class="srv-grid">
+        <div class="srv-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="srv-num">01</div>
+          <div class="srv-icon"><i class="fa-solid fa-microphone"></i></div>
+          <h3>Recording</h3>
+          <p>Sala regia professionale con acustica trattata, microfoni di alta gamma e un ambiente che ti fa sentire a casa.</p>
+          <ul class="srv-list">
+            <li><i class="fa-solid fa-circle"></i> Sala voce insonorizzata</li>
+            <li><i class="fa-solid fa-circle"></i> Microfoni Neumann &amp; Shure</li>
+            <li><i class="fa-solid fa-circle"></i> Pro Tools &amp; Logic Pro</li>
+            <li><i class="fa-solid fa-circle"></i> Engineer incluso</li>
+          </ul>
+        </div>
+
+        <div class="srv-card" data-aos="fade-up" data-aos-delay="80">
+          <div class="srv-num">02</div>
+          <div class="srv-icon"><i class="fa-solid fa-sliders"></i></div>
+          <h3>Mix &amp; Master</h3>
+          <p>Missaggio e mastering professionale per un suono pulito, potente e pronto per tutte le piattaforme streaming.</p>
+          <ul class="srv-list">
+            <li><i class="fa-solid fa-circle"></i> Mix stereofonico</li>
+            <li><i class="fa-solid fa-circle"></i> Mastering Spotify / Apple ready</li>
+            <li><i class="fa-solid fa-circle"></i> Revisioni incluse</li>
+            <li><i class="fa-solid fa-circle"></i> File WAV 24bit consegnati</li>
+          </ul>
+        </div>
+
+        <div class="srv-card" data-aos="fade-up" data-aos-delay="160">
+          <div class="srv-num">03</div>
+          <div class="srv-icon"><i class="fa-solid fa-door-open"></i></div>
+          <h3>Room Rental</h3>
+          <p>Affitta la sala in autonomia. Perfetto per producer che lavorano in modo indipendente.</p>
+          <ul class="srv-list">
+            <li><i class="fa-solid fa-circle"></i> Prenotazione a ore</li>
+            <li><i class="fa-solid fa-circle"></i> Accesso a tutta la strumentazione</li>
+            <li><i class="fa-solid fa-circle"></i> Wi-Fi incluso</li>
+            <li><i class="fa-solid fa-circle"></i> Flessibile 7 giorni su 7</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STUDIO -->
+  <section id="studio">
+    <div class="wrap">
+      <div class="stu-grid">
+        <div class="stu-text" data-aos="fade-right">
+          <div class="tag">Chi siamo</div>
+          <h2 class="sec-title">Uno studio<br>fatto da chi<br><span style="color:var(--red)">ama la musica</span></h2>
+          <p>808 Studio è nato dalla passione di chi ha trascorso anni a fare musica prima ancora di costruire uno studio. Ogni dettaglio — dall'acustica alla strumentazione — è stato scelto per far suonare bene.</p>
+          <p>Situati a Rho, a pochi minuti da Milano, offriamo un ambiente professionale ma informale, dove artisti emergenti e producer affermati lavorano fianco a fianco.</p>
+          <div class="stu-hi">
+            <div class="hi-item"><i class="fa-solid fa-headphones"></i><span>Monitor Yamaha HS8 &amp; Adam Audio</span></div>
+            <div class="hi-item"><i class="fa-solid fa-tower-broadcast"></i><span>Interfaccia Universal Audio Apollo</span></div>
+            <div class="hi-item"><i class="fa-solid fa-keyboard"></i><span>Synth &amp; strumenti hardware</span></div>
+            <div class="hi-item"><i class="fa-solid fa-location-dot"></i><span>Rho, Milano — 15 min dal centro</span></div>
+          </div>
+        </div>
+        <div class="stu-vis" data-aos="fade-left" data-aos-delay="100">
+          <img class="stu-img-main"
+            src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?fit=crop&w=900&h=680&q=80"
+            alt="Sala regia 808 Studio"
+            onerror="this.style.minHeight='300px';this.removeAttribute('src')">
+          <img class="stu-img-sm"
+            src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?fit=crop&w=500&h=500&q=80"
+            alt="Microfono studio"
+            onerror="this.style.display='none'">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <div class="wrap">
+      <div class="tag" data-aos="fade-up">Atmosfera</div>
+      <h2 class="sec-title" data-aos="fade-up" data-aos-delay="50">Lo studio</h2>
+
+      <div class="gal-grid" data-aos="fade-up" data-aos-delay="100">
+        <div class="gal-item">
+          <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?fit=crop&w=1200&h=530&q=80" alt="Console" onerror="this.style.display='none'">
+          <div class="gal-ov"><span>Sala regia</span></div>
+        </div>
+        <div class="gal-item">
+          <img src="https://images.unsplash.com/photo-1571330735066-03aaa9429d89?fit=crop&w=600&h=400&q=80" alt="Recording" onerror="this.style.display='none'">
+          <div class="gal-ov"><span>Recording booth</span></div>
+        </div>
+        <div class="gal-item">
+          <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?fit=crop&w=600&h=600&q=80" alt="Artista" onerror="this.style.display='none'">
+          <div class="gal-ov"><span>Performance</span></div>
+        </div>
+        <div class="gal-item">
+          <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?fit=crop&w=600&h=600&q=80" alt="Strumenti" onerror="this.style.display='none'">
+          <div class="gal-ov"><span>Strumentazione</span></div>
+        </div>
+        <div class="gal-item">
+          <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?fit=crop&w=600&h=600&q=80" alt="Dettagli" onerror="this.style.display='none'">
+          <div class="gal-ov"><span>Dettagli</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="wrap">
+      <div class="tag" data-aos="fade-up">Tariffe</div>
+      <h2 class="sec-title" data-aos="fade-up" data-aos-delay="50">Prezzi trasparenti<br>zero sorprese</h2>
+      <p class="muted" style="font-size:.82rem;margin-top:6px" data-aos="fade-up" data-aos-delay="80">
+        * Prezzi indicativi — contattaci per un preventivo personalizzato.
+      </p>
+
+      <div class="pri-grid">
+        <div class="pri-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="pri-dur">Sessione breve</div>
+          <div class="pri-name">2 ore</div>
+          <div class="pri-price"><sup>€</sup>80</div>
+          <div class="pri-desc">Perfetto per un hook o una voce.</div>
+          <ul class="pri-list">
+            <li><i class="fa-solid fa-check"></i> 2h di studio</li>
+            <li><i class="fa-solid fa-check"></i> Engineer incluso</li>
+            <li><i class="fa-solid fa-check"></i> File grezzo consegnato</li>
+            <li class="off"><i class="fa-solid fa-xmark"></i> Mix &amp; master non incluso</li>
+          </ul>
+          <a href="#contatti" class="btn-pri btn-pri-o">Prenota</a>
+        </div>
+
+        <div class="pri-card feat" data-aos="fade-up" data-aos-delay="80">
+          <div class="pri-dur">Mezza giornata</div>
+          <div class="pri-name">4 ore</div>
+          <div class="pri-price"><sup>€</sup>140</div>
+          <div class="pri-desc">Il pacchetto più scelto per un singolo completo.</div>
+          <ul class="pri-list">
+            <li><i class="fa-solid fa-check"></i> 4h di studio</li>
+            <li><i class="fa-solid fa-check"></i> Engineer incluso</li>
+            <li><i class="fa-solid fa-check"></i> Mix base incluso</li>
+            <li><i class="fa-solid fa-check"></i> File WAV 24bit</li>
+          </ul>
+          <a href="#contatti" class="btn-pri btn-pri-s">Prenota ora</a>
+        </div>
+
+        <div class="pri-card" data-aos="fade-up" data-aos-delay="160">
+          <div class="pri-dur">Giornata intera</div>
+          <div class="pri-name">8 ore</div>
+          <div class="pri-price"><sup>€</sup>250</div>
+          <div class="pri-desc">Per EP, album e produzioni complesse.</div>
+          <ul class="pri-list">
+            <li><i class="fa-solid fa-check"></i> 8h di studio</li>
+            <li><i class="fa-solid fa-check"></i> Engineer incluso</li>
+            <li><i class="fa-solid fa-check"></i> Mix &amp; master incluso</li>
+            <li><i class="fa-solid fa-check"></i> Consegna stems</li>
+          </ul>
+          <a href="#contatti" class="btn-pri btn-pri-o">Prenota</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATTI -->
+  <section id="contatti">
+    <div class="wrap">
+      <div class="tag" data-aos="fade-up">Contattaci</div>
+      <h2 class="sec-title" data-aos="fade-up" data-aos-delay="50">Pronto a<br><span style="color:var(--red)">registrare?</span></h2>
+
+      <div class="con-grid">
+        <div data-aos="fade-right">
+          <div class="ci">
+            <div class="ci-icon"><i class="fa-brands fa-instagram"></i></div>
+            <div><h4>Instagram</h4><a href="https://instagram.com/808___studio" target="_blank">@808___studio</a></div>
+          </div>
+          <div class="ci">
+            <div class="ci-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div><h4>Dove siamo</h4><p>Rho, Milano (MI)</p></div>
+          </div>
+          <div class="ci">
+            <div class="ci-icon"><i class="fa-solid fa-clock"></i></div>
+            <div><h4>Disponibilità</h4><p>7 giorni su 7 · su appuntamento</p></div>
+          </div>
+          <div class="socials">
+            <a href="https://instagram.com/808___studio" target="_blank" class="soc"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="soc"><i class="fa-brands fa-spotify"></i></a>
+            <a href="#" class="soc"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" class="soc"><i class="fa-brands fa-tiktok"></i></a>
+          </div>
+        </div>
+
+        <div data-aos="fade-left" data-aos-delay="100">
+          <div class="book-card">
+            <h3>Prenota una sessione</h3>
+            <p>Scrivici via Instagram DM o WhatsApp per prenotare e ricevere disponibilità e preventivo.</p>
+            <div class="book-opts">
+              <a href="https://instagram.com/808___studio" target="_blank" class="book-btn bb-ig">
+                <div class="book-btn-left"><i class="fa-brands fa-instagram" style="color:#e1306c"></i>
+                  <div><strong>DM su Instagram</strong><small>@808___studio</small></div>
+                </div>
+                <span class="arr"><i class="fa-solid fa-arrow-right"></i></span>
+              </a>
+              <a href="https://wa.me/39" target="_blank" class="book-btn bb-wa">
+                <div class="book-btn-left"><i class="fa-brands fa-whatsapp" style="color:#25d366"></i>
+                  <div><strong>WhatsApp</strong><small>Risposta rapida</small></div>
+                </div>
+                <span class="arr"><i class="fa-solid fa-arrow-right"></i></span>
+              </a>
+              <a href="mailto:info@808studio.it" class="book-btn bb-em">
+                <div class="book-btn-left"><i class="fa-solid fa-envelope" style="color:var(--red)"></i>
+                  <div><strong>Email</strong><small>info@808studio.it</small></div>
+                </div>
+                <span class="arr"><i class="fa-solid fa-arrow-right"></i></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="wrap">
+      <div class="ft-top">
+        <div class="ft-brand">
+          <img src="img/logo.png" alt="808 Studio">
+          <p>Studio di registrazione professionale a Rho, Milano.<br>Recording · Mix &amp; Master · Room Rental</p>
+        </div>
+        <div class="ft-col">
+          <h4>Link</h4>
+          <ul>
+            <li><a href="#servizi">Servizi</a></li>
+            <li><a href="#studio">Studio</a></li>
+            <li><a href="#pricing">Prezzi</a></li>
+            <li><a href="#contatti">Contatti</a></li>
+          </ul>
+        </div>
+        <div class="ft-col">
+          <h4>Contatti</h4>
+          <ul>
+            <li>Rho, Milano</li>
+            <li><a href="https://instagram.com/808___studio" target="_blank">@808___studio</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="ft-bot">
+        <p>© <span id="yr"></span> 808 Studio · Tutti i diritti riservati</p>
+        <a href="https://trila.it" target="_blank" class="trila-badge">
+          <span class="dot"></span> Sito realizzato da Trila
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
+
+  <script>
+  (function(){
+    'use strict';
+
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    /* AOS */
+    AOS.init({ duration:700, easing:'ease-out-cubic', once:true, offset:50 });
+
+    /* Navbar */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60));
+
+    /* Mobile nav */
+    const ham     = document.getElementById('ham');
+    const mobMenu = document.getElementById('mob-menu');
+    let mobOpen   = false;
+
+    function openMob() {
+      mobOpen = true;
+      mobMenu.classList.add('active');
+      ham.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      gsap.fromTo('.mob-link',
+        { opacity:0, y:35 },
+        { opacity:1, y:0, duration:.5, stagger:.07, ease:'power3.out', delay:.05 }
+      );
+      gsap.fromTo('.mob-cta-wrap',
+        { opacity:0, y:20 },
+        { opacity:1, y:0, duration:.4, ease:'power2.out', delay:.42 }
+      );
+      gsap.fromTo('.mob-footer',
+        { opacity:0 },
+        { opacity:1, duration:.4, delay:.55 }
+      );
+    }
+
+    function closeMob() {
+      if(!mobOpen) return;
+      mobOpen = false;
+      gsap.to(['.mob-link','.mob-cta-wrap','.mob-footer'], {
+        opacity:0, y:-15, duration:.25, stagger:.03, ease:'power2.in',
+        onComplete:() => {
+          mobMenu.classList.remove('active');
+          ham.classList.remove('open');
+          document.body.style.overflow = '';
+          gsap.set(['.mob-link','.mob-cta-wrap','.mob-footer'], {opacity:0, y:0});
+        }
+      });
+    }
+
+    ham.addEventListener('click', () => mobOpen ? closeMob() : openMob());
+    document.querySelectorAll('.mob-link, .mob-cta').forEach(el =>
+      el.addEventListener('click', closeMob)
+    );
+
+    /* Three.js */
+    const cv = document.getElementById('hero-cv');
+    if(typeof THREE !== 'undefined' && cv){
+      const scene = new THREE.Scene();
+      const cam = new THREE.PerspectiveCamera(60,innerWidth/innerHeight,.1,100);
+      cam.position.z = 8;
+      const rend = new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});
+      rend.setSize(innerWidth,innerHeight);
+      rend.setPixelRatio(Math.min(devicePixelRatio,2));
+
+      /* white dust */
+      const n=260, wp=new Float32Array(n*3);
+      for(let i=0;i<n*3;i++) wp[i]=(Math.random()-.5)*24;
+      const wg=new THREE.BufferGeometry();
+      wg.setAttribute('position',new THREE.BufferAttribute(wp,3));
+      scene.add(new THREE.Points(wg,new THREE.PointsMaterial({color:0xffffff,size:.022,transparent:true,opacity:.22})));
+
+      /* red sparks */
+      const r=50, rp=new Float32Array(r*3);
+      for(let i=0;i<r*3;i++) rp[i]=(Math.random()-.5)*18;
+      const rg=new THREE.BufferGeometry();
+      rg.setAttribute('position',new THREE.BufferAttribute(rp,3));
+      const redPts=new THREE.Points(rg,new THREE.PointsMaterial({color:0xe8192c,size:.052,transparent:true,opacity:.7}));
+      scene.add(redPts);
+
+      /* rings */
+      const mkRing=(rad,tube,col,op,rx,ry)=>{
+        const m=new THREE.Mesh(
+          new THREE.TorusGeometry(rad,tube,6,120),
+          new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:op})
+        );
+        m.rotation.x=rx||0; m.rotation.y=ry||0;
+        scene.add(m); return m;
+      };
+      const ring1=mkRing(2.3,.007,0xe8192c,.13,Math.PI/4);
+      const ring2=mkRing(4.1,.004,0xffffff,.05,-Math.PI/5,Math.PI/6);
+      const ring3=mkRing(1.1,.01,0xe8192c,.08,Math.PI/3,Math.PI/5);
+
+      let mx=0,my=0;
+      document.addEventListener('mousemove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5;});
+      window.addEventListener('resize',()=>{
+        cam.aspect=innerWidth/innerHeight; cam.updateProjectionMatrix();
+        rend.setSize(innerWidth,innerHeight);
+      });
+
+      (function tick(){
+        requestAnimationFrame(tick);
+        const t=performance.now()*.001;
+        redPts.rotation.y=-t*.07; redPts.rotation.x=t*.025;
+        ring1.rotation.z=t*.11;
+        ring2.rotation.z=-t*.06;
+        ring3.rotation.y=t*.19;
+        cam.position.x+=(mx*.7-cam.position.x)*.024;
+        cam.position.y+=(-my*.4-cam.position.y)*.024;
+        rend.render(scene,cam);
+      })();
+    }
+
+    /* Typed */
+    if(typeof Typed!=='undefined'){
+      new Typed('#typed-h',{
+        strings:['Rec. Mix. Master.','Porta la tua musica al livello successivo.','Prenota la tua sessione.','Rho, Milano.'],
+        typeSpeed:50,backSpeed:26,backDelay:2600,loop:true,smartBackspace:true
+      });
+    }
+
+    /* ── LOGO SLAM ANIMATION ── */
+    // Flash overlay
+    const flash = document.createElement('div');
+    flash.style.cssText = 'position:fixed;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:9000;';
+    document.body.appendChild(flash);
+
+    // Initial states
+    gsap.set(['.hero-pill','.h-sub','.h-typed','.h-btns','.eq','.stat'], {opacity:0});
+    gsap.set('.la-img-l', {x: '-55vw'});
+    gsap.set('.la-img-r', {x:  '55vw'});
+    gsap.set(['.s1','.s2','.s3','.la-glow'], {opacity:0});
+    gsap.set('.la-wrap', {scale:0.85});
+
+    const IMPACT = 0.72;
+
+    const tl = gsap.timeline({defaults:{ease:'power3.out'}});
+
+    tl
+      // Halves charge from opposite sides
+      .to('.la-img-l', {x:0, duration:0.7, ease:'power3.in'}, 0.15)
+      .to('.la-img-r', {x:0, duration:0.7, ease:'power3.in'}, 0.15)
+
+      // Scale up slightly just before impact
+      .to('.la-wrap', {scale:1.12, duration:0.15, ease:'power2.in'}, IMPACT - 0.15)
+
+      // IMPACT ─────────────────────────────────
+      // White flash
+      .to(flash, {opacity:0.75, duration:0.04, ease:'none'}, IMPACT)
+      .to(flash, {opacity:0,    duration:0.35, ease:'power2.out'}, IMPACT + 0.04)
+
+      // Scale slam back + spring
+      .to('.la-wrap', {scale:1, duration:0.55, ease:'elastic.out(1.1, 0.5)'}, IMPACT + 0.02)
+
+      // Screen shake
+      .to('.la-wrap', {
+        keyframes:{
+          x:  [0,-18, 16,-12, 9,-6, 4,-2, 0],
+          y:  [0,  6, -8,  5,-4,  3,-2, 1, 0],
+        },
+        duration:0.5, ease:'none'
+      }, IMPACT)
+
+      // Red glow burst
+      .to('.la-glow', {opacity:1, scale:1, duration:0.12, ease:'power4.out'}, IMPACT + 0.02)
+      .to('.la-glow', {opacity:0, scale:2.5, duration:0.6, ease:'power2.out'}, IMPACT + 0.14)
+
+      // Logo red drop-shadow pulse
+      .to('.la-wrap', {filter:'drop-shadow(0 0 50px rgba(232,25,44,1)) drop-shadow(0 0 100px rgba(232,25,44,.6))', duration:0.1, ease:'none'}, IMPACT + 0.02)
+      .to('.la-wrap', {filter:'drop-shadow(0 0 8px rgba(232,25,44,.25))',  duration:1.2, ease:'power3.out'}, IMPACT + 0.12)
+
+      // Shockwave rings (fromTo: parte da 0 e si espande)
+      .fromTo('.s1', {scale:0, opacity:0.85}, {scale:3.5, opacity:0, duration:0.7, ease:'power2.out'}, IMPACT + 0.02)
+      .fromTo('.s2', {scale:0, opacity:0.6},  {scale:5.5, opacity:0, duration:0.9, ease:'power2.out'}, IMPACT + 0.08)
+      .fromTo('.s3', {scale:0, opacity:0.35}, {scale:8,   opacity:0, duration:1.2, ease:'power2.out'}, IMPACT + 0.16)
+
+      // ─── Hero content reveals ───
+      .fromTo('.hero-pill', {opacity:0, y:18}, {opacity:1, y:0, duration:0.5},          IMPACT + 0.45)
+      .fromTo('.h-sub',     {opacity:0, y:14}, {opacity:1, y:0, duration:0.4},          IMPACT + 0.6)
+      .fromTo('.h-typed',   {opacity:0},       {opacity:1,      duration:0.4},          IMPACT + 0.7)
+      .fromTo('.h-btns',    {opacity:0, y:16}, {opacity:1, y:0, duration:0.5},          IMPACT + 0.75)
+      .fromTo('.eq',        {opacity:0},       {opacity:1,      duration:0.4},          IMPACT + 0.85)
+      .fromTo('.stat',      {opacity:0, y:16}, {opacity:1, y:0, stagger:0.07, duration:0.45}, IMPACT + 0.7)
+
+      // Cleanup flash div when done
+      .add(() => flash.remove(), IMPACT + 1.5);
+
+    /* VanillaTilt */
+    if(typeof VanillaTilt!=='undefined'){
+      VanillaTilt.init(document.querySelectorAll('.srv-card'),{max:6,speed:500,glare:true,'max-glare':.08});
+      VanillaTilt.init(document.querySelectorAll('.pri-card'),{max:4,speed:400});
+      VanillaTilt.init(document.querySelectorAll('.hi-item'),{max:7,speed:400});
+    }
+
+    /* Custom cursor */
+    if(matchMedia('(pointer:fine)').matches){
+      const dot=document.getElementById('cur-dot');
+      const ring=document.getElementById('cur-ring');
+      let rx=0,ry=0;
+      document.addEventListener('mousemove',e=>{
+        dot.style.left=e.clientX+'px'; dot.style.top=e.clientY+'px';
+        rx+=(e.clientX-rx)*.14; ry+=(e.clientY-ry)*.14;
+      });
+      (function tr(){ ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(tr); })();
+      document.querySelectorAll('a,button,.srv-card,.pri-card,.gal-item').forEach(el=>{
+        el.addEventListener('mouseenter',()=>ring.classList.add('on'));
+        el.addEventListener('mouseleave',()=>ring.classList.remove('on'));
+      });
+    } else {
+      document.body.style.cursor='auto';
+      document.getElementById('cur-dot').style.display='none';
+      document.getElementById('cur-ring').style.display='none';
+    }
+
+    /* Magnetic buttons */
+    document.querySelectorAll('.btn-p,.btn-o,.nav-cta').forEach(btn=>{
+      btn.addEventListener('mousemove',e=>{
+        const r=btn.getBoundingClientRect();
+        btn.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.2}px,${(e.clientY-r.top-r.height/2)*.2}px)`;
+      });
+      btn.addEventListener('mouseenter',()=>btn.style.transition='none');
+      btn.addEventListener('mouseleave',()=>{
+        btn.style.transition='transform .45s cubic-bezier(.23,1,.32,1)';
+        btn.style.transform='';
+      });
+    });
+
+  })();
+  </script>
+</body>
+</html>
