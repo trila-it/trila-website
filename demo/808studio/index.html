@@ -152,6 +152,14 @@
     }
     .mob-cta:hover { box-shadow:0 0 28px var(--red-glow); color:var(--white); }
     .mob-cta:hover::after { left:160%; }
+    #mob-close {
+      position:absolute; top:22px; right:22px;
+      background:none; border:none; cursor:pointer;
+      font-size:2rem; color:var(--white); line-height:1;
+      transition:color .2s, transform .3s;
+      opacity:0; z-index:1101;
+    }
+    #mob-close:hover { color:var(--red); transform:rotate(90deg); }
     .mob-footer {
       position:absolute; bottom:32px; left:0; right:0;
       text-align:center; font-size:.7rem;
@@ -576,6 +584,7 @@
 
   <!-- MOBILE FULLSCREEN MENU -->
   <div id="mob-menu">
+    <button id="mob-close" aria-label="Chiudi menu">&#x2715;</button>
     <a href="#servizi"  class="mob-link">Servizi</a>
     <a href="#studio"   class="mob-link">Studio</a>
     <a href="#gallery"  class="mob-link">Gallery</a>
@@ -925,6 +934,7 @@
       ham.classList.add('open');
       document.body.style.overflow = 'hidden';
       gsap.timeline()
+        .fromTo('#mob-close',   {opacity:0},     {opacity:1,     duration:.3},0.1)
         .fromTo('.mob-link',    {opacity:0,y:35},{opacity:1,y:0,duration:.5,stagger:.07,ease:'power3.out'},0.05)
         .fromTo('.mob-cta-wrap',{opacity:0,y:20},{opacity:1,y:0,duration:.4,ease:'power2.out'},0.42)
         .fromTo('.mob-footer',  {opacity:0},     {opacity:1,     duration:.4},0.55);
@@ -933,17 +943,19 @@
     function closeMob() {
       if(!mobOpen) return;
       mobOpen = false;
-      gsap.to(['.mob-link','.mob-cta-wrap','.mob-footer'], {
+      gsap.to(['#mob-close','.mob-link','.mob-cta-wrap','.mob-footer'], {
         opacity:0, y:-15, duration:.25, stagger:.03, ease:'power2.in',
         onComplete:() => {
           mobMenu.classList.remove('active');
           ham.classList.remove('open');
           document.body.style.overflow = '';
+          gsap.set(['#mob-close','.mob-link','.mob-cta-wrap','.mob-footer'], {clearProps:'all'});
         }
       });
     }
 
     ham.addEventListener('click', () => mobOpen ? closeMob() : openMob());
+    document.getElementById('mob-close').addEventListener('click', closeMob);
     document.querySelectorAll('.mob-link, .mob-cta').forEach(el =>
       el.addEventListener('click', closeMob)
     );
