@@ -252,19 +252,24 @@
       letter-spacing:.14em; text-transform:uppercase; margin-top:5px;
     }
     @media(max-width:600px){
-      .hero-stats { gap:10px; bottom:30px; }
-      .stat { padding:14px 16px; min-width:0; flex:1; }
-      .stat-n { font-size:1.8rem; }
+      .hero-stats { display:grid; grid-template-columns:1fr 1fr; gap:8px; bottom:24px; padding:0 16px; }
+      .stat { padding:14px 12px; }
+      .stat-n { font-size:1.7rem; }
+      .hero-body { padding-bottom:230px; }
     }
 
     /* Scroll line */
     .scroll-hint {
-      position:absolute; bottom:195px; left:50%; transform:translateX(-50%);
-      z-index:2; display:flex; flex-direction:column; align-items:center; gap:6px;
+      position:absolute; left:32px; bottom:50%; transform:translateY(50%);
+      z-index:2; display:flex; flex-direction:column; align-items:center; gap:10px;
     }
-    .scroll-hint span { font-size:.62rem; color:var(--gray); letter-spacing:.15em; text-transform:uppercase; }
+    @media(max-width:1024px){ .scroll-hint { display:none; } }
+    .scroll-hint span {
+      font-size:.58rem; color:var(--gray); letter-spacing:.18em; text-transform:uppercase;
+      writing-mode:vertical-rl; transform:rotate(180deg);
+    }
     .s-line {
-      width:1px; height:36px;
+      width:1px; height:48px;
       background:linear-gradient(to bottom, var(--red), transparent);
       animation:sline 2s ease-in-out infinite;
     }
@@ -919,18 +924,10 @@
       mobMenu.classList.add('active');
       ham.classList.add('open');
       document.body.style.overflow = 'hidden';
-      gsap.fromTo('.mob-link',
-        { opacity:0, y:35 },
-        { opacity:1, y:0, duration:.5, stagger:.07, ease:'power3.out', delay:.05 }
-      );
-      gsap.fromTo('.mob-cta-wrap',
-        { opacity:0, y:20 },
-        { opacity:1, y:0, duration:.4, ease:'power2.out', delay:.42 }
-      );
-      gsap.fromTo('.mob-footer',
-        { opacity:0 },
-        { opacity:1, duration:.4, delay:.55 }
-      );
+      gsap.timeline()
+        .fromTo('.mob-link',    {opacity:0,y:35},{opacity:1,y:0,duration:.5,stagger:.07,ease:'power3.out'},0.05)
+        .fromTo('.mob-cta-wrap',{opacity:0,y:20},{opacity:1,y:0,duration:.4,ease:'power2.out'},0.42)
+        .fromTo('.mob-footer',  {opacity:0},     {opacity:1,     duration:.4},0.55);
     }
 
     function closeMob() {
@@ -942,7 +939,6 @@
           mobMenu.classList.remove('active');
           ham.classList.remove('open');
           document.body.style.overflow = '';
-          gsap.set(['.mob-link','.mob-cta-wrap','.mob-footer'], {opacity:0, y:0});
         }
       });
     }
@@ -952,9 +948,9 @@
       el.addEventListener('click', closeMob)
     );
 
-    /* Three.js */
+    /* Three.js – desktop only */
     const cv = document.getElementById('hero-cv');
-    if(typeof THREE !== 'undefined' && cv){
+    if(typeof THREE !== 'undefined' && cv && !matchMedia('(pointer:coarse)').matches){
       const scene = new THREE.Scene();
       const cam = new THREE.PerspectiveCamera(60,innerWidth/innerHeight,.1,100);
       cam.position.z = 8;
@@ -962,20 +958,17 @@
       rend.setSize(innerWidth,innerHeight);
       rend.setPixelRatio(Math.min(devicePixelRatio,2));
 
-      /* white dust */
-      const n=260, wp=new Float32Array(n*3);
-      for(let i=0;i<n*3;i++) wp[i]=(Math.random()-.5)*24;
-      const wg=new THREE.BufferGeometry();
-      wg.setAttribute('position',new THREE.BufferAttribute(wp,3));
-      scene.add(new THREE.Points(wg,new THREE.PointsMaterial({color:0xffffff,size:.022,transparent:true,opacity:.22})));
+      const mkPoints = (count, spread, color, size, opacity) => {
+        const pos = new Float32Array(count*3);
+        for(let i=0;i<count*3;i++) pos[i]=(Math.random()-.5)*spread;
+        const geo = new THREE.BufferGeometry();
+        geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+        const pts = new THREE.Points(geo,new THREE.PointsMaterial({color,size,transparent:true,opacity}));
+        scene.add(pts); return pts;
+      };
 
-      /* red sparks */
-      const r=50, rp=new Float32Array(r*3);
-      for(let i=0;i<r*3;i++) rp[i]=(Math.random()-.5)*18;
-      const rg=new THREE.BufferGeometry();
-      rg.setAttribute('position',new THREE.BufferAttribute(rp,3));
-      const redPts=new THREE.Points(rg,new THREE.PointsMaterial({color:0xe8192c,size:.052,transparent:true,opacity:.7}));
-      scene.add(redPts);
+      mkPoints(260, 24, 0xffffff, .022, .22);
+      const redPts = mkPoints(50, 18, 0xe8192c, .052, .7);
 
       /* rings */
       const mkRing=(rad,tube,col,op,rx,ry)=>{
@@ -1036,56 +1029,30 @@
     const tl = gsap.timeline({defaults:{ease:'power3.out'}});
 
     tl
-      // Halves charge from opposite sides
       .to('.la-img-l', {x:0, duration:0.7, ease:'power3.in'}, 0.15)
       .to('.la-img-r', {x:0, duration:0.7, ease:'power3.in'}, 0.15)
-
-      // Scale up slightly just before impact
-      .to('.la-wrap', {scale:1.12, duration:0.15, ease:'power2.in'}, IMPACT - 0.15)
-
-      // IMPACT ─────────────────────────────────
-      // White flash
-      .to(flash, {opacity:0.75, duration:0.04, ease:'none'}, IMPACT)
-      .to(flash, {opacity:0,    duration:0.35, ease:'power2.out'}, IMPACT + 0.04)
-
-      // Scale slam back + spring
-      .to('.la-wrap', {scale:1, duration:0.55, ease:'elastic.out(1.1, 0.5)'}, IMPACT + 0.02)
-
-      // Screen shake
-      .to('.la-wrap', {
-        keyframes:{
-          x:  [0,-18, 16,-12, 9,-6, 4,-2, 0],
-          y:  [0,  6, -8,  5,-4,  3,-2, 1, 0],
-        },
-        duration:0.5, ease:'none'
-      }, IMPACT)
-
-      // Red glow burst
-      .to('.la-glow', {opacity:1, scale:1, duration:0.12, ease:'power4.out'}, IMPACT + 0.02)
-      .to('.la-glow', {opacity:0, scale:2.5, duration:0.6, ease:'power2.out'}, IMPACT + 0.14)
-
-      // Logo red drop-shadow pulse
-      .to('.la-wrap', {filter:'drop-shadow(0 0 50px rgba(232,25,44,1)) drop-shadow(0 0 100px rgba(232,25,44,.6))', duration:0.1, ease:'none'}, IMPACT + 0.02)
-      .to('.la-wrap', {filter:'drop-shadow(0 0 8px rgba(232,25,44,.25))',  duration:1.2, ease:'power3.out'}, IMPACT + 0.12)
-
-      // Shockwave rings (fromTo: parte da 0 e si espande)
-      .fromTo('.s1', {scale:0, opacity:0.85}, {scale:3.5, opacity:0, duration:0.7, ease:'power2.out'}, IMPACT + 0.02)
-      .fromTo('.s2', {scale:0, opacity:0.6},  {scale:5.5, opacity:0, duration:0.9, ease:'power2.out'}, IMPACT + 0.08)
-      .fromTo('.s3', {scale:0, opacity:0.35}, {scale:8,   opacity:0, duration:1.2, ease:'power2.out'}, IMPACT + 0.16)
-
-      // ─── Hero content reveals ───
-      .fromTo('.hero-pill', {opacity:0, y:18}, {opacity:1, y:0, duration:0.5},          IMPACT + 0.45)
-      .fromTo('.h-sub',     {opacity:0, y:14}, {opacity:1, y:0, duration:0.4},          IMPACT + 0.6)
-      .fromTo('.h-typed',   {opacity:0},       {opacity:1,      duration:0.4},          IMPACT + 0.7)
-      .fromTo('.h-btns',    {opacity:0, y:16}, {opacity:1, y:0, duration:0.5},          IMPACT + 0.75)
-      .fromTo('.eq',        {opacity:0},       {opacity:1,      duration:0.4},          IMPACT + 0.85)
-      .fromTo('.stat',      {opacity:0, y:16}, {opacity:1, y:0, stagger:0.07, duration:0.45}, IMPACT + 0.7)
-
-      // Cleanup flash div when done
+      .to('.la-wrap',  {scale:1.12, duration:0.15, ease:'power2.in'}, IMPACT - 0.15)
+      .to(flash,       {opacity:0.75, duration:0.04, ease:'none'}, IMPACT)
+      .to(flash,       {opacity:0, duration:0.35, ease:'power2.out'}, IMPACT + 0.04)
+      .to('.la-wrap',  {scale:1, duration:0.55, ease:'elastic.out(1.1,0.5)'}, IMPACT + 0.02)
+      .to('.la-wrap',  {keyframes:{x:[0,-18,16,-12,9,-6,4,-2,0],y:[0,6,-8,5,-4,3,-2,1,0]},duration:0.5,ease:'none'}, IMPACT)
+      .to('.la-glow',  {opacity:1, scale:1, duration:0.12, ease:'power4.out'}, IMPACT + 0.02)
+      .to('.la-glow',  {opacity:0, scale:2.5, duration:0.6, ease:'power2.out'}, IMPACT + 0.14)
+      .to('.la-wrap',  {filter:'drop-shadow(0 0 50px rgba(232,25,44,1)) drop-shadow(0 0 100px rgba(232,25,44,.6))',duration:0.1,ease:'none'}, IMPACT + 0.02)
+      .to('.la-wrap',  {filter:'drop-shadow(0 0 8px rgba(232,25,44,.25))',duration:1.2,ease:'power3.out'}, IMPACT + 0.12)
+      .fromTo('.s1',   {scale:0,opacity:0.85},{scale:3.5,opacity:0,duration:0.7,ease:'power2.out'}, IMPACT + 0.02)
+      .fromTo('.s2',   {scale:0,opacity:0.6}, {scale:5.5,opacity:0,duration:0.9,ease:'power2.out'}, IMPACT + 0.08)
+      .fromTo('.s3',   {scale:0,opacity:0.35},{scale:8,  opacity:0,duration:1.2,ease:'power2.out'}, IMPACT + 0.16)
+      .fromTo('.hero-pill',{opacity:0,y:18},{opacity:1,y:0,duration:0.5}, IMPACT + 0.45)
+      .fromTo('.h-sub',    {opacity:0,y:14},{opacity:1,y:0,duration:0.4}, IMPACT + 0.6)
+      .fromTo('.h-typed',  {opacity:0},    {opacity:1,    duration:0.4},  IMPACT + 0.7)
+      .fromTo('.h-btns',   {opacity:0,y:16},{opacity:1,y:0,duration:0.5}, IMPACT + 0.75)
+      .fromTo('.eq',       {opacity:0},    {opacity:1,    duration:0.4},  IMPACT + 0.85)
+      .fromTo('.stat',     {opacity:0,y:16},{opacity:1,y:0,stagger:0.07,duration:0.45}, IMPACT + 0.7)
       .add(() => flash.remove(), IMPACT + 1.5);
 
-    /* VanillaTilt */
-    if(typeof VanillaTilt!=='undefined'){
+    /* VanillaTilt – desktop only */
+    if(typeof VanillaTilt!=='undefined' && !matchMedia('(pointer:coarse)').matches){
       VanillaTilt.init(document.querySelectorAll('.srv-card'),{max:6,speed:500,glare:true,'max-glare':.08});
       VanillaTilt.init(document.querySelectorAll('.pri-card'),{max:4,speed:400});
       VanillaTilt.init(document.querySelectorAll('.hi-item'),{max:7,speed:400});
