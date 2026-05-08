@@ -1,0 +1,95 @@
+<!-- HERO -->
+<section class="ct-hero">
+  <div class="ct-hero__wrap">
+    <div class="ct-hero__text">
+      <span class="ct-eyebrow">Contattaci</span>
+      <h1 class="ct-hero__title">Vieni a<br/>trovarci.</h1>
+      <p class="ct-hero__sub">Siamo in Scali delle Ancore 1d, lungo i canali medicei nella stupenda cornice del Quartiere Venezia di Livorno. Passa quando vuoi — o scrivici prima.</p>
+    </div>
+    <div class="ct-hero__contacts">
+      <a href="tel:+393518456007" class="ct-contact-card">
+        <div class="ct-contact-card__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.03z"/></svg>
+        </div>
+        <div>
+          <span class="ct-contact-card__label">Telefono / Prenotazioni</span>
+          <span class="ct-contact-card__val">351 845 6007</span>
+        </div>
+      </a>
+      <a href="mailto:info@badelfpub.it" class="ct-contact-card">
+        <div class="ct-contact-card__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div>
+          <span class="ct-contact-card__label">Email</span>
+          <span class="ct-contact-card__val">info&#64;badelfpub.it</span>
+        </div>
+      </a>
+      <div class="ct-contact-card">
+        <div class="ct-contact-card__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <span class="ct-contact-card__label">Indirizzo</span>
+          <span class="ct-contact-card__val">Scali delle Ancore 1d<br/>Quartiere Venezia, Livorno</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORARI -->
+<section class="ct-orari-section">
+  <div class="ct-orari-wrap">
+    <div class="ct-orari-header">
+      <span class="ct-eyebrow">Quando siamo aperti</span>
+      <h2 class="ct-orari-title">Orari di apertura</h2>
+    </div>
+    <div class="ct-orari-grid">
+      <div
+        *ngFor="let o of orari"
+        class="ct-orari-item"
+        [class.ct-orari-item--chiuso]="o.chiuso"
+      >
+        <span class="ct-orari-item__day">{{ o.giorno }}</span>
+        <span class="ct-orari-item__sep"></span>
+        <span class="ct-orari-item__hours">{{ o.ore }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL -->
+<section class="ct-social-section">
+  <div class="ct-social-wrap">
+    <div class="ct-social-text">
+      <span class="ct-eyebrow">Seguici</span>
+      <h2 class="ct-social-title">Resta aggiornato<br/>sugli eventi.</h2>
+    </div>
+    <div class="ct-social-links">
+      <a href="#" class="ct-social-link">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        Instagram
+      </a>
+      <a href="#" class="ct-social-link">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        Facebook
+      </a>
+      <a href="#" class="ct-social-link">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12A3 3 0 1 0 12 9 3 3 0 0 0 9 12z"/><path d="M19.59 7a9 9 0 1 0 .69 6h-6.28"/><path d="M15 12h7"/><path d="M19 9l3 3-3 3"/></svg>
+        TikTok
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- MAPPA -->
+<div class="ct-map">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2782.389323340071!2d10.30388927587371!3d43.5528700589146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12d5e97e6516fb69%3A0xf6ad1e83700f5ad7!2sBad%20Elf%20pub!5e1!3m2!1sit!2sit!4v1778257945216!5m2!1sit!2sit"
+    width="100%" height="520"
+    style="border:0; display:block;"
+    allowfullscreen="" loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>

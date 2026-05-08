@@ -1,0 +1,281 @@
+﻿<!-- HERO -->
+<app-hero></app-hero>
+
+<!-- ===== CHI SIAMO ===== -->
+<section class="about-section">
+  <div class="about-wrap">
+    <div class="about-text">
+      <span class="about-eyebrow">Dal 2018 · Livorno</span>
+      <h2 class="about-title">Un pub craft beer nel cuore di Livorno.</h2>
+      <p class="about-body">Siamo nati nel quartiere Venezia, tra i canali medicei e il pavé di Livorno, con un'idea semplice: un posto dove la birra è seria, il cibo è fatto bene e la musica non è mai un dettaglio.</p>
+      <p class="about-body">Otto anni dopo, il Bad Elf è diventato il riferimento per chi in questa città cerca qualcosa di autentico — che siano le 19 di un martedì o le 2 di notte di un sabato di St. Patrick's.</p>
+      <div class="about-stats">
+        <div class="about-stat"><span class="about-stat__num">+90</span><span class="about-stat__label">Birre in carta</span></div>
+        <div class="about-stat__sep"></div>
+        <div class="about-stat"><span class="about-stat__num">8</span><span class="about-stat__label">Anni di storia</span></div>
+        <div class="about-stat__sep"></div>
+        <div class="about-stat"><span class="about-stat__num">52</span><span class="about-stat__label">Settimane di eventi</span></div>
+      </div>
+    </div>
+    <div class="about-visual">
+      <div class="about-img about-img--main"></div>
+      <div class="about-img about-img--accent">
+        <div class="about-tag">
+          <span class="about-tag__label">Food · Beer · Vinyl</span>
+          <span class="about-tag__sub">Quartiere Venezia, Livorno</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA MENU ===== -->
+<section class="menu-cta-section">
+  <div class="menu-cta-wrap">
+
+    <div class="menu-cta-left">
+      <span class="menu-cta-eyebrow">Cucina &amp; Birre</span>
+      <h2 class="menu-cta-title">Birre artigianali, cucina pub e molto altro.</h2>
+      <p class="menu-cta-body">Dalla Guinness alla pompa inglese, dagli hamburger ai taglieri — tutto quello che serve sapere su cosa si mangia e si beve al Bad Elf.</p>
+      <a routerLink="/menu" class="menu-cta-btn">Esplora il menu</a>
+    </div>
+
+    <div class="menu-cta-right">
+      <div class="menu-cta-item">
+        <span class="menu-cta-item__num">01</span>
+        <span class="menu-cta-item__name">Birre alla spina</span>
+        <span class="menu-cta-item__arrow">→</span>
+      </div>
+      <div class="menu-cta-item">
+        <span class="menu-cta-item__num">02</span>
+        <span class="menu-cta-item__name">Lattine &amp; bottiglie</span>
+        <span class="menu-cta-item__arrow">→</span>
+      </div>
+      <div class="menu-cta-item">
+        <span class="menu-cta-item__num">03</span>
+        <span class="menu-cta-item__name">Menu food</span>
+        <span class="menu-cta-item__arrow">→</span>
+      </div>
+      <div class="menu-cta-item">
+        <span class="menu-cta-item__num">04</span>
+        <span class="menu-cta-item__name">Spirits &amp; Whisky</span>
+        <span class="menu-cta-item__arrow">→</span>
+      </div>
+      <div class="menu-cta-item">
+        <span class="menu-cta-item__num">05</span>
+        <span class="menu-cta-item__name">Menu food in English</span>
+        <span class="menu-cta-item__arrow">→</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- ===== EVENTI ===== -->
+<section class="ev-section">
+  <div class="ev-wrap">
+
+    <!-- Header sezione -->
+    <div class="ev-header">
+      <div class="ev-header__left">
+        <span class="ev-eyebrow">Agenda</span>
+        <h2 class="ev-title">In programma</h2>
+      </div>
+      <a routerLink="/eventi" class="ev-all-link">Vedi tutti gli eventi →</a>
+    </div>
+
+    <!-- Evento in evidenza -->
+    <div class="ev-featured">
+      <div class="ev-featured__img" [style.background-image]="'url(' + eventoEvidenza.img + ')'" style="background-size:cover;background-position:center">
+        <span class="ev-featured__tag">{{ eventoEvidenza.tag }}</span>
+      </div>
+      <div class="ev-featured__body">
+        <div class="ev-featured__meta">
+          <span class="ev-featured__date">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            {{ eventoEvidenza.data }}
+          </span>
+
+          <span class="ev-featured__orario">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            ore {{ eventoEvidenza.orario }}
+          </span>
+        </div>
+        <h3 class="ev-featured__title">{{ eventoEvidenza.titolo }}</h3>
+        <p class="ev-featured__desc">{{ eventoEvidenza.descrizione }}</p>
+        <div class="ev-featured__actions">
+          <a routerLink="/eventi/{{ eventoEvidenza.id }}" class="ev-btn-primary">Prenota il posto</a>
+          <a routerLink="/eventi/{{ eventoEvidenza.id }}" class="ev-btn-ghost">Scopri di più →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Griglia altri eventi -->
+    <div class="ev-grid">
+      <div *ngFor="let e of prossimiEventi" class="ev-card" [class.ev-card--vertical]="e.vertical">
+        <div class="ev-card__img" [style.background-image]="'url(' + e.img + ')'" style="background-size:cover;background-position:center">
+          <span class="ev-card__tag">{{ e.tag }}</span>
+        </div>
+        <div class="ev-card__body">
+          <div class="ev-card__meta">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            {{ e.dataBreve }} · {{ e.orario }}
+          </div>
+          <h3 class="ev-card__title">{{ e.titolo }}</h3>
+          <a routerLink="/eventi/{{ e.id }}" class="ev-card__cta">Scopri di più →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer sezione -->
+    <div class="ev-footer">
+      <a routerLink="/eventi" class="ev-btn-outline">Vedi tutti gli eventi</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== 04 — LOCATION ===== -->
+<section class="s s--image">
+  <div class="s--image__overlay"></div>
+  <div class="wrap location-wrap">
+    <div class="location-text">
+      <span class="eyebrow eyebrow--light">Location</span>
+      <h2 class="h2">Nel cuore della<br/>Venezia di Livorno.</h2>
+      <p class="location-desc">Tra luci serali, canali medicei e pavé bagnato. Il posto che stavi cercando era qui, a Livorno.</p>
+      <a routerLink="/foto" class="btn-outline-white">Guarda le foto →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RECENSIONI ===== -->
+<section class="rev-section">
+  <div class="rev-wrap">
+
+    <div class="rev-header">
+      <div class="rev-header__left">
+        <span class="rev-eyebrow">Recensioni Google</span>
+        <h2 class="rev-title">Cosa dicono di noi</h2>
+      </div>
+      <div class="rev-score">
+        <span class="rev-score__num">4.8</span>
+        <div class="rev-score__right">
+          <span class="rev-score__stars">★★★★★</span>
+          <span class="rev-score__label">su Google · +350 recensioni</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rev-grid">
+      <div *ngFor="let r of recensioni" class="rev-card">
+        <div class="rev-card__stars">★★★★★</div>
+        <p class="rev-card__text">"{{ r.testo }}"</p>
+        <div class="rev-card__footer">
+          <div class="rev-card__avatar">{{ r.nome.charAt(0) }}</div>
+          <div>
+            <span class="rev-card__name">{{ r.nome }}</span>
+            <span class="rev-card__date">{{ r.data }}</span>
+          </div>
+          <img src="assets/images/logo.png" class="rev-card__google" alt="Google" />
+        </div>
+      </div>
+    </div>
+
+    <div class="rev-cta">
+      <p class="rev-cta__text">Sei stato da noi? Raccontacelo.</p>
+      <a href="https://g.page/r/XXXXXXXX/review" target="_blank" rel="noopener" class="rev-cta__btn">
+        Lascia una recensione su Google
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== VIENI A TROVARCI ===== -->
+<section class="dove-section">
+  <div class="dove-wrap">
+    <div class="dove-top">
+      <div>
+        <span class="rev-eyebrow">Dove siamo</span>
+        <h2 class="rev-title">Vieni a trovarci.</h2>
+      </div>
+      <div class="dove-contacts">
+        <a href="tel:+390586123456" class="dove-contact-item">
+          <span class="dove-contact-icon">📞</span>
+          <span>+39 0586 123456</span>
+        </a>
+        <a href="mailto:info@badelf.it" class="dove-contact-item">
+          <span class="dove-contact-icon">✉️</span>
+          <span>info&#64;badelf.it</span>
+        </a>
+        <span class="dove-contact-item">
+          <span class="dove-contact-icon">📍</span>
+          <span>Via Scali delle Ancore 12, Livorno</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="dove-orari-strip">
+      <div *ngFor="let o of orari" class="dove-orari-item" [class.dove-orari-item--chiuso]="o.ore === 'Chiuso'">
+        <span class="dove-orari-item__day">{{ o.giorno }}</span>
+        <span class="dove-orari-item__hours">{{ o.ore }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MAPPA ===== -->
+<div class="map-section">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2782.389323340071!2d10.30388927587371!3d43.5528700589146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12d5e97e6516fb69%3A0xf6ad1e83700f5ad7!2sBad%20Elf%20pub!5e1!3m2!1sit!2sit!4v1778257945216!5m2!1sit!2sit"
+    width="100%"
+    height="480"
+    style="border:0; display:block;"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="wrap footer-grid">
+
+    <div class="footer-brand">
+      <img src="assets/images/logo_colored.png" alt="Bad Elf" class="" />
+      <p class="footer-tagline"> </p>
+      <p class="footer-address">Via Scali delle Ancore 12, Livorno</p>
+    </div>
+
+    <div class="footer-col">
+      <span class="footer-heading">Menu</span>
+      <a routerLink="/" class="footer-link">Home</a>
+      <a routerLink="/menu" class="footer-link">Menu &amp; Birre</a>
+      <a routerLink="/eventi" class="footer-link">Eventi</a>
+      <a routerLink="/foto" class="footer-link">Foto</a>
+      <a href="#dove" class="footer-link">Contattaci</a>
+    </div>
+
+    <div class="footer-col">
+      <span class="footer-heading">Orari</span>
+      <div *ngFor="let o of orari" class="footer-orario" [class.footer-orario--chiuso]="o.ore === 'Chiuso'">
+        <span>{{ o.giorno }}</span>
+        <span>{{ o.ore }}</span>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <span class="footer-heading">Seguici</span>
+      <a href="#" class="footer-link">Instagram</a>
+      <a href="#" class="footer-link">Facebook</a>
+      <a href="#" class="footer-link">TikTok</a>
+      <span class="footer-heading" style="margin-top:1.5rem">Contatti</span>
+      <a href="tel:+390586123456" class="footer-link">+39 0586 123456</a>
+      <a href="mailto:info@badelf.it" class="footer-link">info&#64;badelf.it</a>
+    </div>
+
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Bad Elf Pub — Livorno</span>
+    <span>P.IVA 00000000000</span>
+  </div>
+</footer>

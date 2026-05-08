@@ -1,0 +1,51 @@
+<!-- HERO -->
+<section class="foto-hero">
+  <div class="foto-hero__content">
+    <span class="foto-hero__eyebrow">Bad Elf Pub · Livorno</span>
+    <h1 class="foto-hero__title">Foto</h1>
+    <p class="foto-hero__sub">Scorci del locale, serate, eventi e tutto quello che succede al Bad Elf.</p>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<div class="foto-wrap">
+  <div class="foto-count" *ngIf="foto.length">{{ foto.length }} foto</div>
+  <div class="foto-grid">
+    <div
+      *ngFor="let f of foto; let i = index"
+      class="foto-item"
+      (click)="open(f, i)"
+    >
+      <img [src]="getPath(f.file)" [alt]="f.alt" loading="lazy" />
+      <div class="foto-item__overlay">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="foto-empty" *ngIf="foto.length === 0">
+    <p>Nessuna foto disponibile.</p>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" *ngIf="selected" (click)="close()">
+  <button class="lightbox__close" (click)="close()">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+
+  <button class="lightbox__nav lightbox__nav--prev" (click)="prev(); $event.stopPropagation()">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+
+  <div class="lightbox__img-wrap" (click)="$event.stopPropagation()">
+    <img [src]="getPath(selected.file)" [alt]="selected.alt" />
+    <span class="lightbox__caption">{{ selected.alt }}</span>
+  </div>
+
+  <button class="lightbox__nav lightbox__nav--next" (click)="next(); $event.stopPropagation()">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+
+  <span class="lightbox__counter">{{ selectedIndex + 1 }} / {{ foto.length }}</span>
+</div>

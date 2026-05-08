@@ -1,0 +1,303 @@
+<!-- PAGE HERO -->
+<section class="menu-hero">
+  <div class="menu-hero__content">
+    <span class="menu-hero__eyebrow">Bad Elf Pub · Livorno</span>
+    <h1 class="menu-hero__title">Menu &amp; Birre</h1>
+    <p class="menu-hero__sub">Cucina pub, birre artigianali da tutto il mondo e una selezione di whisky che non finisce mai.</p>
+  </div>
+</section>
+
+<!-- STICKY TABS -->
+<div class="menu-tabs-bar">
+  <div class="menu-tabs-inner">
+    <button
+      *ngFor="let t of tabs"
+      class="menu-tab"
+      [class.menu-tab--active]="activeTab === t.id"
+      (click)="activeTab = t.id"
+    >{{ t.label }}</button>
+  </div>
+</div>
+
+<!-- ===== BIRRE ALLA SPINA ===== -->
+<section class="menu-section" *ngIf="activeTab === 'spina'">
+  <div class="menu-section__wrap">
+
+    <div class="menu-section__header">
+      <h2 class="menu-section__title">Birre alla spina</h2>
+      <p class="menu-section__sub">12 spine artigianali · 3 pompe inglesi</p>
+    </div>
+
+    <div class="filter-bar">
+      <button *ngFor="let c of beerCats" class="filter-btn" [class.filter-btn--active]="beerFilter === c.id" (click)="beerFilter = c.id">{{ c.label }}</button>
+    </div>
+
+    <div class="beer-grid">
+      <div *ngFor="let b of filteredBirre" class="beer-card">
+
+        <div class="beer-card__visual">
+          <svg class="beer-glass" viewBox="0 0 64 100" xmlns="http://www.w3.org/2000/svg">
+            <polygon [attr.points]="'4,14 60,14 50,90 14,90'" [attr.fill]="b.colore" opacity="0.95"/>
+            <ellipse cx="32" cy="15" rx="28" ry="9" [attr.fill]="getFoamColor(b.colore)" opacity="0.9"/>
+            <polygon points="4,14 60,14 50,90 14,90" fill="none" stroke="rgba(180,180,200,0.35)" stroke-width="1.5"/>
+            <rect x="13" y="90" width="38" height="5" rx="2.5" fill="rgba(180,180,200,0.18)"/>
+            <line x1="12" y1="18" x2="18" y2="86" stroke="rgba(255,255,255,0.15)" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <div class="beer-card__pompa" *ngIf="b.pompa">Pompa</div>
+        </div>
+
+        <div class="beer-card__body">
+          <div class="beer-card__top">
+            <span class="beer-card__stile">{{ b.stile }}</span>
+            <span class="beer-card__abv">{{ b.abv }}</span>
+          </div>
+          <h3 class="beer-card__nome">{{ b.nome }}</h3>
+          <span class="beer-card__birrificio">{{ b.birrificio }} · {{ b.provenienza }}</span>
+          <p class="beer-card__desc">{{ b.desc }}</p>
+          <div class="beer-card__prezzi">
+            <div class="beer-card__prezzo">
+              <span class="beer-card__prezzo-label">Piccolo</span>
+              <span class="beer-card__prezzo-val">{{ b.prezzoP }}</span>
+            </div>
+            <div class="beer-card__prezzo-sep"></div>
+            <div class="beer-card__prezzo">
+              <span class="beer-card__prezzo-label">Grande</span>
+              <span class="beer-card__prezzo-val">{{ b.prezzoG }}</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== FOOD ===== -->
+<section class="menu-section" *ngIf="activeTab === 'food'">
+  <div class="menu-section__wrap">
+
+    <div class="menu-section__header">
+      <h2 class="menu-section__title">Food</h2>
+      <p class="menu-section__sub">Carne fresca dalla Macelleria Fulceri · Ingredienti selezionati ogni giorno · Coperto € 2,00</p>
+    </div>
+
+    <div class="filter-bar">
+      <button *ngFor="let c of foodCats" class="filter-btn" [class.filter-btn--active]="foodFilter === c.id" (click)="foodFilter = c.id">{{ c.label }}</button>
+    </div>
+
+    <div class="food-grid">
+      <div *ngFor="let f of filteredFood" class="food-card">
+        <div class="food-card__head">
+          <div class="food-card__name-wrap">
+            <span class="food-card__codice" *ngIf="f.codice">{{ f.codice }}</span>
+            <h3 class="food-card__nome">{{ f.nome }}</h3>
+          </div>
+          <span class="food-card__prezzo">{{ f.prezzo }}</span>
+        </div>
+        <p class="food-card__desc" *ngIf="f.desc">{{ f.desc }}</p>
+        <div class="food-card__foot" *ngIf="f.tag || f.allergeni">
+          <span class="food-card__tag" *ngIf="f.tag">{{ f.tag }}</span>
+          <span class="food-card__allergeni" *ngIf="f.allergeni">Allergeni: {{ f.allergeni }}</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== WHISKY ===== -->
+<section class="menu-section" *ngIf="activeTab === 'whisky'">
+  <div class="menu-section__wrap">
+
+    <div class="menu-section__header">
+      <h2 class="menu-section__title">Whisky</h2>
+      <p class="menu-section__sub">Scozia, Irlanda e beyond · Degustazione 3 whisky con cioccolato <strong>€ 20</strong></p>
+    </div>
+
+    <div class="filter-bar">
+      <button *ngFor="let c of whiskyCats" class="filter-btn" [class.filter-btn--active]="whiskyFilter === c.id" (click)="whiskyFilter = c.id">{{ c.label }}</button>
+    </div>
+
+    <div class="whisky-grid">
+      <div *ngFor="let w of filteredWhisky" class="whisky-card">
+        <div class="whisky-card__head">
+          <div class="whisky-card__info">
+            <span class="whisky-card__regione">{{ w.regione }}</span>
+            <h3 class="whisky-card__nome">{{ w.nome }}</h3>
+            <span class="whisky-card__distilleria" *ngIf="w.distilleria && w.distilleria !== 'nd'">{{ w.distilleria }}</span>
+          </div>
+          <div class="whisky-card__right">
+            <span class="whisky-card__abv" *ngIf="w.abv">{{ w.abv }}</span>
+            <span class="whisky-card__prezzo">{{ w.prezzo }}</span>
+          </div>
+        </div>
+        <p class="whisky-card__desc">{{ w.desc }}</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== SPIRITS & COCKTAILS ===== -->
+<section class="menu-section" *ngIf="activeTab === 'spirits'">
+  <div class="menu-section__wrap">
+
+    <div class="menu-section__header">
+      <h2 class="menu-section__title">Spirits &amp; Cocktails</h2>
+      <p class="menu-section__sub">Gin, Rum, Amari, Cocktails e altro</p>
+    </div>
+
+    <div class="spirits-cols">
+
+      <div class="spirits-block">
+        <h3 class="spirits-block__title">Gin <span class="spirits-block__price-note">€ 6,00 al bicchiere</span></h3>
+        <div class="spirits-list">
+          <div class="spirits-item" *ngFor="let g of [
+            {n:'The Botanist', d:'22 botaniche di Islay raccolte a mano. Carattere unico, prodotto in piccoli lotti.'},
+            {n:'Hendrick\'s', d:'Floreale e rinfrescante con essenza di cetriolo e petali di rosa. Distillato in Ayrshire.'},
+            {n:'Tanqueray London Dry', d:'Secco e bilanciato, ginepro protagonista, coriandolo con note di limone.'},
+            {n:'Gin Mare', d:'Ginepro, timo, basilico e rosmarino. Prodotto a Barcellona.'},
+            {n:'Crafter\'s Aromatic Flowers', d:'12 botaniche floreali dall\'Estonia. Fiori di cinorrodo e olmaria, yuzu.'},
+            {n:'GinRaw Lavender', d:'Lavanda, melograno e scorza di limone. Elegante e vellutato.'},
+            {n:'GinRaw Orange', d:'Fiori d\'arancio, citronella e menta. Frizzante e originale.'},
+            {n:'Ambrosia Day Edition', d:'Artigianale della Garfagnana. Ginepro, note agrumate, salvia e rosmarino.'},
+            {n:'Ambrosia Sicily Edition', d:'Ginepro toscano, arance Tarocco, fiore di Zagara e limoni di Sicilia.'},
+            {n:'Tobermory Gin', d:'Spirito di whisky Tobermory + erica, sambuco e scorza d\'arancia. Isola di Mull.'},
+            {n:'Malfy Rosa', d:'Pompelmo rosa siciliano e ginepro raccolto a mano. Intenso con note di rabarbaro.'}
+          ]">
+            <div class="spirits-item__main">
+              <span class="spirits-item__name">{{ g.n }}</span>
+              <span class="spirits-item__desc">{{ g.d }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spirits-block">
+        <h3 class="spirits-block__title">Rum</h3>
+        <div class="spirits-list">
+          <div class="spirits-item" *ngFor="let r of [
+            {n:'Bumbu the Original', d:'Barbados · Speziato', p:'€ 6,00'},
+            {n:'Matusalem 15 anni', d:'Rep. Dominicana', p:'€ 6,50'},
+            {n:'Santa Teresa 1796', d:'Venezuela', p:'€ 6,00'},
+            {n:'Don Papa', d:'Filippine', p:'€ 6,00'},
+            {n:'Paranubes', d:'Oaxaca · Rum agricolo', p:'€ 6,50'}
+          ]">
+            <div class="spirits-item__main">
+              <span class="spirits-item__name">{{ r.n }}</span>
+              <span class="spirits-item__desc">{{ r.d }}</span>
+            </div>
+            <span class="spirits-item__price">{{ r.p }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="spirits-block">
+        <h3 class="spirits-block__title">Amari <span class="spirits-block__price-note">€ 4,00</span></h3>
+        <div class="spirits-list">
+          <div class="spirits-item" *ngFor="let a of ['Montenegro','Jägermeister','Amaro del Capo','Amaro Artista (Livorno)','Amaro Toscano (Volterra)','Du.it Assedio','Du.it Volgare']">
+            <div class="spirits-item__main">
+              <span class="spirits-item__name">{{ a }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spirits-block">
+        <h3 class="spirits-block__title">Cocktails</h3>
+        <div class="spirits-list">
+          <div class="spirits-item" *ngFor="let c of [
+            {n:'Bad Elf Spritz alla birra', p:'€ 6,50'},
+            {n:'Gin Tonic (Gordon\'s o Beefeater\'s)', p:'€ 8,00'},
+            {n:'Gin Tonic — Gin a scelta', p:'€ 9,50'},
+            {n:'Cuba Libre', p:'€ 8,00'},
+            {n:'Americano', p:'€ 6,00'},
+            {n:'Negroni', p:'€ 7,00'},
+            {n:'Moscow Mule', p:'€ 8,50'},
+            {n:'Gin Tonic Analcolico (Tanqueray 00)', p:'€ 8,50'},
+            {n:'Grove Tonic — Seedlip Grove 42', p:'€ 8,50'},
+            {n:'Grove Mule — Seedlip + Ginger Beer', p:'€ 8,50'}
+          ]">
+            <div class="spirits-item__main">
+              <span class="spirits-item__name">{{ c.n }}</span>
+            </div>
+            <span class="spirits-item__price">{{ c.p }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="spirits-block">
+        <h3 class="spirits-block__title">Vino</h3>
+        <div class="spirits-list">
+          <div class="spirits-item" *ngFor="let v of [
+            {n:'Vermentino di Bolgheri IGT', d:'Bianco', p:'€ 6 / bott. € 25'},
+            {n:'Morellino di Scansano DOCG', d:'Rosso', p:'€ 6 / bott. € 25'},
+            {n:'Chianti DOCG', d:'Rosso', p:'€ 6 / bott. € 25'}
+          ]">
+            <div class="spirits-item__main">
+              <span class="spirits-item__name">{{ v.n }}</span>
+              <span class="spirits-item__desc">{{ v.d }}</span>
+            </div>
+            <span class="spirits-item__price">{{ v.p }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="spirits-block">
+        <h3 class="spirits-block__title">Liquori &amp; Altro</h3>
+        <div class="spirits-list">
+          <div class="spirits-item" *ngFor="let l of [
+            {n:'Limoncello', p:'€ 3,00'},
+            {n:'Grappa', p:'€ 3,50'},
+            {n:'Grappa barricata', p:'€ 4,00'},
+            {n:'Baileys', d:'Crema di whisky irlandese', p:'€ 4,50'},
+            {n:'Drambuie', d:'Liquore scozzese a base di whisky, miele di erica e spezie', p:'€ 5,50'}
+          ]">
+            <div class="spirits-item__main">
+              <span class="spirits-item__name">{{ l.n }}</span>
+              <span class="spirits-item__desc" *ngIf="l.d">{{ l.d }}</span>
+            </div>
+            <span class="spirits-item__price">{{ l.p }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="spirits-block">
+        <h3 class="spirits-block__title">Cream Heroes <span class="spirits-block__price-note">€ 4,00</span></h3>
+        <p class="spirits-block__desc">Crema di Tequila (contiene panna) — il meglio della crema, il carattere della tequila e l'esplosione della frutta.</p>
+        <div class="spirits-list">
+          <div class="spirits-item" *ngFor="let c of [
+            {n:'Crema di Tequila alle fragole'},
+            {n:'Crema di Tequila al mango'},
+            {n:'Crema di Tequila al caffè'}
+          ]">
+            <div class="spirits-item__main">
+              <span class="spirits-item__name">{{ c.n }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spirits-block">
+        <h3 class="spirits-block__title">Analcolici</h3>
+        <div class="spirits-list">
+          <div class="spirits-item" *ngFor="let a of [
+            {n:'Coca Cola', d:'Bottiglia 0,33l', p:'€ 3,00'},
+            {n:'Coca Cola Zero', d:'Bottiglia 0,33l', p:'€ 3,00'},
+            {n:'Bio Galvanina', d:'Chinotto, Aranciata, Limonata, Gassosa, Tè al limone o alla pesca — 35,5cl', p:'€ 4,00'},
+            {n:'Succhi BioNatura', d:'Ananas, Ace, Pesca, Pera', p:'€ 3,50'}
+          ]">
+            <div class="spirits-item__main">
+              <span class="spirits-item__name">{{ a.n }}</span>
+              <span class="spirits-item__desc">{{ a.d }}</span>
+            </div>
+            <span class="spirits-item__price">{{ a.p }}</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>

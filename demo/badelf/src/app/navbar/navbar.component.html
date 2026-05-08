@@ -1,0 +1,70 @@
+<!-- Navbar -->
+<nav class="navbar fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+     [class.navbar--scrolled]="scrolled || forceScrolled">
+  <div class="relative flex items-center h-24 md:h-32 px-10 md:px-20">
+
+    <!-- Sinistra: link desktop -->
+    <div class="hidden md:flex items-center gap-10 flex-1 justify-center">
+      <a routerLink="/" class="nav-link" [class.nav-link--dark]="scrolled || forceScrolled">Home</a>
+      <a routerLink="/menu" class="nav-link" [class.nav-link--dark]="scrolled || forceScrolled">Menu</a>
+      <a routerLink="/eventi" class="nav-link" [class.nav-link--dark]="scrolled || forceScrolled">Eventi</a>
+    </div>
+
+    <!-- Centro: logo absolute -->
+    <div class="absolute left-1/2 -translate-x-1/2">
+      <a routerLink="/">
+        <div class="relative h-16 md:h-24">
+          <img
+            [src]="transparentLogo"
+            alt="Bad Elf"
+            class="h-full w-auto object-contain transition-opacity duration-500 absolute inset-0"
+            [class.opacity-0]="scrolled || forceScrolled"
+          />
+          <img
+            src="assets/images/logo_colored.png"
+            alt="Bad Elf"
+            class="h-full w-auto object-contain transition-opacity duration-500"
+            [class.opacity-0]="!(scrolled || forceScrolled)"
+          />
+        </div>
+      </a>
+    </div>
+
+    <!-- Destra: link desktop + hamburger mobile -->
+    <div class="flex items-center gap-10 flex-1 justify-center">
+      <a routerLink="/foto" class="nav-link hidden md:block" [class.nav-link--dark]="scrolled || forceScrolled">Foto</a>
+      <a routerLink="/contattaci" class="nav-link hidden md:block" [class.nav-link--dark]="scrolled || forceScrolled">Contattaci</a>
+      <a href="#" class="nav-link hidden md:block" [class.nav-link--dark]="scrolled || forceScrolled">Card</a>
+
+      <button
+        class="md:hidden ml-auto focus:outline-none"
+        (click)="toggleMenu()"
+        aria-label="Apri menu"
+      >
+        <div class="hamburger" [class.is-open]="menuOpen" [class.hamburger--dark]="scrolled || forceScrolled">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+    </div>
+
+  </div>
+</nav>
+
+<!-- Mobile fullscreen menu overlay -->
+<div
+  class="fixed inset-0 z-40 bg-black flex flex-col items-center justify-center transition-opacity duration-500"
+  [class.opacity-0]="!menuOpen"
+  [class.pointer-events-none]="!menuOpen"
+  [class.opacity-100]="menuOpen"
+>
+  <nav class="flex flex-col items-center gap-10">
+    <a routerLink="/" class="mobile-nav-link" (click)="closeMenu()">Home</a>
+    <a routerLink="/menu" class="mobile-nav-link" (click)="closeMenu()">Menu</a>
+    <a routerLink="/eventi" class="mobile-nav-link" (click)="closeMenu()">Eventi</a>
+    <a routerLink="/foto" class="mobile-nav-link" (click)="closeMenu()">Foto</a>
+    <a routerLink="/contattaci" class="mobile-nav-link" (click)="closeMenu()">Contattaci</a>
+    <a href="#" class="mobile-nav-link" (click)="closeMenu()">Card</a>
+  </nav>
+</div>

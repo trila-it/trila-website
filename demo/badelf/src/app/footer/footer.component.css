@@ -1,0 +1,128 @@
+.ft {
+  background: #0d0d0d;
+  padding: 5rem 1.5rem 2rem;
+}
+
+.ft__wrap {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* TOP GRID */
+.ft__top {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+@media (min-width: 640px) {
+  .ft__top { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 1024px) {
+  .ft__top { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; }
+}
+
+/* BRAND */
+.ft__logo {
+  height: 56px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+.ft__tagline {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.7;
+}
+
+/* NAV COL */
+.ft__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.ft__nav-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #148211;
+  margin-bottom: 0.4rem;
+}
+.ft__nav-link {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.ft__nav-link:hover { color: #fff; }
+
+/* CONTACTS */
+.ft__contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.ft__addr {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.6;
+  margin-bottom: 0.25rem;
+}
+.ft__contact-link {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.ft__contact-link:hover { color: #fff; }
+
+/* SOCIAL */
+.ft__social {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.ft__social-links {
+  display: flex;
+  gap: 0.75rem;
+}
+.ft__social-icon {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+.ft__social-icon:hover {
+  border-color: #148211;
+  color: #fff;
+}
+
+/* BOTTOM BAR */
+.ft__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+@media (min-width: 640px) {
+  .ft__bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+.ft__copy {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.04em;
+}

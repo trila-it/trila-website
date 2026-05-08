@@ -1,0 +1,68 @@
+/* Navbar background */
+.navbar {
+  background: transparent;
+  animation: navDrop 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+@keyframes navDrop {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.navbar--scrolled {
+  background: white;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Nav links */
+.nav-link {
+  @apply text-white text-sm font-medium tracking-widest uppercase
+         transition-all duration-500 hover:opacity-60;
+}
+
+.nav-link--dark {
+  @apply text-black;
+}
+
+/* Mobile nav */
+.mobile-nav-link {
+  @apply text-white text-5xl font-bold uppercase tracking-widest
+         transition-opacity duration-200 hover:opacity-50;
+}
+
+/* Hamburger */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: white;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease, background 0.5s ease;
+  transform-origin: center;
+}
+
+.hamburger--dark span {
+  background: black;
+}
+
+.hamburger.is-open span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburger.is-open span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
