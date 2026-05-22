@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planet Bowl — Chi Siamo | Planet Bowl Pisa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: { 'pb-dark':'#07070f','pb-card':'#0c0c1c','pb-border':'#1a1a35','pb-purple':'#7c3aed','pb-violet':'#5b21b6','pb-cyan':'#06b6d4','pb-pink':'#ec4899','pb-gold':'#f59e0b' },
+        fontFamily: { display:['"Bebas Neue"','cursive'], sans:['Inter','sans-serif'] }
+      }}
+    }
+  </script>
+  <style>
+    ::-webkit-scrollbar{width:6px} ::-webkit-scrollbar-track{background:#07070f} ::-webkit-scrollbar-thumb{background:#7c3aed;border-radius:3px}
+    .neon-purple{text-shadow:0 0 10px rgba(124,58,237,.9),0 0 40px rgba(124,58,237,.6),0 0 80px rgba(124,58,237,.3)}
+    .neon-cyan{text-shadow:0 0 10px rgba(6,182,212,.9),0 0 40px rgba(6,182,212,.6),0 0 80px rgba(6,182,212,.3)}
+    .section-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(124,58,237,.5),transparent)}
+    .btn-primary{display:inline-block;padding:.75rem 2rem;background:#7c3aed;color:white;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border-radius:9999px;transition:all .2s}
+    .btn-primary:hover{background:#6d28d9;transform:translateY(-2px);box-shadow:0 6px 24px rgba(124,58,237,.5)}
+    .btn-secondary{display:inline-block;padding:.75rem 2rem;border:2px solid #06b6d4;color:#06b6d4;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border-radius:9999px;transition:all .2s}
+    .btn-secondary:hover{background:#06b6d4;color:#07070f;transform:translateY(-2px)}
+    .btn-pink{display:inline-block;padding:.75rem 2rem;background:#ec4899;color:white;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border-radius:9999px;transition:all .2s}
+    .btn-pink:hover{background:#db2777;transform:translateY(-2px);box-shadow:0 6px 24px rgba(236,72,153,.5)}
+    .nav-link{position:relative} .nav-link::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:#06b6d4;transform:scaleX(0);transition:transform .2s} .nav-link:hover::after{transform:scaleX(1)}
+    .nav-link.active::after{transform:scaleX(1)} html,body{overflow-x:hidden}
+    #mobileMenu{display:none} #mobileMenu.open{display:block}
+    .activity-card{transition:transform .3s,box-shadow .3s} .activity-card:hover{transform:translateY(-5px);box-shadow:0 8px 40px rgba(124,58,237,.25)}
+    .activity-card img{transition:transform .5s} .activity-card:hover img{transform:scale(1.06)}
+  </style>
+</head>
+<body class="bg-pb-dark text-white font-sans">
+
+<!-- TOP BAR -->
+<div class="bg-[#040408] border-b border-pb-border">
+  <div class="max-w-7xl mx-auto px-4 py-2 flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm">
+    <div class="flex flex-wrap items-center gap-4 text-gray-400">
+      <a href="tel:+39050556390" class="flex items-center gap-1.5 hover:text-pb-cyan transition">
+        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 512 512"><path d="M497.39 361.8l-112-48a24 24 0 0 0-28 6.9l-49.6 60.6A370.66 370.66 0 0 1 130.6 204.11l60.6-49.6a23.94 23.94 0 0 0 6.9-28l-48-112A24.16 24.16 0 0 0 122.6.61l-104 24A24 24 0 0 0 0 48c0 256.5 207.9 464 464 464a24 24 0 0 0 23.4-18.6l24-104a24.29 24.29 0 0 0-14.01-27.6z"/></svg>
+        +39 050-556390
+      </a>
+      <a href="mailto:planetbowlsocial@gmail.com" class="flex items-center gap-1.5 hover:text-pb-cyan transition hidden sm:flex">
+        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 512 512"><path d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416z"/></svg>
+        planetbowlsocial@gmail.com
+      </a>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="eventi-e-compleanni.html" class="px-3 py-1 bg-pb-pink text-white font-bold rounded-full uppercase tracking-wide text-xs hover:bg-pink-600 transition">Prenota Compleanno</a>
+      <a href="prenotazioni-vr.html"     class="px-3 py-1 bg-pb-cyan text-pb-dark font-bold rounded-full uppercase tracking-wide text-xs hover:bg-cyan-400 transition">Prenota VR</a>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar" class="sticky top-0 z-50 bg-pb-dark/95 backdrop-blur-md border-b border-pb-border">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="index.html"><img src="https://www.planetbowlpisa.it/wp-content/uploads/2025/04/Logo-Planet.png" alt="Planet Bowl Pisa" class="h-10 w-auto"></a>
+    <ul class="hidden lg:flex items-center gap-6 text-sm font-semibold uppercase tracking-wider">
+      <li><a href="index.html"                   class="nav-link hover:text-pb-cyan transition-colors">Home</a></li>
+      <li><a href="chi-siamo.html"               class="nav-link active text-pb-cyan transition-colors">Planet Bowl</a></li>
+      <li><a href="eventi-e-compleanni.html"      class="nav-link hover:text-pb-cyan transition-colors">Compleanni</a></li>
+      <li><a href="galleria.html"                class="nav-link hover:text-pb-cyan transition-colors">Galleria</a></li>
+      <li><a href="business-vibe.html"           class="nav-link hover:text-pb-cyan transition-colors">Business Vibe</a></li>
+      <li><a href="promo.html"                   class="nav-link hover:text-pb-cyan transition-colors">Promo</a></li>
+      <li><a href="contatti.html"                class="nav-link hover:text-pb-cyan transition-colors">Contatti</a></li>
+    </ul>
+    <button id="menuBtn" class="lg:hidden p-2 text-gray-300 hover:text-white transition">
+      <svg id="iconOpen"  class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <svg id="iconClose" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div id="mobileMenu" class="lg:hidden border-t border-pb-border px-4 pb-4">
+    <ul class="flex flex-col gap-1 pt-3 text-sm font-semibold uppercase tracking-wider">
+      <li><a href="index.html"                   class="block py-2 hover:text-pb-cyan transition">Home</a></li>
+      <li><a href="chi-siamo.html"               class="block py-2 text-pb-cyan">Planet Bowl</a></li>
+      <li><a href="eventi-e-compleanni.html"      class="block py-2 hover:text-pb-cyan transition">Compleanni</a></li>
+      <li><a href="galleria.html"                class="block py-2 hover:text-pb-cyan transition">Galleria</a></li>
+      <li><a href="business-vibe.html"           class="block py-2 hover:text-pb-cyan transition">Business Vibe</a></li>
+      <li><a href="promo.html"                   class="block py-2 hover:text-pb-cyan transition">Promo</a></li>
+      <li><a href="contatti.html"                class="block py-2 hover:text-pb-cyan transition">Contatti</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative h-72 sm:h-96 flex items-end overflow-hidden">
+  <div class="absolute inset-0">
+    <img src="https://www.planetbowlpisa.it/wp-content/uploads/2025/05/IMG_2311.jpg" alt="Planet Bowl" class="w-full h-full object-cover opacity-40">
+    <div class="absolute inset-0 bg-gradient-to-t from-pb-dark via-pb-dark/60 to-transparent"></div>
+  </div>
+  <div class="relative max-w-6xl mx-auto px-4 pb-12 w-full" data-aos="fade-up">
+    <p class="text-pb-cyan font-semibold uppercase tracking-widest text-sm mb-2">Il tuo centro di divertimento</p>
+    <h1 class="font-display text-6xl sm:text-8xl text-white neon-purple">PLANET BOWL</h1>
+  </div>
+</section>
+
+<!-- BREADCRUMB -->
+<div class="max-w-6xl mx-auto px-4 py-3">
+  <p class="text-gray-500 text-sm"><a href="index.html" class="hover:text-pb-cyan transition">Home</a> <span class="mx-2">›</span> Planet Bowl</p>
+</div>
+<div class="section-divider mx-4"></div>
+
+<!-- CHI SIAMO -->
+<section class="py-20 px-4">
+  <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+    <div data-aos="fade-right">
+      <p class="text-pb-cyan font-semibold uppercase tracking-widest text-sm mb-3">La nostra storia</p>
+      <h2 class="font-display text-5xl text-white mb-6">UN MONDO DI<br><span class="text-pb-purple">DIVERTIMENTO</span></h2>
+      <p class="text-gray-300 text-lg leading-relaxed mb-5">
+        Planet Bowl Pisa è il più grande centro di intrattenimento della provincia di Pisa.
+        Gestito dalla <strong class="text-white">Palasport Bowling Pisa S.R.L.</strong>, accoglie ogni anno
+        migliaia di famiglie, gruppi di amici e aziende in cerca di momenti indimenticabili.
+      </p>
+      <p class="text-gray-400 leading-relaxed mb-5">
+        Situato in Via di Campaldo 7, a pochi passi dal centro, il Planet Bowl offre un'esperienza
+        a 360° che unisce sport, gioco, tecnologia e gastronomia sotto un unico tetto.
+        Dal bowling classico alle arene di realtà virtuale, dai biliardi al foot-bowl,
+        ogni visita è una nuova avventura.
+      </p>
+      <p class="text-gray-400 leading-relaxed">
+        Al suo interno trovi anche un <strong class="text-white">Pub e Pizzeria</strong> per rifocillarti
+        dopo una partita intensa, e due <strong class="text-white">stazioni di ricarica Wallbox</strong>
+        da 11 kW/h per la tua auto elettrica.
+      </p>
+    </div>
+    <div data-aos="fade-left" class="grid grid-cols-2 gap-4">
+      <img src="https://www.planetbowlpisa.it/wp-content/uploads/2025/05/bowling.jpg"   alt="Bowling"   class="rounded-2xl object-cover h-48 w-full">
+      <img src="https://www.planetbowlpisa.it/wp-content/uploads/2025/05/biliardo.jpg" alt="Biliardo"  class="rounded-2xl object-cover h-48 w-full mt-8">
+      <img src="https://www.planetbowlpisa.it/wp-content/uploads/2025/05/ping-pong.jpg" alt="Ping Pong" class="rounded-2xl object-cover h-48 w-full">
+      <img src="https://www.planetbowlpisa.it/wp-content/uploads/2025/05/party-zone.jpg" alt="Party"   class="rounded-2xl object-cover h-48 w-full mt-8">
+    </div>
+  </div>
+</section>
+
+<div class="section-divider mx-8"></div>
+
+<!-- NUMERI -->
+<section class="py-16 px-4">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12" data-aos="fade-up">
+      <h2 class="font-display text-5xl text-white neon-purple">I NOSTRI NUMERI</h2>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6" data-aos="fade-up" data-aos-delay="100">
+      <div class="bg-pb-card border border-pb-border rounded-2xl p-5 text-center">
+        <div class="font-display text-5xl text-pb-purple">14</div>
+        <div class="text-gray-400 text-xs uppercase tracking-wider mt-1">Piste Bowling</div>
+      </div>
+      <div class="bg-pb-card border border-pb-border rounded-2xl p-5 text-center">
+        <div class="font-display text-5xl text-pb-purple">9</div>
+        <div class="text-gray-400 text-xs uppercase tracking-wider mt-1">Biliardi</div>
+      </div>
+      <div class="bg-pb-card border border-pb-border rounded-2xl p-5 text-center">
+        <div class="font-display text-5xl text-pb-purple">5</div>
+        <div class="text-gray-400 text-xs uppercase tracking-wider mt-1">Ping Pong</div>
+      </div>
+      <div class="bg-pb-card border border-pb-border rounded-2xl p-5 text-center">
+        <div class="font-display text-5xl text-pb-purple">4</div>
+        <div class="text-gray-400 text-xs uppercase tracking-wider mt-1">Biliardini</div>
+      </div>
+      <div class="bg-pb-card border border-pb-border rounded-2xl p-5 text-center">
+        <div class="font-display text-5xl text-pb-purple">3</div>
+        <div class="text-gray-400 text-xs uppercase tracking-wider mt-1">Foot-Bowl</div>
+      </div>
+      <div class="bg-pb-card border border-pb-cyan/30 rounded-2xl p-5 text-center">
+        <div class="font-display text-5xl text-pb-cyan">2</div>
+        <div class="text-gray-400 text-xs uppercase tracking-wider mt-1">Arene VR</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider mx-8"></div>
+
+<!-- ATTRAZIONI DETTAGLIO -->
+<section class="py-20 px-4">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-14" data-aos="fade-up">
+      <p class="text-pb-cyan font-semibold uppercase tracking-widest text-sm mb-3">Tutto quello che offriamo</p>
+      <h2 class="font-display text-5xl sm:text-6xl text-white">LE NOSTRE <span class="text-pb-purple">ATTRAZIONI</span></h2>
+    </div>
+    <div class="space-y-12">
+
+      <!-- Bowling -->
+      <div class="grid md:grid-cols-2 gap-8 items-center" data-aos="fade-right">
+        <img src="https://www.planetbowlpisa.it/wp-content/uploads/2025/05/bowling.jpg" alt="14 piste bowling" class="rounded-2xl object-cover w-full h-64">
+        <div>
+          <div class="font-display text-pb-purple text-6xl">14</div>
+          <h3 class="font-display text-3xl text-white mb-3">PISTE BOWLING</h3>
+          <p class="text-gray-300 leading-relaxed">Sfreccia sulle nostre 14 nuovissime piste da bowling, dove ogni birillo abbattuto è un'esplosione di euforia. Disponibili bocce leggere e bumper per i più piccoli — il bowling è per tutti!</p>
+          <p class="text-gray-400 text-sm mt-3">Prenotabile per gruppi, feste e tornei aziendali.</p>
+        </div>
+      </div>
+
+      <!-- Biliardo -->
+      <div class="grid md:grid-cols-2 gap-8 items-center" data-aos="fade-left">
+        <div class="order-2 md:order-1">
+          <div class="font-display text-pb-purple text-6xl">9</div>
+          <h3 class="font-display text-3xl text-white mb-3">BILIARDI</h3>
+          <p class="text-gray-300 leading-relaxed">Sfida i tuoi amici a biliardo su uno dei nostri 9 tavoli, dove strategia e precisione si fondono in un'elegante danza. Adatto a tutti i livelli, dal principiante all'esperto.</p>
+        </div>
+        <img src="https://www.planetbowlpisa.it/wp-content/uploads/2025/05/biliardo.jpg" alt="9 biliardi" class="rounded-2xl object-cover w-full h-64 order-1 md:order-2">
+      </div>
+
+      <!-- VR -->
+      <div class="grid md:grid-cols-2 gap-8 items-center" data-aos="fade-right">
+        <img src="https://www.planetbowlpisa.it/wp-content/uploads/2025/05/IMG_2311.jpg" alt="2 arene VR" class="rounded-2xl object-cover w-full h-64">
+        <div>
+          <div class="font-display text-pb-cyan text-6xl">2</div>
+          <h3 class="font-display text-3xl text-white mb-3">ARENE VR <span class="text-pb-cyan text-lg">(NOVITÀ)</span></h3>
+          <p class="text-gray-300 leading-relaxed">Due sale e un portale immersivo con visori di ultima generazione. Esperienze da 20 a 60 minuti: zombie, fantasy, escape room, laser game. 100% free-roaming, zero motion sickness.</p>
+          <a href="prenotazioni-vr.html" class="inline-block mt-4 btn-secondary text-sm">Prenota l'Esperienza VR →</a>
+        </div>
+      </div>
+
+      <!-- Foot-Bowl -->
+      <div class="grid md:grid-cols-2 gap-8 items-center" data-aos="fade-left">
+        <div class="order-2 md:order-1">
+          <div class="font-display text-pb-purple text-6xl">3</div>
+          <h3 class="font-display text-3xl text-white mb-3">FOOT-BOWL</h3>
+          <p class="text-gray-300 leading-relaxed">L'adrenalina del calcio incontra il divertimento del bowling. Tira i rigori in porta e abbatti i birilli sui nostri 3 campi. Un mix esplosivo che ti lascerà senza fiato!</p>
+        </div>
+        <img src="https://www.planetbowlpisa.it/wp-content/uploads/2025/05/foot-bowl-1.jpg" alt="3 foot-bowl" class="rounded-2xl object-cover w-full h-64 order-1 md:order-2">
+      </div>
+
+      <!-- Altro -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6" data-aos="fade-up">
+        <div class="bg-pb-card border border-pb-border rounded-2xl p-5 text-center">
+          <img src="https://www.planetbowlpisa.it/wp-content/uploads/2025/05/ping-pong.jpg" alt="Ping Pong" class="rounded-xl w-full h-32 object-cover mb-4">
+          <div class="font-display text-pb-purple text-3xl">5</div>
+          <h4 class="font-display text-xl text-white">PING PONG</h4>
+        </div>
+        <div class="bg-pb-card border border-pb-border rounded-2xl p-5 text-center">
+          <img src="https://www.planetbowlpisa.it/wp-content/uploads/2025/05/balilla.jpg" alt="Biliardini" class="rounded-xl w-full h-32 object-cover mb-4">
+          <div class="font-display text-pb-purple text-3xl">4</div>
+          <h4 class="font-display text-xl text-white">BILIARDINI</h4>
+        </div>
+        <div class="bg-pb-card border border-pb-border rounded-2xl p-5 text-center">
+          <img src="https://www.planetbowlpisa.it/wp-content/uploads/2025/05/video-game.jpg" alt="Video Game" class="rounded-xl w-full h-32 object-cover mb-4">
+          <div class="font-display text-pb-purple text-3xl">🎮</div>
+          <h4 class="font-display text-xl text-white">VIDEO GAME</h4>
+        </div>
+        <div class="bg-pb-card border border-pb-border rounded-2xl p-5 text-center">
+          <img src="https://www.planetbowlpisa.it/wp-content/uploads/2025/05/simulatori.jpg" alt="Simulatori" class="rounded-xl w-full h-32 object-cover mb-4">
+          <div class="font-display text-pb-purple text-3xl">🏎️</div>
+          <h4 class="font-display text-xl text-white">SIMULATORI</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider mx-8"></div>
+
+<!-- PUB & PIZZERIA + WALLBOX -->
+<section class="py-20 px-4">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
+    <div class="bg-gradient-to-br from-orange-900/30 to-pb-card border border-orange-700/30 rounded-2xl p-8" data-aos="fade-right">
+      <div class="text-4xl mb-4">🍕🍺</div>
+      <h3 class="font-display text-3xl text-white mb-4">PUB & PIZZERIA</h3>
+      <p class="text-gray-300 leading-relaxed">
+        Dopo una partita intensa, rifocilati al nostro Pub e Pizzeria interni.
+        Pizze, focaccioni, panini, patatine, hamburger, bibite e birre —
+        tutto ciò di cui hai bisogno per continuare la serata al massimo.
+        Menù speciali per i pacchetti compleanno e per i gruppi.
+      </p>
+    </div>
+    <div class="bg-gradient-to-br from-green-900/30 to-pb-card border border-green-700/30 rounded-2xl p-8" data-aos="fade-left">
+      <div class="text-4xl mb-4">⚡🔌</div>
+      <h3 class="font-display text-3xl text-white mb-4">RICARICA ELETTRICA</h3>
+      <p class="text-gray-300 leading-relaxed">
+        Divertimento e sostenibilità si incontrano da Planet Bowl.
+        Approfitta delle nostre <strong class="text-white">2 stazioni Wallbox da 11 kW/h</strong>
+        mentre ti diverti: ricarica la tua auto elettrica a soli
+        <strong class="text-white">€0.40 per kWh</strong> — l'energia a un prezzo imbattibile.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-16 px-4 text-center" data-aos="fade-up">
+  <h2 class="font-display text-4xl sm:text-5xl text-white mb-4">VIENI A TROVARCI</h2>
+  <p class="text-gray-400 mb-8">Via di Campaldo, 7 – Pisa · Tel. +39 050-556390</p>
+  <div class="flex flex-wrap justify-center gap-4">
+    <a href="contatti.html"           class="btn-primary">Contattaci</a>
+    <a href="eventi-e-compleanni.html" class="btn-pink">Prenota Compleanno</a>
+    <a href="prenotazioni-vr.html"    class="btn-secondary">Prenota VR</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-[#040408] border-t border-pb-border pt-16 pb-8 px-4">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-3 gap-12 mb-12">
+      <div>
+        <img src="https://www.planetbowlpisa.it/wp-content/uploads/2025/04/Logo-Planet.png" alt="Planet Bowl Pisa" class="h-16 w-auto mb-5">
+        <h3 class="font-display text-xl text-white mb-1">Palasport Bowling Pisa S.R.L.</h3>
+        <p class="text-gray-400 text-sm mb-4">P.IVA: 01112340508</p>
+        <div class="space-y-2 text-sm text-gray-300">
+          <p class="flex items-start gap-2 text-gray-400"><svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-pb-purple" fill="currentColor" viewBox="0 0 384 512"><path d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"/></svg>Via di Campaldo, 7 – Pisa (PI) 56112</p>
+          <a href="tel:+39050556390" class="flex items-center gap-2 hover:text-pb-cyan transition"><svg class="w-4 h-4 flex-shrink-0 text-pb-purple" fill="currentColor" viewBox="0 0 512 512"><path d="M497.39 361.8l-112-48a24 24 0 0 0-28 6.9l-49.6 60.6A370.66 370.66 0 0 1 130.6 204.11l60.6-49.6a23.94 23.94 0 0 0 6.9-28l-48-112A24.16 24.16 0 0 0 122.6.61l-104 24A24 24 0 0 0 0 48c0 256.5 207.9 464 464 464a24 24 0 0 0 23.4-18.6l24-104a24.29 24.29 0 0 0-14.01-27.6z"/></svg>+39 050-556390</a>
+          <a href="mailto:info@planetbowlpisa.it" class="flex items-center gap-2 hover:text-pb-cyan transition"><svg class="w-4 h-4 flex-shrink-0 text-pb-purple" fill="currentColor" viewBox="0 0 512 512"><path d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416z"/></svg>info@planetbowlpisa.it</a>
+        </div>
+      </div>
+      <div>
+        <h3 class="font-display text-2xl text-white mb-6">ORARI</h3>
+        <div class="space-y-3">
+          <div class="flex justify-between py-2 border-b border-pb-border"><span class="text-gray-400 text-sm">Lunedì – Giovedì</span><span class="text-white font-semibold text-sm">21:00 – 1:30</span></div>
+          <div class="flex justify-between py-2 border-b border-pb-border"><span class="text-gray-400 text-sm">Venerdì</span><span class="text-pb-cyan font-semibold text-sm">17:30 – 2:00</span></div>
+          <div class="flex justify-between py-2 border-b border-pb-border"><span class="text-gray-400 text-sm">Sabato</span><span class="text-pb-cyan font-semibold text-sm">15:30 – 2:00</span></div>
+          <div class="flex justify-between py-2"><span class="text-gray-400 text-sm">Domenica</span><span class="text-pb-cyan font-semibold text-sm">15:30 – 1:00</span></div>
+        </div>
+        <div class="mt-8 space-y-3">
+          <a href="eventi-e-compleanni.html" class="block text-center btn-pink text-sm">Prenota Compleanno</a>
+          <a href="prenotazioni-vr.html"     class="block text-center btn-secondary text-sm">Prenota VR</a>
+        </div>
+      </div>
+      <div>
+        <h3 class="font-display text-2xl text-white mb-6">SEGUICI</h3>
+        <div class="flex gap-4 mb-8">
+          <a href="https://www.facebook.com/planetbowlPI" target="_blank" class="w-12 h-12 bg-[#1877F2]/20 border border-[#1877F2]/40 rounded-xl flex items-center justify-center text-[#1877F2] hover:bg-[#1877F2] hover:text-white transition-all">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 512 512"><path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/planetbowlpisa/" target="_blank" class="w-12 h-12 bg-[#E1306C]/20 border border-[#E1306C]/40 rounded-xl flex items-center justify-center text-[#E1306C] hover:bg-[#E1306C] hover:text-white transition-all">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+          </a>
+        </div>
+        <h4 class="font-display text-lg text-white mb-3">MENU</h4>
+        <ul class="space-y-2 text-sm text-gray-400">
+          <li><a href="index.html"                   class="hover:text-pb-cyan transition">Home</a></li>
+          <li><a href="chi-siamo.html"               class="text-pb-cyan">Planet Bowl</a></li>
+          <li><a href="eventi-e-compleanni.html"      class="hover:text-pb-cyan transition">Compleanni</a></li>
+          <li><a href="galleria.html"                class="hover:text-pb-cyan transition">Galleria</a></li>
+          <li><a href="business-vibe.html"           class="hover:text-pb-cyan transition">Business Vibe</a></li>
+          <li><a href="promo.html"                   class="hover:text-pb-cyan transition">Promo</a></li>
+          <li><a href="contatti.html"                class="hover:text-pb-cyan transition">Contatti</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-pb-border pt-6 flex flex-wrap justify-between items-center gap-3 text-sm text-gray-500">
+      <p>© 2025 Palasport Bowling Pisa S.R.L. — Tutti i diritti riservati</p>
+      <p>Sito Web realizzato da <strong class="text-gray-400">Trila</strong></p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ once:true, duration:700, easing:'ease-out-cubic' });
+  const menuBtn=document.getElementById('menuBtn'), mobileMenu=document.getElementById('mobileMenu'), iconOpen=document.getElementById('iconOpen'), iconClose=document.getElementById('iconClose');
+  menuBtn.addEventListener('click',()=>{const o=mobileMenu.classList.contains('open');mobileMenu.classList.toggle('open',!o);iconOpen.classList.toggle('hidden',!o);iconClose.classList.toggle('hidden',o)});
+</script>
+</body>
+</html>
