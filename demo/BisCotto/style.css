@@ -1,0 +1,695 @@
+ /* --- TEMA COLORI VIVACI --- */
+ :root {
+     --rosa-chiaro: rgb(196, 223, 221);
+     /* Sfondo morbido */
+     --rosa-vivo: rgb(125, 214, 208);
+     /* Rosa acceso per bordi e dettagli */
+     --marrone-cioccolato: #4a2c2a;
+     /* Testo scuro ad alto contrasto */
+     --azzurro-logo: #dabed4;
+     /* L'azzurro vivido della fascia */
+     --rosso-logo: #b71b16;
+     /* Il rosso pop del cuore e delle labbra */
+     --bianco: #ffffff;
+ }
+
+ * {
+     box-sizing: border-box;
+     margin: 0;
+     padding: 0;
+ }
+
+ body {
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     /* Pattern a righe rosa e bianche ispirato all'immagine di presentazione */
+     background: repeating-linear-gradient(45deg,
+             var(--rosa-chiaro),
+             var(--rosa-chiaro) 20px,
+             #ffffff 20px,
+             #ffffff 40px);
+     color: var(--marrone-cioccolato);
+     line-height: 1.6;
+ }
+
+/* 1. Cambiamo il font di base di tutti i titoli del sito */
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--marrone-cioccolato);
+    text-align: center;
+}
+
+/* 2. Modifichiamo il titolo principale "Bakery Shop" per farlo apparire vintage e importante */
+.hero-badge h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.8rem;
+    color: var(--marrone-cioccolato);
+    margin-bottom: 5px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+ /* --- HEADER & NAVIGAZIONE --- */
+ header {
+     background-color: var(--bianco);
+     border-bottom: 6px dashed var(--rosa-vivo);
+     padding: 20px;
+     text-align: center;
+     position: sticky;
+     top: 0;
+     z-index: 1000;
+     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+ }
+
+ .logo-container {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+ }
+
+ .logo-img {
+     max-width: 130px;
+     height: auto;
+     /*--border-radius: 50%;
+            border: 3px solid var(--azzurro-logo);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);--*/
+ }
+
+ nav {
+     margin-top: 20px;
+ }
+
+ nav a {
+     color: var(--marrone-cioccolato);
+     text-decoration: none;
+     font-weight: bold;
+     margin: 0 15px;
+     text-transform: uppercase;
+     font-size: 0.95rem;
+     letter-spacing: 1px;
+     transition: all 0.3s ease;
+     padding: 5px 10px;
+     border-radius: 20px;
+ }
+
+ nav a:hover {
+     color: var(--bianco);
+     background-color: var(--rosso-logo);
+ }
+
+ /* --- HERO SECTION (Stile Vistoso) --- */
+ .hero {
+     background: linear-gradient(rgba(255, 235, 238, 0.2), rgba(255, 235, 238, 0.2)),
+         url('culo.jpg') center/cover no-repeat;
+     padding: 120px 20px;
+     text-align: center;
+ }
+
+ .hero-badge {
+     background-color: var(--bianco);
+     padding: 40px 50px;
+     border: 4px double var(--marrone-cioccolato);
+     border-radius: 40px;
+     display: inline-block;
+     max-width: 650px;
+     box-shadow: 0 15px 30px rgba(74, 44, 42, 0.15);
+ }
+
+ .hero-badge h1 {
+     font-size: 3.2rem;
+     color: var(--marrone-cioccolato);
+     margin-bottom: 10px;
+     font-style: italic;
+     font-weight: 900;
+ }
+
+ .hero-badge p {
+     font-size: 1.3rem;
+     color: var(--rosso-logo);
+     font-weight: bold;
+     text-transform: uppercase;
+     letter-spacing: 1px;
+ }
+
+ /* --- INTRODUZIONE --- */
+ .intro {
+     max-width: 800px;
+     margin: 70px auto;
+     padding: 40px;
+     text-align: center;
+     background: var(--bianco);
+     border-radius: 30px;
+     border: 3px solid var(--rosa-vivo);
+     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.03);
+ }
+
+ .intro h2 {
+     font-size: 2.2rem;
+     margin-bottom: 20px;
+     color: var(--marrone-cioccolato);
+ }
+
+ .intro .icon-divider {
+     color: var(--rosso-logo);
+     font-size: 1.8rem;
+     margin-bottom: 15px;
+ }
+
+ .intro p {
+     font-size: 1.15rem;
+     color: #5a3d3a;
+ }
+
+ /* --- VETRINA PRODOTTI CONTRASTATA --- */
+ .prodotti-section {
+     background-color: var(--bianco);
+     padding: 80px 20px;
+     border-top: 6px dashed var(--azzurro-logo);
+     border-bottom: 6px dashed var(--azzurro-logo);
+ }
+
+ .prodotti-section h2 {
+     font-size: 2.4rem;
+     margin-bottom: 10px;
+ }
+
+ .prodotti-container {
+     max-width: 1100px;
+     margin: 50px auto 0 auto;
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+     gap: 35px;
+ }
+
+ .prodotto-card {
+     background: var(--rosa-chiaro);
+     border: 3px solid var(--rosa-vivo);
+     border-radius: 20px;
+     overflow: hidden;
+     text-align: center;
+     transition: transform 0.3s ease, box-shadow 0.3s ease;
+     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.04);
+ }
+
+ .prodotto-card:hover {
+     transform: translateY(-8px);
+     box-shadow: 0 15px 25px rgba(252, 163, 181, 0.4);
+     border-color: var(--rosso-logo);
+ }
+
+ .prodotto-img {
+     width: 100%;
+     height: 220px;
+     object-fit: cover;
+     background-color: #ffe4e8;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
+
+ .prodotto-img i {
+     font-size: 4rem;
+     color: var(--rosa-vivo);
+ }
+
+ .prodotto-info {
+     padding: 25px;
+     background: #ffffff;
+     border-top: 3px solid var(--rosa-vivo);
+ }
+
+ .prodotto-info h3 {
+     font-size: 1.4rem;
+     margin-bottom: 12px;
+     color: var(--marrone-cioccolato);
+ }
+
+ /* --- CONTATTI E ORARI VIVI --- */
+ .contatti-section {
+     max-width: 950px;
+     margin: 80px auto;
+     padding: 0 20px;
+     display: flex;
+     flex-wrap: wrap;
+     gap: 40px;
+ }
+
+ .contatti-box,
+ .orari-box {
+     flex: 1;
+     min-width: 290px;
+     background-color: var(--bianco);
+     padding: 40px;
+     border-radius: 25px;
+     border: 3px solid var(--azzurro-logo);
+     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+ }
+
+ .contatti-box h2,
+ .orari-box h2 {
+     margin-bottom: 25px;
+     font-size: 1.8rem;
+     text-align: center;
+     border-bottom: 3px solid var(--rosa-vivo);
+     padding-bottom: 15px;
+ }
+
+ .info-list {
+     list-style: none;
+ }
+
+ .info-list li {
+     margin-bottom: 18px;
+     display: flex;
+     align-items: center;
+     gap: 15px;
+     font-size: 1.1rem;
+ }
+
+ .info-list i {
+     color: var(--rosso-logo);
+     font-size: 1.3rem;
+     width: 25px;
+     text-align: center;
+ }
+
+ /* --- FOOTER POP --- */
+ footer {
+     background-color: var(--marrone-cioccolato);
+     color: #fff;
+     text-align: center;
+     padding: 40px 20px;
+     font-size: 0.95rem;
+ }
+
+ .footer-banner {
+     background-color: var(--azzurro-logo);
+     color: var(--marrone-cioccolato);
+     padding: 12px;
+     font-weight: 900;
+     font-size: 1.4rem;
+     text-transform: uppercase;
+     letter-spacing: 3px;
+     margin-bottom: 25px;
+     border-radius: 10px;
+     display: inline-block;
+     padding: 10px 40px;
+     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+ }
+
+ /* RESPONSIVE 
+ @media (max-width: 600px) {
+     .hero-badge h1 {
+         font-size: 2.2rem;
+     }
+
+     nav a {
+         margin: 5px;
+         font-size: 0.85rem;
+         display: inline-block;
+     }
+ }*/
+
+ .btn-contattaci {
+     display: inline-block;
+     margin-top: 25px;
+     padding: 12px 30px;
+     background-color: var(--rosso-logo);
+     color: white;
+     text-decoration: none;
+     font-weight: bold;
+     text-transform: uppercase;
+     font-size: 1.1rem;
+     border-radius: 50px;
+     box-shadow: 0 5px 15px rgba(255, 42, 33, 0.4);
+     transition: all 0.3s ease;
+ }
+
+ .btn-contattaci:hover {
+     background-color: var(--marrone-cioccolato);
+     transform: scale(1.05);
+     box-shadow: 0 8px 20px rgba(74, 44, 42, 0.4);
+ }
+ /* Risolve il problema del salto a metà sezione dovuto all'header sticky */
+section[id] {
+    scroll-margin-top: 180px; 
+}
+/* REGOLA NUOVA: Diamo più spazio specifico alla sezione contatti/orari */
+#contatti {
+    scroll-margin-top: 240px; /* Aumenta questo numero se va ancora troppo su */
+}
+
+/* Opzionale: rende lo scorrimento fluido e piacevole alla vista */
+html {
+    scroll-behavior: smooth;
+}
+
+
+/* Nascondi i controlli del menu mobile su desktop */
+.menu-checkbox, .menu-button, .close-button {
+    display: none;
+}
+
+
+/* --- MENU LATERALE PER SMARTPHONE --- */
+@media (max-width: 600px) {
+    
+    /* Configura l'header per tenere logo e bottone hamburger sulla stessa linea */
+    header {
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo-img {
+        max-width: 100px;
+    }
+
+    /* Mostra e fissa lo stile del bottone Hamburger */
+    .menu-button {
+        display: block;
+        font-size: 1.8rem;
+        color: var(--marrone-cioccolato);
+        cursor: pointer;
+    }
+
+    /* Trasforma la NAV in un pannello laterale nascosto a destra */
+    nav {
+        margin-top: 0;
+        position: fixed;
+        top: 0;
+        right: -280px; /* Nasconde il menu fuori dallo schermo a destra */
+        width: 280px;
+        height: 100vh;
+        background-color: var(--bianco);
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column; /* Dispone i link in verticale */
+        padding: 80px 20px 20px 20px;
+        gap: 15px;
+        transition: right 0.4s ease; /* Effetto scivolamento fluido */
+        z-index: 9999;
+    }
+
+    /* Mostra e posiziona la "X" di chiusura in alto dentro il menu */
+    .close-button {
+        display: block;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 1.8rem;
+        color: var(--marrone-cioccolato);
+        cursor: pointer;
+    }
+
+    /* Adatta i link per la disposizione verticale */
+    nav a {
+        margin: 0;
+        padding: 12px 20px;
+        text-align: left;
+        font-size: 1.1rem;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    /* --- LA MAGIA DEL CHECKBOX --- */
+    /* Quando il checkbox è selezionato (cliccato), sposta la nav a "right: 0" per mostrarla */
+    .menu-checkbox:checked ~ nav {
+        right: 0;
+    }
+
+    /* Riduciamo il margine di scorrimento perché l'header mobile ora è molto basso */
+    section[id] {
+        scroll-margin-top: 90px; 
+    }
+    /* REGOLA NUOVA SMARTPHONE: aumenta il margine per non far coprire il titolo */
+    #contatti {
+        scroll-margin-top: 150px; /* Regola questo valore finché il titolo non è ben visibile */
+    }
+
+    .hero-badge h1 {
+        font-size: 2.2rem;
+    }
+}
+/* --- STILI PER IL CAROSELLO MODALE --- */
+.modal-carosello {
+    display: none; /* Rimane nascosto finché non si clicca */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(74, 44, 42, 0.95); /* Sfondo scuro color cioccolato */
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-contenuto {
+    position: relative;
+    max-width: 800px;
+    width: 90%;
+    text-align: center;
+}
+
+.modal-img {
+    max-width: 100%;
+    max-height: 75vh;
+    border: 5px solid white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    display: inline-block;
+}
+
+/* Bottoni Avanti / Indietro */
+.modal-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #b71b16; /* Rosso logo */
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    font-size: 1.4rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-nav-btn:hover {
+    background-color: #81cbdc; /* Azzurro logo al passaggio */
+    transform: translateY(-50%) scale(1.1);
+}
+
+.btn-prev { left: -25px; }
+.btn-next { right: -25px; }
+
+/* Tasto Chiudi (X) */
+.btn-close {
+    position: absolute;
+    top: -60px;
+    right: 0;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.btn-close:hover {
+    color: #fca3b5;
+}
+
+/* Gestione frecce su schermi piccoli */
+@media (max-width: 600px) {
+    .btn-prev { left: 5px; }
+    .btn-next { right: 5px; }
+}
+
+
+/* --- RESET E STILI GENERALI SEZIONE CHI SIAMO (100% RESPONSIVE) --- */
+.chi-siamo-section {
+    padding: 60px 15px; /* Ridotto leggermente il padding per gli schermi piccoli */
+    background-color: #ffffff; 
+    border-top: 6px dashed var(--rosa-vivo);
+    border-bottom: 6px dashed var(--rosa-vivo);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.chi-siamo-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row; /* Layout affiancato su PC */
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* --- COLONNA TESTO --- */
+.chi-siamo-testo {
+    flex: 1;
+    min-width: 0; /* Soluzione tecnica cruciale per evitare il freeze del flexbox su mobile */
+    width: 100%;
+}
+
+.chi-siamo-subtitle {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2rem;
+    color: var(--rosso-logo);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.chi-siamo-testo h2 {
+    text-align: left; 
+    font-size: 2.4rem;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.divider-cuore {
+    color: var(--azzurro-logo);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.divider-cuore::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background-color: var(--rosa-chiaro);
+}
+
+.chi-siamo-testo p {
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+    color: #5a3d3a;
+    text-align: left; /* Meglio allineato a sinistra su mobile rispetto a justify */
+}
+
+/* I TRE PUNTI DI FORZA */
+.punti-forza {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 30px;
+    border-top: 2px dashed var(--rosa-chiaro);
+    padding-top: 25px;
+    width: 100%;
+}
+
+.punto {
+    text-align: center;
+    flex: 1;
+}
+
+.punto i {
+    font-size: 1.8rem;
+    color: var(--rosso-logo);
+    margin-bottom: 8px;
+    display: block;
+}
+
+.punto span {
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--marrone-cioccolato);
+    display: block;
+}
+
+/* --- COLONNA CAROSELLO --- */
+.chi-siamo-carosello-automatico {
+    flex: 1;
+    width: 100%;
+    max-width: 450px; /* Impedisce alla foto di diventare gigantesca su schermi enormi */
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.chi-siamo-slider-wrapper {
+    width: 100%;
+    aspect-ratio: 4 / 3; /* Mantiene la proporzione fotografica perfetta ovunque */
+    position: relative;
+    overflow: hidden;
+    border-radius: 30px; 
+    border: 4px solid var(--azzurro-logo);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.chi-siamo-slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: 1;
+}
+
+.chi-siamo-slide.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+/* --- MEDIA QUERY PER TABLET E SMARTPHONE --- */
+@media (max-width: 820px) {
+    .chi-siamo-container {
+        flex-direction: column; /* Il testo va sopra e il carosello va sotto */
+        gap: 40px;
+        text-align: center;
+    }
+
+    .chi-siamo-testo h2 {
+        text-align: center; /* Titolo centrato su mobile */
+    }
+
+    .divider-cuore {
+        justify-content: center;
+    }
+    .divider-cuore::after {
+        display: none; /* Rimuove la linea laterale che creava asimmetria */
+    }
+
+    .chi-siamo-testo p {
+        text-align: center; /* Testo centrato per una lettura più pulita da smartphone */
+    }
+
+    .punti-forza {
+        flex-direction: row; /* Mantiene le icone affiancate sui tablet */
+        justify-content: space-around;
+    }
+}
+
+@media (max-width: 480px) {
+    .chi-siamo-section {
+        padding: 40px 10px; /* Riduce i margini esterni sui telefoni molto stretti */
+    }
+
+    .chi-siamo-testo h2 {
+        font-size: 1.9rem; /* Riduce il titolo per evitare che si spezzi male */
+    }
+
+    .punti-forza {
+        flex-direction: column; /* Mette le 3 icone una sotto l'altra solo sui telefoni stretti */
+        gap: 25px;
+    }
+    
+    .punto i {
+        font-size: 1.6rem;
+    }
+}
