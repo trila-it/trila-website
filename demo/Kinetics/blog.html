@@ -337,6 +337,9 @@
 </head>
 <body>
 
+  <!-- Page transition overlay (starts covering, then slides away) -->
+  <div id="page-transition" style="transform:translateY(0%)"></div>
+
   <!-- ── ORARI BAR ── -->
   <div class="orari-bar">
     <div class="container orari-inner">
@@ -349,12 +352,13 @@
   <header class="navbar" id="navbar">
     <div class="container nav-content">
       <a href="index.html" class="logo-link">
-        <img src="images/logo.png" alt="Centro Kinetics" class="nav-logo">
+        <img src="images/logo-verde.png" alt="Centro Kinetics" class="nav-logo">
       </a>
       <nav id="main-nav">
         <a href="index.html#chi-siamo">Chi Siamo</a>
         <a href="index.html#servizi">Servizi</a>
         <a href="index.html#attivita">Attività</a>
+        <a href="index.html#gallery">Gallery</a>
         <a href="blog.html" class="active">Blog</a>
         <a href="index.html#dicono-di-noi">Recensioni</a>
         <a href="index.html#contatti">Contatti</a>
@@ -373,9 +377,12 @@
       <a href="index.html#chi-siamo" class="mobile-link">Chi Siamo</a>
       <a href="index.html#servizi" class="mobile-link">Servizi</a>
       <a href="index.html#attivita" class="mobile-link">Attività</a>
+      <a href="index.html#gallery" class="mobile-link">Gallery</a>
       <a href="blog.html" class="mobile-link">Blog</a>
       <a href="index.html#dicono-di-noi" class="mobile-link">Recensioni</a>
+      <a href="index.html#lavora" class="mobile-link">Lavora con Noi</a>
       <a href="index.html#contatti" class="mobile-link">Contatti</a>
+      <a href="tel:+390571730770" class="btn primary full-width">Chiama ora: 0571 73077</a>
     </div>
   </header>
 
@@ -493,9 +500,9 @@
         <p>© 2025 Centro Kinetics S.r.l. – P.IVA 05253310485 – REA n° FI-532765</p>
         <div style="display:flex;align-items:center;gap:1.25rem">
           <a href="admin.html" style="font-size:.72rem;color:rgba(255,255,255,.2);transition:color .2s" onmouseover="this.style.color='rgba(255,255,255,.6)'" onmouseout="this.style.color='rgba(255,255,255,.2)'">⚙ Admin</a>
-          <a href="http://www.ibi.it" target="_blank" style="opacity:.4">
-            <img src="images/credits-1.png" alt="ibi.it" style="height:26px;filter:brightness(0) invert(1)">
-          </a>
+          <a href="http://www.ibi.it" target="_blank" style="opacity:.65; transition:opacity .2s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.65">
+          <img src="images/credits-1.png" alt="ibi.it" style="height:28px;">
+        </a>
         </div>
       </div>
     </div>
@@ -924,6 +931,17 @@
   }, { passive: true });
 
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  /* ── ANIMAZIONE INGRESSO PAGINA ── */
+  (function() {
+    const overlay = document.getElementById('page-transition');
+    // piccolo delay per assicurarsi che il browser abbia dipinto l'overlay
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        overlay.classList.add('pt-leave');
+      });
+    });
+  })();
   </script>
 </body>
 </html>

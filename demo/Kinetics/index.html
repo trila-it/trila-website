@@ -19,7 +19,7 @@
   <header class="navbar" id="navbar">
     <div class="container nav-content">
       <a href="#" class="logo-link">
-        <img src="images/logo.png" alt="Centro Kinetics" class="nav-logo">
+        <img src="images/logo-verde.png" alt="Centro Kinetics" class="nav-logo">
       </a>
 
       <nav id="main-nav">
@@ -27,6 +27,7 @@
         <a href="#servizi">Servizi</a>
         <a href="#attivita">Attività</a>
         <a href="#gallery">Gallery</a>
+        <a href="blog.html">Blog</a>
         <a href="#dicono-di-noi">Recensioni</a>
         <a href="#contatti">Contatti</a>
       </nav>
@@ -47,6 +48,7 @@
       <a href="#servizi" class="mobile-link">Servizi</a>
       <a href="#attivita" class="mobile-link">Attività</a>
       <a href="#gallery" class="mobile-link">Gallery</a>
+      <a href="blog.html" class="mobile-link">Blog</a>
       <a href="#dicono-di-noi" class="mobile-link">Recensioni</a>
       <a href="#lavora" class="mobile-link">Lavora con Noi</a>
       <a href="#contatti" class="mobile-link">Contatti</a>
@@ -486,8 +488,8 @@
     <div class="footer-bottom">
       <div class="container footer-bottom-inner">
         <p>© 2025 Centro Kinetics S.r.l. – P.IVA 05253310485 – REA n° FI-532765 – Cap. Soc. 10.000,00 i.v.</p>
-        <a href="http://www.ibi.it" target="_blank" style="opacity:.4">
-          <img src="images/credits-1.png" alt="ibi.it" style="height:28px; filter:brightness(0) invert(1)">
+        <a href="http://www.ibi.it" target="_blank" style="opacity:.65; transition:opacity .2s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.65">
+          <img src="images/credits-1.png" alt="ibi.it" style="height:28px;">
         </a>
       </div>
     </div>
@@ -500,5 +502,20 @@
   </div>
 
   <script src="script.js"></script>
+
+  <!-- Page transition overlay -->
+  <div id="page-transition"></div>
+
+  <script>
+    /* ── TRANSIZIONE VERSO BLOG ── */
+    document.querySelectorAll('a[href="blog.html"]').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const overlay = document.getElementById('page-transition');
+        overlay.classList.add('pt-enter');
+        setTimeout(() => { window.location.href = 'blog.html'; }, 520);
+      });
+    });
+  </script>
 </body>
 </html>
