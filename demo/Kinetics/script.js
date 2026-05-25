@@ -81,7 +81,7 @@ const services = [
 const attivitaData = {
   bodytec: {
     title: 'Bodytec – EMS Training',
-    img: 'images/inaugurazione5.jpg',
+    img: 'images/bodytec-1.png',
     desc: 'Il Bodytec è un sistema di allenamento con elettrostimolazione muscolare (EMS) che permette di attivare fino al 90% delle fibre muscolari in soli 20 minuti. Ideale per chi ha poco tempo ma vuole risultati concreti su tonificazione, forza e riduzione del grasso localizzato.',
     punti: [
       '20 minuti equivalgono a 3 ore di palestra tradizionale',
@@ -93,7 +93,7 @@ const attivitaData = {
   },
   pilates: {
     title: 'Pilates',
-    img: 'images/inaugurazione4.jpg',
+    img: 'images/1.jpg',
     desc: 'Il Pilates di Centro Kinetics è proposto sia nella versione Mat (a corpo libero) sia con attrezzi specifici (Reformer, Cadillac). Un metodo completo per rafforzare il core, migliorare la postura, aumentare la flessibilità e ridurre i dolori muscolo-scheletrici.',
     punti: [
       'Lezioni individuali e in mini gruppi',
@@ -105,7 +105,7 @@ const attivitaData = {
   },
   kinesis: {
     title: 'Kinesis',
-    img: 'images/inaugurazione6.jpg',
+    img: 'images/kinesis.png',
     desc: 'Il sistema Kinesis di Technogym permette movimenti liberi e tridimensionali attraverso un sistema di cavi e carrucole. Sviluppa la forza funzionale, la stabilità articolare e la coordinazione motoria, riproducendo i movimenti naturali del corpo nella vita quotidiana e nello sport.',
     punti: [
       'Allenamento funzionale tridimensionale',
