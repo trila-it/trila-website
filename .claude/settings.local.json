@@ -4,7 +4,8 @@
       "WebFetch(domain:share.google)",
       "WebSearch",
       "WebFetch(domain:www.google.com)",
-      "WebFetch(domain:www.instagram.com)"
+      "WebFetch(domain:www.instagram.com)",
+      "Bash(open /Users/lisamaiorano/Desktop/trila-website/demo/planetbowlpisa/index.html)"
     ]
   }
 }

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BisCotto - Pasticceria Artigianale</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Chewy&family=Great+Vibes&family=Nunito:wght@400;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <div>
+            <img src="favicon.ico" alt="BisCotto" class="logo-img">
+        </div>
+
+        <input type="checkbox" id="menu-toggle" class="menu-checkbox">
+        <label for="menu-toggle" class="menu-button">
+            <i class="fa-solid fa-bars"></i>
+        </label>
+
+        <nav>
+            <label for="menu-toggle" class="close-button">
+                <i class="fa-solid fa-xmark"></i>
+            </label>
+
+            <a href="#home"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="#prodotti"><i class="fa-solid fa-cake-candles"></i> Dolcezze</a>
+            <a href="#recensioni"><i class="fa-solid fa-star"></i> Recensioni</a>
+            <a href="#mappa"><i class="fa-solid fa-clock"></i> Orari</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-badge">
+            <h1>BisCotto</h1>
+            <p><i class="fa-solid fa-heart"></i> Fatto a mano, col cuore dentro.</p>
+            <div class="hero-actions">
+                <a href="mailto:pasticceriabiscotto@hotmail.com?subject=Richiesta%20Informazioni%20Pasticceria"
+                    class="btn-contattaci">
+                    <i class="fa-solid fa-envelope"></i> Inviaci un'Email
+                </a>
+                <a href="tel:+390586950323" class="btn-contattaci btn-chiama">
+                    <i class="fa-solid fa-phone"></i> Chiama
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="chi-siamo-section" id="chi-siamo">
+        <div class="chi-siamo-container">
+
+            <div class="chi-siamo-testo">
+                <span class="chi-siamo-subtitle">La nostra passione</span>
+                <h2>Benvenuti da Elena BisCotto</h2>
+                <div class="divider-cuore"><i class="fa-solid fa-heart"></i></div>
+
+                <p>
+                    Ogni dolce che esce dal nostro laboratorio racconta una storia fatta di tradizione,
+                    scelta accurata delle materie prime e tanta passione. La nostra pasticceria nasce dal
+                    desiderio di regalare un momento di genuina felicità quotidiana, proponendo ricette
+                    artigianali che profumano di casa.
+                </p>
+                <p>
+                    Dalle colazioni con le nostre soffici brioche fino alle torte personalizzate per i vostri
+                    momenti più importanti, mettiamo lo stesso amore e la stessa cura nei dettagli che trovereste
+                    nella cucina della nonna, con un pizzico di creatività moderna.
+                </p>
+
+                <div class="punti-forza">
+                    <div class="punto">
+                        <i class="fa-solid fa-wheat-awn"></i>
+                        <span>Ingredienti Top</span>
+                    </div>
+                    <div class="punto">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                        <span>100% Artigianale</span>
+                    </div>
+                    <div class="punto">
+                        <i class="fa-solid fa-smile-beam"></i>
+                        <span>Fatto con Amore</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chi-siamo-carosello-automatico">
+                <div class="chi-siamo-slider-wrapper">
+                    <img src="noi.jpg" alt="Il laboratorio" class="chi-siamo-slide active">
+                    <img src="noi2.jpg" alt="Elena all'opera" class="chi-siamo-slide">
+                    <img src="noi3.jpg" alt="Materie prime selezionate" class="chi-siamo-slide">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="intro">
+        <div class="icon-divider"><i class="fa-solid fa-stroopwafel"></i></div>
+        <h2>Prodotti Artigianali Tradizionali</h2>
+        <p>Benvenuti nel mondo di Elena, dove ogni dolce racconta una storia di tradizione, cura e passione. Utilizziamo
+            solo ingredienti selezionati per regalarvi un momento di genuina felicità quotidiana.</p>
+    </section>
+
+    <section class="prodotti-section" id="prodotti">
+        <h2><i class="fa-solid fa-cookie-bite" style="color: var(--rosso-logo);"></i> Le Nostre Specialità</h2>
+
+        <div class="prodotti-container">
+
+            <div class="prodotto-card" role="button" tabindex="0" aria-label="Apri le foto delle brioche"
+                data-images="cro.avif,cake.webp,crostatine-alla-marmellata-Ricetta-Crostatine.webp">
+                <span class="foto-hint"><i class="fa-solid fa-images"></i> Clicca per le foto</span>
+                <img src="cro.avif" alt="Brioche artigianali" class="prodotto-img">
+                <div class="prodotto-info">
+                    <h3>Brioche</h3>
+                    <p>Soffici, profumate e perfette per iniziare la giornata con il piede giusto.</p>
+                </div>
+            </div>
+
+            <div class="prodotto-card" role="button" tabindex="0" aria-label="Apri le foto delle crostatine"
+                data-images="cro.avif,cake.webp,crostatine-alla-marmellata-Ricetta-Crostatine.webp">
+                <span class="foto-hint"><i class="fa-solid fa-images"></i> Clicca per le foto</span>
+                <img src="crostatine-alla-marmellata-Ricetta-Crostatine.webp" alt="Crostatine" class="prodotto-img">
+                <div class="prodotto-info">
+                    <h3>Crostatine</h3>
+                    <p>Pasta frolla friabile artigianale con le nostre migliori confetture.</p>
+                </div>
+            </div>
+
+            <div class="prodotto-card" role="button" tabindex="0" aria-label="Apri le foto delle sfoglie"
+                data-images="s1.jpg,s2.jpg,s4.jpg">
+                <span class="foto-hint"><i class="fa-solid fa-images"></i> Clicca per le foto</span>
+                <img src="italian-desssert-english-translation-naples-dessert-pistachio-sfogliatella-shell-shaped-layered-pastry-sweet-custard-like-419891030.webp"
+                    alt="Sfoglie" class="prodotto-img">
+                <div class="prodotto-info">
+                    <h3>Sfoglie</h3>
+                    <p>Croccanti strati di sfoglia che si sciolgono in bocca.</p>
+                </div>
+            </div>
+
+            <div class="prodotto-card" role="button" tabindex="0" aria-label="Apri le foto delle torte per occasioni"
+                data-images="t1.jpg,t2.jpg,t3.jpg,t4.jpg,t5.jpg">
+                <span class="foto-hint"><i class="fa-solid fa-images"></i> Clicca per le foto</span>
+                <img src="cake.webp" alt="Torta" class="prodotto-img">
+                <div class="prodotto-info">
+                    <h3>Torte per Occasioni</h3>
+                    <p>Torte personalizzate per compleanni e momenti speciali da ricordare.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="mappa-section" id="mappa">
+        <div class="mappa-orari-container">
+            <div class="orari-box">
+                <h2><i class="fa-solid fa-location-dot"></i> Dove siamo</h2>
+
+                <div class="mappa-wrapper">
+                    <iframe title="Mappa Google di BisCotto Livorno"
+                        src="https://www.google.com/maps?q=BisCotto%20Pasticceria%20Artigianale%20Via%20delle%20Sorgenti%2047%20Livorno&output=embed"
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <p>Ci trovi in Via delle Sorgenti n°47, Livorno.</p>
+                <a class="btn-mappa"
+                    href="https://www.google.com/maps/search/?api=1&query=BisCotto%20Via%20delle%20Sorgenti%2047%20Livorno"
+                    target="_blank">
+                    <i class="fa-solid fa-route"></i> Apri indicazioni
+                </a>
+            </div>
+
+            <div class="orari-box">
+                <h2><i class="fa-solid fa-calendar-days"></i> Orari di Apertura</h2>
+                <ul class="info-list">
+                    <li><i class="fa-solid fa-check"></i> <span><strong>Lun:</strong> Chiuso</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span><strong>Mar:</strong> 09:00 - 12:30 / 16:00 -
+                            19:30</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span><strong>Mer:</strong> 09:00 - 12:30</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span><strong>Gio - Sab:</strong> 09:00 - 12:30 / 16:00 -
+                            19:30</span></li>
+                    <li><i class="fa-solid fa-star"></i> <span><strong>Domenica:</strong> 09:00 - 12:30</span></li>
+                </ul>
+            </div>
+        </div>
+
+
+    </section>
+
+    <section class="recensioni-section" id="recensioni">
+        <div class="recensioni-header">
+            <span class="chi-siamo-subtitle">Dicono di noi</span>
+            <h2><i class="fa-solid fa-star" style="color: var(--rosso-logo);"></i> Recensioni dei Clienti</h2>
+            <p>Le parole piu belle arrivano da chi passa, assaggia e torna con il sorriso.</p>
+        </div>
+
+        <div class="recensioni-container">
+            <article class="recensione-card">
+                <div class="stelle" aria-label="5 stelle">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <p>"Torta bellissima e buonissima, oltre le aspettative."</p>
+                <span>Gaia C.</span>
+            </article>
+
+            <article class="recensione-card">
+                <div class="stelle" aria-label="5 stelle">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <p>"Una piccola pasticceria artigianale piena di cura."</p>
+                <span>Alessio C.</span>
+            </article>
+
+            <article class="recensione-card">
+                <div class="stelle" aria-label="5 stelle">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <p>"Dolci fantastici, delicati e sempre una meraviglia."</p>
+                <span>Giulia F.</span>
+            </article>
+        </div>
+
+        <a class="btn-recensioni"
+            href="https://www.google.com/maps/search/?api=1&query=BisCotto%20Via%20delle%20Sorgenti%2047%20Livorno"
+            target="_blank">
+            <i class="fa-brands fa-google"></i> Leggi le recensioni su Google
+        </a>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <img src="favicon.ico" alt="BisCotto" class="footer-logo">
+
+            <div class="footer-info">
+                <ul class="footer-contacts">
+                    <li><i class="fa-solid fa-phone"></i> <a href="tel:+390586950323">0586 950323</a></li>
+                    <li><i class="fa-solid fa-envelope"></i> <a
+                            href="mailto:pasticceriabiscotto@hotmail.com">pasticceriabiscotto@hotmail.com</a></li>
+                </ul>
+
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/BisCottoLivorno/" target="_blank"><i
+                            class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/pasticceriabiscotto/" target="_blank"><i
+                            class="fa-brands fa-instagram"></i></a>
+                </div>
+
+                <p>&copy; 2026 Pasticceria Elena Biscotto. Tutti i diritti riservati.</p>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+    <div id="caroselloModal" class="modal-carosello">
+        <div class="modal-contenuto">
+            <button class="btn-close" id="closeModal">&times;</button>
+
+            <button class="modal-nav-btn btn-prev" id="prevBtn">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+
+            <img src="" alt="Foto Prodotto" id="modalImg" class="modal-img">
+
+            <button class="modal-nav-btn btn-next" id="nextBtn">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Seleziona tutti i link che si trovano all'interno della nav
+        const menuLinks = document.querySelectorAll('nav a');
+        // Seleziona il checkbox che controlla l'apertura del menu
+        const menuToggle = document.getElementById('menu-toggle');
+
+        // Per ogni link, aggiungi un evento di ascolto al "click"
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                // Se il link rimanda a una sezione interna (inizia con #)
+                if (link.getAttribute('href').startsWith('#')) {
+                    menuToggle.checked = false; // Chiude il menu deselezionando il checkbox
+                }
+            });
+        });
+
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Seleziona tutte le schede prodotto, il pop-up e i controlli
+            const cards = document.querySelectorAll('.prodotto-card');
+            const modal = document.getElementById('caroselloModal');
+            const modalImg = document.getElementById('modalImg');
+            const closeModal = document.getElementById('closeModal');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            let immaginiAttuali = [];
+            let indiceAttuale = 0;
+
+            function apriCarosello(card) {
+                // Estrae la lista di immagini separate da virgola scritte nel tag HTML
+                const fotoAttr = card.getAttribute('data-images');
+
+                if (fotoAttr) {
+                    immaginiAttuali = fotoAttr.split(',');
+                    indiceAttuale = 0;
+
+                    if (immaginiAttuali.length > 0 && immaginiAttuali[0] !== "") {
+                        aggiornaFoto(indiceAttuale);
+                        modal.style.display = 'flex'; // Mostra il carosello
+                    }
+                }
+            }
+
+            // Sente il click su ogni singola scheda
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    apriCarosello(card);
+                });
+
+                card.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        apriCarosello(card);
+                    }
+                });
+            });
+
+            function aggiornaFoto(index) {
+                modalImg.src = immaginiAttuali[index].trim();
+            }
+
+            // Bottone Avanti
+            nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Evita che il click chiuda la finestra
+                indiceAttuale = (indiceAttuale + 1) % immaginiAttuali.length;
+                aggiornaFoto(indiceAttuale);
+            });
+
+            // Bottone Indietro
+            prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                indiceAttuale = (indiceAttuale - 1 + immaginiAttuali.length) % immaginiAttuali.length;
+                aggiornaFoto(indiceAttuale);
+            });
+
+            // Chiudi premendo sulla X
+            closeModal.addEventListener('click', () => { modal.style.display = 'none'; });
+
+            // Chiudi premendo sullo sfondo scuro fuori dalla foto
+            modal.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
+        });
+
+        // CAROSELLO AUTOMATICO SEZIONE CHI SIAMO
+        document.addEventListener("DOMContentLoaded", () => {
+            const slides = document.querySelectorAll('.chi-siamo-slide');
+            let slideAttuale = 0;
+            const tempoCambio = 4000; // Tempo in millisecondi (3000 = 3 secondi)
+
+            // Controlla che ci siano effettivamente delle immagini prima di far partire il timer
+            if (slides.length > 0) {
+                setInterval(() => {
+                    // Rimuove la visibilità dall'immagine attuale
+                    slides[slideAttuale].classList.remove('active');
+
+                    // Passa alla foto successiva (e ricomincia da capo se è l'ultima)
+                    slideAttuale = (slideAttuale + 1) % slides.length;
+
+                    // Mostra la nuova immagine
+                    slides[slideAttuale].classList.add('active');
+                }, tempoCambio);
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog – Il Personal Trainer Consiglia | Centro Kinetics Empoli</title>
+  <meta name="description" content="Articoli su fitness, nutrizione, benessere e allenamento dal personal trainer David Caponi di Centro Kinetics Empoli." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── BLOG-SPECIFIC STYLES ── */
+    .blog-hero {
+      background: linear-gradient(135deg, var(--green-bg) 0%, #f0fdf4 50%, white 100%);
+      padding: 5rem 0 4rem;
+      text-align: center;
+    }
+    .blog-hero .breadcrumb {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+      color: var(--subtle);
+      margin-bottom: 1.5rem;
+    }
+    .blog-hero .breadcrumb a { color: var(--green-dark); font-weight: 600; }
+    .blog-hero .breadcrumb span { opacity: 0.5; }
+    .blog-hero h1 {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.1;
+    }
+    .blog-hero h1 span { color: var(--green); }
+    .blog-hero p {
+      color: var(--muted);
+      margin-top: 1.25rem;
+      font-size: 1.05rem;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── LAYOUT ── */
+    .blog-layout {
+      padding: 5rem 0 7rem;
+      background: var(--bg-soft);
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    /* ── FILTER TAGS ── */
+    .filter-bar {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .filter-btn {
+      padding: 0.5rem 1.1rem;
+      border-radius: 100px;
+      border: 1.5px solid var(--border);
+      background: white;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      color: var(--muted);
+      transition: all var(--transition);
+    }
+    .filter-btn:hover { border-color: var(--green); color: var(--green-dark); }
+    .filter-btn.active { background: var(--green); color: white; border-color: var(--green); }
+
+    /* ── ARTICLE CARDS ── */
+    .articles-list { display: flex; flex-direction: column; gap: 2rem; }
+
+    .article-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+    .article-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+
+    .article-card-inner { padding: 2.25rem; }
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+    .article-cat {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: var(--green-bg);
+      color: var(--green-dark);
+      padding: 0.3rem 0.8rem;
+      border-radius: 100px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .article-date {
+      font-size: 0.8rem;
+      color: var(--subtle);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .article-card h2 {
+      font-size: 1.5rem;
+      font-weight: 900;
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.75rem;
+    }
+    .article-card h2 a { color: var(--text); transition: color var(--transition); }
+    .article-card h2 a:hover { color: var(--green-dark); }
+
+    .article-excerpt {
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 0.93rem;
+    }
+
+    .article-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 2.25rem;
+      border-top: 1px solid var(--border);
+      background: var(--bg-soft);
+    }
+    .read-more-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--green-dark);
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: inherit;
+      transition: gap var(--transition);
+    }
+    .read-more-btn:hover { gap: 0.7rem; }
+    .read-time {
+      font-size: 0.78rem;
+      color: var(--subtle);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    /* ── FULL ARTICLE MODAL ── */
+    .article-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9998;
+      overflow-y: auto;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      padding: 2rem 1rem;
+    }
+    .article-modal.open { display: block; }
+    .article-modal-inner {
+      background: white;
+      border-radius: var(--radius-xl);
+      max-width: 780px;
+      margin: auto;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      width: 38px; height: 38px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: grid; place-items: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      z-index: 10;
+      transition: all var(--transition);
+    }
+    .modal-close:hover { background: var(--green); color: white; border-color: var(--green); }
+
+    .modal-header { padding: 2.5rem 2.5rem 0; }
+    .modal-body { padding: 1.75rem 2.5rem 3rem; }
+    .modal-body p { color: var(--muted); line-height: 1.85; font-size: 0.97rem; margin-top: 1.25rem; }
+    .modal-body p:first-child { margin-top: 0; }
+    .modal-body h3 { font-size: 1.15rem; font-weight: 800; margin-top: 2rem; margin-bottom: 0.5rem; }
+    .modal-body ul { margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem; padding-left: 1.25rem; }
+    .modal-body li { color: var(--muted); font-size: 0.93rem; line-height: 1.65; list-style: disc; }
+    .modal-body blockquote,
+    .modal-body .highlight-box {
+      background: var(--green-bg);
+      border-left: 4px solid var(--green);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 1rem 1.25rem;
+      margin-top: 1.5rem;
+      font-size: 0.93rem;
+      color: var(--green-dark);
+      font-weight: 600;
+    }
+    .modal-author {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1.5rem 2.5rem;
+      border-top: 1px solid var(--border);
+      background: var(--bg-soft);
+    }
+    .modal-author-avatar {
+      width: 42px; height: 42px;
+      background: var(--green);
+      border-radius: 50%;
+      display: grid; place-items: center;
+      color: white;
+      font-weight: 800;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .modal-author strong { display: block; font-size: 0.9rem; }
+    .modal-author span { font-size: 0.8rem; color: var(--subtle); }
+
+    /* ── SIDEBAR ── */
+    .blog-sidebar { display: flex; flex-direction: column; gap: 2rem; }
+    .sidebar-widget {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+    }
+    .sidebar-widget h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--green-bg);
+    }
+
+    /* About widget */
+    .about-widget-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      margin-bottom: 1rem;
+    }
+    .about-widget p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+    .about-widget .cert-row { display: flex; gap: 0.75rem; margin-top: 1rem; align-items: center; }
+    .about-widget .cert-row img { height: 36px; width: auto; opacity: 0.75; }
+
+    /* Archive widget */
+    .archive-list { display: flex; flex-direction: column; gap: 0.25rem; }
+    .archive-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: background var(--transition);
+      color: var(--muted);
+    }
+    .archive-item:hover { background: var(--green-bg); color: var(--green-dark); }
+    .archive-item span { font-weight: 600; }
+    .archive-badge {
+      background: var(--bg-soft);
+      border-radius: 100px;
+      padding: 0.15rem 0.6rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--subtle);
+    }
+
+    /* Topics widget */
+    .topics-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .topic-tag {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.35rem 0.9rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .topic-tag:hover { background: var(--green-bg); border-color: var(--green); color: var(--green-dark); }
+
+    /* CTA widget */
+    .sidebar-cta {
+      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      color: white;
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      text-align: center;
+    }
+    .sidebar-cta h3 { font-size: 1.1rem; color: white; border: none; padding: 0; margin: 0 0 0.75rem; }
+    .sidebar-cta p { font-size: 0.85rem; color: rgba(255,255,255,0.85); line-height: 1.6; margin-bottom: 1.25rem; }
+    .sidebar-cta .btn { width: 100%; justify-content: center; background: white; color: var(--green-dark); }
+    .sidebar-cta .btn:hover { background: var(--green-bg); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .blog-grid { grid-template-columns: 1fr; }
+      .blog-sidebar { order: -1; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    }
+    @media (max-width: 600px) {
+      .blog-sidebar { grid-template-columns: 1fr; }
+      .article-card-inner { padding: 1.5rem; }
+      .article-footer { padding: 1rem 1.5rem; }
+      .modal-header, .modal-body { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .modal-author { padding-left: 1.5rem; padding-right: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Page transition overlay (starts covering, then slides away) -->
+  <div id="page-transition" style="transform:translateY(0%)"></div>
+
+  <!-- ── ORARI BAR ── -->
+  <div class="orari-bar">
+    <div class="container orari-inner">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      <span>Centro Kinetics aperto <strong>su appuntamento</strong>: Lun–Ven 7:00–22:00 &nbsp;|&nbsp; Sabato 8:00–14:00 &nbsp;|&nbsp; <a href="tel:+390571730770" style="color:var(--green-light)">0571 73077</a></span>
+    </div>
+  </div>
+
+  <!-- ── NAVBAR ── -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-content">
+      <a href="index.html" class="logo-link">
+        <img src="images/logo-verde.png" alt="Centro Kinetics" class="nav-logo">
+      </a>
+      <nav id="main-nav">
+        <a href="index.html#chi-siamo">Chi Siamo</a>
+        <a href="index.html#servizi">Servizi</a>
+        <a href="index.html#attivita">Attività</a>
+        <a href="index.html#gallery">Gallery</a>
+        <a href="blog.html" class="active">Blog</a>
+        <a href="index.html#dicono-di-noi">Recensioni</a>
+        <a href="index.html#contatti">Contatti</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="tel:+390571730770" class="btn primary">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          Prenota
+        </a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="index.html#chi-siamo" class="mobile-link">Chi Siamo</a>
+      <a href="index.html#servizi" class="mobile-link">Servizi</a>
+      <a href="index.html#attivita" class="mobile-link">Attività</a>
+      <a href="index.html#gallery" class="mobile-link">Gallery</a>
+      <a href="blog.html" class="mobile-link">Blog</a>
+      <a href="index.html#dicono-di-noi" class="mobile-link">Recensioni</a>
+      <a href="index.html#lavora" class="mobile-link">Lavora con Noi</a>
+      <a href="index.html#contatti" class="mobile-link">Contatti</a>
+      <a href="tel:+390571730770" class="btn primary full-width">Chiama ora: 0571 73077</a>
+    </div>
+  </header>
+
+  <!-- ── BLOG HERO ── -->
+  <section class="blog-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>›</span>
+        <span>Blog</span>
+      </div>
+      <span class="section-tag">Il Personal Trainer Consiglia</span>
+      <h1>Fitness, salute<br><span>e benessere.</span></h1>
+      <p>Consigli pratici di David Caponi su allenamento, nutrizione e stile di vita sano. Aggiornamenti basati su ricerche scientifiche.</p>
+    </div>
+  </section>
+
+  <!-- ── BLOG LAYOUT ── -->
+  <div class="blog-layout">
+    <div class="container blog-grid">
+
+      <!-- ── ARTICOLI ── -->
+      <main>
+        <div class="filter-bar" id="filter-bar"></div>
+        <div class="articles-list" id="articles-list"></div>
+      </main>
+
+      <!-- ── SIDEBAR ── -->
+      <aside class="blog-sidebar">
+
+        <!-- About -->
+        <div class="sidebar-widget about-widget">
+          <h3>Chi scrive</h3>
+          <img src="images/inaugurazione3.jpg" alt="David Caponi" class="about-widget-img">
+          <p><strong>David Caponi</strong> – Personal Trainer ISSA CFT2, Diplomato ISEF, Chinesiologo UNC. Condivide consigli pratici su fitness, nutrizione e benessere basati su anni di esperienza clinica e sportiva.</p>
+          <div class="cert-row">
+            <img src="images/certificato.png" alt="ISSA">
+            <img src="images/esercizio_collettivo.png" alt="Esercizio Correttivo">
+            <img src="images/unc.png" alt="UNC">
+          </div>
+        </div>
+
+        <!-- Archivio -->
+        <div class="sidebar-widget">
+          <h3>Archivio</h3>
+          <div class="archive-list" id="archive-list"></div>
+        </div>
+
+        <!-- Argomenti -->
+        <div class="sidebar-widget">
+          <h3>Argomenti</h3>
+          <div class="topics-list" id="topics-list"></div>
+        </div>
+
+        <!-- CTA -->
+        <div class="sidebar-cta">
+          <h3>Vuoi un programma personalizzato?</h3>
+          <p>Prenota una consulenza gratuita con David Caponi e inizia il tuo percorso.</p>
+          <a href="index.html#contatti" class="btn">Contattaci ora</a>
+        </div>
+
+      </aside>
+    </div>
+  </div>
+
+  <!-- ── MODAL ARTICOLO ── -->
+  <div class="article-modal" id="article-modal" onclick="handleModalClick(event)">
+    <div class="article-modal-inner">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-header" id="modal-header"></div>
+      <div class="modal-body" id="modal-body"></div>
+      <div class="modal-author">
+        <div class="modal-author-avatar">DC</div>
+        <div>
+          <strong>David Caponi</strong>
+          <span>Personal Trainer ISSA CFT2 · Centro Kinetics Empoli</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="images/logo.png" alt="Centro Kinetics" class="footer-logo-img">
+        <p>Palestra di personal training, Pilates e fitness a Empoli (FI). Lezioni individuali e in mini gruppi con istruttori certificati.</p>
+      </div>
+      <div>
+        <h5>Attività</h5>
+        <ul class="footer-links">
+          <li><a href="index.html#servizi">Personal Training</a></li>
+          <li><a href="index.html#attivita">Pilates</a></li>
+          <li><a href="index.html#attivita">Bodytec</a></li>
+          <li><a href="index.html#attivita">Kinesis</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Blog</h5>
+        <ul class="footer-links" id="footer-blog-links"></ul>
+      </div>
+      <div>
+        <h5>Contatti</h5>
+        <p>Via Luigi Russo, 23/25 – 50053 Empoli (FI)</p>
+        <p><a href="tel:+390571730770">Tel: 0571 73077</a></p>
+        <p><a href="tel:+393287020958">Cell. David: 328 7020958</a></p>
+        <p><a href="mailto:info@centrokinetics.it">info@centrokinetics.it</a></p>
+        <br><h5>Orari</h5>
+        <p>Lun–Ven: 07:00–22:00</p>
+        <p>Sabato: 08:00–14:00</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>© 2025 Centro Kinetics S.r.l. – P.IVA 05253310485 – REA n° FI-532765</p>
+        <div style="display:flex;align-items:center;gap:1.25rem">
+          <a href="admin.html" style="font-size:.72rem;color:rgba(255,255,255,.2);transition:color .2s" onmouseover="this.style.color='rgba(255,255,255,.6)'" onmouseout="this.style.color='rgba(255,255,255,.2)'">⚙ Admin</a>
+          <a href="http://www.ibi.it" target="_blank" style="opacity:.65; transition:opacity .2s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.65">
+          <img src="images/credits-1.png" alt="ibi.it" style="height:28px;">
+        </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  /* ════════════════════════════════════════
+     ARTICOLI DEL BLOG (da centrokinetics.blogspot.com)
+  ════════════════════════════════════════ */
+  const articles = [
+    {
+      id: 1,
+      title: 'Arance Rosse ed attività fisica',
+      date: '9 marzo 2014',
+      month: 'Marzo 2014',
+      category: 'Nutrizione',
+      readTime: '2 min',
+      excerpt: 'Una ricerca italiana dell\'Università di Catania dimostra che gli antiossidanti contenuti nell\'estratto di arance rosse di Sicilia riducono lo stress ossidativo negli atleti professionisti.',
+      body: `
+        <p>Una ricerca italiana dell'Università di Catania, pubblicata sulla rivista scientifica <em>Nutrition Research</em>, ha dimostrato che gli antiossidanti ampiamente contenuti nell'estratto di arance rosse di Sicilia hanno dimostrato di ridurre gli indici di stress ossidativo negli atleti professionisti.</p>
+        <h3>Il problema dei radicali liberi negli sportivi</h3>
+        <p>L'attività fisica intensa aumenta la produzione di radicali liberi, molecole instabili che causano invecchiamento cellulare precoce. Negli sportivi, questo fenomeno può comportare:</p>
+        <ul>
+          <li>Riduzione delle performance atletiche</li>
+          <li>Affaticamento muscolare precoce</li>
+          <li>Danni alle fibre muscolari</li>
+          <li>Tempi di recupero più lunghi</li>
+        </ul>
+        <h3>Il ruolo degli antiossidanti</h3>
+        <p>Integrare antiossidanti nella dieta degli sportivi aiuta a bilanciare l'accumulo di radicali liberi. I ricercatori concludono che questa strategia può essere adottata anche da atleti non professionisti che svolgono attività fisica a livello amatoriale.</p>
+        <div class="highlight-box">
+          💡 Consiglio pratico: consuma almeno 2 arance rosse al giorno, preferibilmente al mattino prima dell'allenamento, per sfruttare al massimo le proprietà antiossidanti.
+        </div>
+        <p>Le arance rosse di Sicilia sono particolarmente ricche di antocianine, flavonoidi e vitamina C, una combinazione unica che le rende superiori rispetto alle arance bionde in termini di potere antiossidante.</p>
+      `
+    },
+    {
+      id: 2,
+      title: 'L\'osteoporosi e l\'attività fisica',
+      date: 'Febbraio 2014',
+      month: 'Febbraio 2014',
+      category: 'Salute',
+      readTime: '3 min',
+      excerpt: 'L\'esercizio fisico regolare è uno degli strumenti più efficaci per la prevenzione e il trattamento dell\'osteoporosi. Scopri quali attività sono raccomandate e con quale frequenza.',
+      body: `
+        <p>L'osteoporosi è una condizione caratterizzata dalla progressiva riduzione della densità ossea, che rende le ossa fragili e più soggette a fratture. In Italia colpisce oltre 5 milioni di persone, prevalentemente donne in menopausa. L'attività fisica regolare è uno degli strumenti più potenti a nostra disposizione per prevenirla e contrastarla.</p>
+        <h3>Come l'esercizio protegge le ossa</h3>
+        <p>Le ossa, come i muscoli, si adattano agli stimoli meccanici. Quando carichiamo il nostro scheletro con esercizi di resistenza e impatto, le cellule ossee (osteoblasti) vengono stimolate a produrre nuovo tessuto osseo, aumentando la densità minerale.</p>
+        <ul>
+          <li><strong>Esercizi con pesi</strong>: squat, affondi, rematori stimolano direttamente la formazione ossea</li>
+          <li><strong>Esercizi di impatto</strong>: camminata veloce, jogging leggero, salti a bassa intensità</li>
+          <li><strong>Allenamento posturale</strong>: rinforza i muscoli paravertebrali riducendo il rischio di fratture vertebrali</li>
+          <li><strong>Esercizi di equilibrio</strong>: riducono il rischio di cadute, causa principale di fratture da osteoporosi</li>
+        </ul>
+        <h3>La frequenza raccomandata</h3>
+        <p>Per ottenere benefici concreti sulla densità ossea è consigliabile svolgere attività fisica con le seguenti cadenze:</p>
+        <ul>
+          <li>Almeno 2–3 sessioni settimanali di esercizi con resistenza</li>
+          <li>Sessioni da 30–40 minuti ciascuna</li>
+          <li>Progressione graduale dei carichi nel tempo</li>
+        </ul>
+        <div class="highlight-box">
+          💡 Importante: prima di iniziare qualsiasi programma di esercizi in presenza di osteoporosi diagnosticata, è fondamentale consultare il proprio medico e affidarsi a un personal trainer qualificato per un programma sicuro e personalizzato.
+        </div>
+        <p>Al Centro Kinetics di Empoli, David Caponi propone percorsi specifici per la salute ossea, adattati all'età e alle condizioni di ogni persona.</p>
+      `
+    },
+    {
+      id: 3,
+      title: 'Carne rossa sì... Carne rossa no!',
+      date: '16 febbraio 2014',
+      month: 'Febbraio 2014',
+      category: 'Nutrizione',
+      readTime: '2 min',
+      excerpt: 'Proprio quando molti avevano deciso di eliminarla dalla dieta, arriva uno studio della Penn State University che dimostra come la carne molto magra aiuti a ridurre il colesterolo LDL di circa il 10%.',
+      body: `
+        <p>Proprio quando molti avevano definitivamente eliminato la carne rossa dalla loro dieta, ecco arrivare uno studio che rimescola le carte in tavola. Una ricerca della <strong>Penn State University</strong>, pubblicata sull'<em>American Journal of Clinical Nutrition</em>, dimostra come il consumo giornaliero di carne molto magra possa avere effetti benefici sul profilo lipidico.</p>
+        <h3>Cosa dice la ricerca</h3>
+        <p>Secondo lo studio, consumare quotidianamente carne molto magra – come il carpaccio o il macinato di scottona – diminuisce il colesterolo totale ed in particolare l'LDL (il cosiddetto "colesterolo cattivo") di circa il <strong>10%</strong>.</p>
+        <p>Il meccanismo è legato alle qualità organolettiche di questa carne: essendo povera di grassi saturi, non contribuisce all'accumulo di colesterolo nel sangue e, anzi, grazie all'elevato contenuto proteico di alta qualità, favorisce un miglior profilo metabolico.</p>
+        <h3>Che cosa si intende per "carne molto magra"?</h3>
+        <p>Qui sta il punto cruciale che distingue i dati di laboratorio dalla realtà quotidiana. Non tutta la carne rossa è uguale. Le opzioni più indicate sono:</p>
+        <ul>
+          <li><strong>Carpaccio</strong>: taglio sottilissimo, praticamente privo di grasso visibile</li>
+          <li><strong>Macinato di scottona</strong>: prodotto da bovini giovani, con un contenuto di grassi notevolmente inferiore rispetto al macinato standard</li>
+          <li>Tagli magri come filetto, controfiletto privato del grasso esterno</li>
+        </ul>
+        <div class="highlight-box">
+          💡 La chiave è la qualità del taglio, non la semplice etichetta "carne rossa". Impara a leggere le etichette al supermercato e scegli tagli certificati con basso contenuto di grassi saturi.
+        </div>
+        <p>La conclusione dell'autore è incoraggiante: con le giuste scelte, anche la carne rossa può far parte di un'alimentazione equilibrata a supporto dell'attività fisica. Provare per credere!</p>
+      `
+    },
+    {
+      id: 4,
+      title: 'Cellulite: come contrastarla con l\'attività fisica',
+      date: 'Febbraio 2014',
+      month: 'Febbraio 2014',
+      category: 'Benessere',
+      readTime: '4 min',
+      excerpt: 'La cellulite non si combatte solo con creme e massaggi. Un programma strutturato in tre fasi, che combina cardio mirato ed esercizi di tonificazione, produce risultati concreti e duraturi.',
+      body: `
+        <p>La cellulite, o pannicolopatia edemato-fibro-sclerotica, è un inestetismo che colpisce oltre l'80% delle donne adulte. Sebbene spesso si cerchi una soluzione in creme, massaggi e trattamenti estetici, l'attività fisica rimane lo strumento più efficace e duraturo per combatterla davvero.</p>
+        <h3>Perché si forma la cellulite</h3>
+        <p>La cellulite si sviluppa a causa di un'alterazione del microcircolo che porta ad accumulo di liquidi, infiammazione e, progressivamente, indurimento del tessuto adiposo sottocutaneo. I fattori principali sono:</p>
+        <ul>
+          <li>Sedentarietà e scarsa circolazione periferica</li>
+          <li>Squilibrio ormonale (estrogeni)</li>
+          <li>Dieta ricca di sale, zuccheri e grassi saturi</li>
+          <li>Predisposizione genetica</li>
+          <li>Abbigliamento costrittivo e posture scorrette</li>
+        </ul>
+        <h3>Il programma in tre fasi</h3>
+        <p>Un approccio strutturato all'attività fisica anti-cellulite si sviluppa in tre fasi progressive:</p>
+        <h3>Fase 1 – Attivazione circolatoria (settimane 1–4)</h3>
+        <p>L'obiettivo è migliorare il microcircolo e iniziare a ridurre la ritenzione idrica. Si privilegiano attività a bassa intensità ma continuativa:</p>
+        <ul>
+          <li>Camminata veloce: 30–40 minuti, 4 volte a settimana</li>
+          <li>Nuoto o acquagym: eccellente per la pressione idrostatica sull'esterno</li>
+          <li>Cyclette a bassa resistenza</li>
+          <li>Stretching mirato agli arti inferiori</li>
+        </ul>
+        <h3>Fase 2 – Tonificazione localizzata (settimane 5–10)</h3>
+        <p>Si aggiungono esercizi di rinforzo muscolare specifici per le zone più colpite (glutei, cosce, addome basso):</p>
+        <ul>
+          <li>Squat e affondi in progressione</li>
+          <li>Ponte glutei e varianti</li>
+          <li>Leg press a basso carico e alto numero di ripetizioni</li>
+          <li>Plank e esercizi di core stability</li>
+        </ul>
+        <h3>Fase 3 – Mantenimento e ottimizzazione (settimane 11+)</h3>
+        <p>Combinazione di cardio ad intervalli (HIIT leggero) e rinforzo muscolare per stabilizzare i risultati e prevenire le recidive.</p>
+        <div class="highlight-box">
+          💡 Risultati visibili si ottengono mediamente dopo 6–8 settimane di programma costante, abbinato ad una corretta idratazione (almeno 2 litri d'acqua al giorno) e ad una riduzione di sale e zuccheri raffinati nella dieta.
+        </div>
+      `
+    },
+    {
+      id: 5,
+      title: 'La camminata sportiva (Fit Walking)',
+      date: '24 gennaio 2014',
+      month: 'Gennaio 2014',
+      category: 'Allenamento',
+      readTime: '3 min',
+      excerpt: 'La camminata sportiva coinvolge oltre il 70% della muscolatura corporea ed è uno degli allenamenti più completi e accessibili. Ma per farlo bene serve una valutazione funzionale iniziale.',
+      body: `
+        <p>La camminata sportiva – o <em>Fit Walking</em> – è un particolare tipo di allenamento che prevede di camminare in modo ritmico utilizzando attivamente anche le braccia, attraverso un movimento coordinato e oscillante. Non è semplicemente "camminare veloce": è una vera e propria tecnica che, se eseguita correttamente, coinvolge <strong>oltre il 70% della muscolatura corporea</strong>.</p>
+        <h3>Perché è così efficace</h3>
+        <p>A differenza della corsa, il Fit Walking non genera impatti traumatici sulle articolazioni, rendendolo adatto a tutte le età e a chi ha problemi articolari al ginocchio o alla schiena. I benefici principali:</p>
+        <ul>
+          <li>Miglioramento della capacità cardiovascolare</li>
+          <li>Consumo calorico elevato (350–500 kcal/ora)</li>
+          <li>Tonificazione di glutei, cosce, polpacci, addome e braccia</li>
+          <li>Riduzione dello stress e miglioramento dell'umore</li>
+          <li>Nessun rischio di trauma articolare</li>
+          <li>Praticabile ovunque, senza attrezzatura specifica</li>
+        </ul>
+        <h3>L'importanza della valutazione iniziale</h3>
+        <p>Per ottenere risultati ottimali e sicuri, è fondamentale iniziare con una <strong>valutazione funzionale</strong> da parte di un personal trainer qualificato. Il professionista utilizzerà test specifici per determinare:</p>
+        <ul>
+          <li>Il tuo VO₂ max (capacità aerobica massimale) tramite test sub-massimali indiretti</li>
+          <li>La frequenza cardiaca a riposo e la frequenza cardiaca allenante</li>
+          <li>L'andatura ottimale (passo e frequenza) per i tuoi obiettivi</li>
+          <li>Eventuali squilibri muscolari o posturali da correggere</li>
+        </ul>
+        <p>Questi test devono essere ripetuti ogni <strong>4–5 settimane</strong> per monitorare i progressi e aggiornare il programma.</p>
+        <h3>Programma consigliato per iniziare</h3>
+        <ul>
+          <li><strong>Primo mese:</strong> 2 sessioni settimanali da 30–40 minuti</li>
+          <li><strong>Secondo mese:</strong> 3 sessioni settimanali da 45 minuti</li>
+          <li><strong>Dal terzo mese:</strong> 3 sessioni settimanali da 60 minuti, con variazioni di ritmo</li>
+        </ul>
+        <div class="highlight-box">
+          💡 Tecnica corretta: testa che guarda avanti, spalle rilassate, braccia che oscillano con gomito a 90°, passo attivo con spinta del tallone e rotolamento fino alla punta. Respira ritmicamente con il passo.
+        </div>
+      `
+    },
+    {
+      id: 6,
+      title: 'Sapevi che anche il fegato ingrassa?',
+      date: '18 gennaio 2014',
+      month: 'Gennaio 2014',
+      category: 'Salute',
+      readTime: '3 min',
+      excerpt: 'La steatosi epatica non alcolica (fegato grasso) è in aumento nei paesi industrializzati. Una ricerca dell\'Università di Sydney dimostra che bastano piccoli aumenti dell\'attività fisica per proteggere questo organo vitale.',
+      body: `
+        <p>Quando si parla di sovrappeso e sedentarietà, si pensa immediatamente a cuore, pressione e colesterolo. Ma c'è un organo spesso dimenticato che ne soffre in modo silenzioso: <strong>il fegato</strong>. La steatosi epatica non alcolica – comunemente chiamata "fegato grasso" – è in costante aumento nei paesi industrializzati e colpisce soprattutto persone in sovrappeso e sedentarie.</p>
+        <h3>Il fegato: il centro del metabolismo</h3>
+        <p>Il fegato svolge il ruolo centrale di tutto il nostro metabolismo: elabora i nutrienti assorbiti dall'intestino, produce bile, regola gli zuccheri nel sangue, sintetizza proteine e smaltisce le tossine. Quando assumiamo troppe calorie, i livelli di trigliceridi aumentano e iniziano ad invadere le cellule epatiche, creando la cosiddetta condizione di "fegato grasso".</p>
+        <p>Se non trattata, la steatosi epatica può evolvere verso l'infiammazione (steatoepatite), la fibrosi e, nei casi più gravi, la cirrosi.</p>
+        <h3>L'attività fisica come medicina per il fegato</h3>
+        <p>Una ricerca dell'<strong>Università di Sydney</strong> ha dimostrato che aumentare l'attività fisica, anche modestamente e in modo costante, riduce significativamente il rischio di sviluppare la steatosi epatica, <em>indipendentemente dalla perdita di peso</em>. Lo studio ha rilevato che aggiungere anche solo un'ora settimanale di movimento mostra "cambiamenti favorevoli negli indici di funzionalità dell'organo".</p>
+        <ul>
+          <li>L'esercizio aerobico riduce i trigliceridi circolanti</li>
+          <li>Migliora la sensibilità insulinica, riducendo l'accumulo di grasso epatico</li>
+          <li>Stimola l'ossidazione degli acidi grassi nel fegato</li>
+          <li>Riduce l'infiammazione sistemica</li>
+        </ul>
+        <h3>La soluzione più semplice</h3>
+        <p>Non serve un programma di allenamento intensivo per proteggere il fegato. I ricercatori suggeriscono come soluzione pratica ed efficace una semplice <strong>camminata veloce di 20–30 minuti al giorno</strong>, da svolgere con continuità.</p>
+        <div class="highlight-box">
+          💡 Aggiungi movimento alla tua giornata in modo progressivo: inizia con 20 minuti di camminata quotidiana, poi aumenta gradualmente. Associa l'attività fisica a una dieta con meno zuccheri raffinati e grassi saturi per risultati ancora più rapidi.
+        </div>
+        <p>Al Centro Kinetics, David Caponi può aiutarti a costruire un piano di attività fisica personalizzato che tenga conto del tuo stato di salute generale, inclusa la salute epatica.</p>
+      `
+    },
+    {
+      id: 7,
+      title: 'Allenare le abilità',
+      date: '8 dicembre 2013',
+      month: 'Dicembre 2013',
+      category: 'Allenamento',
+      readTime: '3 min',
+      excerpt: 'La maggior parte delle palestre si concentra quasi esclusivamente sulla forza, trascurando le abilità coordinative. Un approccio incompleto che limita i risultati e impoverisce la qualità del movimento.',
+      body: `
+        <p>Nella maggior parte delle palestre, insegnanti e personal trainer si concentrano quasi esclusivamente sull'allenamento della <strong>forza nelle sue varie forme</strong>: forza resistente, esplosiva, massimale, ipertrofia. Raramente si affronta l'allenamento delle <strong>abilità coordinative</strong>. Un approccio che ritengo molto limitante e incompleto.</p>
+        <h3>Cosa sono le abilità coordinative</h3>
+        <p>Le abilità coordinative sono la capacità del sistema nervoso centrale di organizzare, regolare e controllare il movimento. Comprendono:</p>
+        <ul>
+          <li><strong>Equilibrio</strong> statico e dinamico</li>
+          <li><strong>Coordinazione</strong> oculo-manuale e oculo-podale</li>
+          <li><strong>Ritmo</strong> e sincronizzazione del movimento</li>
+          <li><strong>Orientamento spaziale</strong></li>
+          <li><strong>Reattività</strong> e velocità di risposta agli stimoli</li>
+          <li><strong>Differenziazione cinestetica</strong> (senso della posizione e del movimento)</li>
+        </ul>
+        <h3>Sviluppare le abilità significa...</h3>
+        <p>Migliorare la stabilità corporea complessiva e, per gli atleti, perfezionare il gesto atletico specifico della propria disciplina. È come ritornare ai movimenti naturali dell'infanzia: saltare la corda, fare capriole, salti in lungo, lanciare pesi o giavellotti.</p>
+        <p>Questi movimenti apparentemente semplici attivano circuiti neuromotori che l'allenamento tradizionale in palestra non riesce a stimolare. Il risultato è un atleta più completo, più stabile e più efficiente nei movimenti.</p>
+        <h3>L'esperienza sul campo</h3>
+        <p>Attraverso la mia esperienza nel lavoro con golfisti, sciatori e sportivi amatoriali di varie discipline, ho osservato miglioramenti significativi nelle performance quando l'allenamento delle capacità condizionali viene integrato con quello coordinativo.</p>
+        <ul>
+          <li>Golfisti: miglioramento della rotazione e della precisione del colpo</li>
+          <li>Sciatori: maggiore stabilità in curva e reattività sui cambi di direzione</li>
+          <li>Sportivi amatori: riduzione degli infortuni e movimenti più fluidi ed efficienti</li>
+        </ul>
+        <div class="highlight-box">
+          💡 L'allenamento deve considerare la complessità della persona nella sua totalità. Integrare capacità condizionali e coordinative non è un'opzione per chi vuole risultati superiori: è una necessità.
+        </div>
+        <p>Al Centro Kinetics, il programma di allenamento personalizzato include sempre una componente di lavoro sulle abilità coordinative, adattata all'età, al livello di partenza e agli obiettivi di ciascun cliente.</p>
+      `
+    }
+  ];
+
+  /* ── REVEAL OBSERVER ── */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  /* ── MERGE CON ARTICOLI ADMIN (localStorage) ── */
+  function loadAdminArticles() {
+    try {
+      const stored = JSON.parse(localStorage.getItem('ck_blog_articles') || '[]');
+      return stored
+        .filter(a => a.published)
+        .sort((a, b) => new Date(b.savedAt) - new Date(a.savedAt))
+        .map(a => ({
+          id:       a.id,
+          title:    a.title,
+          date:     formatDateBlog(a.date),
+          month:    monthLabel(a.date),
+          category: a.category,
+          readTime: a.readTime || '2 min',
+          excerpt:  a.excerpt || '',
+          body:     a.body || '',
+          fromAdmin: true
+        }));
+    } catch { return []; }
+  }
+
+  function formatDateBlog(dateStr) {
+    if (!dateStr) return '';
+    const months = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+    const d = new Date(dateStr + 'T12:00:00');
+    return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+  }
+
+  function monthLabel(dateStr) {
+    if (!dateStr) return 'Recente';
+    const months = ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
+    const d = new Date(dateStr + 'T12:00:00');
+    return `${months[d.getMonth()]} ${d.getFullYear()}`;
+  }
+
+  const adminArticles = loadAdminArticles();
+  const allArticles   = [...adminArticles, ...articles];
+
+  /* ── CATEGORIE E FILTRI ── */
+  const categories = ['Tutti', ...new Set(allArticles.map(a => a.category))];
+  const filterBar = document.getElementById('filter-bar');
+  categories.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = `filter-btn${cat === 'Tutti' ? ' active' : ''}`;
+    btn.textContent = cat;
+    btn.addEventListener('click', () => {
+      filterBar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderArticles(cat === 'Tutti' ? allArticles : allArticles.filter(a => a.category === cat));
+    });
+    filterBar.appendChild(btn);
+  });
+
+  /* ── RENDER ARTICOLI ── */
+  function renderArticles(list) {
+    const container = document.getElementById('articles-list');
+    container.innerHTML = '';
+    list.forEach((art, i) => {
+      const card = document.createElement('div');
+      card.className = 'article-card reveal';
+      card.style.transitionDelay = `${i * 0.07}s`;
+      card.innerHTML = `
+        <div class="article-card-inner">
+          <div class="article-meta">
+            <span class="article-cat">${art.category}</span>
+            <span class="article-date">
+              <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              ${art.date}
+            </span>
+          </div>
+          <h2><a href="#" onclick="openArticle(${JSON.stringify(art.id)}); return false;">${art.title}</a></h2>
+          <p class="article-excerpt">${art.excerpt}</p>
+        </div>
+        <div class="article-footer">
+          <button class="read-more-btn" onclick="openArticle(${JSON.stringify(art.id)})">
+            Leggi l'articolo
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </button>
+          <span class="read-time">
+            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            ${art.readTime} di lettura
+          </span>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+    // Re-observe new cards
+    container.querySelectorAll('.reveal').forEach(el => {
+      revealObserver.observe(el);
+    });
+  }
+
+  renderArticles(allArticles);
+
+  /* ── MODAL ARTICOLO ── */
+  function openArticle(id) {
+    // cerca in allArticles (hardcoded + admin); confronta sia == che ===
+    const art = allArticles.find(a => a.id == id || a.id === id);
+    if (!art) return;
+    document.getElementById('modal-header').innerHTML = `
+      <div class="article-meta" style="margin-bottom:1.25rem">
+        <span class="article-cat">${art.category}</span>
+        <span class="article-date">
+          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          ${art.date}
+        </span>
+      </div>
+      <h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:900;letter-spacing:-0.5px;line-height:1.2">${art.title}</h2>
+    `;
+    document.getElementById('modal-body').innerHTML = art.body;
+    const modal = document.getElementById('article-modal');
+    modal.classList.add('open');
+    modal.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('article-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function handleModalClick(e) {
+    if (e.target === document.getElementById('article-modal')) closeModal();
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  /* ── ARCHIVIO SIDEBAR ── */
+  const archiveMap = {};
+  allArticles.forEach(a => {
+    archiveMap[a.month] = (archiveMap[a.month] || 0) + 1;
+  });
+  const archiveList = document.getElementById('archive-list');
+  Object.entries(archiveMap).forEach(([month, count]) => {
+    archiveList.innerHTML += `
+      <div class="archive-item">
+        <span>${month}</span>
+        <span class="archive-badge">${count}</span>
+      </div>
+    `;
+  });
+
+  /* ── TOPICS SIDEBAR ── */
+  const topicsList = document.getElementById('topics-list');
+  const allTopics = ['Fitness', 'Nutrizione', 'Allenamento', 'Salute', 'Benessere', 'Pilates', 'Dimagrimento', 'Postura', 'Sport', 'Personal Training'];
+  allTopics.forEach(t => {
+    topicsList.innerHTML += `<span class="topic-tag">${t}</span>`;
+  });
+
+  /* ── FOOTER BLOG LINKS ── */
+  const footerBlogLinks = document.getElementById('footer-blog-links');
+  allArticles.slice(0, 5).forEach(art => {
+    footerBlogLinks.innerHTML += `<li><a href="#" onclick="openArticle(${JSON.stringify(art.id)});return false;">${art.title}</a></li>`;
+  });
+
+  /* ── NAVBAR / HAMBURGER ── */
+  const hamburger  = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
+  });
+
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  /* ── ANIMAZIONE INGRESSO PAGINA ── */
+  (function() {
+    const overlay = document.getElementById('page-transition');
+    // piccolo delay per assicurarsi che il browser abbia dipinto l'overlay
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        overlay.classList.add('pt-leave');
+      });
+    });
+  })();
+  </script>
+</body>
+</html>
