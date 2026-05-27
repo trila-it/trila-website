@@ -824,9 +824,26 @@
       .macchine-grid { grid-template-columns: 1fr; }
     }
 
+    .nav-mobile-cta {
+      display: none;
+    }
+
     @media (max-width: 640px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
+      .nav-mobile-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: .5rem;
+        background: var(--green);
+        color: var(--white);
+        padding: .55rem 1.2rem;
+        border-radius: 100px;
+        font-size: .875rem;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .nav-mobile-cta svg { width: 16px; height: 16px; }
       .hero-content { padding: 0 1.5rem; padding-top: 5rem; }
       .hero-stats { display: none; }
       .container { padding: 0 1.5rem; }
@@ -848,6 +865,13 @@
       </svg>
       Eco<span>Ricicli</span>
     </div>
+    <a href="tel:050561609" class="nav-mobile-cta">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+      </svg>
+      Chiama
+    </a>
+
     <ul class="nav-links">
       <li><a href="#chi-siamo">Chi siamo</a></li>
       <li><a href="#servizi">Servizi</a></li>
