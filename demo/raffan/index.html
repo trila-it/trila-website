@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Google Review Card Method — Coach Raffan</title>
+  <meta name="description" content="Start a low-cost side hustle selling pre-programmed Google Review NFC cards to local businesses." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #05070a;
+      --surface: #0b0f14;
+      --card:    #0f1419;
+      --border:  rgba(255,255,255,0.06);
+      --green:   #1aff8c;
+      --green2:  #00cc6a;
+      --glow:    rgba(26,255,140,0.15);
+      --text:    #f0f4f8;
+      --muted:   #6b7685;
+      --heading: 'Syne', sans-serif;
+      --body:    'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: auto; }
+    body {
+      font-family: var(--body);
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 200px;
+      opacity: .5;
+    }
+
+    /* ─── CURSOR ─── */
+    #c-dot, #c-ring {
+      position: fixed; border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      top: 0; left: 0; transform: translate(-50%,-50%);
+    }
+    #c-dot  { width: 6px; height: 6px; background: var(--green); }
+    #c-ring { width: 32px; height: 32px; border: 1px solid rgba(26,255,140,.5); transition: width .2s, height .2s; }
+    body:has(a:hover) #c-ring, body:has(button:hover) #c-ring { width: 48px; height: 48px; }
+    @media (pointer: coarse) { #c-dot, #c-ring { display: none; } }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 22px 52px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background .4s, border-color .4s;
+    }
+    nav.stuck {
+      background: rgba(5,7,10,.88);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: var(--heading); font-size: .95rem; font-weight: 800;
+      color: var(--text); letter-spacing: .04em; text-decoration: none;
+    }
+    .logo em { color: var(--green); font-style: normal; }
+    .nav-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid rgba(26,255,140,.3); color: var(--green);
+      font-family: var(--body); font-size: .8rem; font-weight: 600;
+      letter-spacing: .06em; text-transform: uppercase;
+      padding: 8px 20px; border-radius: 50px; text-decoration: none;
+      transition: background .2s, border-color .2s;
+    }
+    .nav-pill:hover { background: rgba(26,255,140,.08); border-color: var(--green); }
+    @media (max-width: 600px) { nav { padding: 18px 20px; } }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100svh;
+      display: grid; place-items: center;
+      position: relative; overflow: hidden;
+      padding: 140px 24px 100px;
+    }
+
+    /* big blurred circle bg */
+    .hero-orb {
+      position: absolute; border-radius: 50%;
+      pointer-events: none; filter: blur(90px);
+    }
+    .orb1 { width: 600px; height: 600px; background: rgba(26,255,140,.07); top: -120px; left: -100px; }
+    .orb2 { width: 400px; height: 400px; background: rgba(26,255,140,.05); bottom: -60px; right: -80px; }
+
+    /* grid lines */
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(26,255,140,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26,255,140,.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at 50% 40%, black 20%, transparent 70%);
+    }
+
+    .hero-inner {
+      position: relative; z-index: 1;
+      max-width: 860px; text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: .72rem; font-weight: 600; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--green);
+      margin-bottom: 32px;
+    }
+    .eyebrow-line { width: 28px; height: 1px; background: var(--green); opacity: .6; }
+
+    h1 {
+      font-family: var(--heading);
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 800; line-height: .95;
+      letter-spacing: -.03em;
+      margin-bottom: 32px;
+    }
+    h1 .outline {
+      -webkit-text-stroke: 1.5px rgba(255,255,255,.25);
+      color: transparent;
+    }
+    h1 .google-word { font-family: var(--heading); font-weight: 800; }
+    h1 .lit {
+      background: linear-gradient(90deg, #1aff8c, #00e5ff, #1aff8c);
+      background-size: 200%;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s linear infinite;
+    }
+    @keyframes shimmer { to { background-position: 200% center; } }
+
+    .hero-desc {
+      font-size: clamp(.95rem, 2vw, 1.15rem);
+      color: var(--muted); line-height: 1.75;
+      max-width: 520px; margin: 0 auto 48px;
+    }
+
+    .cta-row {
+      display: flex; align-items: center; justify-content: center;
+      gap: 16px; flex-wrap: wrap;
+    }
+
+    .btn-cta {
+      position: relative; overflow: hidden;
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--green); color: #05070a;
+      font-family: var(--body); font-weight: 700; font-size: 1rem;
+      letter-spacing: .01em; padding: 16px 36px;
+      border-radius: 4px; border: none; cursor: pointer;
+      text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-cta::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,.35) 50%, transparent 60%);
+      transform: translateX(-100%);
+      transition: transform .5s;
+    }
+    .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(26,255,140,.3); }
+    .btn-cta:hover::after { transform: translateX(100%); }
+    .btn-cta svg { width: 18px; height: 18px; }
+
+    .btn-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--muted); font-size: .88rem; font-weight: 500;
+      text-decoration: none; transition: color .2s;
+    }
+    .btn-link:hover { color: var(--text); }
+    .btn-link svg { width: 16px; height: 16px; transition: transform .2s; }
+    .btn-link:hover svg { transform: translateY(2px); }
+
+    .trust-row {
+      margin-top: 52px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 24px; flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: .78rem; color: var(--muted); font-weight: 500;
+    }
+    .trust-item svg { width: 14px; height: 14px; stroke: var(--green); }
+    .trust-sep { width: 4px; height: 4px; border-radius: 50%; background: var(--border); }
+
+    /* ─── SCROLL TICKER ─── */
+    .ticker-wrap {
+      overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      background: var(--surface); padding: 14px 0;
+      position: relative; z-index: 1;
+    }
+    .ticker-track {
+      display: flex; gap: 0;
+      animation: tick 22s linear infinite;
+      white-space: nowrap;
+    }
+    .ticker-item {
+      display: inline-flex; align-items: center; gap: 14px;
+      font-size: .75rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--muted);
+      padding: 0 32px;
+    }
+    .ticker-item span { color: var(--green); }
+    .ticker-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--green); opacity: .5; }
+    @keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ─── SECTIONS ─── */
+    section { padding: 110px 24px; position: relative; z-index: 1; }
+    .wrap { max-width: 1080px; margin: 0 auto; }
+
+    .tag {
+      display: inline-block;
+      font-size: .68rem; font-weight: 700; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--green);
+      border: 1px solid rgba(26,255,140,.2);
+      padding: 5px 12px; border-radius: 3px;
+      margin-bottom: 20px;
+    }
+    h2 {
+      font-family: var(--heading);
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 800; letter-spacing: -.025em; line-height: 1.05;
+      margin-bottom: 16px;
+    }
+    .sub {
+      color: var(--muted); font-size: 1rem; line-height: 1.7;
+      max-width: 480px; margin-bottom: 56px;
+    }
+
+    /* ─── WHAT YOU GET ─── */
+    #what { background: var(--surface); }
+    .get-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 8px; overflow: hidden;
+      margin-top: 56px;
+    }
+    @media (max-width: 900px) { .get-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 560px) { .get-grid { grid-template-columns: 1fr; } }
+
+    .get-cell {
+      background: var(--card);
+      padding: 32px 28px;
+      transition: background .25s;
+    }
+    .get-cell:hover { background: #131920; }
+    .get-num {
+      font-family: var(--heading); font-size: 2.4rem; font-weight: 800;
+      color: rgba(26,255,140,.12); line-height: 1;
+      margin-bottom: 16px; letter-spacing: -.04em;
+    }
+    .get-cell h3 { font-family: var(--heading); font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .get-cell p  { font-size: .85rem; color: var(--muted); line-height: 1.6; }
+
+    /* ─── CURRICULUM ─── */
+    #learn { background: var(--bg); }
+    .curr-list {
+      margin-top: 56px;
+      display: flex; flex-direction: column; gap: 0;
+      border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+    }
+    .curr-item {
+      display: flex; align-items: center; gap: 20px;
+      padding: 20px 28px;
+      border-bottom: 1px solid var(--border);
+      background: var(--card);
+      transition: background .2s, padding-left .2s;
+      cursor: default;
+    }
+    .curr-item:last-child { border-bottom: none; }
+    .curr-item:hover { background: #131920; padding-left: 36px; }
+    .curr-n {
+      font-family: var(--heading); font-size: .75rem; font-weight: 800;
+      color: var(--green); opacity: .5; width: 24px; flex-shrink: 0;
+      letter-spacing: .06em;
+    }
+    .curr-item span { font-size: .92rem; color: var(--text); }
+    .curr-arrow { margin-left: auto; opacity: 0; transition: opacity .2s; }
+    .curr-item:hover .curr-arrow { opacity: 1; }
+    .curr-arrow svg { width: 14px; height: 14px; stroke: var(--green); }
+
+    /* ─── FOR WHO ─── */
+    #forwho { background: var(--surface); }
+    .biz-grid {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .biz-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px; padding: 20px;
+      transition: border-color .2s, transform .2s;
+    }
+    .biz-card:hover { border-color: rgba(26,255,140,.3); transform: translateY(-2px); }
+    .biz-icon {
+      width: 36px; height: 36px;
+      background: rgba(26,255,140,.06);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 12px;
+    }
+    .biz-icon svg { width: 18px; height: 18px; stroke: var(--green); }
+    .biz-card span { font-size: .85rem; font-weight: 600; }
+
+    /* ─── REVIEW ─── */
+    #social { background: var(--bg); }
+    .review-wrap {
+      margin-top: 56px;
+      max-width: 640px; margin-left: auto; margin-right: auto;
+    }
+    .review-box {
+      border: 1px solid rgba(26,255,140,.2);
+      border-radius: 8px;
+      background: var(--card);
+      padding: 40px;
+      position: relative;
+    }
+    .review-box::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--green), transparent);
+      opacity: .4;
+    }
+    .r-stars { display: flex; gap: 4px; margin-bottom: 20px; }
+    .r-stars svg { width: 16px; height: 16px; fill: #f5c518; }
+    .r-text {
+      font-size: 1.1rem; line-height: 1.75; color: var(--text);
+      margin-bottom: 28px; font-style: italic;
+    }
+    .r-author { display: flex; align-items: center; gap: 14px; }
+    .r-av {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: linear-gradient(135deg, #1aff8c, #00e5ff);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--heading); font-weight: 800; font-size: .85rem; color: #05070a;
+    }
+    .r-name { font-weight: 600; font-size: .9rem; }
+    .r-meta { font-size: .75rem; color: var(--muted); margin-top: 2px; }
+
+    /* ─── PRICING ─── */
+    #buy { background: var(--surface); }
+    .pricing-layout {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 48px; align-items: center;
+      margin-top: 56px;
+    }
+    @media (max-width: 760px) { .pricing-layout { grid-template-columns: 1fr; } }
+
+    .pricing-left h2 { margin-bottom: 20px; }
+    .pricing-left p { color: var(--muted); font-size: .95rem; line-height: 1.7; margin-bottom: 28px; }
+    .pricing-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .pricing-list li {
+      display: flex; align-items: center; gap: 12px;
+      font-size: .88rem; color: var(--text);
+    }
+    .pricing-list li::before {
+      content: '';
+      width: 18px; height: 18px; flex-shrink: 0;
+      background: rgba(26,255,140,.1);
+      border-radius: 50%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%231aff8c' stroke-width='2.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M4.5 12.75l6 6 9-13.5'/%3E%3C/svg%3E");
+      background-size: 11px; background-repeat: no-repeat; background-position: center;
+    }
+
+    .price-box {
+      background: var(--card);
+      border: 1px solid rgba(26,255,140,.2);
+      border-radius: 8px; padding: 40px 36px;
+      position: relative; overflow: hidden;
+      text-align: center;
+    }
+    .price-box::after {
+      content: '';
+      position: absolute; top: -80px; left: 50%; transform: translateX(-50%);
+      width: 280px; height: 280px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(26,255,140,.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .price-box .eyebrow { justify-content: center; margin-bottom: 24px; font-size: .7rem; }
+    .price-big {
+      font-family: var(--heading); font-weight: 800;
+      font-size: 5.5rem; line-height: 1; letter-spacing: -.04em;
+      color: var(--text); margin-bottom: 4px;
+    }
+    .price-big sup { font-size: 2rem; vertical-align: top; margin-top: .8rem; display: inline-block; }
+    .price-note { font-size: .8rem; color: var(--muted); margin-bottom: 32px; }
+
+    .pay-btn {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%;
+      background: var(--green); color: #05070a;
+      font-family: var(--body); font-weight: 800; font-size: 1rem;
+      letter-spacing: .01em; padding: 17px 32px;
+      border-radius: 4px; border: none; cursor: pointer;
+      text-decoration: none;
+      position: relative; overflow: hidden;
+      transition: box-shadow .25s, transform .2s;
+    }
+    .pay-btn::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.3) 50%, transparent 65%);
+      transform: translateX(-100%); transition: transform .55s;
+    }
+    .pay-btn:hover { box-shadow: 0 0 48px rgba(26,255,140,.4); transform: translateY(-2px); }
+    .pay-btn:hover::after { transform: translateX(100%); }
+    .pay-btn svg { width: 18px; height: 18px; }
+
+    .secure-note {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      margin-top: 14px; font-size: .73rem; color: var(--muted);
+    }
+    .secure-note svg { width: 12px; height: 12px; stroke: var(--muted); }
+    .sales-count { margin-top: 18px; font-size: .78rem; color: var(--muted); }
+    .sales-count strong { color: var(--green); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--bg); border-top: 1px solid var(--border);
+      padding: 40px 24px; text-align: center;
+      font-size: .78rem; color: var(--muted);
+      position: relative; z-index: 1;
+    }
+    footer .f-logo { font-family: var(--heading); font-weight: 800; color: var(--text); font-size: .9rem; margin-bottom: 12px; }
+    footer .f-logo em { color: var(--green); font-style: normal; }
+    footer p { max-width: 560px; margin: 8px auto 0; line-height: 1.6; }
+
+    /* ─── REVEAL ─── */
+    .r { opacity: 0; transform: translateY(28px); }
+  </style>
+</head>
+<body>
+
+<div id="c-dot"></div>
+<div id="c-ring"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="logo">Coach <em>Raffan</em></a>
+  <a href="#buy" class="nav-pill">Get Access — $49.99</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-orb orb1"></div>
+  <div class="hero-orb orb2"></div>
+  <div class="hero-grid"></div>
+  <canvas id="c3d"></canvas>
+
+  <div class="hero-inner">
+    <div class="eyebrow">
+      <span class="eyebrow-line"></span>
+      Side Hustle · NFC Cards · Local Businesses
+      <span class="eyebrow-line"></span>
+    </div>
+
+    <h1>
+      <span class="google-word"><span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC05">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span></span><br />
+      <span class="lit">Review Card</span><br />
+      <span class="outline">Method</span>
+    </h1>
+
+    <p class="hero-desc">
+      Learn how to source, program, and sell pre-programmed NFC review cards
+      to local businesses — door-to-door or online. Beginner-friendly. Low startup cost.
+    </p>
+
+    <div class="cta-row">
+      <a href="#buy" class="btn-cta">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        Get Instant Access
+      </a>
+      <a href="#learn" class="btn-link">
+        See what's inside
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+      </a>
+    </div>
+
+    <div class="trust-row">
+      <div class="trust-item">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+        22+ students
+      </div>
+      <div class="trust-sep"></div>
+      <div class="trust-item">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+        5 / 5 stars
+      </div>
+      <div class="trust-sep"></div>
+      <div class="trust-item">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+        Instant PDF download
+      </div>
+      <div class="trust-sep"></div>
+      <div class="trust-item">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+        Beginner friendly
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <!-- duplicated for seamless loop -->
+    <div class="ticker-item"><span>NFC Cards</span><span class="ticker-dot"></span></div>
+    <div class="ticker-item">Google Reviews<span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span>Side Hustle</span><span class="ticker-dot"></span></div>
+    <div class="ticker-item">Local Business<span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span>Sales Scripts</span><span class="ticker-dot"></span></div>
+    <div class="ticker-item">Door-to-Door<span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span>Low Cost Startup</span><span class="ticker-dot"></span></div>
+    <div class="ticker-item">Instant Download<span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span>NFC Cards</span><span class="ticker-dot"></span></div>
+    <div class="ticker-item">Google Reviews<span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span>Side Hustle</span><span class="ticker-dot"></span></div>
+    <div class="ticker-item">Local Business<span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span>Sales Scripts</span><span class="ticker-dot"></span></div>
+    <div class="ticker-item">Door-to-Door<span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span>Low Cost Startup</span><span class="ticker-dot"></span></div>
+    <div class="ticker-item">Instant Download<span class="ticker-dot"></span></div>
+  </div>
+</div>
+
+<!-- WHAT YOU GET -->
+<section id="what">
+  <div class="wrap">
+    <div class="r"><span class="tag">What you get</span></div>
+    <h2 class="r">Everything inside<br />the PDF course</h2>
+    <p class="sub r">12 pages. No fluff. Step-by-step instructions from buying the cards to closing your first sale.</p>
+
+    <div class="get-grid">
+      <div class="get-cell r">
+        <div class="get-num">01</div>
+        <h3>12-Page PDF Course</h3>
+        <p>Complete guide covering the full process from sourcing to selling, written for total beginners.</p>
+      </div>
+      <div class="get-cell r">
+        <div class="get-num">02</div>
+        <h3>NFC Setup Guide</h3>
+        <p>Which app to use, how to write the Google review link onto the card, and how to test it before delivery.</p>
+      </div>
+      <div class="get-cell r">
+        <div class="get-num">03</div>
+        <h3>Sales Scripts</h3>
+        <p>Word-for-word scripts to approach business owners confidently and handle every common objection.</p>
+      </div>
+      <div class="get-cell r">
+        <div class="get-num">04</div>
+        <h3>Supplier Sourcing</h3>
+        <p>Exact supplier recommendations so you buy cards at the right price and maximise your margin.</p>
+      </div>
+      <div class="get-cell r">
+        <div class="get-num">05</div>
+        <h3>Pricing & Packages</h3>
+        <p>Suggested pricing structures and bundling options to earn more from each client you sign.</p>
+      </div>
+      <div class="get-cell r">
+        <div class="get-num">06</div>
+        <h3>Client Handoff</h3>
+        <p>Professional handoff process that leaves clients happy and sets you up for referrals.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section id="learn">
+  <div class="wrap">
+    <div class="r"><span class="tag">Full curriculum</span></div>
+    <h2 class="r">11 lessons,<br />zero filler</h2>
+    <p class="sub r">Every step of the process covered, in order.</p>
+
+    <div class="curr-list">
+      <div class="curr-item r">
+        <span class="curr-n">01</span>
+        <span>What Google NFC review cards are and how they work</span>
+        <span class="curr-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+      </div>
+      <div class="curr-item r">
+        <span class="curr-n">02</span>
+        <span>Where to buy NFC cards from a supplier</span>
+        <span class="curr-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+      </div>
+      <div class="curr-item r">
+        <span class="curr-n">03</span>
+        <span>Which app to use to program the cards</span>
+        <span class="curr-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+      </div>
+      <div class="curr-item r">
+        <span class="curr-n">04</span>
+        <span>How to get a business's Google review link</span>
+        <span class="curr-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+      </div>
+      <div class="curr-item r">
+        <span class="curr-n">05</span>
+        <span>How to write the link onto the NFC card</span>
+        <span class="curr-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+      </div>
+      <div class="curr-item r">
+        <span class="curr-n">06</span>
+        <span>How to test the card before selling it</span>
+        <span class="curr-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+      </div>
+      <div class="curr-item r">
+        <span class="curr-n">07</span>
+        <span>How to explain the product to business owners</span>
+        <span class="curr-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+      </div>
+      <div class="curr-item r">
+        <span class="curr-n">08</span>
+        <span>Sales scripts and objection-handling tips</span>
+        <span class="curr-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+      </div>
+      <div class="curr-item r">
+        <span class="curr-n">09</span>
+        <span>Pricing and package ideas</span>
+        <span class="curr-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+      </div>
+      <div class="curr-item r">
+        <span class="curr-n">10</span>
+        <span>Client handoff instructions</span>
+        <span class="curr-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+      </div>
+      <div class="curr-item r">
+        <span class="curr-n">11</span>
+        <span>Troubleshooting and best practices</span>
+        <span class="curr-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHO -->
+<section id="forwho">
+  <div class="wrap">
+    <div class="r"><span class="tag">Who needs this</span></div>
+    <h2 class="r">Every local business<br />wants more reviews</h2>
+    <p class="sub r">Sell to any business that relies on word of mouth — which is basically all of them.</p>
+
+    <div class="biz-grid">
+      <div class="biz-card r">
+        <div class="biz-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg></div>
+        <span>Restaurants</span>
+      </div>
+      <div class="biz-card r">
+        <div class="biz-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z"/></svg></div>
+        <span>Barbershops</span>
+      </div>
+      <div class="biz-card r">
+        <div class="biz-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></div>
+        <span>Salons & Spas</span>
+      </div>
+      <div class="biz-card r">
+        <div class="biz-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg></div>
+        <span>Gyms</span>
+      </div>
+      <div class="biz-card r">
+        <div class="biz-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z"/></svg></div>
+        <span>Contractors</span>
+      </div>
+      <div class="biz-card r">
+        <div class="biz-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349m-16.5 11.65V9.35m0 0a3.001 3.001 0 003.75-.615A2.993 2.993 0 009.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 002.25 1.016c.896 0 1.7-.393 2.25-1.016a3.001 3.001 0 003.75.614m-16.5 0a3.004 3.004 0 01-.621-4.72L4.318 3.44A1.5 1.5 0 015.378 3h13.243a1.5 1.5 0 011.06.44l1.19 1.189a3 3 0 01-.621 4.72m-13.5 8.65h3.75a.75.75 0 00.75-.75V13.5a.75.75 0 00-.75-.75H6.75a.75.75 0 00-.75.75v3.75c0 .415.336.75.75.75z"/></svg></div>
+        <span>Retail Shops</span>
+      </div>
+      <div class="biz-card r">
+        <div class="biz-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg></div>
+        <span>Clinics</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section id="social">
+  <div class="wrap" style="text-align:center;">
+    <div class="r"><span class="tag">Reviews</span></div>
+    <h2 class="r">What students say</h2>
+    <div class="review-wrap r">
+      <div class="review-box">
+        <div class="r-stars">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="r-text">"Very thorough and helpful. Coach is also very responsive and supportive throughout the whole process."</p>
+        <div class="r-author">
+          <div class="r-av">RK</div>
+          <div>
+            <div class="r-name">Ryan Kang</div>
+            <div class="r-meta">Verified buyer · 5 stars</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="buy">
+  <div class="wrap">
+    <div class="pricing-layout">
+      <div class="pricing-left">
+        <div class="r"><span class="tag">Pricing</span></div>
+        <h2 class="r">One payment.<br />Yours forever.</h2>
+        <p class="r">No subscription. No upsells. Download the PDF instantly and start your first sale this week.</p>
+        <ul class="pricing-list">
+          <li class="r">12-page professional PDF course</li>
+          <li class="r">Step-by-step NFC card programming guide</li>
+          <li class="r">Sales scripts & objection handling</li>
+          <li class="r">Supplier sourcing recommendations</li>
+          <li class="r">Pricing & package ideas</li>
+          <li class="r">Client handoff instructions</li>
+          <li class="r">Troubleshooting & best practices</li>
+          <li class="r">Instant download · Lifetime access</li>
+        </ul>
+      </div>
+
+      <div class="price-box r">
+        <div class="eyebrow">
+          <span class="eyebrow-line"></span>
+          Google Review Card Method
+          <span class="eyebrow-line"></span>
+        </div>
+        <div class="price-big"><sup>$</sup>49<span style="font-size:2.4rem;opacity:.6">.99</span></div>
+        <p class="price-note">One-time · Instant PDF download</p>
+
+        <!-- Sostituire href con il link Stripe -->
+        <a href="" class="pay-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          Buy Now — $49.99
+        </a>
+
+        <div class="secure-note">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg>
+          Secure payment powered by Stripe
+        </div>
+        <p class="sales-count">Joined <strong>22+ students</strong> already using this method</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Coach <em>Raffan</em></div>
+  <p>© 2026 Coach Raffan · All rights reserved</p>
+  <p>This course teaches the setup and sales process for NFC review cards. It does not guarantee income or business results. Success depends on your effort, sales approach, local market, pricing, and client demand.</p>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+  // ── LENIS ──
+  const lenis = new Lenis({ lerp: 0.1, duration: 1.2 });
+  function raf(t) { lenis.raf(t); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+  lenis.on('scroll', ScrollTrigger.update);
+  ScrollTrigger.scrollerProxy(document.body, {
+    scrollTop(v) { return arguments.length ? lenis.scrollTo(v, { immediate: true }) : lenis.scroll; },
+    getBoundingClientRect() { return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight }; },
+  });
+  ScrollTrigger.defaults({ scroller: document.body });
+
+  // ── CURSOR ──
+  if (window.matchMedia('(pointer: fine)').matches) {
+    const dot = document.getElementById('c-dot');
+    const ring = document.getElementById('c-ring');
+    let tx = 0, ty = 0, rx = 0, ry = 0;
+    window.addEventListener('mousemove', e => {
+      tx = e.clientX; ty = e.clientY;
+      dot.style.left = tx + 'px'; dot.style.top = ty + 'px';
+    });
+    (function loop() {
+      rx += (tx - rx) * 0.12; ry += (ty - ry) * 0.12;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(loop);
+    })();
+  }
+
+  // ── NAV ──
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('stuck', window.scrollY > 30);
+  });
+
+  // ── THREE.JS ──
+  (function() {
+    const canvas = document.getElementById('c3d');
+    if (!canvas) return;
+    Object.assign(canvas.style, {
+      position: 'absolute', inset: '0', width: '100%', height: '100%',
+      pointerEvents: 'none', zIndex: '0'
+    });
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    const W = () => canvas.parentElement.offsetWidth;
+    const H = () => canvas.parentElement.offsetHeight;
+    renderer.setSize(W(), H());
+
+    const scene = new THREE.Scene();
+    const cam = new THREE.PerspectiveCamera(55, W() / H(), 0.1, 200);
+    cam.position.z = 40;
+
+    // particles
+    const N = 1200;
+    const pos = new Float32Array(N * 3);
+    for (let i = 0; i < N * 3; i++) pos[i] = (Math.random() - .5) * 80;
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    scene.add(new THREE.Points(geo, new THREE.PointsMaterial({
+      color: 0x1aff8c, size: 0.1, transparent: true, opacity: 0.5
+    })));
+
+    // icosahedron wireframe
+    const ico = new THREE.Mesh(
+      new THREE.IcosahedronGeometry(10, 1),
+      new THREE.MeshBasicMaterial({ color: 0x1aff8c, wireframe: true, transparent: true, opacity: 0.05 })
+    );
+    scene.add(ico);
+
+    let mx = 0, my = 0;
+    window.addEventListener('mousemove', e => {
+      mx = (e.clientX / innerWidth  - .5) * 2;
+      my = (e.clientY / innerHeight - .5) * 2;
+    });
+    window.addEventListener('resize', () => {
+      cam.aspect = W() / H();
+      cam.updateProjectionMatrix();
+      renderer.setSize(W(), H());
+    });
+    (function animate() {
+      requestAnimationFrame(animate);
+      ico.rotation.x += .0025; ico.rotation.y += .004;
+      cam.position.x += (mx * 3 - cam.position.x) * .03;
+      cam.position.y += (-my * 3 - cam.position.y) * .03;
+      renderer.render(scene, cam);
+    })();
+  })();
+
+  // ── GSAP REVEALS ──
+  gsap.registerPlugin(ScrollTrigger);
+
+  // hero
+  gsap.timeline({ delay: .15 })
+    .from('.eyebrow',     { y: 20, opacity: 0, duration: .7, ease: 'power3.out' })
+    .from('h1',           { y: 48, opacity: 0, duration: .9, ease: 'power3.out' }, '-=.4')
+    .from('.hero-desc',   { y: 24, opacity: 0, duration: .6, ease: 'power3.out' }, '-=.5')
+    .from('.cta-row',     { y: 20, opacity: 0, duration: .5, ease: 'power3.out' }, '-=.35')
+    .from('.trust-row',   { y: 16, opacity: 0, duration: .5, ease: 'power3.out' }, '-=.25');
+
+  // scroll reveals
+  gsap.utils.toArray('.r').forEach(el => {
+    gsap.fromTo(el,
+      { y: 28, opacity: 0 },
+      { y: 0, opacity: 1, duration: .65, ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' }
+      }
+    );
+  });
+
+  // curriculum hover slide
+  document.querySelectorAll('.curr-item').forEach(item => {
+    item.addEventListener('mouseenter', () =>
+      gsap.to(item, { paddingLeft: 36, duration: .25, ease: 'power2.out' }));
+    item.addEventListener('mouseleave', () =>
+      gsap.to(item, { paddingLeft: 28, duration: .25, ease: 'power2.out' }));
+  });
+</script>
+</body>
+</html>
