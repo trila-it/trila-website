@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I Battelli — Dudi e Nennella — Livornosailing</title>
+<meta name="description" content="Scopri i due battelli di Livornosailing: Dudi, il grande battello da 50 passeggeri, e Nennella, il gozzo storico per tour esclusivi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/inner.css">
+</head>
+<body>
+<nav class="nav scrolled" id="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo"><img src="scraped/foto/grandi/logo-1-2.jpg" alt="Livornosailing"></a>
+    <ul class="nav__links">
+      <li><a href="index.html#chi-siamo" data-i18n="nav.chiSiamo">Chi Siamo</a></li>
+      <li><a href="battelli.html" data-i18n="nav.battelli">I Battelli</a></li>
+      <li class="has-dropdown"><a href="#">I Tour</a>
+        <ul class="dropdown">
+          <li><a href="tour-standard.html">Tour Standard</a></li>
+          <li><a href="tour-romantico.html">Tour Romantico</a></li>
+          <li><a href="tour-aperitivo.html">Aperitivo del Sabato</a></li>
+          <li><a href="noleggio.html">Noleggio Privato</a></li>
+        </ul>
+      </li>
+      <li><a href="itinerario.html" data-i18n="nav.itinerario">Itinerario</a></li>
+      <li><a href="gallery.html" data-i18n="nav.gallery">Gallery</a></li>
+      <li><a href="contatti.html" data-i18n="nav.contatti">Contatti</a></li>
+    </ul>
+    <div class="lang-switcher"><button class="lang-btn active" data-lang="it" onclick="I18N.set('it')">IT</button><button class="lang-btn" data-lang="en" onclick="I18N.set('en')">EN</button></div><a href="prenota.html" class="btn btn--accent nav__cta" data-i18n="nav.prenota">Prenota</a>
+    <button class="nav__hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu__lang"><button class="lang-btn active" data-lang="it" onclick="I18N.set('it')">IT</button><button class="lang-btn" data-lang="en" onclick="I18N.set('en')">EN</button></div>
+  <ul>
+    <li><a href="tour-standard.html">Tour Standard</a></li>
+    <li><a href="tour-romantico.html">Tour Romantico</a></li>
+    <li><a href="tour-aperitivo.html">Aperitivo Sabato</a></li>
+    <li><a href="itinerario.html" data-i18n="nav.itinerario">Itinerario</a></li>
+    <li><a href="gallery.html" data-i18n="nav.gallery">Gallery</a></li>
+    <li><a href="contatti.html" data-i18n="nav.contatti">Contatti</a></li>
+    <li><a href="prenota.html" class="btn btn--accent">Prenota ora</a></li>
+  </ul>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero__bg"><img src="scraped/foto/grandi/dudi-e-fortezza.jpg" alt="I battelli"></div>
+  <div class="page-hero__content">
+    <p class="section__label">La nostra flotta</p>
+    <h1 class="section__title">I Battelli</h1>
+    <p class="page-hero__desc">Due imbarcazioni, due esperienze diverse. Dudi per i grandi gruppi, Nennella per i momenti esclusivi.</p>
+  </div>
+</div>
+
+<section class="boat-section section">
+  <div class="container">
+    <div class="boat-grid reveal">
+      <div class="boat-images">
+        <img src="scraped/foto/grandi/dudi-e-fortezza.jpg" alt="Battello Dudi con Fortezza">
+        <img src="scraped/foto/grandi/barcaadudi-1-5.jpeg" alt="Dudi">
+        <img src="scraped/foto/grandi/foto-battello-bn-ia-fossi-1-1.jpeg" alt="Dudi nei fossi">
+      </div>
+      <div class="boat-text">
+        <p class="section__label">Battello principale</p>
+        <h2 class="section__title">DUDI</h2>
+        <p>Il battello Dudi è il cuore delle operazioni di Livornosailing. Con una capienza di <strong>50 passeggeri</strong>, è il mezzo ideale per i tour di gruppo, le gite scolastiche, i tour operator e gli eventi aziendali.</p>
+        <p>Dotato di <strong>tendalino parasole</strong> e <strong>nebulizzatore</strong> per attenuare la calura estiva, garantisce comfort anche nei mesi più caldi. Ampio e stabile, è accessibile a tutti.</p>
+        <div class="boat-specs">
+          <div class="boat-spec"><span class="label">Capacità</span><span class="value">50 pax</span></div>
+          <div class="boat-spec"><span class="label">Tipo</span><span class="value">Battello</span></div>
+          <div class="boat-spec"><span class="label">Parasole</span><span class="value">Incluso</span></div>
+          <div class="boat-spec"><span class="label">Nebulizzatore</span><span class="value">Incluso</span></div>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a href="tour-standard.html" class="btn btn--accent">Tour Standard →</a>
+          <a href="tour-aperitivo.html" class="btn btn--outline">Aperitivo Sabato →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="boat-section" style="background:var(--grey-l);padding:80px 0">
+  <div class="container">
+    <div class="boat-grid boat-grid--reverse reveal">
+      <div class="boat-images">
+        <img src="scraped/foto/grandi/nennella-3.jpg" alt="Nennella">
+        <img src="scraped/foto/grandi/nennella-calice.jpg" alt="Nennella con calice">
+        <img src="scraped/foto/grandi/nennella-di-sera-1-1.jpg" alt="Nennella di sera">
+      </div>
+      <div class="boat-text">
+        <p class="section__label">Il gozzo storico</p>
+        <h2 class="section__title">NENNELLA</h2>
+        <p>La Nennella è un gozzo tradizionale in legno — la prima barca con cui Livornosailing ha iniziato nel 2016. Piccola, silenziosa e bellissima, ospita al massimo <strong>6 persone</strong>.</p>
+        <p>Riservata esclusivamente al vostro gruppo, la Nennella è la scelta perfetta per chi vuole un'esperienza <strong>privata e intima</strong>: coppie, anniversari, richieste di matrimonio, compleanni in due.</p>
+        <div class="boat-specs">
+          <div class="boat-spec"><span class="label">Capacità</span><span class="value">6 pax</span></div>
+          <div class="boat-spec"><span class="label">Tipo</span><span class="value">Gozzo storico</span></div>
+          <div class="boat-spec"><span class="label">Esclusiva</span><span class="value">Solo voi</span></div>
+          <div class="boat-spec"><span class="label">Guida</span><span class="value">A bordo</span></div>
+        </div>
+        <a href="tour-romantico.html" class="btn btn--accent">Tour Romantico →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand"><img src="scraped/foto/grandi/logo-1-2.jpg" alt="Livornosailing" class="footer__logo"><p>Tour guidati in battello lungo i Canali Medicei di Livorno dal 2016.</p></div>
+      <div class="footer__col"><h4>Tour</h4><ul><li><a href="tour-standard.html">Tour Standard</a></li><li><a href="tour-romantico.html">Tour Romantico</a></li><li><a href="tour-aperitivo.html">Aperitivo Sabato</a></li><li><a href="noleggio.html">Noleggio Privato</a></li></ul></div>
+      <div class="footer__col"><h4>Info</h4><ul><li><a href="itinerario.html" data-i18n="nav.itinerario">Itinerario</a></li><li><a href="gallery.html" data-i18n="nav.gallery">Gallery</a></li><li><a href="contatti.html" data-i18n="nav.contatti">Contatti</a></li></ul></div>
+      <div class="footer__col"><h4>Contatti</h4><ul><li><a href="tel:+393471565607">+39 347 15 65 607</a></li><li><a href="tel:+393498961586">+39 349 896 15 86</a></li><li><a href="mailto:info@livornosailing.it">info@livornosailing.it</a></li></ul></div>
+    </div>
+    <div class="footer__bottom"><p>© 2024 Livornosailing di Ceccotti Luca · P.IVA 01837950490</p></div>
+  </div>
+</footer>
+<a href="https://wa.me/393498961586" class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+<script>document.addEventListener("DOMContentLoaded", () => I18N.init());</script>
+</body>
+</html>

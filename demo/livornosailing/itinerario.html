@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Itinerario — Tour dei Canali Medicei — Livornosailing</title>
+<meta name="description" content="Scopri le 10 tappe del tour in battello sui Canali Medicei di Livorno: Fortezze Medicee, Quattro Mori, Quartiere Venezia e molto altro.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/inner.css">
+</head>
+<body>
+
+<nav class="nav scrolled" id="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo"><img src="scraped/foto/grandi/logo-1-2.jpg" alt="Livornosailing"></a>
+    <ul class="nav__links">
+      <li><a href="index.html#chi-siamo" data-i18n="nav.chiSiamo">Chi Siamo</a></li>
+      <li><a href="battelli.html" data-i18n="nav.battelli">I Battelli</a></li>
+      <li class="has-dropdown"><a href="#">I Tour</a>
+        <ul class="dropdown">
+          <li><a href="tour-standard.html">Tour Standard</a></li>
+          <li><a href="tour-romantico.html">Tour Romantico</a></li>
+          <li><a href="tour-aperitivo.html">Aperitivo del Sabato</a></li>
+          <li><a href="noleggio.html">Noleggio Privato</a></li>
+        </ul>
+      </li>
+      <li><a href="itinerario.html" data-i18n="nav.itinerario">Itinerario</a></li>
+      <li><a href="gallery.html" data-i18n="nav.gallery">Gallery</a></li>
+      <li><a href="contatti.html" data-i18n="nav.contatti">Contatti</a></li>
+    </ul>
+    <div class="lang-switcher"><button class="lang-btn active" data-lang="it" onclick="I18N.set('it')">IT</button><button class="lang-btn" data-lang="en" onclick="I18N.set('en')">EN</button></div><a href="prenota.html" class="btn btn--accent nav__cta" data-i18n="nav.prenota">Prenota</a>
+    <button class="nav__hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu__lang"><button class="lang-btn active" data-lang="it" onclick="I18N.set('it')">IT</button><button class="lang-btn" data-lang="en" onclick="I18N.set('en')">EN</button></div>
+  <ul>
+    <li><a href="tour-standard.html">Tour Standard</a></li>
+    <li><a href="tour-romantico.html">Tour Romantico</a></li>
+    <li><a href="tour-aperitivo.html">Aperitivo Sabato</a></li>
+    <li><a href="itinerario.html" data-i18n="nav.itinerario">Itinerario</a></li>
+    <li><a href="gallery.html" data-i18n="nav.gallery">Gallery</a></li>
+    <li><a href="contatti.html" data-i18n="nav.contatti">Contatti</a></li>
+    <li><a href="prenota.html" class="btn btn--accent">Prenota ora</a></li>
+  </ul>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero__bg"><img src="scraped/foto/grandi/itinerario-1-2.jpg" alt="Canali Medicei"></div>
+  <div class="page-hero__content">
+    <p class="section__label">50 minuti · 10 tappe</p>
+    <h1 class="section__title">L'Itinerario</h1>
+    <p class="page-hero__desc">Dal Mercato Centrale alla Venezia Livornese, attraverso fortezze medicee, palazzi nobiliari e antichi magazzini sul canale.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="section__header reveal">
+      <p class="section__label">Il percorso</p>
+      <h2 class="section__title">Livorno vista dal mare</h2>
+      <p class="section__desc">"Livorno è un'affascinante città della Costa Tirrenica, caratterizzata da atmosfere vivaci, divertenti e cosmopolite."</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;margin-bottom:64px">
+      <div class="reveal">
+        <img src="scraped/foto/grandi/cartina-percorso.jpg" alt="Mappa del percorso" style="width:100%;border-radius:12px;box-shadow:0 12px 48px rgba(12,28,90,.18)">
+      </div>
+      <div class="reveal" style="transition-delay:.15s">
+        <p style="color:var(--grey);font-size:.98rem;line-height:1.75;margin-bottom:20px">Il tour parte dall'imbarcadero di <strong>Scali delle Pietre 6</strong>, davanti alla Fortezza Nuova, e percorre i Fossi Medicei — i canali storici scavati nel XVI secolo per volontà dei Medici per collegare il porto al cuore della città.</p>
+        <p style="color:var(--grey);font-size:.98rem;line-height:1.75;margin-bottom:20px">A bordo, la guida storica racconta la Livorno dei mercanti e dei marinai: una città cosmopolita dove convivevano olandesi, ebrei, greci e armeni — ognuno con il suo quartiere, la sua chiesa, il suo magazzino sul canale.</p>
+        <p style="color:var(--grey);font-size:.98rem;line-height:1.75;margin-bottom:32px">Il percorso dura circa <strong>50 minuti</strong>. Non è richiesta nessuna preparazione fisica — il battello è accessibile e dotato di tendalino parasole e nebulizzatore per i mesi più caldi.</p>
+        <a href="prenota.html" class="btn btn--accent">Prenota il tour</a>
+      </div>
+    </div>
+
+    <div class="itinerary-stops reveal">
+
+      <div class="stop-card">
+        <div class="stop-card__img"><img src="scraped/foto/grandi/piazzarepubblica-2-1-1.jpg" alt="Piazza della Repubblica"></div>
+        <div class="stop-card__body">
+          <p class="stop-card__num">Tappa 01</p>
+          <h3 class="stop-card__name">Piazza della Repubblica</h3>
+          <p class="stop-card__desc">220 metri di larghezza: definita piazza, è in realtà il ponte più largo d'Europa.</p>
+        </div>
+      </div>
+
+      <div class="stop-card">
+        <div class="stop-card__img"><img src="scraped/foto/grandi/mercatocentrale-1-2.jpg" alt="Mercato Centrale"></div>
+        <div class="stop-card__body">
+          <p class="stop-card__num">Tappa 02</p>
+          <h3 class="stop-card__name">Mercato Centrale</h3>
+          <p class="stop-card__desc">Le cantine storiche sul canale, un tempo usate per trasportare il pesce direttamente dall'acqua al mercato.</p>
+        </div>
+      </div>
+
+      <div class="stop-card">
+        <div class="stop-card__img"><img src="scraped/foto/grandi/chiesaolandesi-1-1.jpg" alt="Chiesa degli Olandesi"></div>
+        <div class="stop-card__body">
+          <p class="stop-card__num">Tappa 03</p>
+          <h3 class="stop-card__name">Chiesa degli Olandesi</h3>
+          <p class="stop-card__desc">Testimonianza della comunità mercantile olandese che si stabilì a Livorno nel '600.</p>
+        </div>
+      </div>
+
+      <div class="stop-card">
+        <div class="stop-card__img"><img src="scraped/foto/grandi/palazziottocenteschi-1-1.jpg" alt="Palazzi Ottocenteschi"></div>
+        <div class="stop-card__body">
+          <p class="stop-card__num">Tappa 04</p>
+          <h3 class="stop-card__name">Palazzi Ottocenteschi</h3>
+          <p class="stop-card__desc">Le residenze delle grandi famiglie straniere che fecero la fortuna commerciale di Livorno nell'800.</p>
+        </div>
+      </div>
+
+      <div class="stop-card">
+        <div class="stop-card__img"><img src="scraped/foto/grandi/cantina-1-1.jpg" alt="Cantina del Palio"></div>
+        <div class="stop-card__body">
+          <p class="stop-card__num">Tappa 05</p>
+          <h3 class="stop-card__name">Cantina del Palio Marinaro</h3>
+          <p class="stop-card__desc">Antico magazzino affacciato sul canale, legato alla tradizione del Palio Marinaro livornese.</p>
+        </div>
+      </div>
+
+      <div class="stop-card">
+        <div class="stop-card__img"><img src="scraped/foto/grandi/porto-1-1.jpg" alt="Porto e Faro"></div>
+        <div class="stop-card__body">
+          <p class="stop-card__num">Tappa 06</p>
+          <h3 class="stop-card__name">Porto e Faro</h3>
+          <p class="stop-card__desc">Il cuore marittimo di Livorno: il porto da cui partivano le grandi navi mercantili verso il Mediterraneo.</p>
+        </div>
+      </div>
+
+      <div class="stop-card">
+        <div class="stop-card__img"><img src="scraped/foto/grandi/4mori-1-1.jpg" alt="Quattro Mori"></div>
+        <div class="stop-card__body">
+          <p class="stop-card__num">Tappa 07</p>
+          <h3 class="stop-card__name">Monumento dei Quattro Mori</h3>
+          <p class="stop-card__desc">Il simbolo di Livorno, dedicato a Ferdinando I de' Medici: quattro schiavi mori incatenati ai piedi della statua.</p>
+        </div>
+      </div>
+
+      <div class="stop-card">
+        <div class="stop-card__img"><img src="scraped/foto/grandi/fortezzavecchia-1-1.jpg" alt="Fortezza Vecchia"></div>
+        <div class="stop-card__body">
+          <p class="stop-card__num">Tappa 08</p>
+          <h3 class="stop-card__name">Fortezza Vecchia</h3>
+          <p class="stop-card__desc">Fortification del 1500, simbolo della famiglia Medici, con prigioni sotterranee ancora visitabili.</p>
+        </div>
+      </div>
+
+      <div class="stop-card">
+        <div class="stop-card__img"><img src="scraped/foto/grandi/venezia1-1-1.jpg" alt="Quartiere Venezia"></div>
+        <div class="stop-card__body">
+          <p class="stop-card__num">Tappa 09</p>
+          <h3 class="stop-card__name">Quartiere Venezia</h3>
+          <p class="stop-card__desc">La piccola Venezia livornese: un'isola artificiale concepita nel '600, attraversata da canali e ponticelli.</p>
+        </div>
+      </div>
+
+      <div class="stop-card">
+        <div class="stop-card__img"><img src="scraped/foto/grandi/fortezzanuova-1-1.jpg" alt="Fortezza Nuova"></div>
+        <div class="stop-card__body">
+          <p class="stop-card__num">Tappa 10</p>
+          <h3 class="stop-card__name">Fortezza Nuova</h3>
+          <p class="stop-card__desc">Il punto di partenza e di arrivo del tour — la fortezza medicea che domina il centro storico di Livorno.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:56px" class="reveal">
+      <a href="prenota.html" class="btn btn--accent btn--lg">Prenota il tour ora</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand"><img src="scraped/foto/grandi/logo-1-2.jpg" alt="Livornosailing" class="footer__logo"><p>Tour guidati in battello lungo i Canali Medicei di Livorno dal 2016.</p></div>
+      <div class="footer__col"><h4>Tour</h4><ul><li><a href="tour-standard.html">Tour Standard</a></li><li><a href="tour-romantico.html">Tour Romantico</a></li><li><a href="tour-aperitivo.html">Aperitivo Sabato</a></li><li><a href="noleggio.html">Noleggio Privato</a></li></ul></div>
+      <div class="footer__col"><h4>Info</h4><ul><li><a href="itinerario.html" data-i18n="nav.itinerario">Itinerario</a></li><li><a href="gallery.html" data-i18n="nav.gallery">Gallery</a></li><li><a href="contatti.html" data-i18n="nav.contatti">Contatti</a></li></ul></div>
+      <div class="footer__col"><h4>Contatti</h4><ul><li><a href="tel:+393471565607">+39 347 15 65 607</a></li><li><a href="tel:+393498961586">+39 349 896 15 86</a></li><li><a href="mailto:info@livornosailing.it">info@livornosailing.it</a></li></ul></div>
+    </div>
+    <div class="footer__bottom"><p>© 2024 Livornosailing di Ceccotti Luca · P.IVA 01837950490</p><p><a href="#">Privacy Policy</a></p></div>
+  </div>
+</footer>
+<a href="https://wa.me/393498961586" class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+<script>document.addEventListener("DOMContentLoaded", () => I18N.init());</script>
+</body>
+</html>

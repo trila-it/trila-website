@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Livornosailing — Tour dei Canali Medicei in Battello</title>
+<meta name="description" content="Tour guidati in battello lungo i Canali Medicei di Livorno. Scopri la storia dal mare con guida turistica a bordo. Prenota ora e paga dopo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <img src="scraped/foto/grandi/logo-1-2.jpg" alt="Livornosailing">
+    </a>
+    <ul class="nav__links">
+      <li><a href="#chi-siamo" data-i18n="nav.chiSiamo">Chi Siamo</a></li>
+      <li><a href="battelli.html" data-i18n="nav.battelli">I Battelli</a></li>
+      <li class="has-dropdown">
+        <a href="#" data-i18n="nav.tour">I Tour</a>
+        <ul class="dropdown">
+          <li><a href="tour-standard.html" data-i18n="nav.tourStandard">Tour Standard</a></li>
+          <li><a href="tour-romantico.html" data-i18n="nav.tourRomantico">Tour Romantico</a></li>
+          <li><a href="tour-aperitivo.html" data-i18n="nav.aperitivo">Aperitivo del Sabato</a></li>
+          <li><a href="noleggio.html" data-i18n="nav.noleggio">Noleggio Privato</a></li>
+        </ul>
+      </li>
+      <li><a href="itinerario.html" data-i18n="nav.itinerario">Itinerario</a></li>
+      <li><a href="gallery.html" data-i18n="nav.gallery">Gallery</a></li>
+      <li><a href="contatti.html" data-i18n="nav.contatti">Contatti</a></li>
+    </ul>
+    <div class="lang-switcher">
+      <button class="lang-btn active" data-lang="it" onclick="I18N.set('it')">IT</button>
+      <button class="lang-btn" data-lang="en" onclick="I18N.set('en')">EN</button>
+    </div>
+    <a href="prenota.html" class="btn btn--accent nav__cta" data-i18n="nav.prenota">Prenota</a>
+    <button class="nav__hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu__lang">
+    <button class="lang-btn active" data-lang="it" onclick="I18N.set('it')">IT</button>
+    <button class="lang-btn" data-lang="en" onclick="I18N.set('en')">EN</button>
+  </div>
+  <ul>
+    <li><a href="#chi-siamo" data-i18n="nav.chiSiamo">Chi Siamo</a></li>
+    <li><a href="battelli.html" data-i18n="nav.battelli">I Battelli</a></li>
+    <li><a href="tour-standard.html" data-i18n="nav.tourStandard">Tour Standard</a></li>
+    <li><a href="tour-romantico.html" data-i18n="nav.tourRomantico">Tour Romantico</a></li>
+    <li><a href="tour-aperitivo.html" data-i18n="nav.aperitivo">Aperitivo del Sabato</a></li>
+    <li><a href="noleggio.html" data-i18n="nav.noleggio">Noleggio Privato</a></li>
+    <li><a href="itinerario.html" data-i18n="nav.itinerario">Itinerario</a></li>
+    <li><a href="gallery.html" data-i18n="nav.gallery">Gallery</a></li>
+    <li><a href="contatti.html" data-i18n="nav.contatti">Contatti</a></li>
+    <li><a href="prenota.html" class="btn btn--accent" data-i18n="nav.prenota">Prenota ora</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__bg">
+    <img src="scraped/foto/grandi/dudi-e-fortezza.jpg" alt="Battello Dudi nei canali di Livorno" class="hero__img" id="heroImg">
+  </div>
+  <div class="hero__overlay"></div>
+  <div class="hero__content">
+    <p class="hero__sub" id="heroSub" data-i18n="hero.sub">Livorno dal mare</p>
+    <h1 class="hero__title" id="heroTitle" data-i18n="hero.title">Tour dei<br>Canali Medicei</h1>
+    <p class="hero__desc" id="heroDesc" data-i18n="hero.desc">50 minuti di storia, acqua e meraviglia.<br>Guida a bordo in italiano e inglese.</p>
+    <div class="hero__actions" id="heroActions">
+      <a href="prenota.html" class="btn btn--accent btn--lg" data-i18n="hero.cta1">Prenota ora</a>
+      <a href="itinerario.html" class="btn btn--outline btn--lg" data-i18n="hero.cta2">Scopri l'itinerario</a>
+    </div>
+  </div>
+  <div class="hero__scroll" id="heroScroll">
+    <span></span>
+  </div>
+</section>
+
+<!-- BADGE BAR -->
+<div class="badges">
+  <div class="container">
+    <div class="badges__grid">
+      <div class="badge">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+        <span data-i18n="badge.durata">50 minuti di tour</span>
+      </div>
+      <div class="badge">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span data-i18n="badge.canali">Canali Medicei</span>
+      </div>
+      <div class="badge">
+        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+        <span data-i18n="badge.guida">Guida IT / EN</span>
+      </div>
+      <div class="badge">
+        <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+        <span data-i18n="badge.pagaDopo">Prenota e paga dopo</span>
+      </div>
+      <div class="badge">
+        <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+        <span data-i18n="badge.maxPax">Max 50 passeggeri</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOUR CARDS -->
+<section class="tours section" id="tour">
+  <div class="container">
+    <div class="section__header">
+      <p class="section__label" data-i18n="tours.label">Le nostre proposte</p>
+      <h2 class="section__title" data-i18n="tours.title">Scegli il tuo tour</h2>
+    </div>
+    <div class="tours__grid">
+
+      <article class="tour-card tour-card--featured">
+        <div class="tour-card__img">
+          <img src="scraped/foto/grandi/barcaadudi-1-5.jpeg" alt="Tour Standard Dudi">
+          <span class="tour-card__badge" data-i18n="tour.standard.badge">Più scelto</span>
+        </div>
+        <div class="tour-card__body">
+          <p class="tour-card__label" data-i18n="tour.standard.label">Battello DUDI · 50 pax</p>
+          <h3 class="tour-card__title" data-i18n="tour.standard.title">Tour Standard</h3>
+          <p class="tour-card__desc" data-i18n="tour.standard.desc">50 minuti sui Canali Medicei con guida storica a bordo. Scopri i palazzi, le fortezze e i segreti di Livorno dal livello dell'acqua.</p>
+          <div class="tour-card__price">
+            <span class="price__main" data-i18n="tour.standard.price">€15</span>
+            <span class="price__sub" data-i18n="tour.standard.priceSub">adulti · bambini €7 · under 5 gratis</span>
+          </div>
+          <a href="tour-standard.html" class="btn btn--accent" data-i18n="tour.standard.cta">Scopri e Prenota</a>
+        </div>
+      </article>
+
+      <article class="tour-card">
+        <div class="tour-card__img">
+          <img src="scraped/foto/grandi/nennella-calice.jpg" alt="Tour Romantico Nennella">
+          <span class="tour-card__badge tour-card__badge--gold" data-i18n="tour.romantico.badge">Esclusivo</span>
+        </div>
+        <div class="tour-card__body">
+          <p class="tour-card__label" data-i18n="tour.romantico.label">Battello NENNELLA · 6 pax</p>
+          <h3 class="tour-card__title" data-i18n="tour.romantico.title">Tour Romantico</h3>
+          <p class="tour-card__desc" data-i18n="tour.romantico.desc">Il gozzo storico Nennella riservato solo a voi. Atmosfera intima sui canali medicei, con guida storica a bordo. Ideale per coppie e occasioni speciali.</p>
+          <div class="tour-card__price">
+            <span class="price__main" data-i18n="tour.romantico.price">€20</span>
+            <span class="price__sub" data-i18n="tour.romantico.priceSub">a persona · orari 11:00 · 12:00 · 14:30</span>
+          </div>
+          <a href="tour-romantico.html" class="btn btn--navy" data-i18n="tour.romantico.cta">Scopri e Prenota</a>
+        </div>
+      </article>
+
+      <article class="tour-card">
+        <div class="tour-card__img">
+          <img src="scraped/foto/grandi/aperitivo-per-due-dani-2000-1.jpg" alt="Tour Aperitivo Sabato">
+          <span class="tour-card__badge tour-card__badge--amber" data-i18n="tour.aperitivo.badge">Solo sabato</span>
+        </div>
+        <div class="tour-card__body">
+          <p class="tour-card__label" data-i18n="tour.aperitivo.label">Battello DUDI · ore 19:00</p>
+          <h3 class="tour-card__title" data-i18n="tour.aperitivo.title">Aperitivo a Bordo</h3>
+          <p class="tour-card__desc" data-i18n="tour.aperitivo.desc">Ogni sabato alle 19 salpa il tour con aperitivo incluso. I canali al tramonto, un calice in mano e la storia di Livorno che scorre fuori dal finestrino.</p>
+          <div class="tour-card__price">
+            <span class="price__main" data-i18n="tour.aperitivo.price">€15</span>
+            <span class="price__sub" data-i18n="tour.aperitivo.priceSub">a persona · min. 20 persone</span>
+          </div>
+          <a href="tour-aperitivo.html" class="btn btn--navy" data-i18n="tour.aperitivo.cta">Scopri e Prenota</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- CHI SIAMO -->
+<section class="about section" id="chi-siamo">
+  <div class="container">
+    <div class="about__grid">
+      <div class="about__images">
+        <img src="scraped/foto/grandi/lucaemartina.jpg" alt="Luca e Martina" class="about__img about__img--main">
+        <img src="scraped/foto/grandi/foto-battello-bn-ia-fossi-1-1.jpeg" alt="Canali di Livorno" class="about__img about__img--secondary">
+      </div>
+      <div class="about__text">
+        <p class="section__label" data-i18n="about.label">La nostra storia</p>
+        <h2 class="section__title" data-i18n="about.title">Livorno che naviga,<br>che va, che parte</h2>
+        <p data-i18n="about.p1">Livornosailing nasce nel 2016 da un sogno di <strong>Luca</strong>, skipper appassionato del mare e della sua città. Con il gozzo storico <em>Nennella</em> ha iniziato a portare i primi turisti lungo i Fossi Medicei, condividendo storie di mercanti, battaglie e personaggi illustri.</p>
+        <p data-i18n="about.p2">Oggi la flotta si è ampliata con il grande battello <strong>Dudi</strong>, capace di accogliere fino a 50 passeggeri, mantenendo intatto lo spirito originale: far conoscere Livorno dall'acqua, con passione e autenticità.</p>
+        <a href="battelli.html" class="btn btn--outline" data-i18n="about.cta">Scopri i battelli</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ITINERARIO PREVIEW -->
+<section class="itinerary section">
+  <div class="container">
+    <div class="section__header">
+      <p class="section__label" data-i18n="itinerary.label">Il percorso</p>
+      <h2 class="section__title" data-i18n="itinerary.title">10 tappe, 50 minuti di storia</h2>
+      <p class="section__desc" data-i18n="itinerary.desc">Dal Mercato Centrale alla Venezia Livornese, attraverso fortezze medicee e palazzi ottocenteschi.</p>
+    </div>
+    <div class="itinerary__grid">
+      <div class="itinerary__map">
+        <img src="scraped/foto/grandi/cartina-percorso.jpg" alt="Mappa del percorso">
+      </div>
+      <ol class="itinerary__list">
+        <li><strong data-i18n="itinerary.stop1.name">Piazza della Repubblica</strong><span data-i18n="itinerary.stop1.desc">Il ponte più largo d'Europa — 220m di larghezza</span></li>
+        <li><strong data-i18n="itinerary.stop2.name">Mercato Centrale</strong><span data-i18n="itinerary.stop2.desc">Le cantine storiche sul canale per il trasporto del pesce</span></li>
+        <li><strong data-i18n="itinerary.stop3.name">Chiesa degli Olandesi</strong><span data-i18n="itinerary.stop3.desc">Testimonianza della comunità mercantile straniera</span></li>
+        <li><strong data-i18n="itinerary.stop4.name">Palazzi Ottocenteschi</strong><span data-i18n="itinerary.stop4.desc">Le residenze delle grandi famiglie straniere</span></li>
+        <li><strong data-i18n="itinerary.stop5.name">Cantina del Palio Marinaro</strong><span data-i18n="itinerary.stop5.desc">Antico magazzino sul canale</span></li>
+        <li><strong data-i18n="itinerary.stop6.name">Porto e Faro</strong><span data-i18n="itinerary.stop6.desc">Il cuore marittimo della città</span></li>
+        <li><strong data-i18n="itinerary.stop7.name">Quattro Mori</strong><span data-i18n="itinerary.stop7.desc">Il monumento simbolo di Livorno, dedicato ai Medici</span></li>
+        <li><strong data-i18n="itinerary.stop8.name">Fortezza Vecchia</strong><span data-i18n="itinerary.stop8.desc">Fortification del '500 con prigioni sotterranee</span></li>
+        <li><strong data-i18n="itinerary.stop9.name">Quartiere Venezia</strong><span data-i18n="itinerary.stop9.desc">La piccola Venezia livornese, nata nel '600</span></li>
+        <li><strong data-i18n="itinerary.stop10.name">Fortezza Nuova</strong><span data-i18n="itinerary.stop10.desc">Punto di arrivo e partenza</span></li>
+      </ol>
+    </div>
+    <div class="itinerary__cta">
+      <a href="itinerario.html" class="btn btn--accent" data-i18n="itinerary.cta">Vedi l'itinerario completo</a>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY STRIP -->
+<section class="gallery-strip">
+  <div class="gallery-strip__track" id="galleryTrack">
+    <img src="scraped/foto/grandi/sottorepubblica.jpg" alt="Sotto la Repubblica">
+    <img src="scraped/foto/grandi/venezia1-1-1.jpg" alt="Quartiere Venezia">
+    <img src="scraped/foto/grandi/fortezzavecchia-1-1.jpg" alt="Fortezza Vecchia">
+    <img src="scraped/foto/grandi/mercatocentrale-1-2.jpg" alt="Mercato Centrale">
+    <img src="scraped/foto/grandi/4mori-1-1.jpg" alt="Quattro Mori">
+    <img src="scraped/foto/grandi/piazzarepubblica-2-1-1.jpg" alt="Piazza della Repubblica">
+    <img src="scraped/foto/grandi/fortezzanuova-1-1.jpg" alt="Fortezza Nuova">
+    <img src="scraped/foto/grandi/porto-1-1.jpg" alt="Porto">
+    <!-- duplicate for infinite loop -->
+    <img src="scraped/foto/grandi/sottorepubblica.jpg" alt="">
+    <img src="scraped/foto/grandi/venezia1-1-1.jpg" alt="">
+    <img src="scraped/foto/grandi/fortezzavecchia-1-1.jpg" alt="">
+    <img src="scraped/foto/grandi/mercatocentrale-1-2.jpg" alt="">
+    <img src="scraped/foto/grandi/4mori-1-1.jpg" alt="">
+    <img src="scraped/foto/grandi/piazzarepubblica-2-1-1.jpg" alt="">
+  </div>
+</section>
+
+<!-- REGALA UN TOUR -->
+<section class="gift section">
+  <div class="container">
+    <div class="gift__grid">
+      <div class="gift__text">
+        <p class="section__label" data-i18n="gift.label">Idea regalo</p>
+        <h2 class="section__title" data-i18n="gift.title">Regala un tour</h2>
+        <p data-i18n="gift.desc">Scegli il buono regalo perfetto — per un adulto, un bambino o una coppia. Ricevi il codice via email, valido un anno. Il destinatario lo usa al momento della prenotazione online.</p>
+        <div class="gift__options">
+          <div class="gift__opt"><span data-i18n="gift.adult">Adulto</span><strong>€15</strong></div>
+          <div class="gift__opt"><span data-i18n="gift.child">Bambino</span><strong>€7</strong></div>
+          <div class="gift__opt"><span data-i18n="gift.couple">Coppia</span><strong>€30</strong></div>
+          <div class="gift__opt"><span data-i18n="gift.free">Importo libero</span><strong>€ —</strong></div>
+        </div>
+        <a href="prenota.html#regalo" class="btn btn--accent" data-i18n="gift.cta">Acquista il buono</a>
+      </div>
+      <div class="gift__img">
+        <img src="scraped/foto/grandi/regalauntour.webp" alt="Regala un tour Livornosailing">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA PRENOTA -->
+<section class="cta-band">
+  <div class="container">
+    <div class="cta-band__inner">
+      <div>
+        <h2 data-i18n="cta.title">Prenota ora, paga dopo</h2>
+        <p data-i18n="cta.desc">Riserva il tuo posto gratuitamente online. Paghi solo 15 minuti prima dell'imbarco.</p>
+      </div>
+      <div class="cta-band__actions">
+        <a href="prenota.html" class="btn btn--accent btn--lg" data-i18n="cta.btn">Prenota ora</a>
+        <a href="https://wa.me/393498961586" class="btn btn--whatsapp btn--lg" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOVE IMBARCARSI PREVIEW -->
+<section class="embark section">
+  <div class="container">
+    <div class="embark__grid">
+      <div class="embark__text">
+        <p class="section__label" data-i18n="embark.label">Dove imbarcarsi</p>
+        <h2 class="section__title" data-i18n="embark.title">Scali delle Pietre, 6</h2>
+        <p data-i18n="embark.desc">L'imbarcadero si trova presso l'ingresso della Fortezza Nuova, a Livorno. Scendi la piccola rampa sul canale e trovi il battello ad aspettarti.</p>
+        <ul class="embark__info">
+          <li>
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <span data-i18n="embark.address">Scali delle Pietre 6, c/o Fortezza Nuova</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+            <span data-i18n="embark.hours">Ufficio aperto 10:00 – 13:30</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            <span data-i18n="embark.phones">Sabrina +39 347 15 65 607 · Marco +39 349 896 15 86</span>
+          </li>
+        </ul>
+        <a href="contatti.html" class="btn btn--outline" data-i18n="embark.cta">Come arrivarci</a>
+      </div>
+      <div class="embark__map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2891.55264170205!2d10.308130676171515!3d43.5533663711069!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12d5e95891742523%3A0x1a4e56a437623890!2sLivorno%20in%20Battello%20con%20Livornosailing!5e0!3m2!1sit!2sit!4v1694781804189!5m2!1sit!2sit"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="Punto di imbarco Livornosailing">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="scraped/foto/grandi/logo-1-2.jpg" alt="Livornosailing" class="footer__logo">
+        <p data-i18n="footer.desc">Tour guidati in battello lungo i Canali Medicei di Livorno dal 2016.</p>
+        <div class="footer__social">
+          <a href="https://www.facebook.com/livornosailing" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://wa.me/393498961586" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer__col">
+        <h4>Tour</h4>
+        <ul>
+          <li><a href="tour-standard.html">Tour Standard</a></li>
+          <li><a href="tour-romantico.html">Tour Romantico</a></li>
+          <li><a href="tour-aperitivo.html">Aperitivo del Sabato</a></li>
+          <li><a href="noleggio.html">Noleggio Privato</a></li>
+          <li><a href="prenota.html#regalo">Regala un Tour</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Info</h4>
+        <ul>
+          <li><a href="battelli.html">I Battelli</a></li>
+          <li><a href="itinerario.html">Itinerario</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contatti.html">Dove Imbarcarsi</a></li>
+          <li><a href="eventi.html">Organizza un Evento</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Contatti</h4>
+        <ul>
+          <li><a href="tel:+393471565607">+39 347 15 65 607 (Sabrina)</a></li>
+          <li><a href="tel:+393498961586">+39 349 896 15 86 (Marco)</a></li>
+          <li><a href="mailto:info@livornosailing.it">info@livornosailing.it</a></li>
+          <li>Scali delle Pietre 6, Livorno</li>
+          <li>Orari: 10:00 – 13:30</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2024 Livornosailing di Ceccotti Luca · P.IVA 01837950490</p>
+      <p><a href="privacy.html">Privacy Policy</a> · <a href="cookie.html">Cookie Policy</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/393498961586" class="wa-float" target="_blank" rel="noopener" aria-label="Contattaci su WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+<script>document.addEventListener('DOMContentLoaded', () => I18N.init());</script>
+</body>
+</html>
