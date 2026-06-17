@@ -7,76 +7,95 @@
 gsap.registerPlugin(ScrollTrigger);
 
 // ============================================================
-// HERO VISUAL — colonne di reel che scorrono in loop verticale
-// infinito, ciascuna a velocità/direzione propria.
+// HERO VISUAL — 3 telefoni con snap-scroll reel + flottaggio
 // ============================================================
-(function initHeroReels(){
-  // 8 video disponibili = esattamente questi 8, usati una sola volta ciascuno,
-  // niente duplicati nella scena. Se ne aggiungi altri, mettili qui.
+(function initHeroPhones(){
   const MEDIA = [
-    { type:'video', src:'assets/video/focacceria1.mp4' },
-    { type:'video', src:'assets/video/focacceria_2.mp4' },
-    { type:'video', src:'assets/video/melody_1.mp4' },
-    { type:'video', src:'assets/video/melody_2.mp4' },
-    { type:'video', src:'assets/video/mo_ravioli1.mp4' },
-    { type:'video', src:'assets/video/mo_ravioli2.mp4' },
-    { type:'video', src:'assets/video/ravvin1.mp4' },
-    { type:'video', src:'assets/video/ravvin2.mp4' },
+    'assets/video/focacceria1.mp4',
+    'assets/video/focacceria_2.mp4',
+    'assets/video/melody_1.mp4',
+    'assets/video/melody_2.mp4',
+    'assets/video/mo_ravioli1.mp4',
+    'assets/video/mo_ravioli2.mp4',
+    'assets/video/ravvin1.mp4',
+    'assets/video/ravvin2.mp4',
   ];
 
-  function createReelCard(media){
+  function createReelCard(src){
     const card = document.createElement('div');
     card.className = 'reel-card';
-
-    let el;
-    if(media.type === 'video'){
-      el = document.createElement('video');
-      el.src = media.src;
-      el.autoplay = true; el.muted = true; el.loop = true; el.playsInline = true;
-      el.preload = 'auto';
-      // se per qualche motivo l'autoplay si blocca/sospende, riprova
-      el.addEventListener('pause', ()=>{ el.play().catch(()=>{}); });
-    } else {
-      el = document.createElement('img');
-      el.src = media.src;
-      el.loading = 'lazy';
-    }
-    card.appendChild(el);
+    const v = document.createElement('video');
+    v.src = src;
+    v.autoplay = true; v.muted = true; v.loop = true; v.playsInline = true;
+    v.preload = 'auto';
+    v.addEventListener('pause', ()=>{ v.play().catch(()=>{}); });
+    card.appendChild(v);
     return card;
   }
 
-  // distribuisce gli 8 video unici sulle 3 colonne SENZA ripetizioni tra colonne:
-  // ogni video appare una volta sola in tutta la scena. Le colonne avranno quindi
-  // lunghezze diverse (3/3/2 con 8 video), il loop resta corretto comunque.
+  // distribuisce gli 8 video sulle 3 colonne
   const cols = Array.from(document.querySelectorAll('#hero-visual .reel-col'));
   const shuffled = [...MEDIA].sort(()=> Math.random()-0.5);
   const buckets = cols.map(()=>[]);
-  shuffled.forEach((media, i)=>{ buckets[i % cols.length].push(media); });
+  shuffled.forEach((src, i)=>{ buckets[i % cols.length].push(src); });
 
-  cols.forEach((col, i)=>{
+  cols.forEach((col, phoneIdx)=>{
     const track = col.querySelector('.reel-track');
-    const dir = parseInt(col.dataset.dir, 10);
-    const speed = parseFloat(col.dataset.speed);
-    const sequence = buckets[i];
+    const phone = col.closest('.phone-mockup');
+    const srcs  = buckets[phoneIdx];
 
-    // due copie della stessa sequenza = loop senza giunte visibili,
-    // ma ogni video resta unico ALL'INTERNO della colonna (non si ripete vicino a sé stesso)
-    [0,1].forEach(()=>{
-      sequence.forEach((media)=>{
-        track.appendChild(createReelCard(media));
-      });
-    });
+    // costruisce le card + clone del primo per il loop seamless
+    srcs.forEach(src=> track.appendChild(createReelCard(src)));
+    track.appendChild(createReelCard(srcs[0]));
 
     requestAnimationFrame(()=>{
-      const halfHeight = track.scrollHeight / 2;
-      if(dir === 1){
-        gsap.fromTo(track, { y:-halfHeight }, { y:0, duration:speed, ease:'none', repeat:-1 });
-      } else {
-        gsap.fromTo(track, { y:0 }, { y:-halfHeight, duration:speed, ease:'none', repeat:-1 });
+      const cardH = phone.clientHeight;
+      track.querySelectorAll('.reel-card').forEach(card=>{
+        card.style.height = cardH + 'px';
+      });
+
+      let current = 0;
+
+      // intervalli diversi per ogni telefono → non si sincronizzano mai
+      const CYCLE_MS = [2200, 2600, 2400];
+      const cycleMs  = CYCLE_MS[phoneIdx];
+
+      function scrollNext(){
+        current++;
+        gsap.to(track, {
+          y: -(current * cardH),
+          duration: 0.44,
+          ease: 'power2.inOut',
+          onComplete(){
+            if(current >= srcs.length){
+              gsap.set(track, { y: 0 });
+              current = 0;
+            }
+            setTimeout(scrollNext, cycleMs);
+          },
+        });
       }
+
+      // ordine primo scroll: left (0) → right (2) → mid (1), 1s di stacco
+      const SCROLL_ORDER = [0, 2, 1];
+      setTimeout(scrollNext, 2000 + SCROLL_ORDER.indexOf(phoneIdx) * 1000);
     });
   });
+
+  // flottaggio indipendente — X e Y con durate diverse per ciascun telefono,
+  // così le traiettorie ellittiche non si sincronizzano mai tra loro
+  const PHONES = [
+    { id:'#phone-left',  rotate:-5, yBase:32, yAmp:16, xAmp: 5, yDur:2.2, xDur:3.3 },
+    { id:'#phone-mid',   rotate: 0, yBase: 0, yAmp:10, xAmp: 3, yDur:3.6, xDur:2.1 },
+    { id:'#phone-right', rotate: 5, yBase:32, yAmp:13, xAmp:-4, yDur:2.9, xDur:3.9 },
+  ];
+  PHONES.forEach(({ id, rotate, yBase, yAmp, xAmp, yDur, xDur }, i)=>{
+    gsap.set(id, { rotate, y: yBase, x: 0 });
+    gsap.to(id, { y: yBase - yAmp, duration: yDur, ease:'sine.inOut', yoyo:true, repeat:-1, delay: 1.8 + i * 0.15 });
+    gsap.to(id, { x: xAmp,         duration: xDur, ease:'sine.inOut', yoyo:true, repeat:-1, delay: 2.0 + i * 0.3  });
+  });
 })();
+
 
 // ---------- Navbar: sfondo solido dopo un po' di scroll ----------
 const navbar = document.getElementById('navbar');
@@ -115,10 +134,15 @@ heroTL
   .call(()=>{ document.querySelectorAll('.hero-sub .kw').forEach(k=>k.classList.add('drawn')); }, [], 1.55)
   .from('.hero-ctas', { opacity:0, y:14, duration:0.55, ease:'power2.out' }, 1.45)
   .from('.hero-proof', { opacity:0, y:10, duration:0.5, ease:'power2.out' }, 1.65)
-  .from('.reel-card', {
-    opacity:0, y:20, scale:.94, duration:0.5, ease:'power2.out',
-    stagger:{ each:0.025, from:'random' },
-  }, 1.0);
+  // logo + barre — appare prima dei telefoni
+  .from('.hero-dragon-wrap', { opacity:0, y:-10, duration:0.5, ease:'power2.out' }, 0.7)
+  .from('.hero-dragon', { scale:0.6, duration:0.55, ease:'back.out(2)' }, 0.75)
+  // i telefoni entrano con stagger
+  .from('.phone-mockup', {
+    opacity:0, scale:.88, duration:0.7, ease:'power2.out', stagger:0.12,
+  }, 1.0)
+  // stats entrano dopo i telefoni, una alla volta
+  .from('.hero-stat', { opacity:0, y:12, duration:0.45, ease:'power2.out', stagger:0.1 }, 1.7);
 
 // ============================================================
 // TITOLI DI SEZIONE — reveal a maschera quando entrano nello scroll

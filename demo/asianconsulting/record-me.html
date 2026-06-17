@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Record me — Reel Loop 20s</title>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a100a;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #fff;
+  }
+
+  /* ---- UI sopra / sotto — NON fanno parte del recording ---- */
+  .ui {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    user-select: none;
+  }
+
+  .hint {
+    font-size: 12px;
+    color: rgba(255,255,255,.4);
+    letter-spacing: .5px;
+    text-transform: uppercase;
+  }
+
+  .btn-start {
+    background: #b6f03f;
+    color: #0a100a;
+    border: none;
+    border-radius: 100px;
+    padding: 12px 32px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: .3px;
+    transition: opacity .15s;
+  }
+  .btn-start:disabled { opacity: .35; cursor: default; }
+
+  .timer-bar-wrap {
+    width: 390px;
+    height: 4px;
+    background: rgba(255,255,255,.1);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .timer-bar {
+    height: 100%;
+    width: 0%;
+    background: #b6f03f;
+    border-radius: 2px;
+    transition: width linear;
+  }
+
+  .status {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,.5);
+    min-height: 20px;
+    text-align: center;
+    letter-spacing: .3px;
+  }
+  .status.rec { color: #ff4747; }
+  .status.done { color: #b6f03f; }
+
+  /* ---- ZONA DI RECORDING — 390×844 (9:19.5) ---- */
+  .record-frame {
+    position: relative;
+    width: 390px;
+    height: 844px;
+    overflow: hidden;
+    outline: 2px dashed rgba(255,255,255,.12);
+    outline-offset: 4px;
+  }
+
+  /* flash verde ai bordi quando parte/finisce il ciclo */
+  .record-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+    border: 3px solid transparent;
+    transition: border-color .2s;
+  }
+  .record-frame.go::after { border-color: #b6f03f; }
+
+  /* ---- colonne reel ---- */
+  #reel-visual {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 8px;
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%);
+  }
+
+  .reel-col {
+    position: relative;
+    flex: 1;
+    height: 100%;
+    min-width: 0;
+  }
+
+  .reel-track {
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    will-change: transform;
+  }
+
+  .reel-card {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 9/16;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1.5px solid rgba(255,255,255,.08);
+    box-shadow: 0 8px 24px rgba(0,0,0,.4);
+    flex-shrink: 0;
+    background: #111;
+  }
+
+  .reel-card video {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<!-- CONTROLLI (non registrare questa parte) -->
+<div class="ui">
+  <span class="hint">Non registrare questa area</span>
+  <button class="btn-start" id="btnStart" onclick="startSequence()">▶ Avvia loop 20s</button>
+  <div class="status" id="status">Premi per sincronizzare il loop</div>
+  <div class="timer-bar-wrap"><div class="timer-bar" id="timerBar"></div></div>
+</div>
+
+<!-- ZONA DA REGISTRARE — seleziona questa area con CMD+SHIFT+5 -->
+<div class="record-frame" id="recordFrame">
+  <div id="reel-visual">
+    <!-- velocità: 20s / 10s / 20s → qualunque 20s di registrazione è un loop perfetto -->
+    <div class="reel-col" data-dir="1"  data-speed="20"><div class="reel-track"></div></div>
+    <div class="reel-col" data-dir="-1" data-speed="10"><div class="reel-track"></div></div>
+    <div class="reel-col" data-dir="1"  data-speed="20"><div class="reel-track"></div></div>
+  </div>
+</div>
+
+<!-- ISTRUZIONE SOTTO -->
+<div class="ui">
+  <span class="hint">Registra solo il riquadro sopra · 20 secondi · CMD+SHIFT+5</span>
+</div>
+
+<script>
+const MEDIA = [
+  'assets/video/focacceria1.mp4',
+  'assets/video/focacceria_2.mp4',
+  'assets/video/melody_1.mp4',
+  'assets/video/melody_2.mp4',
+  'assets/video/mo_ravioli1.mp4',
+  'assets/video/mo_ravioli2.mp4',
+  'assets/video/ravvin1.mp4',
+  'assets/video/ravvin2.mp4',
+];
+
+let animsStarted = false;
+let gsapCtx = null;
+
+function buildReels() {
+  const cols = Array.from(document.querySelectorAll('#reel-visual .reel-col'));
+  const shuffled = [...MEDIA].sort(() => Math.random() - .5);
+  const buckets = cols.map(() => []);
+  shuffled.forEach((src, i) => { buckets[i % cols.length].push(src); });
+
+  cols.forEach((col, i) => {
+    const track = col.querySelector('.reel-track');
+    track.innerHTML = '';
+    const seq = buckets[i];
+    [0, 1].forEach(() => {
+      seq.forEach(src => {
+        const card = document.createElement('div');
+        card.className = 'reel-card';
+        const v = document.createElement('video');
+        v.src = src;
+        v.autoplay = true; v.muted = true; v.loop = true; v.playsInline = true;
+        v.addEventListener('pause', () => v.play().catch(() => {}));
+        card.appendChild(v);
+        track.appendChild(card);
+      });
+    });
+  });
+}
+
+function startAnims() {
+  if (gsapCtx) gsapCtx.revert();
+
+  const cols = Array.from(document.querySelectorAll('#reel-visual .reel-col'));
+  gsapCtx = gsap.context(() => {
+    cols.forEach(col => {
+      const track = col.querySelector('.reel-track');
+      const dir = parseInt(col.dataset.dir, 10);
+      const speed = parseFloat(col.dataset.speed);
+      requestAnimationFrame(() => {
+        const half = track.scrollHeight / 2;
+        if (dir === 1) {
+          gsap.fromTo(track, { y: -half }, { y: 0, duration: speed, ease: 'none', repeat: -1 });
+        } else {
+          gsap.fromTo(track, { y: 0 }, { y: -half, duration: speed, ease: 'none', repeat: -1 });
+        }
+      });
+    });
+  });
+}
+
+function flashFrame() {
+  const f = document.getElementById('recordFrame');
+  f.classList.add('go');
+  setTimeout(() => f.classList.remove('go'), 300);
+}
+
+function startSequence() {
+  const btn = document.getElementById('btnStart');
+  const status = document.getElementById('status');
+  const bar = document.getElementById('timerBar');
+
+  btn.disabled = true;
+
+  // rebuild reels per avere un punto di partenza pulito
+  buildReels();
+
+  let count = 3;
+  status.textContent = `Inizia tra ${count}...`;
+  status.className = 'status';
+
+  const countdown = setInterval(() => {
+    count--;
+    if (count > 0) {
+      status.textContent = `Inizia tra ${count}...`;
+    } else {
+      clearInterval(countdown);
+      // PARTI — sincronizza animazioni e timer
+      startAnims();
+      flashFrame();
+      status.textContent = '● REC — 20s';
+      status.className = 'status rec';
+
+      // barra progressione
+      bar.style.transition = 'none';
+      bar.style.width = '0%';
+      requestAnimationFrame(() => {
+        bar.style.transition = 'width 20s linear';
+        bar.style.width = '100%';
+      });
+
+      // STOP a 20s
+      setTimeout(() => {
+        flashFrame();
+        status.textContent = '✓ STOP — loop perfetto';
+        status.className = 'status done';
+        btn.disabled = false;
+        btn.textContent = '↺ Ricomincia';
+      }, 20000);
+    }
+  }, 1000);
+}
+
+// preload reels subito (senza avviare le animazioni)
+buildReels();
+</script>
+</body>
+</html>
