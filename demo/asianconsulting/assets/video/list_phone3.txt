@@ -1,4 +1,0 @@
-file 'clip_melody_1.mp4'
-file 'clip_ravvin1.mp4'
-file 'clip_focacceria1.mp4'
-file 'clip_mo_ravioli1.mp4'
