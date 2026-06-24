@@ -10,75 +10,102 @@ gsap.registerPlugin(ScrollTrigger);
 // HERO VISUAL — 3 telefoni con snap-scroll reel + flottaggio
 // ============================================================
 (function initHeroPhones(){
-  const MEDIA = [
-    'assets/video/focacceria1.mp4',
-    'assets/video/focacceria_2.mp4',
-    'assets/video/melody_1.mp4',
-    'assets/video/melody_2.mp4',
-    'assets/video/mo_ravioli1.mp4',
-    'assets/video/mo_ravioli2.mp4',
-    'assets/video/ravvin1.mp4',
-    'assets/video/ravvin2.mp4',
+  // Clip pre-tagliate a 6s, ~300KB ciascuna — distribuiti 4 per telefono senza ripetizioni
+  const CLIPS = [
+    'assets/video/clip_focacceria1_sm.mp4',
+    'assets/video/clip_focacceria_2_sm.mp4',
+    'assets/video/clip_melody_1_sm.mp4',
+    'assets/video/clip_melody_2_sm.mp4',
+    'assets/video/clip_mo_ravioli1_sm.mp4',
+    'assets/video/clip_mo_ravioli2_sm.mp4',
+    'assets/video/clip_ravvin1_sm.mp4',
+    'assets/video/clip_ravvin2_sm.mp4',
   ];
 
-  function createReelCard(src){
-    const card = document.createElement('div');
-    card.className = 'reel-card';
+  // 8 clip su 3 telefoni: phone1=clip 0-2, phone2=clip 3-5, phone3=clip 6-7+0+3
+  // Nessuna clip appare nello stesso momento sullo stesso telefono.
+  // Phone3 ha solo 2 clip uniche — le alterna con la prima di phone1 e phone2
+  // che in quel momento stanno mostrando clip diverse (sfasate dai CYCLE_MS diversi).
+  // 3 clip per telefono = 9 slot con 8 clip uniche → solo 1 ripetizione inevitabile.
+  // La clip ripetuta (CLIPS[7]) è su left e right — mai adiacenti, mai sincronizzati.
+  const BUCKETS = [
+    [CLIPS[0], CLIPS[1], CLIPS[2]],            // phone left:  0 1 2
+    [CLIPS[3], CLIPS[4], CLIPS[5]],            // phone mid:   3 4 5  (zero overlap)
+    [CLIPS[6], CLIPS[7], CLIPS[2]],            // phone right: 6 7 + 2 (unica ripetizione, mai con mid)
+  ];
+
+  const allVideos = [];
+
+  function makeVideo(src, preload){
     const v = document.createElement('video');
     v.src = src;
-    v.autoplay = true; v.muted = true; v.loop = true; v.playsInline = true;
-    v.preload = 'auto';
-    v.addEventListener('pause', ()=>{ v.play().catch(()=>{}); });
-    card.appendChild(v);
-    return card;
+    v.muted = true; v.loop = false; v.playsInline = true;
+    v.setAttribute('playsinline', '');
+    v.setAttribute('webkit-playsinline', '');
+    v.controls = false;
+    v.disablePictureInPicture = true;
+    v.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;';
+    v.preload = preload || 'auto';
+    return v;
   }
 
-  // distribuisce gli 8 video sulle 3 colonne
-  const cols = Array.from(document.querySelectorAll('#hero-visual .reel-col'));
-  const shuffled = [...MEDIA].sort(()=> Math.random()-0.5);
-  const buckets = cols.map(()=>[]);
-  shuffled.forEach((src, i)=>{ buckets[i % cols.length].push(src); });
+  function playAll(){
+    allVideos.forEach(v => v.play().catch(()=>{}));
+  }
 
-  cols.forEach((col, phoneIdx)=>{
+  const cols = Array.from(document.querySelectorAll('#hero-visual .reel-col'));
+
+  cols.forEach((col, phoneIdx) => {
     const track = col.querySelector('.reel-track');
     const phone = col.closest('.phone-mockup');
-    const srcs  = buckets[phoneIdx];
+    const srcs  = BUCKETS[phoneIdx];
 
-    // costruisce le card + clone del primo per il loop seamless
-    srcs.forEach(src=> track.appendChild(createReelCard(src)));
-    track.appendChild(createReelCard(srcs[0]));
+    // Crea una card per ogni clip
+    srcs.forEach((src, j) => {
+      const card = document.createElement('div');
+      card.className = 'reel-card';
+      // Il primo video parte subito, gli altri preload=none per non saturare la banda
+      const v = makeVideo(src, j === 0 ? 'auto' : 'none');
+      allVideos.push(v);
+      card.appendChild(v);
+      track.appendChild(card);
+    });
 
-    requestAnimationFrame(()=>{
+    requestAnimationFrame(() => {
       const cardH = phone.clientHeight;
-      track.querySelectorAll('.reel-card').forEach(card=>{
-        card.style.height = cardH + 'px';
-      });
+      track.querySelectorAll('.reel-card').forEach(c => { c.style.height = cardH + 'px'; });
 
       let current = 0;
-
-      // intervalli diversi per ogni telefono → non si sincronizzano mai
-      const CYCLE_MS = [2200, 2600, 2400];
-      const cycleMs  = CYCLE_MS[phoneIdx];
+      const CYCLE_MS = [3000, 3400, 2800][phoneIdx];
 
       function scrollNext(){
+        const nextIdx = (current + 1) % srcs.length;
+        // Precarica il prossimo video appena prima dello scroll
+        const nextVideo = track.querySelectorAll('.reel-card video')[nextIdx];
+        if(nextVideo.preload === 'none'){ nextVideo.preload = 'auto'; nextVideo.load(); }
+
         current++;
         gsap.to(track, {
           y: -(current * cardH),
           duration: 0.44,
           ease: 'power2.inOut',
           onComplete(){
-            if(current >= srcs.length){
+            // Avvia il video appena entrato in scena
+            nextVideo.play().catch(()=>{});
+            if(current >= srcs.length - 1){
+              // Torna silenziosamente al primo senza animazione
               gsap.set(track, { y: 0 });
               current = 0;
+              track.querySelectorAll('.reel-card video')[0].currentTime = 0;
+              track.querySelectorAll('.reel-card video')[0].play().catch(()=>{});
             }
-            setTimeout(scrollNext, cycleMs);
+            setTimeout(scrollNext, CYCLE_MS);
           },
         });
       }
 
-      // ordine primo scroll: left (0) → right (2) → mid (1), 1s di stacco
       const SCROLL_ORDER = [0, 2, 1];
-      setTimeout(scrollNext, 2000 + SCROLL_ORDER.indexOf(phoneIdx) * 1000);
+      setTimeout(scrollNext, 2200 + SCROLL_ORDER.indexOf(phoneIdx) * 900);
     });
   });
 
@@ -94,6 +121,13 @@ gsap.registerPlugin(ScrollTrigger);
     gsap.to(id, { y: yBase - yAmp, duration: yDur, ease:'sine.inOut', yoyo:true, repeat:-1, delay: 1.8 + i * 0.15 });
     gsap.to(id, { x: xAmp,         duration: xDur, ease:'sine.inOut', yoyo:true, repeat:-1, delay: 2.0 + i * 0.3  });
   });
+
+  // Tenta autoplay subito (funziona su desktop e Android).
+  // Su Safari iOS l'autoplay di video creati via JS è bloccato finché non c'è
+  // un gesto utente: al primo touchstart rieseguiamo play() su tutti i video.
+  setTimeout(playAll, 100);
+  const unlock = () => { playAll(); document.removeEventListener('touchstart', unlock); };
+  document.addEventListener('touchstart', unlock, { once: true, passive: true });
 })();
 
 
@@ -121,14 +155,12 @@ gsap.set('#hero-headline .line-inner', { y:'0%' });
 
 const heroTL = gsap.timeline({ delay:0.2 });
 heroTL
-  // parole della prima riga, una dopo l'altra con un ritmo netto
   .to('#hero-headline .line:nth-child(1) .word', {
-    y:'0%', opacity:1, duration:0.55, ease:'back.out(1.6)', stagger:0.09,
+    y:'0%', opacity:1, duration:0.5, ease:'power3.out', stagger:0.08,
   }, 0.15)
-  // pausa marcata: la seconda riga arriva solo dopo che la prima si è fermata del tutto
   .to('#hero-headline .line:nth-child(2) .word', {
-    y:'0%', opacity:1, duration:0.55, ease:'back.out(1.6)', stagger:0.07,
-  }, 1.35)
+    y:'0%', opacity:1, duration:0.6, ease:'power3.out', stagger:0.06,
+  }, 1.1)
   .from('.hero-sub', { opacity:0, y:14, duration:0.6, ease:'power2.out' }, 2.05)
   // la parola-chiave nel sottotitolo si sottolinea con un piccolo ritardo dopo il resto del testo
   .call(()=>{ document.querySelectorAll('.hero-sub .kw').forEach(k=>k.classList.add('drawn')); }, [], 1.55)
@@ -201,6 +233,39 @@ ScrollTrigger.create({
     });
   },
 });
+
+// ============================================================
+// PORTFOLIO — accordion orizzontale
+// ============================================================
+(function initAccordion(){
+  const cards = Array.from(document.querySelectorAll('.acc-card'));
+  if(!cards.length) return;
+
+  function open(card){
+    cards.forEach(c => c.classList.remove('open'));
+    card.classList.add('open');
+  }
+
+  // prima card aperta di default
+  open(cards[0]);
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => open(card));
+  });
+
+  // reveal in entrata
+  ScrollTrigger.create({
+    trigger: '.acc-wrap',
+    start: 'top 82%',
+    once: true,
+    onEnter(){
+      gsap.fromTo('.acc-wrap',
+        { opacity:0, y:30 },
+        { opacity:1, y:0, duration:0.7, ease:'power2.out' }
+      );
+    },
+  });
+})();
 
 // ============================================================
 // PROCESSO — gli step entrano uno alla volta con un ritmo preciso

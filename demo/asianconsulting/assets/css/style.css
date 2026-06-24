@@ -236,20 +236,30 @@ h2 .kw::after{ background:var(--green-bright); height:4px; bottom:2px; }
 .btn-ghost:hover{ border-color:var(--ink); }
 
 .hero-proof{
-  display:flex; align-items:center; gap:16px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:nowrap;
 }
-.hero-proof .avatars{ display:flex; }
+.hero-proof .avatars{
+  display:flex;
+  flex-shrink:0;
+}
 .hero-proof .avatars img{
-  width:38px;height:38px;border-radius:50%;
-  border:3px solid var(--paper);
+  width:36px; height:36px;
+  border-radius:50%;
+  border:2.5px solid var(--paper);
   object-fit:cover;
-  margin-left:-12px;
+  object-position:center top;
+  margin-left:-8px;
+  box-shadow:0 1px 4px rgba(19,35,29,.18);
 }
 .hero-proof .avatars img:first-child{ margin-left:0; }
 .hero-proof small{
   font-size:13px;
   font-weight:600;
   color:var(--ink-soft);
+  line-height:1.4;
 }
 .hero-proof small b{ color:var(--ink); }
 
@@ -384,6 +394,17 @@ h2 .kw::after{ background:var(--green-bright); height:4px; bottom:2px; }
   width:100%; height:100%;
   object-fit:cover;
   display:block;
+  pointer-events:none;
+}
+/* nasconde play button nativo Safari/iOS */
+.phone-mockup video::-webkit-media-controls{ display:none !important; }
+.phone-mockup video::-webkit-media-controls-enclosure{ display:none !important; }
+.phone-mockup video::-webkit-media-controls-panel{ display:none !important; }
+.phone-mockup video::-webkit-media-controls-play-button{ display:none !important; }
+.phone-mockup video::-webkit-media-controls-start-playback-button{ display:none !important; }
+/* overlay trasparente che blocca i tap */
+.phone-mockup .reel-card::after{
+  content:''; position:absolute; inset:0; z-index:2;
 }
 
 .hero-blob{
@@ -392,8 +413,8 @@ h2 .kw::after{ background:var(--green-bright); height:4px; bottom:2px; }
   filter:blur(40px);
   opacity:.5;
 }
-.hero-blob.b1{ width:480px; height:480px; top:-120px; right:-120px; background:radial-gradient(circle, var(--green-acid), transparent 70%); }
-.hero-blob.b2{ width:380px; height:380px; bottom:-100px; left:-100px; background:radial-gradient(circle, var(--amber), transparent 70%); }
+.hero-blob.b1{ width:480px; height:480px; top:-120px; right:-120px; background:radial-gradient(circle, var(--green-acid), transparent 70%); max-width:60vw; }
+.hero-blob.b2{ width:380px; height:380px; bottom:-100px; left:-100px; background:radial-gradient(circle, var(--amber), transparent 70%); max-width:60vw; }
 
 /* ============================================================
    MARQUEE — striscia di parole che scorre, energia immediata
@@ -442,7 +463,7 @@ h2 .kw::after{ background:var(--green-bright); height:4px; bottom:2px; }
 
 .servizi-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(2,1fr);
   gap:24px;
 }
 .servizio-card{
@@ -484,56 +505,6 @@ h2 .kw::after{ background:var(--green-bright); height:4px; bottom:2px; }
 }
 .servizio-tag.organic{ color:var(--green-deep); background:rgba(31,107,74,.1); }
 
-/* ============================================================
-   PORTFOLIO
-   ============================================================ */
-#portfolio{
-  padding:120px 0;
-  background:var(--ink);
-  color:var(--paper);
-}
-#portfolio .section-head p{ color:rgba(251,248,241,.65); }
-#portfolio .eyebrow{ color:var(--green-acid); }
-#portfolio .eyebrow::before{ background:var(--green-acid); }
-
-.portfolio-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
-}
-.portfolio-item{
-  position:relative;
-  aspect-ratio:9/16;
-  border-radius:16px;
-  overflow:hidden;
-  cursor:pointer;
-}
-.portfolio-item img{
-  width:100%;height:100%;object-fit:cover;
-  transition: transform .4s ease;
-}
-.portfolio-item:hover img{ transform:scale(1.06); }
-.portfolio-item .overlay{
-  position:absolute; inset:0;
-  background:linear-gradient(to top, rgba(19,35,29,.88) 0%, rgba(19,35,29,0) 55%);
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  padding:18px;
-}
-.portfolio-item .client{
-  font-weight:800;
-  font-size:14px;
-  color:#fff;
-}
-.portfolio-item .niche{
-  font-size:12px;
-  color:var(--green-acid);
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:.5px;
-  margin-top:3px;
-}
 
 /* ============================================================
    NUMERI
@@ -606,31 +577,52 @@ h2 .kw::after{ background:var(--green-bright); height:4px; bottom:2px; }
    ============================================================ */
 #cta-finale{
   padding:120px 0;
-  background: linear-gradient(135deg, var(--green-deep), var(--ink));
-  color:var(--paper);
-  text-align:center;
-  position:relative;
-  overflow:hidden;
-}
-#cta-finale h2{
-  font-size:clamp(34px,5.6vw,72px);
-  max-width:18ch;
-  margin:0 auto 26px;
-}
-#cta-finale .accent{ color:var(--green-acid); }
-#cta-finale p{
-  font-size:18px;
-  color:rgba(251,248,241,.75);
-  max-width:50ch;
-  margin:0 auto 40px;
-}
-#cta-finale .btn-primary{
-  background:var(--green-acid);
+  background:var(--paper);
   color:var(--ink);
-  font-size:17px;
-  padding:20px 38px;
 }
-#cta-finale .btn-primary:hover{ background:#fff; }
+#cta-finale .eyebrow{ color:var(--green); }
+#cta-finale .eyebrow::before{ background:var(--green); }
+
+.cta-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:start;
+}
+
+.cta-copy h2{
+  font-size:clamp(30px,3.8vw,52px);
+  margin-bottom:20px;
+  line-height:1.05;
+}
+.cta-copy p{
+  font-size:17px;
+  color:var(--ink-soft);
+  line-height:1.65;
+  max-width:40ch;
+  margin-bottom:32px;
+}
+
+.cta-list{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.cta-list li{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:15px;
+  font-weight:600;
+  color:var(--ink);
+}
+.cta-list li svg{
+  width:18px; height:18px;
+  flex-shrink:0;
+  color:var(--green);
+  stroke-width:2.5;
+}
 
 /* ============================================================
    FOOTER
@@ -664,6 +656,370 @@ footer{
 }
 
 /* ============================================================
+   SERVIZI — tag multipli
+   ============================================================ */
+.servizio-tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+
+/* ============================================================
+   PORTFOLIO CLIENTI — accordion orizzontale
+   ============================================================ */
+#portfolio{ padding:120px 0; background:var(--ink); color:var(--paper); }
+#portfolio .section-head{ margin-bottom:0; }
+#portfolio .eyebrow{ color:var(--green-acid); }
+#portfolio .eyebrow::before{ background:var(--green-acid); }
+#portfolio .mask-title .line-inner{ color:var(--paper); }
+
+.acc-wrap{
+  display:flex;
+  gap:6px;
+  margin-top:56px;
+  height:480px;
+  overflow:hidden;
+  opacity:0;
+}
+
+.acc-card{
+  position:relative;
+  flex:1;                       /* collassata: peso uguale */
+  min-width:52px;
+  border-radius:18px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:flex .55s cubic-bezier(.77,0,.18,1);
+  background:var(--green-deep);
+}
+.acc-card.open{
+  flex:5;                       /* espansa: 5× le altre */
+}
+
+/* immagine di sfondo */
+.acc-img{
+  position:absolute;
+  inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .55s ease, filter .55s ease;
+  filter:grayscale(60%) brightness(.7);
+}
+.acc-card.open .acc-img{
+  filter:grayscale(0%) brightness(.82);
+  transform:scale(1.04);
+}
+
+/* numero in alto a sx sempre visibile */
+.acc-card::before{
+  content: attr(data-num);
+  position:absolute;
+  top:16px; left:16px;
+  font-family:var(--ff-display);
+  font-size:11px;
+  letter-spacing:1.5px;
+  color:rgba(251,248,241,.5);
+  z-index:2;
+  transition:color .3s;
+}
+.acc-card.open::before{ color:var(--green-acid); }
+
+/* nome verticale ruotato — visibile solo quando collassata */
+.acc-label{
+  position:absolute;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%) rotate(-90deg);
+  transform-origin:center center;
+  white-space:nowrap;
+  font-family:var(--ff-display);
+  font-size:13px;
+  color:rgba(251,248,241,.75);
+  z-index:2;
+  opacity:1;
+  transition:opacity .2s ease;
+  pointer-events:none;
+}
+.acc-card.open .acc-label{ opacity:0; }
+
+/* contenuto espanso — visibile solo .open */
+.acc-content{
+  position:absolute;
+  bottom:0; left:0; right:0;
+  padding:32px 28px;
+  background:linear-gradient(to top, rgba(19,35,29,.92) 0%, rgba(19,35,29,.4) 60%, transparent 100%);
+  z-index:2;
+  opacity:0;
+  transform:translateY(10px);
+  transition:opacity .3s ease .2s, transform .3s ease .2s;
+  pointer-events:none;
+}
+.acc-card.open .acc-content{
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+}
+
+.acc-nome{
+  font-family:var(--ff-display);
+  font-size:clamp(22px,2.4vw,34px);
+  color:#fff;
+  line-height:1.05;
+  margin-bottom:12px;
+}
+
+.acc-tags{
+  display:flex; flex-wrap:wrap; gap:6px;
+}
+.acc-tags span{
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+  color:rgba(251,248,241,.75);
+  border:1px solid rgba(251,248,241,.25);
+  padding:4px 12px;
+  border-radius:20px;
+  background:rgba(19,35,29,.4);
+  backdrop-filter:blur(4px);
+}
+
+.acc-btns{
+  display:flex;
+  gap:8px;
+  margin-top:16px;
+  flex-wrap:wrap;
+}
+.acc-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  font-family:var(--ff-body);
+  font-weight:700;
+  font-size:12px;
+  letter-spacing:.5px;
+  padding:9px 18px;
+  border-radius:50px;
+  transition:transform .2s ease, opacity .2s ease;
+  text-decoration:none;
+}
+.acc-btn:hover{ transform:translateY(-2px); opacity:.88; }
+.acc-btn svg{ width:14px; height:14px; flex-shrink:0; }
+.acc-btn.ig{ background:#e1306c; color:#fff; }
+.acc-btn.tk{ background:#010101; color:#fff; border:1px solid rgba(255,255,255,.15); }
+
+/* ============================================================
+   VANTAGGI
+   ============================================================ */
+#vantaggi{ padding:120px 0; background:var(--paper-dim); }
+.vantaggi-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+  margin-top:48px;
+}
+.vantaggi-col{
+  border-radius:var(--radius);
+  padding:36px 32px;
+}
+.vantaggi-col.bad-col, .vantaggi-col:first-child{
+  background:#fff;
+  border:1px solid rgba(19,35,29,.08);
+}
+.vantaggi-col:last-child{
+  background:var(--ink);
+  color:var(--paper);
+}
+.vantaggi-col-title{
+  font-family:var(--ff-display);
+  font-size:16px;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+  margin-bottom:24px;
+  padding-bottom:16px;
+  border-bottom:1px solid rgba(19,35,29,.1);
+}
+.vantaggi-col:last-child .vantaggi-col-title{
+  border-color:rgba(251,248,241,.1);
+  color:var(--green-acid);
+}
+.vantaggi-list{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.vantaggi-list li{
+  font-size:15px;
+  padding-left:24px;
+  position:relative;
+  line-height:1.4;
+}
+.vantaggi-list.bad li{ color:var(--ink-soft); }
+.vantaggi-list.bad li::before{
+  content:'';
+  position:absolute; left:0; top:8px;
+  width:12px; height:12px;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='%23c9683a' stroke-width='2.5' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18 6L6 18M6 6l12 12'/%3E%3C/svg%3E");
+  background-size:contain;
+  background-repeat:no-repeat;
+}
+.vantaggi-list.good li{ color:rgba(251,248,241,.85); }
+.vantaggi-list.good li::before{
+  content:'';
+  position:absolute; left:0; top:8px;
+  width:12px; height:12px;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='%239ee84a' stroke-width='2.5' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
+  background-size:contain;
+  background-repeat:no-repeat;
+}
+
+/* ============================================================
+   RECENSIONI
+   ============================================================ */
+#recensioni{ padding:120px 0; }
+.recensioni-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+.recensione-card{
+  background:#fff;
+  border-radius:var(--radius);
+  padding:32px 28px;
+  border:1px solid rgba(19,35,29,.08);
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+.stelle{ color:var(--amber); font-size:18px; letter-spacing:2px; }
+.recensione-card p{
+  font-size:15px;
+  color:var(--ink-soft);
+  line-height:1.6;
+  flex:1;
+}
+.recensione-autore{
+  display:flex; align-items:center; gap:12px;
+  padding-top:16px;
+  border-top:1px solid rgba(19,35,29,.08);
+}
+.rec-iniziale{
+  width:42px; height:42px;
+  border-radius:50%;
+  background:var(--green-deep);
+  color:var(--green-acid);
+  font-family:var(--ff-display);
+  font-size:18px;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.recensione-autore strong{ display:block; font-size:14px; }
+.recensione-autore span{ font-size:12px; color:var(--ink-soft); }
+
+/* ============================================================
+   FORM CONTATTO
+   ============================================================ */
+.contact-form{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  background:#fff;
+  border:1px solid rgba(19,35,29,.1);
+  border-radius:24px;
+  padding:40px 36px;
+  box-shadow:0 4px 32px rgba(19,35,29,.06);
+}
+.form-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.field label{
+  font-size:13px;
+  font-weight:700;
+  color:var(--ink);
+  letter-spacing:.3px;
+}
+.field label .opt{
+  font-weight:400;
+  color:var(--ink-soft);
+}
+.contact-form input,
+.contact-form textarea{
+  width:100%;
+  padding:13px 16px;
+  border-radius:10px;
+  border:1.5px solid rgba(19,35,29,.15);
+  background:#fafaf8;
+  color:var(--ink);
+  font-family:var(--ff-body);
+  font-size:15px;
+  outline:none;
+  transition:border-color .2s, box-shadow .2s;
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder{ color:rgba(19,35,29,.3); }
+.contact-form input:focus,
+.contact-form textarea:focus{
+  border-color:var(--green);
+  box-shadow:0 0 0 3px rgba(31,107,74,.1);
+}
+.contact-form textarea{ resize:vertical; min-height:110px; }
+.contact-form .btn{
+  margin-top:4px;
+  background:var(--ink);
+  color:var(--paper);
+  font-size:15px;
+  padding:16px 28px;
+  border:none;
+  cursor:pointer;
+  align-self:flex-start;
+}
+.contact-form .btn:hover{ background:var(--green-deep); }
+
+/* ============================================================
+   CTA MID-PAGE — banner con draghetto
+   ============================================================ */
+#cta-mid{
+  padding:56px 0;
+  background:var(--green-deep);
+  color:var(--paper);
+}
+.cta-mid-inner{
+  display:flex;
+  align-items:center;
+  gap:32px;
+  flex-wrap:wrap;
+}
+.cta-mid-dragon{
+  width:64px; height:64px;
+  border-radius:50%;
+  flex-shrink:0;
+  filter:drop-shadow(0 0 12px rgba(158,232,74,.35));
+}
+.cta-mid-text{
+  flex:1;
+  min-width:200px;
+}
+.cta-mid-text p{
+  font-size:16px;
+  color:rgba(251,248,241,.7);
+  margin-bottom:4px;
+}
+.cta-mid-text strong{
+  font-family:var(--ff-display);
+  font-size:clamp(18px,2.2vw,26px);
+  color:#fff;
+}
+#cta-mid .btn-primary{
+  background:var(--green-acid);
+  color:var(--ink);
+  white-space:nowrap;
+  flex-shrink:0;
+}
+#cta-mid .btn-primary:hover{ background:#fff; }
+
+/* ============================================================
    REVEAL ON SCROLL (classe gestita da JS)
    ============================================================ */
 .reveal{
@@ -679,13 +1035,83 @@ footer{
   .hero-copy{ padding-bottom:48px; }
   .hero-visual{ margin-top:0; }
   .servizi-grid{ grid-template-columns:1fr; }
-  .portfolio-grid{ grid-template-columns:repeat(2,1fr); }
   .numeri-grid{ grid-template-columns:repeat(2,1fr); gap:32px; }
   .nav-links{ display:none; }
+  .vantaggi-grid{ grid-template-columns:1fr; }
+  .recensioni-grid{ grid-template-columns:1fr; }
+  .acc-wrap{ height:420px; }
+  .cta-grid{ grid-template-columns:1fr; gap:48px; }
+  .form-row{ grid-template-columns:1fr; }
 }
-@media (max-width: 560px){
-  .phone-mockup{ width:118px; border-radius:28px; }
-  .phone-mockup.mid{ width:148px; }
-  .processo-step{ grid-template-columns:50px 1fr; }
+@media (max-width: 768px){
+  html, body{ overflow-x:hidden; max-width:100%; }
+  #hero{ overflow:hidden; }
+
+  /* blob ridotti su mobile — erano la causa principale dell'overflow X */
+  .hero-blob.b1{ width:280px; height:280px; top:-80px; right:-80px; }
+  .hero-blob.b2{ width:220px; height:220px; bottom:-60px; left:-60px; }
+
+  /* navbar */
+  .nav-links{ display:none; }
+  .nav-cta{ display:none; }
+
+  /* hero phones: scala proporzionale alla viewport */
+  .hero-phones{ gap:8px; width:100%; justify-content:center; }
+  .phone-mockup{ width:calc(28vw - 8px); max-width:130px; border-radius:26px; }
+  .phone-mockup.mid{ width:calc(34vw - 8px); max-width:158px; border-radius:32px; }
+
+  /* stats: font più piccolo */
+  .hero-stat-val{ font-size:20px; }
+  .hero-stat-label{ font-size:10px; }
+  .hero-stat{ padding:0 12px; }
+
+  /* sezioni */
+  .hero-ctas{ flex-direction:column; align-items:stretch; gap:10px; }
+  .btn{ justify-content:center; }
+  #servizi, #portfolio, #processo{ padding:60px 0; }
+  .section-head{ margin-bottom:36px; }
+  /* accordion: passa a verticale su mobile */
+  .acc-wrap{ flex-direction:column; height:auto; gap:4px; }
+  .acc-card{ min-width:unset; min-height:64px; flex:none; border-radius:14px; }
+  .acc-card.open{ flex:none; min-height:300px; }
+  .acc-label{
+    bottom:unset; top:50%; left:72px;
+    transform:translateY(-50%) rotate(0deg);
+    font-size:15px;
+  }
+  .acc-card.open .acc-label{ opacity:0; }
+  .acc-content{ padding:24px 20px; }
+  .acc-nome{ font-size:22px; }
+  .portfolio-grid{ grid-template-columns:repeat(2,1fr); gap:10px; }
+  #numeri{ padding:50px 0; }
+  .numeri-grid{ grid-template-columns:repeat(2,1fr); gap:24px; }
+  .numero-item .val{ font-size:clamp(32px,10vw,48px); }
+  .processo-step{ grid-template-columns:50px 1fr; gap:16px; }
   .processo-step .step-num{ font-size:28px; }
+  .processo-step h3{ font-size:19px; }
+  #cta-finale{ padding:70px 0; }
+  .cta-grid{ grid-template-columns:1fr; gap:40px; }
+  .cta-copy p{ max-width:none; }
+  .contact-form{ padding:28px 22px; }
+  .footer-links{ flex-wrap:wrap; gap:14px; }
+
+  /* fix testi tagliati su mobile */
+  #hero-headline .line-inner{ white-space:normal; word-break:break-word; }
+  .mask-title .line-inner{ white-space:normal; word-break:break-word; }
+  .section-head h2{ font-size:clamp(24px,7vw,40px); }
+  .cta-mid-inner{ gap:20px; }
+  .cta-mid-text strong{ font-size:18px; }
+  #cta-mid .btn{ width:100%; justify-content:center; }
+  .hero-sub{ font-size:15px; }
+  .vantaggi-col{ padding:28px 22px; }
+  #recensioni, #vantaggi{ padding:60px 0; }
+  #cta-mid{ padding:40px 0; }
+  .acc-nome{ font-size:18px; }
+  .acc-tags span{ font-size:9px; padding:3px 8px; }
+}
+@media (max-width: 400px){
+  .phone-mockup{ width:26vw; border-radius:22px; border-width:5px; }
+  .phone-mockup.mid{ width:32vw; border-radius:28px; border-width:6px; }
+  .hero-stat{ padding:0 8px; }
+  .hero-stat-val{ font-size:17px; }
 }
