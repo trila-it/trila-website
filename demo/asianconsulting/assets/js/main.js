@@ -235,6 +235,54 @@ ScrollTrigger.create({
 });
 
 // ============================================================
+// POPUP CTA — appare dopo aver visto il portfolio O dopo 8s
+// ============================================================
+(function initPopup(){
+  const popup  = document.getElementById('cta-popup');
+  const close  = document.getElementById('popup-close');
+  const ctaBtn = document.getElementById('popup-cta');
+  if(!popup) return;
+
+  // Non mostrare se già chiuso in questa sessione
+  if(sessionStorage.getItem('popup-dismissed')) return;
+
+  let shown = false;
+  function show(){
+    if(shown) return;
+    shown = true;
+    popup.setAttribute('aria-hidden','false');
+    popup.classList.add('visible');
+  }
+
+  function dismiss(){
+    popup.classList.remove('visible');
+    popup.setAttribute('aria-hidden','true');
+    sessionStorage.setItem('popup-dismissed','1');
+  }
+
+  // Trigger 1: l'utente ha scorso oltre la fine del portfolio
+  const sentinel = document.querySelector('.acc-wrap');
+  if(sentinel && 'IntersectionObserver' in window){
+    const obs = new IntersectionObserver((entries)=>{
+      if(entries[0].boundingClientRect.bottom < 0){ // portfolio uscito in alto = già visto
+        show();
+        obs.disconnect();
+      }
+    }, { threshold:0 });
+    obs.observe(sentinel);
+  }
+
+  // Trigger 2: fallback timer 8 secondi
+  setTimeout(show, 8000);
+
+  // Chiudi con X
+  close.addEventListener('click', dismiss);
+
+  // Click sul CTA → chiudi popup e scrolla al form
+  ctaBtn.addEventListener('click', ()=>{ dismiss(); });
+})();
+
+// ============================================================
 // PORTFOLIO — accordion orizzontale
 // ============================================================
 (function initAccordion(){
