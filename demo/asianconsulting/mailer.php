@@ -9,14 +9,7 @@
  */
 
 // ── Configurazione ──────────────────────────────────────────
-define('SMTP_HOST',     'smtps.aruba.it');      // host Aruba
-define('SMTP_PORT',     465);                    // SSL
-define('SMTP_USER',     'info@asianconsulting.it');   // email Aruba mittente
-define('SMTP_PASS',     'Info_Asian123-');      // password casella Aruba
-define('MAIL_FROM',     'info@asianconsulting.it');   // mittente visibile
-define('MAIL_FROM_NAME','Asian Consulting');
-define('MAIL_TO',       'andrea.bonacci20@gmail.com'); // dove arrivano le richieste
-define('MAIL_SUBJECT',  'Nuova richiesta dal sito — Asian Consulting');
+require_once __DIR__ . '/config.php';
 // ─────────────────────────────────────────────────────────────
 
 header('Content-Type: application/json; charset=utf-8');
