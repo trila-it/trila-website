@@ -976,6 +976,26 @@ footer{
   align-self:flex-start;
 }
 .contact-form .btn:hover{ background:var(--green-deep); }
+.contact-form .btn:disabled{ opacity:.6; cursor:not-allowed; }
+.form-feedback{
+  font-size:14px;
+  font-weight:600;
+  padding:12px 16px;
+  border-radius:10px;
+  display:none;
+}
+.form-feedback.ok{
+  display:block;
+  background:rgba(31,107,74,.08);
+  color:var(--green-deep);
+  border:1px solid rgba(31,107,74,.2);
+}
+.form-feedback.err{
+  display:block;
+  background:rgba(201,104,58,.08);
+  color:var(--rust);
+  border:1px solid rgba(201,104,58,.2);
+}
 
 /* ============================================================
    CTA MID-PAGE — banner con draghetto

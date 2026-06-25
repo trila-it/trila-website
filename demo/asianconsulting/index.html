@@ -543,7 +543,7 @@
       </ul>
     </div>
 
-    <form class="contact-form" id="contact-form">
+    <form class="contact-form" id="contact-form" novalidate>
       <div class="form-row">
         <div class="field">
           <label for="f-nome">Nome</label>
@@ -566,7 +566,8 @@
         <label for="f-msg">Di cosa hai bisogno?</label>
         <textarea id="f-msg" name="messaggio" placeholder="Breve descrizione della tua attività e cosa vorresti migliorare..." rows="4"></textarea>
       </div>
-      <button type="submit" class="btn btn-primary">
+      <div class="form-feedback" id="form-feedback" aria-live="polite"></div>
+      <button type="submit" class="btn btn-primary" id="form-submit">
         Invia richiesta
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </button>

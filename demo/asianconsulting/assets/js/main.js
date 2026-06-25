@@ -204,6 +204,64 @@ document.querySelectorAll('.reveal').forEach((el)=>{
 });
 
 // ============================================================
+// FORM — submit via fetch → mailer.php
+// ============================================================
+(function initForm(){
+  const form     = document.getElementById('contact-form');
+  const btn      = document.getElementById('form-submit');
+  const feedback = document.getElementById('form-feedback');
+  if(!form) return;
+
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+
+    // Validazione base lato client
+    const nome     = form.nome.value.trim();
+    const attivita = form.attivita.value.trim();
+    const email    = form.email.value.trim();
+    if(!nome || !attivita || !email){
+      feedback.className = 'form-feedback err';
+      feedback.textContent = 'Compila nome, attività ed email per procedere.';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Invio in corso…';
+    feedback.className = 'form-feedback';
+    feedback.textContent = '';
+
+    try {
+      const res = await fetch('mailer.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nome,
+          attivita,
+          email,
+          tel:       form.tel.value.trim(),
+          messaggio: form.messaggio.value.trim(),
+        }),
+      });
+      const data = await res.json();
+
+      if(data.ok){
+        feedback.className = 'form-feedback ok';
+        feedback.textContent = 'Messaggio inviato! Ti risponderemo entro 24 ore.';
+        form.reset();
+      } else {
+        throw new Error(data.error || 'Errore server');
+      }
+    } catch(err){
+      feedback.className = 'form-feedback err';
+      feedback.textContent = 'Qualcosa è andato storto. Riprova o scrivici direttamente.';
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = 'Invia richiesta <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>';
+    }
+  });
+})();
+
+// ============================================================
 // NUMERI — cascata scandita: un numero dopo l'altro, non insieme
 // ============================================================
 function animateCounter(el, duration){
