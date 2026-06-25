@@ -997,6 +997,61 @@ footer{
   border:1px solid rgba(201,104,58,.2);
 }
 
+.field-check{ margin-top:4px; }
+.check-label{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  cursor:pointer;
+}
+.check-label input[type="checkbox"]{
+  position:absolute;
+  opacity:0;
+  width:0;
+  height:0;
+}
+.check-box{
+  flex-shrink:0;
+  width:20px;
+  height:20px;
+  border-radius:5px;
+  border:1.5px solid rgba(19,35,29,.25);
+  background:#fafaf8;
+  margin-top:2px;
+  transition:border-color .2s, background .2s, box-shadow .2s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.check-box::after{
+  content:'';
+  width:10px;
+  height:6px;
+  border-left:2px solid #fff;
+  border-bottom:2px solid #fff;
+  transform:rotate(-45deg) scale(0);
+  transition:transform .15s ease;
+}
+.check-label input:checked ~ .check-box{
+  background:var(--green);
+  border-color:var(--green);
+  box-shadow:0 0 0 3px rgba(31,107,74,.15);
+}
+.check-label input:checked ~ .check-box::after{
+  transform:rotate(-45deg) scale(1);
+}
+.check-label:hover .check-box{ border-color:var(--green); }
+.check-text{
+  font-size:13px;
+  line-height:1.55;
+  color:var(--ink-soft);
+}
+.check-text a{
+  color:var(--green);
+  text-decoration:underline;
+  text-underline-offset:2px;
+}
+
 /* ============================================================
    CTA MID-PAGE — banner con draghetto
    ============================================================ */

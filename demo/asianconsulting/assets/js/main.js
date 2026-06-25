@@ -224,6 +224,11 @@ document.querySelectorAll('.reveal').forEach((el)=>{
       feedback.textContent = 'Compila nome, attività ed email per procedere.';
       return;
     }
+    if(!form.privacy.checked){
+      feedback.className = 'form-feedback err';
+      feedback.textContent = 'Devi accettare la Privacy Policy per inviare il modulo.';
+      return;
+    }
 
     btn.disabled = true;
     btn.textContent = 'Invio in corso…';

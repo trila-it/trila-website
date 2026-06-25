@@ -566,6 +566,16 @@
         <label for="f-msg">Di cosa hai bisogno?</label>
         <textarea id="f-msg" name="messaggio" placeholder="Breve descrizione della tua attività e cosa vorresti migliorare..." rows="4"></textarea>
       </div>
+      <div class="field-check">
+        <label class="check-label">
+          <input type="checkbox" id="f-privacy" name="privacy" required>
+          <span class="check-box"></span>
+          <span class="check-text">
+            Ho letto e accetto la <a href="privacy.html" target="_blank">Privacy Policy</a>.
+            Acconsento al trattamento dei miei dati per essere ricontattato.
+          </span>
+        </label>
+      </div>
       <div class="form-feedback" id="form-feedback" aria-live="polite"></div>
       <button type="submit" class="btn btn-primary" id="form-submit">
         Invia richiesta
@@ -611,7 +621,11 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 Asian Consulting — content agency.</span>
-      <span>Non siamo solo partner. Cresciamo insieme.</span>
+      <span>
+        Non siamo solo partner. Cresciamo insieme.
+        &nbsp;·&nbsp;
+        <a href="privacy.html" style="color:rgba(251,248,241,.5);text-decoration:underline;">Privacy Policy</a>
+      </span>
     </div>
   </div>
 </footer>
