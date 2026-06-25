@@ -7,6 +7,24 @@
 gsap.registerPlugin(ScrollTrigger);
 
 // ============================================================
+// PRELOADER — si chiude quando il DOM è pronto (non aspetta i video)
+// ============================================================
+(function initPreloader(){
+  const el = document.getElementById('preloader');
+  if(!el) return;
+  function hide(){
+    el.classList.add('hidden');
+    el.addEventListener('transitionend', () => el.remove(), { once: true });
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', hide);
+  } else {
+    // già pronto
+    setTimeout(hide, 300);
+  }
+})();
+
+// ============================================================
 // HERO VISUAL — 3 telefoni con snap-scroll reel + flottaggio
 // ============================================================
 (function initHeroPhones(){
@@ -46,6 +64,9 @@ gsap.registerPlugin(ScrollTrigger);
     v.disablePictureInPicture = true;
     v.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;';
     v.preload = preload || 'auto';
+    // poster: primo frame estratto con ffmpeg — evita il nero su mobile
+    const poster = src.replace('assets/video/', 'assets/img/poster_').replace('.mp4', '.jpg');
+    v.poster = poster;
     return v;
   }
 
@@ -65,7 +86,7 @@ gsap.registerPlugin(ScrollTrigger);
       const card = document.createElement('div');
       card.className = 'reel-card';
       // Il primo video parte subito, gli altri preload=none per non saturare la banda
-      const v = makeVideo(src, j === 0 ? 'auto' : 'none');
+      const v = makeVideo(src, j === 0 ? 'metadata' : 'none');
       allVideos.push(v);
       card.appendChild(v);
       track.appendChild(card);
