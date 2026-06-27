@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Camere — Hotel Misa Marzabotto</title>
+  <meta name="description" content="8 camere con vista sui monti dell'Appennino Bolognese. WiFi, A/C, minibar inclusi. Prenota direttamente al miglior prezzo.">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/pages.css">
+  <style>
+    /* ── Camere ── */
+    .camere-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+      margin-bottom: 7rem;
+    }
+    .camere-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 3rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--beige-2);
+    }
+    .cs-val { font-family: var(--serif); font-size: 3rem; font-weight: 300; color: var(--brown); display: block; line-height: 1; }
+    .cs-lbl { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--stone); display: block; margin-top: 0.4rem; }
+
+    /* Camera card */
+    .camera {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 520px;
+      border-top: 1px solid var(--beige-2);
+    }
+    .camera.flip { direction: rtl; }
+    .camera.flip > * { direction: ltr; }
+    .camera-img {
+      position: relative;
+      overflow: hidden;
+    }
+    .camera-img img { transition: transform 1.2s var(--slow); }
+    .camera-img:hover img { transform: scale(1.04); }
+    .camera-badge {
+      position: absolute;
+      top: 1.5rem; left: 1.5rem;
+      background: var(--white);
+      color: var(--brown);
+      font-family: var(--sans);
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.45rem 1rem;
+      border-radius: 100px;
+    }
+    .camera-body {
+      padding: 4rem 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--white);
+    }
+    .camera-eyebrow {
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--stone);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .camera-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      font-weight: 300;
+      color: var(--brown);
+      line-height: 1.15;
+      margin-bottom: 1.4rem;
+    }
+    .camera-title em { font-style: italic; }
+    .camera-desc {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--stone);
+      line-height: 1.85;
+      margin-bottom: 2rem;
+    }
+    .camera-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2.4rem;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      font-weight: 400;
+      color: var(--brown);
+      background: var(--beige);
+      padding: 0.4rem 0.9rem;
+      border-radius: 100px;
+    }
+    .tag svg { width: 11px; height: 11px; stroke: var(--stone); fill: none; stroke-width: 1.5; }
+    .camera-price {
+      display: flex;
+      align-items: baseline;
+      gap: 0.3rem;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--beige-2);
+    }
+    .price-from { font-size: 0.75rem; font-weight: 300; color: var(--stone); }
+    .price-val { font-family: var(--serif); font-size: 2.4rem; font-weight: 300; color: var(--brown); line-height: 1; }
+    .price-night { font-size: 0.75rem; font-weight: 300; color: var(--stone); }
+
+    /* btn-pill già definito in home.css ma lo ridefinisco qui */
+    .btn-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 1rem 2.2rem;
+      border-radius: 100px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.35s var(--slow);
+      text-decoration: none;
+    }
+    .btn-pill svg { width: 13px; height: 13px; transition: transform 0.3s; flex-shrink: 0; }
+    .btn-pill:hover svg { transform: translateX(4px); }
+    .btn-dark { background: var(--brown); color: var(--white); }
+    .btn-dark:hover { background: var(--brown-2); }
+    .btn-outline { background: transparent; color: var(--brown); border: 1.5px solid var(--beige-3); }
+    .btn-outline:hover { border-color: var(--brown); }
+    .btn-white { background: var(--white); color: var(--brown); }
+    .btn-white:hover { background: var(--beige); }
+    .btn-outline-white { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,0.5); }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.1); }
+
+    @media (max-width: 1024px) {
+      .camera { grid-template-columns: 1fr; min-height: auto; }
+      .camera.flip { direction: ltr; }
+      .camera-img { height: 380px; }
+      .camera-body { padding: 3rem 4vw; }
+      .camere-intro { grid-template-columns: 1fr; gap: 3rem; }
+    }
+    @media (max-width: 768px) {
+      .camera-img { height: 280px; }
+      .camera-body { padding: 2.5rem 5vw; }
+      .camere-stats { gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <ul class="nav-left">
+    <li><a href="camere.html">Camere</a></li>
+    <li><a href="ristorante.html">Ristorante</a></li>
+    <li><a href="sale.html">Sale Riunioni</a></li>
+  </ul>
+  <div class="nav-center">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/img/logo_black.png" alt="Hotel Misa">
+    </a>
+  </div>
+  <ul class="nav-right">
+    <li><a href="contatti.html">Contatti</a></li>
+    <li><a href="https://hospitality-guest.teamsystem.cloud/booking-engine/al-misa-da-gege" target="_blank" class="nav-book-btn">Prenota ora</a></li>
+  </ul>
+  <div class="hamburger" aria-label="Menu"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="camere.html">Camere</a>
+  <a href="ristorante.html">Ristorante</a>
+  <a href="sale.html">Sale Riunioni</a>
+  <a href="contatti.html">Contatti</a>
+  <a href="https://hospitality-guest.teamsystem.cloud/booking-engine/al-misa-da-gege" target="_blank" class="mobile-book">Prenota ora</a>
+</div>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-hero-img">
+    <img src="assets/img/camere/0225n12000s85pqjj2562_W_1280_853_R5.webp" alt="Camere Hotel Misa" fetchpriority="high">
+  </div>
+  <div class="page-hero-body">
+    <span class="page-eyebrow">Soggiorno</span>
+    <h1 class="page-title">Le nostre <em>Camere</em></h1>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="section">
+  <div class="section-inner">
+    <div class="camere-intro">
+      <div>
+        <span class="section-eyebrow reveal">8 camere · 3 stelle</span>
+        <h2 class="section-title reveal d1">Comfort e <em>vista sui monti</em></h2>
+        <p class="section-body reveal d2">Ogni camera è stata curata nei minimi dettagli. Aria condizionata, minibar, TV, WiFi gratuito e bagno privato in tutte le camere. Reception attiva 24 ore su 24 per qualsiasi necessità.</p>
+        <div class="camere-stats reveal d3">
+          <div><span class="cs-val">8</span><span class="cs-lbl">Camere</span></div>
+          <div><span class="cs-val">14:00</span><span class="cs-lbl">Check-in</span></div>
+          <div><span class="cs-val">11:00</span><span class="cs-lbl">Check-out</span></div>
+        </div>
+      </div>
+      <div class="reveal d2">
+        <img src="assets/img/camere/0225x12000s84buwrD729_W_1280_853_R5.webp" alt="Camera Hotel Misa" style="border-radius:4px; height:420px; object-fit:cover;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAMERA 1 -->
+<div class="camera reveal">
+  <div class="camera-img">
+    <img src="assets/img/camere/0221c12000s84c60aDFD6_W_1280_853_R5.webp" alt="Camera Confortevole Vista Monti" loading="lazy">
+    <span class="camera-badge">Vista Monti</span>
+  </div>
+  <div class="camera-body">
+    <span class="camera-eyebrow">Camera</span>
+    <h2 class="camera-title">Camera <em>Confortevole</em></h2>
+    <div class="camera-price">
+      <span class="price-from">Da</span>
+      <span class="price-val">€59</span>
+      <span class="price-night">/ notte</span>
+    </div>
+    <p class="camera-desc">La nostra camera più caratteristica, con vista panoramica sulle colline appenniniche. Letto queen e letto singolo, perfetta per coppie o chi viaggia con un accompagnatore.</p>
+    <div class="camera-tags">
+      <span class="tag"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>TV</span>
+      <span class="tag"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>WiFi</span>
+      <span class="tag"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>Minibar</span>
+      <span class="tag"><svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/></svg>A/C</span>
+      <span class="tag"><svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/></svg>Vista monti</span>
+    </div>
+    <a href="https://hospitality-guest.teamsystem.cloud/booking-engine/al-misa-da-gege" target="_blank" class="btn-pill btn-dark">
+      Prenota questa camera
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- CAMERA 2 -->
+<div class="camera flip reveal">
+  <div class="camera-img">
+    <img src="assets/img/camere/0221l12000s84buot4129_W_1280_853_R5.webp" alt="Camera Doppia Matrimoniale" loading="lazy">
+  </div>
+  <div class="camera-body">
+    <span class="camera-eyebrow">Camera</span>
+    <h2 class="camera-title">Camera <em>Doppia / Matrimoniale</em></h2>
+    <div class="camera-price">
+      <span class="price-from">Da</span>
+      <span class="price-val">€59</span>
+      <span class="price-night">/ notte</span>
+    </div>
+    <p class="camera-desc">Versatile e confortevole, disponibile con letto matrimoniale o due letti singoli. Al piano terra con accesso diretto, ideale per chi preferisce evitare le scale.</p>
+    <div class="camera-tags">
+      <span class="tag"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>TV</span>
+      <span class="tag"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>WiFi</span>
+      <span class="tag"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>Minibar</span>
+      <span class="tag"><svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/></svg>A/C</span>
+      <span class="tag"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Piano terra</span>
+    </div>
+    <a href="https://hospitality-guest.teamsystem.cloud/booking-engine/al-misa-da-gege" target="_blank" class="btn-pill btn-dark">
+      Prenota questa camera
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- CAMERA 3 -->
+<div class="camera reveal">
+  <div class="camera-img">
+    <img src="assets/img/camere/0223j12000s84bjwnC024_W_1280_853_R5.webp" alt="Camera Vista Montagna" loading="lazy">
+    <span class="camera-badge">Più richiesta</span>
+  </div>
+  <div class="camera-body">
+    <span class="camera-eyebrow">Camera</span>
+    <h2 class="camera-title">Camera Vista <em>Montagna</em></h2>
+    <div class="camera-price">
+      <span class="price-from">Da</span>
+      <span class="price-val">€69</span>
+      <span class="price-night">/ notte</span>
+    </div>
+    <p class="camera-desc">La nostra camera più apprezzata. Si affaccia direttamente sull'Appennino con una vista che toglie il fiato. Disponibile matrimoniale o doppia.</p>
+    <div class="camera-tags">
+      <span class="tag"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>TV</span>
+      <span class="tag"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>WiFi</span>
+      <span class="tag"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>Minibar</span>
+      <span class="tag"><svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/></svg>A/C</span>
+      <span class="tag"><svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/></svg>Vista montagna</span>
+    </div>
+    <a href="https://hospitality-guest.teamsystem.cloud/booking-engine/al-misa-da-gege" target="_blank" class="btn-pill btn-dark">
+      Prenota questa camera
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- SERVIZI -->
+<section class="section section--beige">
+  <div class="section-inner">
+    <div style="text-align:center; margin-bottom:1rem;">
+      <span class="section-eyebrow reveal">Incluso in ogni camera</span>
+      <h2 class="section-title reveal d1" style="text-align:center;">I servizi <em>dell'hotel</em></h2>
+    </div>
+    <div class="amenities-grid">
+      <div class="amenity-item reveal"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg><span>WiFi gratuito</span></div>
+      <div class="amenity-item reveal d1"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><span>Parcheggio gratuito</span></div>
+      <div class="amenity-item reveal d2"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Reception 24/7</span></div>
+      <div class="amenity-item reveal d3"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span>Ascensore</span></div>
+      <div class="amenity-item reveal"><svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/></svg><span>Aria condizionata</span></div>
+      <div class="amenity-item reveal d1"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg><span>Minibar</span></div>
+      <div class="amenity-item reveal d2"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span>TV satellite</span></div>
+      <div class="amenity-item reveal d3"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Bagno privato</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="page-cta">
+  <div class="page-cta-img">
+    <img src="assets/img/hero/0223p12000s84c4bfC6CC_W_1280_853_R5.webp" alt="Prenota Hotel Misa" loading="lazy">
+  </div>
+  <div class="page-cta-body">
+    <span class="page-cta-eyebrow reveal">Prenotazione diretta</span>
+    <h2 class="page-cta-title reveal d1">Prenota adesso<br>e <em>risparmia</em></h2>
+    <div class="page-cta-actions reveal d2">
+      <a href="https://hospitality-guest.teamsystem.cloud/booking-engine/al-misa-da-gege" target="_blank" class="btn-pill btn-white">
+        Verifica disponibilità
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="contatti.html" class="btn-pill btn-outline-white">Contattaci</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <img src="assets/img/logo_black.png" alt="Hotel Misa" class="footer-logo-img">
+        <p class="footer-desc">Un hotel 3 stelle nel cuore dell'Appennino Bolognese, dove l'accoglienza è autentica e la cura è nei dettagli.</p>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/hotelmisa" target="_blank" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/hotelmisa" target="_blank" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Esplora</h5>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="camere.html">Camere</a></li>
+          <li><a href="ristorante.html">Ristorante</a></li>
+          <li><a href="sale.html">Sale Riunioni</a></li>
+          <li><a href="contatti.html">Contatti</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Prenota</h5>
+        <ul>
+          <li><a href="https://hospitality-guest.teamsystem.cloud/booking-engine/al-misa-da-gege" target="_blank">Camere</a></li>
+          <li><a href="ristorante.html#prenota">Ristorante</a></li>
+          <li><a href="sale.html#richiesta">Sala Riunioni</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Dove siamo</h5>
+        <div class="footer-address">
+          <p>Piazza Martiri delle<br>Fosse Ardeatine, 1<br>40043 Marzabotto (BO)</p>
+          <p><a href="tel:051932800">051 932800</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 Hotel Misa — Al Misa da Gegè. Tutti i diritti riservati.</span>
+      <a href="contatti.html">Privacy Policy</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

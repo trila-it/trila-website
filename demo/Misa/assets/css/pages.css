@@ -1,0 +1,191 @@
+/* ══════════════════════════════
+   INNER PAGES — shared
+══════════════════════════════ */
+
+/* ── Page hero ── */
+.page-hero {
+  position: relative;
+  height: 60vh;
+  min-height: 420px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+.page-hero-img {
+  position: absolute;
+  inset: 0;
+}
+.page-hero-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10,8,5,0.3) 0%,
+    rgba(10,8,5,0.25) 40%,
+    rgba(10,8,5,0.65) 100%
+  );
+}
+.page-hero-body {
+  position: relative;
+  z-index: 2;
+  padding: 0 6vw 4rem;
+  max-width: 1380px;
+  width: 100%;
+  margin: 0 auto;
+}
+.page-eyebrow {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+  margin-bottom: 0.9rem;
+}
+.page-title {
+  font-family: var(--serif);
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.08;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.35);
+}
+.page-title em { font-style: italic; }
+
+/* ── Section wrapper ── */
+.section {
+  padding: 8rem 6vw;
+}
+.section-inner {
+  max-width: 1380px;
+  margin: 0 auto;
+}
+.section--beige { background: var(--beige); }
+.section--dark { background: var(--brown); }
+
+/* ── Section heading ── */
+.section-eyebrow {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--stone);
+  margin-bottom: 1.2rem;
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  font-weight: 300;
+  color: var(--brown);
+  line-height: 1.1;
+  margin-bottom: 2rem;
+}
+.section-title em { font-style: italic; }
+.section-body {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--stone);
+  line-height: 1.85;
+  max-width: 560px;
+}
+
+/* ── Fullbleed CTA (shared) ── */
+.page-cta {
+  position: relative;
+  height: 55vh;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.page-cta-img {
+  position: absolute;
+  inset: 0;
+}
+.page-cta-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(10,8,5,0.56);
+}
+.page-cta-body {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 4vw;
+  max-width: 640px;
+}
+.page-cta-eyebrow {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 1.2rem;
+}
+.page-cta-title {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 2.2rem;
+}
+.page-cta-title em { font-style: italic; }
+.page-cta-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── Amenities grid ── */
+.amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--beige-3);
+  margin-top: 4rem;
+}
+.amenity-item {
+  background: var(--beige);
+  padding: 2.4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  transition: background 0.3s;
+}
+.amenity-item:hover { background: #ece4d5; }
+.amenity-item svg {
+  width: 22px; height: 22px;
+  stroke: var(--stone);
+  fill: none;
+  stroke-width: 1.5;
+  flex-shrink: 0;
+}
+.amenity-item span {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--brown);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .amenities-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 768px) {
+  .page-hero { height: 50vh; min-height: 320px; }
+  .page-hero-body { padding: 0 5vw 3rem; }
+  .section { padding: 5rem 5vw; }
+  .amenities-grid { grid-template-columns: repeat(2, 1fr); }
+}

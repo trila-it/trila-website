@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contatti — Hotel Misa Marzabotto</title>
+  <meta name="description" content="Contatta l'Hotel Misa di Marzabotto. Tel. 051 932800 — Piazza Martiri delle Fosse Ardeatine 1, Marzabotto (BO).">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/pages.css">
+  <style>
+    .btn-pill {
+      display: inline-flex; align-items: center; gap: 0.8rem;
+      font-family: var(--sans); font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      padding: 1rem 2.2rem; border-radius: 100px;
+      cursor: pointer; border: none; transition: all 0.35s var(--slow);
+      text-decoration: none;
+    }
+    .btn-pill svg { width: 13px; height: 13px; transition: transform 0.3s; flex-shrink: 0; }
+    .btn-pill:hover svg { transform: translateX(4px); }
+    .btn-dark { background: var(--brown); color: var(--white); }
+    .btn-dark:hover { background: var(--brown-2); }
+    .btn-white { background: var(--white); color: var(--brown); }
+    .btn-white:hover { background: var(--beige); }
+    .btn-outline-white { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,0.5); }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.1); }
+
+    .contatti-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7rem;
+      align-items: start;
+    }
+    .info-list { margin-top: 3rem; display: flex; flex-direction: column; gap: 2.5rem; }
+    .info-item { display: flex; gap: 1.4rem; align-items: flex-start; }
+    .info-icon {
+      width: 42px; height: 42px; flex-shrink: 0;
+      border-radius: 50%; border: 1px solid var(--beige-3);
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 0.2rem;
+    }
+    .info-icon svg { width: 18px; height: 18px; stroke: var(--stone); fill: none; stroke-width: 1.5; }
+    .info-item h4 { font-family: var(--sans); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--stone); margin-bottom: 0.5rem; }
+    .info-item p { font-size: 0.92rem; font-weight: 300; color: var(--brown); line-height: 1.8; }
+    .info-item a { color: var(--brown); transition: color 0.3s; }
+    .info-item a:hover { color: var(--stone); }
+    .info-big { font-family: var(--serif); font-size: 2rem; font-weight: 300; color: var(--brown); display: block; margin-bottom: 0.2rem; }
+    .info-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--stone);
+      margin-top: 0.6rem; transition: color 0.3s;
+    }
+    .info-link:hover { color: var(--brown); }
+    .info-link svg { width: 11px; height: 11px; stroke: currentColor; fill: none; }
+
+    .contatti-form { display: flex; flex-direction: column; gap: 1.2rem; }
+    .field { display: flex; flex-direction: column; gap: 0.4rem; }
+    .field label { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--brown); }
+    .field input, .field select, .field textarea {
+      font-family: var(--sans); font-size: 0.9rem; font-weight: 300; color: var(--brown);
+      background: transparent; border: none; border-bottom: 1px solid var(--beige-3);
+      padding: 0.6rem 0; outline: none; transition: border-color 0.3s; width: 100%;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--brown); }
+    .field textarea { resize: vertical; min-height: 120px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .privacy-row {
+      display: flex; align-items: flex-start; gap: 0.8rem;
+      font-size: 0.8rem; font-weight: 300; color: var(--stone); line-height: 1.6;
+    }
+    .privacy-row input[type="checkbox"] { margin-top: 3px; flex-shrink: 0; accent-color: var(--brown); }
+    .privacy-row a { color: var(--brown); }
+
+    .mappa { height: 420px; }
+    .mappa iframe { width: 100%; height: 100%; border: none; display: block; }
+
+    @media (max-width: 1024px) {
+      .contatti-grid { grid-template-columns: 1fr; gap: 4rem; }
+      .form-row { grid-template-columns: 1fr; gap: 1.2rem; }
+    }
+    @media (max-width: 768px) {
+      .mappa { height: 300px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <ul class="nav-left">
+    <li><a href="camere.html">Camere</a></li>
+    <li><a href="ristorante.html">Ristorante</a></li>
+    <li><a href="sale.html">Sale Riunioni</a></li>
+  </ul>
+  <div class="nav-center">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/img/logo_black.png" alt="Hotel Misa">
+    </a>
+  </div>
+  <ul class="nav-right">
+    <li><a href="contatti.html">Contatti</a></li>
+    <li><a href="https://hospitality-guest.teamsystem.cloud/booking-engine/al-misa-da-gege" target="_blank" class="nav-book-btn">Prenota ora</a></li>
+  </ul>
+  <div class="hamburger" aria-label="Menu"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="camere.html">Camere</a>
+  <a href="ristorante.html">Ristorante</a>
+  <a href="sale.html">Sale Riunioni</a>
+  <a href="contatti.html">Contatti</a>
+  <a href="https://hospitality-guest.teamsystem.cloud/booking-engine/al-misa-da-gege" target="_blank" class="mobile-book">Prenota ora</a>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-img">
+    <img src="assets/img/hero/0222t12000s84c4be75D6_W_1280_853_R5.webp" alt="Contatti Hotel Misa" fetchpriority="high">
+  </div>
+  <div class="page-hero-body">
+    <span class="page-eyebrow">Siamo qui per te</span>
+    <h1 class="page-title"><em>Contattaci</em></h1>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="contatti-grid">
+      <div>
+        <span class="section-eyebrow reveal">Informazioni</span>
+        <h2 class="section-title reveal d1">Come <em>trovarci</em></h2>
+        <div class="info-list">
+          <div class="info-item reveal d1">
+            <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div>
+              <h4>Indirizzo</h4>
+              <p>Piazza Martiri delle Fosse Ardeatine, 1<br>40043 Marzabotto (BO)</p>
+              <a href="https://maps.google.com/?q=Piazza+Martiri+Fosse+Ardeatine+1+Marzabotto" target="_blank" class="info-link">
+                Apri in Google Maps
+                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="info-item reveal d2">
+            <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 17z"/></svg></div>
+            <div>
+              <h4>Telefono</h4>
+              <a href="tel:051932800" class="info-big">051 932800</a>
+              <p>Reception attiva 24 ore su 24</p>
+            </div>
+          </div>
+          <div class="info-item reveal d3">
+            <div class="info-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div>
+              <h4>Check-in / Check-out</h4>
+              <p>Check-in: <strong>dalle ore 14:00</strong><br>Check-out: <strong>entro le ore 11:00</strong></p>
+            </div>
+          </div>
+          <div class="info-item reveal d4">
+            <div class="info-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+            <div>
+              <h4>Come arrivare</h4>
+              <p><strong>In auto:</strong> A1 uscita Sasso Marconi, poi SS64 verso Marzabotto (28 km da Bologna)</p>
+              <p style="margin-top:0.4rem;"><strong>In treno:</strong> Stazione Marzabotto a 290 m dall'hotel</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <span class="section-eyebrow reveal">Scrivici</span>
+        <h2 class="section-title reveal d1">Hai una <em>domanda?</em></h2>
+        <p class="section-body reveal d2" style="margin-bottom:2.5rem;">Compila il modulo e ti risponderemo il prima possibile. Per prenotare le camere usa il bottone "Prenota ora".</p>
+        <form class="contatti-form reveal d2" id="form-contatti">
+          <div class="form-row">
+            <div class="field"><label for="nome-c">Nome e Cognome *</label><input type="text" id="nome-c" name="nome" placeholder="Mario Rossi" required></div>
+            <div class="field"><label for="email-c">Email *</label><input type="email" id="email-c" name="email" placeholder="mario@esempio.it" required></div>
+          </div>
+          <div class="field"><label for="tel-c">Telefono</label><input type="tel" id="tel-c" name="telefono" placeholder="333 1234567"></div>
+          <div class="field">
+            <label for="oggetto">Oggetto *</label>
+            <select id="oggetto" name="oggetto" required>
+              <option value="">Seleziona</option>
+              <option>Informazioni generali</option>
+              <option>Prenotazione camere</option>
+              <option>Prenotazione ristorante</option>
+              <option>Sale riunioni / eventi</option>
+              <option>Preventivo gruppo</option>
+              <option>Altro</option>
+            </select>
+          </div>
+          <div class="field"><label for="msg">Messaggio *</label><textarea id="msg" name="messaggio" placeholder="Scrivi qui la tua richiesta..." required></textarea></div>
+          <div class="privacy-row">
+            <input type="checkbox" name="privacy" id="privacy" required>
+            <label for="privacy">Ho letto e accetto la <a href="#">Privacy Policy</a> *</label>
+          </div>
+          <button type="submit" class="btn-pill btn-dark" style="justify-content:center;">
+            Invia messaggio
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="mappa">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2843.7!2d11.2001!3d44.3494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132adf6e3a8b3a2d%3A0x1234!2sPiazza+Martiri+delle+Fosse+Ardeatine%2C+1%2C+40043+Marzabotto+BO!5e0!3m2!1sit!2sit!4v1234567890"
+    title="Hotel Misa Marzabotto"
+    loading="lazy"
+    allowfullscreen
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+
+<div class="page-cta">
+  <div class="page-cta-img">
+    <img src="assets/img/hero/0221v12000s84c65x4CA7_W_1280_853_R5.webp" alt="Hotel Misa" loading="lazy">
+  </div>
+  <div class="page-cta-body">
+    <span class="page-cta-eyebrow reveal">Pronto a venire?</span>
+    <h2 class="page-cta-title reveal d1">Prenota <em>direttamente</em> con noi</h2>
+    <div class="page-cta-actions reveal d2">
+      <a href="https://hospitality-guest.teamsystem.cloud/booking-engine/al-misa-da-gege" target="_blank" class="btn-pill btn-white">
+        Verifica disponibilità
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="camere.html" class="btn-pill btn-outline-white">Scopri le camere</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <img src="assets/img/logo_black.png" alt="Hotel Misa" class="footer-logo-img">
+        <p class="footer-desc">Un hotel 3 stelle nel cuore dell'Appennino Bolognese, dove l'accoglienza è autentica e la cura è nei dettagli.</p>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/hotelmisa" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="https://www.instagram.com/hotelmisa" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col"><h5>Esplora</h5><ul><li><a href="index.html">Home</a></li><li><a href="camere.html">Camere</a></li><li><a href="ristorante.html">Ristorante</a></li><li><a href="sale.html">Sale Riunioni</a></li><li><a href="contatti.html">Contatti</a></li></ul></div>
+      <div class="footer-col"><h5>Prenota</h5><ul><li><a href="https://hospitality-guest.teamsystem.cloud/booking-engine/al-misa-da-gege" target="_blank">Camere</a></li><li><a href="ristorante.html#prenota">Ristorante</a></li><li><a href="sale.html#richiesta">Sala Riunioni</a></li></ul></div>
+      <div class="footer-col"><h5>Dove siamo</h5><div class="footer-address"><p>Piazza Martiri delle<br>Fosse Ardeatine, 1<br>40043 Marzabotto (BO)</p><p><a href="tel:051932800">051 932800</a></p></div></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 Hotel Misa — Al Misa da Gegè. Tutti i diritti riservati.</span>
+      <a href="#">Privacy Policy</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
