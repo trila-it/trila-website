@@ -40,16 +40,22 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-img">
-    <img src="assets/img/hero/0221v12000s84c65x4CA7_W_1280_853_R5.webp" alt="Hotel Misa Marzabotto" fetchpriority="high">
+  <div class="hero-slides">
+    <div class="hero-slide active"><img src="assets/img/hero/esterno.webp" alt="Hotel Misa Marzabotto" fetchpriority="high"></div>
+    <div class="hero-slide"><img src="assets/img/hero/camera-doppia-montagna.webp" alt="Camera doppia Hotel Misa" loading="lazy"></div>
+    <div class="hero-slide"><img src="assets/img/hero/ristorante-sala.webp" alt="Ristorante Hotel Misa" loading="lazy"></div>
+    <div class="hero-slide"><img src="assets/img/hero/ingresso.webp" alt="Ingresso Hotel Misa" loading="lazy"></div>
+    <div class="hero-slide"><img src="assets/img/hero/bar.webp" alt="Bar Hotel Misa" loading="lazy"></div>
   </div>
+  <div class="hero-overlay"></div>
 
   <div class="hero-logo">
     <img src="assets/img/logo_black.png" alt="Hotel Misa">
   </div>
   <p class="hero-sub">Marzabotto · Appennino Bolognese</p>
+  <p class="hero-desc">Un hotel 3 stelle autentico nel cuore dell'Appennino Bolognese,<br>dove l'accoglienza è di casa.</p>
 
-  <div class="hero-scroll">
+<div class="hero-scroll">
     <span>Scorri</span>
     <div class="hero-scroll-line"></div>
   </div>
@@ -64,19 +70,31 @@
   </div>
   <div class="booking-bar booking-bar--desktop">
     <div class="booking-bar-inner">
-      <div class="bb-field">
+      <div class="bb-field" id="bb-checkin">
         <label>Check-in</label>
-        <input type="date" id="checkin" name="checkin">
+        <span class="bb-val" data-placeholder="Aggiungi data">Aggiungi data</span>
+        <input type="date" id="checkin" name="checkin" tabindex="-1">
       </div>
-      <div class="bb-field">
+      <div class="bb-field" id="bb-checkout">
         <label>Check-out</label>
-        <input type="date" id="checkout" name="checkout">
+        <span class="bb-val" data-placeholder="Aggiungi data">Aggiungi data</span>
+        <input type="date" id="checkout" name="checkout" tabindex="-1">
       </div>
-      <div class="bb-field">
+      <div class="bb-field bb-field--ospiti">
         <label>Ospiti</label>
-        <span>1 adulto</span>
+        <select id="ospiti" name="ospiti">
+          <option>1 adulto</option>
+          <option>2 adulti</option>
+          <option>3 adulti</option>
+          <option>4 adulti</option>
+          <option>2 adulti + 1 bambino</option>
+          <option>2 adulti + 2 bambini</option>
+        </select>
       </div>
-      <a href="https://hospitality-guest.teamsystem.cloud/booking-engine/al-misa-da-gege" target="_blank" class="bb-book">Controlla disponibilità</a>
+      <a href="https://hospitality-guest.teamsystem.cloud/booking-engine/al-misa-da-gege" target="_blank" class="bb-book">
+        <span class="bb-book-text">Controlla disponibilità</span>
+        <svg class="bb-book-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
     </div>
   </div>
 </section>
@@ -102,10 +120,10 @@
     </div>
     <div class="intro-visual reveal d2">
       <div class="iv-main">
-        <img src="assets/img/hero/0222t12000s84c4be75D6_W_1280_853_R5.webp" alt="Esterno Hotel Misa" loading="lazy">
+        <img src="assets/img/camere/doppia.webp" alt="Camera doppia Hotel Misa" loading="lazy">
       </div>
       <div class="iv-secondary">
-        <img src="assets/img/hero/0223p12000s84c4bfC6CC_W_1280_853_R5.webp" alt="Dettaglio Hotel Misa" loading="lazy">
+        <img src="assets/img/ristorante/ingresso-ristorante.webp" alt="Ristorante Hotel Misa" loading="lazy">
       </div>
     </div>
   </div>
@@ -150,7 +168,7 @@
     <div class="services-grid">
       <a href="camere.html" class="scard reveal">
         <div class="scard-img">
-          <img src="assets/img/camere/0221c12000s84c60aDFD6_W_1280_853_R5.webp" alt="Camere Hotel Misa" loading="lazy">
+          <img src="assets/img/camere/matrimoniale.webp" alt="Camere Hotel Misa" loading="lazy">
         </div>
         <div class="scard-body">
           <span class="scard-eyebrow">Soggiorno</span>
@@ -161,7 +179,7 @@
       </a>
       <a href="ristorante.html" class="scard reveal d1">
         <div class="scard-img">
-          <img src="assets/img/ristorante/hotel-misa-marzabotto-014-20200701044926.webp" alt="Ristorante Hotel Misa" loading="lazy">
+          <img src="assets/img/ristorante/sala2.webp" alt="Ristorante Hotel Misa" loading="lazy">
         </div>
         <div class="scard-body">
           <span class="scard-eyebrow">Cucina</span>
@@ -172,7 +190,7 @@
       </a>
       <a href="sale.html" class="scard reveal d2">
         <div class="scard-img">
-          <img src="assets/img/ristorante/hotel-misa-marzabotto-20201222000138.webp" alt="Sale riunioni Hotel Misa" loading="lazy">
+          <img src="assets/img/hero/ingresso.webp" alt="Sale riunioni Hotel Misa" loading="lazy">
         </div>
         <div class="scard-body">
           <span class="scard-eyebrow">Business</span>
@@ -188,7 +206,7 @@
 <!-- FULLBLEED CTA -->
 <section class="fullbleed">
   <div class="fullbleed-img">
-    <img src="assets/img/ristorante/hotel-misa-marzabotto-015-20200701044928.webp" alt="Prenota direttamente Hotel Misa" loading="lazy">
+    <img src="assets/img/hero/esterno-vaso.webp" alt="Hotel Misa Marzabotto" loading="lazy">
   </div>
   <div class="fullbleed-body">
     <span class="fullbleed-eyebrow reveal">Prenotazione diretta</span>
