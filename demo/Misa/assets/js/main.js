@@ -24,8 +24,15 @@ if (ham && mob) {
 
 // Reveal
 const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-}, { threshold: 0, rootMargin: '0px 0px 0px 0px' });
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      io.unobserve(e.target);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => e.target.classList.add('in'));
+      });
+    }
+  });
+}, { threshold: 0, rootMargin: '0px 0px -30px 0px' });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 // Booking bar date display
