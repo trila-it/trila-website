@@ -45,13 +45,14 @@ ul { list-style: none; }
 
 @media (max-width: 768px) {
   .reveal {
-    transform: translateY(14px);
-    transition: opacity 0.7s var(--slow), transform 0.7s var(--slow);
+    transform: none;
+    will-change: opacity;
+    transition: opacity 0.55s ease-out;
   }
-  .d1 { transition-delay: 0.07s; }
-  .d2 { transition-delay: 0.14s; }
-  .d3 { transition-delay: 0.21s; }
-  .d4 { transition-delay: 0.28s; }
+  .d1 { transition-delay: 0.05s; }
+  .d2 { transition-delay: 0.1s; }
+  .d3 { transition-delay: 0.15s; }
+  .d4 { transition-delay: 0.2s; }
 }
 
 /* clip-path reveal variant */
