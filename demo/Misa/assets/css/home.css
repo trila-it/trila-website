@@ -658,6 +658,7 @@
     display: block;
     position: relative;
     z-index: 2;
+    animation: fadeIn 0.9s var(--slow) 0.3s both;
     text-align: center;
     margin-bottom: 1.2rem;
     padding: 0 1.4rem;
