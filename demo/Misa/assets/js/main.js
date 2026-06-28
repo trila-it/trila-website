@@ -84,10 +84,9 @@ if (slides.length) {
   }
 }
 
-// ── Parallax (hero + fullbleed + page-hero) ──
-// Parallax solo sull'hero slideshow
+// ── Parallax — solo desktop ──
 const heroSlides = document.querySelector('.hero-slides');
-if (heroSlides) {
+if (heroSlides && window.matchMedia('(min-width: 769px)').matches) {
   let ticking = false;
   window.addEventListener('scroll', () => {
     if (ticking) return;
