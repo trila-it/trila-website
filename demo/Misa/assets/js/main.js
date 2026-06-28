@@ -84,14 +84,6 @@ if (slides.length) {
   }
 }
 
-// ── Hero mobile stagger ──
-const heroMobileItems = document.querySelectorAll('.hero-mobile-text > *');
-if (heroMobileItems.length && window.innerWidth <= 768) {
-  heroMobileItems.forEach((el, i) => {
-    setTimeout(() => el.classList.add('visible'), 120 + i * 140);
-  });
-}
-
 // ── Parallax — solo desktop ──
 const heroSlides = document.querySelector('.hero-slides');
 if (heroSlides && window.matchMedia('(min-width: 769px)').matches) {
