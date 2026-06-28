@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Camere — Hotel Misa Marzabotto</title>
   <meta name="description" content="8 camere con vista sui monti dell'Appennino Bolognese. WiFi, A/C, minibar inclusi. Prenota direttamente al miglior prezzo.">
+  <link rel="icon" href="assets/img/favicon.ico">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/pages.css">
   <style>
@@ -39,11 +40,59 @@
       position: relative;
       overflow: hidden;
     }
-    .camera-img img { transition: transform 1.2s var(--slow); }
-    .camera-img:hover img { transform: scale(1.04); }
+
+    /* Slideshow per camera */
+    .camera-img { display: grid; }
+    .cslide { grid-area: 1/1; opacity: 0; transition: opacity 0.7s ease; min-height: 0; }
+    .cslide.active { opacity: 1; }
+    .cslide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .cslide-btn {
+      grid-area: 1/1;
+      align-self: center;
+      position: relative;
+      z-index: 3;
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.3);
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.3s, background 0.2s;
+      margin: 0 0.9rem;
+    }
+    .cslide-btn svg { width: 16px; height: 16px; stroke: #fff; fill: none; stroke-width: 2; }
+    .cslide-btn--prev { justify-self: start; }
+    .cslide-btn--next { justify-self: end; }
+    .camera-img:hover .cslide-btn { opacity: 1; }
+    .cslide-btn:hover { background: rgba(255,255,255,0.32); }
+    .cslide-dots {
+      grid-area: 1/1;
+      align-self: end;
+      justify-self: center;
+      margin-bottom: 1rem;
+      display: flex; gap: 5px;
+      z-index: 3;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .camera-img:hover .cslide-dots { opacity: 1; }
+    .cslide-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .cslide-dot.active { background: #fff; transform: scale(1.3); }
     .camera-badge {
-      position: absolute;
-      top: 1.5rem; left: 1.5rem;
+      grid-area: 1/1;
+      align-self: start;
+      justify-self: start;
+      margin: 1.5rem 0 0 1.5rem;
+      position: relative;
+      z-index: 3;
       background: var(--white);
       color: var(--brown);
       font-family: var(--sans);
@@ -219,25 +268,33 @@
   </div>
 </section>
 
-<!-- CAMERA 1 -->
+<!-- CAMERA 1 — Singola -->
 <div class="camera reveal">
   <div class="camera-img">
-    <img src="assets/img/camere/stanza19.webp" alt="Camera Confortevole Vista Monti" loading="lazy">
-    <span class="camera-badge">Vista Monti</span>
+    <div class="cslide active"><img src="assets/img/camere/singola-1.webp" alt="Camera Singola Hotel Misa" fetchpriority="high"></div>
+    <div class="cslide"><img src="assets/img/camere/singola-2.webp" alt="Camera Singola Hotel Misa" loading="lazy"></div>
+    <button class="cslide-btn cslide-btn--prev" aria-label="Precedente"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <button class="cslide-btn cslide-btn--next" aria-label="Successiva"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+    <div class="cslide-dots">
+      <span class="cslide-dot active"></span>
+      <span class="cslide-dot"></span>
+    </div>
   </div>
   <div class="camera-body">
     <span class="camera-eyebrow">Camera</span>
-    <h2 class="camera-title">Camera <em>Confortevole</em></h2>
+    <h2 class="camera-title">Camera <em>Singola</em></h2>
     <div class="camera-price">
-      <span class="price-val">Chiedi disponibilità</span>
+      <span class="price-from">Max</span>
+      <span class="price-val">1</span>
+      <span class="price-night">persona</span>
     </div>
-    <p class="camera-desc">La nostra camera più caratteristica, con vista panoramica sulle colline appenniniche. Letto queen e letto singolo, perfetta per coppie o chi viaggia con un accompagnatore.</p>
+    <p class="camera-desc">Compatta e funzionale, perfetta per il viaggiatore singolo. Tutto il necessario per un soggiorno comodo: TV, WiFi, minibar e bagno privato.</p>
     <div class="camera-tags">
       <span class="tag"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>TV</span>
       <span class="tag"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>WiFi</span>
       <span class="tag"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>Minibar</span>
       <span class="tag"><svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/></svg>A/C</span>
-      <span class="tag"><svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/></svg>Vista monti</span>
+      <span class="tag"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Bagno privato</span>
     </div>
     <a href="https://hospitality-guest.teamsystem.cloud/booking-engine/al-misa-da-gege" target="_blank" class="btn-pill btn-dark">
       Prenota questa camera
@@ -246,24 +303,35 @@
   </div>
 </div>
 
-<!-- CAMERA 2 -->
+<!-- CAMERA 2 — Doppia standard -->
 <div class="camera flip reveal">
   <div class="camera-img">
-    <img src="assets/img/camere/doppia.webp" alt="Camera Doppia Matrimoniale" loading="lazy">
+    <div class="cslide active"><img src="assets/img/camere/doppia-1.webp" alt="Camera Doppia Hotel Misa" loading="lazy"></div>
+    <div class="cslide"><img src="assets/img/camere/doppia-2.webp" alt="Camera Doppia Hotel Misa" loading="lazy"></div>
+    <div class="cslide"><img src="assets/img/camere/doppia-3.webp" alt="Camera Doppia Hotel Misa" loading="lazy"></div>
+    <button class="cslide-btn cslide-btn--prev" aria-label="Precedente"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <button class="cslide-btn cslide-btn--next" aria-label="Successiva"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+    <div class="cslide-dots">
+      <span class="cslide-dot active"></span>
+      <span class="cslide-dot"></span>
+      <span class="cslide-dot"></span>
+    </div>
   </div>
   <div class="camera-body">
     <span class="camera-eyebrow">Camera</span>
     <h2 class="camera-title">Camera <em>Doppia / Matrimoniale</em></h2>
     <div class="camera-price">
-      <span class="price-val">Chiedi disponibilità</span>
+      <span class="price-from">Max</span>
+      <span class="price-val">2</span>
+      <span class="price-night">persone</span>
     </div>
-    <p class="camera-desc">Versatile e confortevole, disponibile con letto matrimoniale o due letti singoli. Al piano terra con accesso diretto, ideale per chi preferisce evitare le scale.</p>
+    <p class="camera-desc">Versatile e confortevole, disponibile con letto matrimoniale o due letti singoli. Ideale per coppie e viaggiatori che cercano comfort e praticità.</p>
     <div class="camera-tags">
       <span class="tag"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>TV</span>
-      <span class="tag"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>WiFi</span>
+      <span class="tag"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>WiFi</span>
       <span class="tag"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>Minibar</span>
       <span class="tag"><svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/></svg>A/C</span>
-      <span class="tag"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Piano terra</span>
+      <span class="tag"><svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/></svg>Vista giardino</span>
     </div>
     <a href="https://hospitality-guest.teamsystem.cloud/booking-engine/al-misa-da-gege" target="_blank" class="btn-pill btn-dark">
       Prenota questa camera
@@ -272,25 +340,74 @@
   </div>
 </div>
 
-<!-- CAMERA 3 -->
+<!-- CAMERA 3 — Vista Montagna -->
 <div class="camera reveal">
   <div class="camera-img">
-    <img src="assets/img/camere/matrimoniale.webp" alt="Camera Vista Montagna" loading="lazy">
-    <span class="camera-badge">Più richiesta</span>
+    <div class="cslide active"><img src="assets/img/camere/vista-montagna-1.webp" alt="Camera Vista Montagna Hotel Misa" loading="lazy"></div>
+    <div class="cslide"><img src="assets/img/camere/vista-montagna-2.webp" alt="Camera Vista Montagna Hotel Misa" loading="lazy"></div>
+    <div class="cslide"><img src="assets/img/camere/vista-montagna-3.webp" alt="Camera Vista Montagna Hotel Misa" loading="lazy"></div>
+    <button class="cslide-btn cslide-btn--prev" aria-label="Precedente"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <button class="cslide-btn cslide-btn--next" aria-label="Successiva"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+    <div class="cslide-dots">
+      <span class="cslide-dot active"></span>
+      <span class="cslide-dot"></span>
+      <span class="cslide-dot"></span>
+    </div>
+    <span class="camera-badge">Vista Montagna</span>
   </div>
   <div class="camera-body">
     <span class="camera-eyebrow">Camera</span>
-    <h2 class="camera-title">Camera Vista <em>Montagna</em></h2>
+    <h2 class="camera-title">Camera <em>Vista Montagna</em></h2>
     <div class="camera-price">
-      <span class="price-val">Chiedi disponibilità</span>
+      <span class="price-from">Max</span>
+      <span class="price-val">2</span>
+      <span class="price-night">persone</span>
     </div>
-    <p class="camera-desc">La nostra camera più apprezzata. Si affaccia direttamente sull'Appennino con una vista che toglie il fiato. Disponibile matrimoniale o doppia.</p>
+    <p class="camera-desc">Si affaccia direttamente sull'Appennino con una vista panoramica sulle montagne. Disponibile matrimoniale o doppia con due letti singoli.</p>
     <div class="camera-tags">
       <span class="tag"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>TV</span>
-      <span class="tag"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>WiFi</span>
+      <span class="tag"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>WiFi</span>
       <span class="tag"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>Minibar</span>
       <span class="tag"><svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/></svg>A/C</span>
       <span class="tag"><svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/></svg>Vista montagna</span>
+    </div>
+    <a href="https://hospitality-guest.teamsystem.cloud/booking-engine/al-misa-da-gege" target="_blank" class="btn-pill btn-dark">
+      Prenota questa camera
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- CAMERA 4 — Spaziosa con Balcone -->
+<div class="camera flip reveal">
+  <div class="camera-img">
+    <div class="cslide active"><img src="assets/img/camere/spaziosa-1.webp" alt="Camera Spaziosa Hotel Misa" loading="lazy"></div>
+    <div class="cslide"><img src="assets/img/camere/spaziosa-2.webp" alt="Camera Spaziosa Hotel Misa" loading="lazy"></div>
+    <div class="cslide"><img src="assets/img/camere/spaziosa-3.webp" alt="Camera Spaziosa Hotel Misa" loading="lazy"></div>
+    <button class="cslide-btn cslide-btn--prev" aria-label="Precedente"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <button class="cslide-btn cslide-btn--next" aria-label="Successiva"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+    <div class="cslide-dots">
+      <span class="cslide-dot active"></span>
+      <span class="cslide-dot"></span>
+      <span class="cslide-dot"></span>
+    </div>
+    <span class="camera-badge">La più richiesta</span>
+  </div>
+  <div class="camera-body">
+    <span class="camera-eyebrow">Camera</span>
+    <h2 class="camera-title">Camera Spaziosa <em>con Balcone</em></h2>
+    <div class="camera-price">
+      <span class="price-from">Max</span>
+      <span class="price-val">3</span>
+      <span class="price-night">persone</span>
+    </div>
+    <p class="camera-desc">La nostra camera più grande e apprezzata. Ampia, luminosa, con balcone privato affacciato sulla piazza. Ideale per famiglie o chi cerca spazio in più.</p>
+    <div class="camera-tags">
+      <span class="tag"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>TV</span>
+      <span class="tag"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>WiFi</span>
+      <span class="tag"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>Minibar</span>
+      <span class="tag"><svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/></svg>A/C</span>
+      <span class="tag"><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z M3 9h18M9 21V9"/></svg>Balcone</span>
     </div>
     <a href="https://hospitality-guest.teamsystem.cloud/booking-engine/al-misa-da-gege" target="_blank" class="btn-pill btn-dark">
       Prenota questa camera

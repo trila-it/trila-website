@@ -133,6 +133,34 @@ document.querySelectorAll('.stat-val').forEach(el => counterObs.observe(el));
 
 
 
+// ── Camera slideshows ──
+document.querySelectorAll('.camera-img').forEach(container => {
+  const slides = container.querySelectorAll('.cslide');
+  const dots = container.querySelectorAll('.cslide-dot');
+  if (slides.length < 2) return;
+  let cur = 0;
+
+  function goTo(idx) {
+    slides[cur].classList.remove('active');
+    dots[cur]?.classList.remove('active');
+    cur = (idx + slides.length) % slides.length;
+    slides[cur].classList.add('active');
+    dots[cur]?.classList.add('active');
+  }
+
+  container.querySelector('.cslide-btn--prev')?.addEventListener('click', () => goTo(cur - 1));
+  container.querySelector('.cslide-btn--next')?.addEventListener('click', () => goTo(cur + 1));
+  dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+
+  // Touch swipe
+  let startX = 0;
+  container.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+  container.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) goTo(dx < 0 ? cur + 1 : cur - 1);
+  });
+});
+
 // ── Tilt on service cards (desktop) ──
 if (window.matchMedia('(pointer: fine)').matches) {
   document.querySelectorAll('.scard').forEach(card => {
