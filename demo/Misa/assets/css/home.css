@@ -108,6 +108,9 @@
   opacity: 0;
   animation: fadeIn 1s var(--slow) 1.2s forwards;
 }
+@media (max-width: 768px) {
+  .hero-desc { display: none; }
+}
 
 /* Mobile-only hero text */
 .hero-mobile-text {
