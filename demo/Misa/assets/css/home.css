@@ -654,11 +654,6 @@
 }
 
 @media (max-width: 768px) {
-  @keyframes heroItemIn {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: none; }
-  }
-
   .hero-mobile-text {
     display: flex;
     flex-direction: column;
@@ -676,7 +671,6 @@
     line-height: 1.05;
     text-shadow: 0 2px 20px rgba(0,0,0,0.5);
     margin-bottom: 0.6rem;
-    animation: heroItemIn 0.7s cubic-bezier(0.16,1,0.3,1) 0.1s both;
   }
   .hero-mobile-location {
     font-family: var(--sans);
@@ -687,7 +681,6 @@
     color: rgba(255,255,255,0.8);
     text-shadow: 0 1px 8px rgba(0,0,0,0.5);
     margin-bottom: 1.4rem;
-    animation: heroItemIn 0.7s cubic-bezier(0.16,1,0.3,1) 0.22s both;
   }
   .hero-mobile-sub {
     font-family: var(--sans);
@@ -697,7 +690,6 @@
     line-height: 1.7;
     text-shadow: 0 1px 12px rgba(0,0,0,0.4);
     margin-bottom: 2rem;
-    animation: heroItemIn 0.7s cubic-bezier(0.16,1,0.3,1) 0.34s both;
   }
   .hero-mobile-cta {
     display: flex;
@@ -705,7 +697,7 @@
     justify-content: center;
     width: 100%;
     background: var(--white);
-    color: var(--brown) !important;
+    color: var(--brown);
     font-family: var(--sans);
     font-size: 0.72rem;
     font-weight: 500;
@@ -716,14 +708,23 @@
     text-decoration: none;
     box-shadow: 0 4px 20px rgba(0,0,0,0.25);
     margin-bottom: 0.8rem;
-    animation: heroItemIn 0.7s cubic-bezier(0.16,1,0.3,1) 0.46s both;
   }
   .hero-mobile-cta--outline {
     background: transparent;
-    color: var(--white) !important;
+    color: var(--white);
     border: 1.5px solid rgba(255,255,255,0.8);
     box-shadow: none;
-    animation-delay: 0.56s;
+  }
+
+  /* Stagger hero mobile via classi JS */
+  .hero-mobile-text > * {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1);
+  }
+  .hero-mobile-text > *.visible {
+    opacity: 1;
+    transform: none;
   }
 
   .booking-bar--desktop { display: none; }
