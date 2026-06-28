@@ -676,8 +676,7 @@
     line-height: 1.05;
     text-shadow: 0 2px 20px rgba(0,0,0,0.5);
     margin-bottom: 0.6rem;
-    opacity: 0;
-    animation: heroItemIn 0.8s cubic-bezier(0.16,1,0.3,1) 0.2s forwards;
+    animation: heroItemIn 0.8s cubic-bezier(0.16,1,0.3,1) 0.25s both;
   }
   .hero-mobile-location {
     font-family: var(--sans);
@@ -688,8 +687,7 @@
     color: rgba(255,255,255,0.72);
     text-shadow: 0 1px 8px rgba(0,0,0,0.5);
     margin-bottom: 1.4rem;
-    opacity: 0;
-    animation: heroItemIn 0.8s cubic-bezier(0.16,1,0.3,1) 0.4s forwards;
+    animation: heroItemIn 0.8s cubic-bezier(0.16,1,0.3,1) 0.45s both;
   }
   .hero-mobile-sub {
     font-family: var(--sans);
@@ -699,8 +697,7 @@
     line-height: 1.7;
     text-shadow: 0 1px 12px rgba(0,0,0,0.4);
     margin-bottom: 2rem;
-    opacity: 0;
-    animation: heroItemIn 0.8s cubic-bezier(0.16,1,0.3,1) 0.55s forwards;
+    animation: heroItemIn 0.8s cubic-bezier(0.16,1,0.3,1) 0.62s both;
   }
   .hero-mobile-cta {
     display: flex;
@@ -719,15 +716,14 @@
     text-decoration: none;
     box-shadow: 0 4px 20px rgba(0,0,0,0.25);
     margin-bottom: 0.8rem;
-    opacity: 0;
-    animation: heroItemIn 0.7s cubic-bezier(0.16,1,0.3,1) 0.7s forwards;
+    animation: heroItemIn 0.7s cubic-bezier(0.16,1,0.3,1) 0.78s both;
   }
   .hero-mobile-cta--outline {
     background: transparent;
     color: var(--white);
     border: 1.5px solid rgba(255,255,255,0.7);
     box-shadow: none;
-    animation-delay: 0.82s;
+    animation-delay: 0.92s;
   }
 
   .booking-bar--desktop { display: none; }
