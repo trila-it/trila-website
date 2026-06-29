@@ -8,6 +8,13 @@
 const _page = window.location.pathname.split('/').pop() || 'index.html';
 const _showLoader = _page === 'index.html' || _page === '' || _page.startsWith('sede-');
 
+// Calcola il base path degli SVG dalla posizione dello script
+const _scriptBase = (function () {
+  const s = document.currentScript;
+  if (s) return s.src.replace(/[^/]+$/, '');
+  return window.location.href.replace(/[^/]+$/, '');
+})();
+
 if (_showLoader) document.documentElement.classList.add('dc-loading');
 
 (function () {
@@ -42,10 +49,10 @@ if (_showLoader) document.documentElement.classList.add('dc-loading');
   /* dc-sizer è la prima img ma in position:relative — serve solo a dare altezza al wrapper */
   loader.innerHTML = `
     <div class="dc-logo-wrap">
-      <img class="dc-sizer"        src="img/logo_dental.svg"   alt="">
-      <img class="dc-dental-img"   src="img/logo_dental.svg"   alt="Dental">
-      <img class="dc-tooth-img"    src="img/logo_dente.svg"    alt="">
-      <img class="dc-clinique-img" src="img/logo_clinique.svg" alt="Clinique">
+      <img class="dc-sizer"        src="${_scriptBase}img/logo_dental.svg"   alt="">
+      <img class="dc-dental-img"   src="${_scriptBase}img/logo_dental.svg"   alt="Dental">
+      <img class="dc-tooth-img"    src="${_scriptBase}img/logo_dente.svg"    alt="">
+      <img class="dc-clinique-img" src="${_scriptBase}img/logo_clinique.svg" alt="Clinique">
     </div>
   `;
   document.documentElement.style.overflow = 'hidden';
