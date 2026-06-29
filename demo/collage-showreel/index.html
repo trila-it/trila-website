@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero Showreel — Demo in 3 atti</title>
+<style>
+  :root{
+    /* palette derivata dal logo: verde scaglie, verde corno, crema fumo, accenti caldi */
+    --paper:#fbf8f1;
+    --ink:#16241f;
+    --green-deep:#1f6b4a;
+    --green-bright:#3fae6e;
+    --green-light:#2e8f5f;
+    --cream:#f3ecd9;
+    --amber:#e0a458;
+    --rust:#c9683a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{
+    width:100%;height:100%;
+    background:var(--paper);
+    overflow:hidden;
+    font-family:'Arial Black', Arial, sans-serif;
+  }
+  #stage{
+    position:relative;
+    width:100vw;height:100vh;
+    overflow:hidden;
+  }
+
+  /* ============================================================
+     ATTO 1 — title card iniziale: schermo pieno bianco, logo + scritta.
+     Sopra a tutto, da solo, perfettamente leggibile.
+     ============================================================ */
+  #intro{
+    position:absolute; inset:0;
+    z-index:90;
+    background:var(--paper);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:22px;
+  }
+  #intro .intro-logo{
+    width:96px;height:96px;
+    border-radius:50%;
+    overflow:hidden;
+    background:var(--cream);
+    box-shadow:0 8px 30px rgba(22,36,31,.15);
+    transform:scale(.4);
+    opacity:0;
+  }
+  #intro .intro-logo img{ width:100%;height:100%;object-fit:cover; }
+  #intro .intro-text{
+    font-size:clamp(22px,3.4vw,40px);
+    color:var(--ink);
+    letter-spacing:.5px;
+    text-align:center;
+    min-height:1.2em;
+  }
+  #intro .intro-text .accent{ color:var(--green-bright); }
+  #intro .intro-text .cursor{
+    display:inline-block;
+    width:3px;
+    margin-left:2px;
+    background:var(--green-bright);
+    animation: blink 0.8s steps(1) infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+  /* il blocco intero (logo+testo) che poi scivola via verso il basso */
+  #intro .intro-block{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:22px;
+  }
+
+  /* ============================================================
+     ATTO 2 — il collage a colonne, sfondo vivo dell'intera scena.
+     Durante l'atto 2 è a piena leggibilità/contrasto, nessun testo sopra.
+     ============================================================ */
+  #columns{
+    position:absolute;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    gap: clamp(14px, 2vw, 28px);
+    padding: 0 clamp(20px, 4vw, 60px);
+    filter: saturate(1.05);
+    transform: scale(1.15);
+    opacity:0;
+  }
+  .column{
+    position:relative;
+    width: clamp(140px, 14vw, 210px);
+    height:100%;
+    flex-shrink:0;
+  }
+  .column.near{ width: clamp(160px, 16vw, 235px); }
+  .column.far{
+    width: clamp(120px, 12vw, 185px);
+    filter: blur(2.5px) brightness(.55) saturate(.8);
+  }
+  .column.focus{
+    filter:none;
+    z-index:5;
+  }
+
+  .track{
+    position:absolute;
+    left:0; top:0;
+    width:100%;
+    will-change:transform;
+  }
+
+  .card{
+    position:relative;
+    width:100%;
+    aspect-ratio: 9/16;
+    border-radius:18px;
+    overflow:hidden;
+    margin-bottom: clamp(14px, 2vw, 26px);
+    border:3px solid transparent;
+    background:#e9e3d3;
+    box-shadow:0 14px 34px rgba(22,36,31,.18);
+  }
+  .card img, .card video{
+    width:100%;height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .card.frame-green{border-color:var(--green-bright); box-shadow:0 0 20px rgba(63,174,110,.25), 0 14px 34px rgba(22,36,31,.18);}
+  .card.frame-light{border-color:var(--green-light); box-shadow:0 0 20px rgba(46,143,95,.22), 0 14px 34px rgba(22,36,31,.18);}
+  .card.frame-amber{border-color:var(--amber); box-shadow:0 0 20px rgba(224,164,88,.25), 0 14px 34px rgba(22,36,31,.18);}
+  .card.frame-rust{border-color:var(--rust); box-shadow:0 0 20px rgba(201,104,58,.25), 0 14px 34px rgba(22,36,31,.18);}
+
+  .card .fallback{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    color:rgba(22,36,31,.4);
+    font-size:11px;
+    letter-spacing:.5px;
+    text-align:center;
+    padding:10px;
+  }
+
+  /* badge sulle card: solo il nome dell'attività/cliente, niente metriche finte */
+  .badge{
+    position:absolute;
+    top:10px; left:10px;
+    background:rgba(255,255,255,.92);
+    backdrop-filter: blur(4px);
+    border:1px solid rgba(22,36,31,.12);
+    border-radius:20px;
+    padding:6px 12px;
+    font-family:Arial,sans-serif;
+    font-size:11px;
+    font-weight:700;
+    color:var(--ink);
+    z-index:6;
+    white-space:nowrap;
+    box-shadow:0 4px 14px rgba(0,0,0,.12);
+  }
+
+  /* ============================================================
+     ATTO 2.5 — i numeri: uno per volta, grande, al centro schermo,
+     in sequenza ordinata sopra il collage che continua a scorrere.
+     ============================================================ */
+  #stats-overlay{
+    position:absolute; inset:0;
+    z-index:15;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    pointer-events:none;
+  }
+  .stat-pop{
+    position:absolute;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+    opacity:0;
+    transform:scale(.6) translateY(20px);
+  }
+  .stat-pop .stat-num{
+    font-size:clamp(64px, 13vw, 168px);
+    color:var(--ink);
+    line-height:1;
+    text-shadow:0 8px 30px rgba(251,248,241,1), 0 0 40px rgba(251,248,241,1);
+  }
+  .stat-pop .stat-num.accent{ color:var(--green-bright); }
+  .stat-pop .stat-label{
+    font-family:Arial,sans-serif;
+    font-weight:700;
+    font-size:clamp(14px,2vw,20px);
+    letter-spacing:.5px;
+    color:var(--ink);
+    background:rgba(251,248,241,.92);
+    padding:6px 18px;
+    border-radius:20px;
+  }
+
+  /* ============================================================
+     ATTO 3 — overlay che sale sopra il collage (che continua a scorrere
+     dietro, ora attenuato) e porta l'hero finale: headline + CTA, no subhead.
+     ============================================================ */
+  #scrim{
+    position:absolute; inset:0;
+    z-index:20;
+    pointer-events:none;
+    background: radial-gradient(ellipse 60% 55% at 50% 50%, rgba(251,248,241,.88) 0%, rgba(251,248,241,.55) 55%, rgba(251,248,241,0) 80%);
+    opacity:0;
+  }
+
+  #hero-content{
+    position:absolute; inset:0;
+    z-index:30;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding: 0 20px;
+    pointer-events:none;
+  }
+  #hero-content > *{ pointer-events:auto; }
+
+  #headline{
+    font-size:clamp(36px, 6vw, 76px);
+    line-height:1.05;
+    color:var(--ink);
+    max-width:16ch;
+    letter-spacing:-0.5px;
+  }
+  #headline .accent{ color:var(--green-bright); }
+  #headline .line{
+    display:block;
+    overflow:hidden;
+  }
+  #headline .line-inner{
+    display:block;
+    transform: translateY(110%);
+  }
+
+  .cta-row{
+    display:flex; gap:16px; flex-wrap:wrap; justify-content:center;
+    margin-top:32px;
+    opacity:0;
+    transform:translateY(14px);
+  }
+  .btn{
+    font-family:Arial,sans-serif;
+    font-weight:700;
+    font-size:15px;
+    letter-spacing:.3px;
+    padding:16px 32px;
+    border-radius:50px;
+    cursor:pointer;
+    border:none;
+    transition: transform .2s ease;
+  }
+  .btn:hover{ transform: translateY(-2px) scale(1.02); }
+  .btn-primary{
+    background: linear-gradient(135deg, var(--green-bright), var(--green-deep));
+    color:#fff;
+    box-shadow:0 10px 30px rgba(63,174,110,.35);
+  }
+  .btn-secondary{
+    background:transparent;
+    border:1.5px solid rgba(22,36,31,.25);
+    color:var(--ink);
+  }
+
+  #vignette-top, #vignette-bottom{
+    position:absolute; left:0; right:0;
+    height:18vh;
+    pointer-events:none;
+    z-index:25;
+    opacity:0;
+  }
+  #vignette-top{ top:0; background:linear-gradient(to bottom, var(--paper), transparent); }
+  #vignette-bottom{ bottom:0; background:linear-gradient(to top, var(--paper), transparent); }
+</style>
+</head>
+<body>
+
+<div id="stage">
+
+  <!-- ATTO 1 -->
+  <div id="intro">
+    <div class="intro-block">
+      <div class="intro-logo"><img src="media/img/logo-dragon.png" alt="logo" onerror="this.parentElement.style.display='none'"></div>
+      <div class="intro-text" id="intro-text"></div>
+    </div>
+  </div>
+
+  <!-- ATTO 2 -->
+  <div id="columns"></div>
+
+  <!-- ATTO 2.5: i numeri, uno per volta al centro -->
+  <div id="stats-overlay">
+    <div class="stat-pop" id="stat-1">
+      <div class="stat-num" data-count="180" data-suffix="+">0</div>
+      <div class="stat-label">reel prodotti</div>
+    </div>
+    <div class="stat-pop" id="stat-2">
+      <div class="stat-num accent" data-count="42" data-suffix="M">0</div>
+      <div class="stat-label">visualizzazioni totali</div>
+    </div>
+    <div class="stat-pop" id="stat-3">
+      <div class="stat-num" data-count="35" data-suffix="">0</div>
+      <div class="stat-label">brand e creator</div>
+    </div>
+    <div class="stat-pop" id="stat-4">
+      <div class="stat-num accent" data-count="98" data-suffix="%">0</div>
+      <div class="stat-label">clienti che restano</div>
+    </div>
+  </div>
+
+  <!-- ATTO 3 -->
+  <div id="scrim"></div>
+  <div id="vignette-top"></div>
+  <div id="vignette-bottom"></div>
+
+  <div id="hero-content">
+    <h1 id="headline">
+      <span class="line"><span class="line-inner">CONTENUTI CHE LA GENTE</span></span>
+      <span class="line"><span class="line-inner accent">GUARDA DAVVERO.</span></span>
+    </h1>
+
+    <div class="cta-row">
+      <button class="btn btn-primary">Scopri i nostri lavori</button>
+      <button class="btn btn-secondary">Parliamone</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+/* ============================================================
+   HERO IN 3 ATTI
+   1) Title card piena: sfondo bianco, logo + scritta, sola e leggibile.
+   2) Transizione: il logo dissolve, il collage di reel entra a schermo
+      intero con uno zoom-in deciso e comincia a scorrere — momento
+      "ganza", nessun testo sopra, il collage è il protagonista.
+   3) Overlay: uno scrim chiaro sale dal centro, il collage continua
+      a scorrere ma attenuato dietro, e arriva l'headline finale + CTA
+      (senza sottotitolo) — diventa una hero stabile e leggibile.
+   ============================================================ */
+
+const columnsEl = document.getElementById('columns');
+const frameColors = ['frame-green','frame-light','frame-amber','frame-rust'];
+
+const MEDIA = [
+  { type:'image', src:'media/img/portfolio-1.jpg' },
+  { type:'image', src:'media/img/portfolio-2.jpg' },
+  { type:'image', src:'media/img/portfolio-3.jpg' },
+  { type:'image', src:'media/img/portfolio-4.jpg' },
+  { type:'image', src:'media/img/portfolio-6.jpg' },
+  { type:'image', src:'media/img/portfolio-7.jpg' },
+  { type:'image', src:'media/img/portfolio-8.jpg' },
+  { type:'image', src:'media/img/portfolio-9.jpg' },
+  { type:'image', src:'media/img/about-company-1.jpg' },
+  { type:'image', src:'media/img/about-company-2.jpg' },
+  { type:'image', src:'media/img/about-company-3.jpg' },
+  { type:'video', src:'media/sample-clip-1.mp4' },
+  { type:'video', src:'media/sample-clip-2.mp4' },
+];
+
+// nomi delle attività/clienti: solo questo va sulle card, niente metriche finte
+const CLIENT_NAMES = [
+  'NordVPN', 'La Cuevona', 'Sara Resoller', 'Studio Verde',
+  'Wok&Roll', 'Bao House', 'Dragon Market', null, null,
+];
+
+function rand(min,max){ return Math.random()*(max-min)+min; }
+function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+function createCard(media){
+  const card = document.createElement('div');
+  card.className = 'card ' + pick(frameColors);
+
+  let el;
+  if(media.type === 'video'){
+    el = document.createElement('video');
+    el.src = media.src;
+    el.autoplay = true;
+    el.muted = true;
+    el.loop = true;
+    el.playsInline = true;
+    el.onerror = ()=> showFallback(card);
+  } else {
+    el = document.createElement('img');
+    el.src = media.src;
+    el.loading = 'lazy';
+    el.onerror = ()=> showFallback(card);
+  }
+  card.appendChild(el);
+
+  const clientName = pick(CLIENT_NAMES);
+  if(clientName){
+    const b = document.createElement('div');
+    b.className = 'badge';
+    b.textContent = clientName;
+    card.appendChild(b);
+  }
+
+  return card;
+}
+
+function showFallback(card){
+  card.querySelectorAll('img,video').forEach(n=>n.remove());
+  const fb = document.createElement('div');
+  fb.className = 'fallback';
+  fb.textContent = 'media non trovato';
+  card.appendChild(fb);
+}
+
+const COLUMN_DEFS = [
+  { depth:'far',   dir: 1, speed: 42 },
+  { depth:'near',  dir:-1, speed: 26 },
+  { depth:'focus', dir: 1, speed: 30 },
+  { depth:'near',  dir:-1, speed: 26 },
+  { depth:'far',   dir: 1, speed: 42 },
+];
+
+const CARDS_PER_TRACK = 8;
+
+COLUMN_DEFS.forEach((def)=>{
+  const col = document.createElement('div');
+  col.className = 'column ' + def.depth;
+  columnsEl.appendChild(col);
+
+  const track = document.createElement('div');
+  track.className = 'track';
+  col.appendChild(track);
+
+  const sequence = [];
+  for(let i=0;i<CARDS_PER_TRACK;i++) sequence.push(pick(MEDIA));
+
+  [0,1].forEach(()=>{
+    sequence.forEach(media=>{
+      track.appendChild(createCard(media));
+    });
+  });
+
+  requestAnimationFrame(()=>{
+    const fullHeight = track.scrollHeight;
+    const halfHeight = fullHeight/2;
+
+    if(def.dir === 1){
+      gsap.fromTo(track, { y: -halfHeight }, { y: 0, duration: def.speed, ease:'none', repeat:-1 });
+    } else {
+      gsap.fromTo(track, { y: 0 }, { y: -halfHeight, duration: def.speed, ease:'none', repeat:-1 });
+    }
+  });
+});
+
+// --- helper: anima un numero da 0 al valore target, scritto nel suo elemento ---
+function animateCounter(el, duration){
+  const target = parseFloat(el.dataset.count);
+  const suffix = el.dataset.suffix || '';
+  const obj = { val: 0 };
+  return gsap.to(obj, {
+    val: target,
+    duration: duration,
+    ease:'power2.out',
+    onUpdate:()=>{ el.textContent = Math.round(obj.val) + suffix; },
+  });
+}
+
+// --- helper: effetto typewriter, scrive il testo carattere per carattere
+// dentro target, rispettando eventuali tag <span class="accent"> nel markup ---
+function typewriter(target, html, charDuration){
+  const container = document.createElement('span');
+  container.innerHTML = html;
+  // estrae il testo puro mantenendo a parte dove inizia la parte "accent"
+  const fullText = container.textContent;
+  const accentText = container.querySelector('.accent') ? container.querySelector('.accent').textContent : null;
+  const plainPart = accentText ? fullText.slice(0, fullText.length - accentText.length) : fullText;
+
+  target.innerHTML = '<span class="typed-plain"></span><span class="typed-accent accent"></span><span class="cursor">&nbsp;</span>';
+  const plainEl = target.querySelector('.typed-plain');
+  const accentEl = target.querySelector('.typed-accent');
+
+  const obj = { i: 0 };
+  return gsap.to(obj, {
+    i: fullText.length,
+    duration: fullText.length * charDuration,
+    ease:'none',
+    onUpdate:()=>{
+      const n = Math.round(obj.i);
+      const shown = fullText.slice(0, n);
+      if(shown.length <= plainPart.length){
+        plainEl.textContent = shown;
+        accentEl.textContent = '';
+      } else {
+        plainEl.textContent = plainPart;
+        accentEl.textContent = shown.slice(plainPart.length);
+      }
+    },
+  });
+}
+
+// ============================================================
+// REGIA DELLA SEQUENZA — ritmo serrato, niente attese morte
+// ============================================================
+const master = gsap.timeline();
+
+// --- ATTO 1: logo pop-in veloce, poi il testo si scrive (typewriter) ---
+master
+  .to('#intro .intro-logo', { scale:1, opacity:1, duration:0.45, ease:'back.out(1.8)' }, 0.1)
+  .call(()=>{
+    typewriter(document.getElementById('intro-text'), 'Ciao, siamo <span class="accent">Asian Consulting</span>', 0.035);
+  }, [], 0.35)
+  // breve sosta a scritta completa
+  .to({}, { duration: 0.4 })
+
+  // --- TRANSIZIONE 1→2 ---
+  // 1) il blocco fa un piccolo balzo avanti (si "carica") prima di cadere
+  .to('#intro .intro-block', {
+    scale: 1.08,
+    duration: 0.18,
+    ease:'power2.out',
+  })
+  // 2) precipita verso il fondo, fuori schermo — e nello stesso istante in cui INIZIA
+  //    a cadere, il collage comincia già a comparire in trasparenza dietro di lui
+  .to('#intro .intro-block', {
+    y: 700,
+    opacity: 0,
+    scale: 1,
+    duration: 0.55,
+    ease: 'power2.in',
+  }, 'fall')
+  .to('#columns', {
+    opacity:1,
+    scale:1,
+    duration:0.7,
+    ease:'power3.out',
+  }, 'fall') // stessa label = overlap totale: il collage entra mentre il testo cade
+  // il bounce di tutto lo schermo, anch'esso sovrapposto alla caduta del testo
+  .to('#stage', { scale:1.035, duration:0.16, ease:'power2.out' }, 'fall+=0.15')
+  .to('#stage', { scale:1, duration:0.5, ease:'elastic.out(1, 0.35)' })
+  .set('#intro', { display:'none' })
+
+  // --- ATTO 2: il collage scorre da solo un momento, protagonista ---
+  .to({}, { duration: 0.6 })
+
+  // --- ATTO 2.5: i 4 numeri, uno alla volta, al centro ---
+  .add(buildStatsSequence(), '+=0')
+
+  // --- TRANSIZIONE 2→3: scrim e vignette salgono, headline+CTA arrivano ---
+  .to(['#scrim', '#vignette-top', '#vignette-bottom'], {
+    opacity:1, duration:0.8, ease:'power2.out',
+  })
+  .to('#headline .line-inner', {
+    y:'0%', duration:0.7, ease:'power4.out', stagger:0.13,
+  }, '-=0.4')
+  .to('.cta-row', { opacity:1, y:0, duration:0.5, ease:'power2.out' }, '-=0.15');
+
+// costruisce la sotto-timeline dei 4 numeri in sequenza (uno entra, conta, esce, poi il successivo)
+function buildStatsSequence(){
+  const tl = gsap.timeline();
+  const ids = ['#stat-1', '#stat-2', '#stat-3', '#stat-4'];
+
+  ids.forEach((id)=>{
+    tl.to(id, {
+        opacity:1, scale:1, y:0,
+        duration:0.45,
+        ease:'back.out(1.9)',
+        onStart:()=>{
+          const numEl = document.querySelector(id + ' .stat-num');
+          animateCounter(numEl, 0.7);
+        },
+      })
+      .to({}, { duration: 0.75 }) // resta leggibile
+      .to(id, { opacity:0, scale:.75, y:-16, duration:0.3, ease:'power1.in' });
+  });
+
+  return tl;
+}
+
+</script>
+</body>
+</html>
