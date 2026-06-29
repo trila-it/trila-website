@@ -8,12 +8,8 @@
 const _page = window.location.pathname.split('/').pop() || 'index.html';
 const _showLoader = _page === 'index.html' || _page === '' || _page.startsWith('sede-');
 
-// Calcola il base path degli SVG dalla posizione dello script
-const _scriptBase = (function () {
-  const s = document.currentScript;
-  if (s) return s.src.replace(/[^/]+$/, '');
-  return window.location.href.replace(/[^/]+$/, '');
-})();
+// Base path: directory della pagina corrente
+const _scriptBase = window.location.href.replace(/[^/]*$/, '');
 
 if (_showLoader) document.documentElement.classList.add('dc-loading');
 
