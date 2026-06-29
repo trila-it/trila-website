@@ -11,92 +11,75 @@ const _showLoader = _page === 'index.html' || _page === '' || _page.startsWith('
 // Base path: directory della pagina corrente
 const _scriptBase = window.location.href.replace(/[^/]*$/, '');
 
-if (_showLoader) document.documentElement.classList.add('dc-loading');
-
-(function () {
-  if (!_showLoader) return;
-  const style = document.createElement('style');
-  style.textContent = `
-    html.dc-loading body { visibility: hidden; }
+if (_showLoader) {
+  // Inietta CSS loader subito nell'head
+  const _loaderStyle = document.createElement('style');
+  _loaderStyle.textContent = `
     #dc-loader {
-      position: fixed; inset: 0; background: #ffffff;
+      position: fixed; inset: 0; background: #fff;
       display: flex; align-items: center; justify-content: center;
-      z-index: 99999; pointer-events: none;
+      z-index: 99999;
     }
-    #dc-loader .dc-logo-wrap {
+    #dc-loader .dc-wrap {
       position: relative;
-      width: min(520px, 80vw);
+      width: min(500px, 78vw);
     }
-    #dc-loader .dc-logo-wrap img {
-      position: absolute;
-      top: 0; left: 0;
+    #dc-loader .dc-wrap img {
+      position: absolute; top: 0; left: 0;
       width: 100%; height: auto;
-      opacity: 0; will-change: transform, opacity;
+      opacity: 0;
     }
-    #dc-loader .dc-logo-wrap img.dc-sizer {
-      position: relative;
-      visibility: hidden;
+    #dc-loader .dc-wrap .dc-sizer {
+      position: relative; visibility: hidden;
     }
   `;
-  document.head.appendChild(style);
+  document.head.appendChild(_loaderStyle);
+}
 
+document.addEventListener('DOMContentLoaded', function () {
+  if (!_showLoader) { initPageAnimations(); return; }
+
+  // Crea e inserisce il loader
   const loader = document.createElement('div');
   loader.id = 'dc-loader';
-  /* dc-sizer è la prima img ma in position:relative — serve solo a dare altezza al wrapper */
   loader.innerHTML = `
-    <div class="dc-logo-wrap">
-      <img class="dc-sizer"        src="${_scriptBase}img/logo_dental.svg"   alt="">
-      <img class="dc-dental-img"   src="${_scriptBase}img/logo_dental.svg"   alt="Dental">
-      <img class="dc-tooth-img"    src="${_scriptBase}img/logo_dente.svg"    alt="">
-      <img class="dc-clinique-img" src="${_scriptBase}img/logo_clinique.svg" alt="Clinique">
+    <div class="dc-wrap">
+      <img class="dc-sizer"      src="${_scriptBase}img/logo_dental.svg" alt="">
+      <img class="dc-dental"     src="${_scriptBase}img/logo_dental.svg" alt="Dental">
+      <img class="dc-dente"      src="${_scriptBase}img/logo_dente.svg"  alt="">
+      <img class="dc-clinique"   src="${_scriptBase}img/logo_clinique.svg" alt="Clinique">
     </div>
   `;
-  document.documentElement.style.overflow = 'hidden';
+  document.body.appendChild(loader);
+  document.body.style.visibility = 'visible';
 
-  if (document.body) {
-    document.body.appendChild(loader);
-  } else {
-    document.addEventListener('DOMContentLoaded', () => {
-      document.body.appendChild(loader);
-      runLoader();
-    });
-    return;
-  }
+  const dental   = loader.querySelector('.dc-dental');
+  const dente    = loader.querySelector('.dc-dente');
+  const clinique = loader.querySelector('.dc-clinique');
 
-  runLoader();
+  gsap.set(dental,   { x: -22, opacity: 0 });
+  gsap.set(clinique, { x:  22, opacity: 0 });
+  gsap.set(dente,    { y:  14, scale: 0.65, opacity: 0 });
 
-  function runLoader() {
-    const dental   = loader.querySelector('.dc-dental-img');
-    const tooth    = loader.querySelector('.dc-tooth-img');
-    const clinique = loader.querySelector('.dc-clinique-img');
+  const tl = gsap.timeline({
+    delay: 0.1,
+    onComplete: () => {
+      gsap.to(loader.querySelector('.dc-wrap'), {
+        scale: 7, opacity: 0, duration: 0.5, ease: 'power2.in',
+        onComplete: () => {
+          loader.remove();
+          document.documentElement.style.overflow = '';
+          initPageAnimations();
+        }
+      });
+    }
+  });
 
-    gsap.set(dental,   { x: -20 });
-    gsap.set(clinique, { x:  20 });
-    gsap.set(tooth,    { y: 12, scale: 0.7 });
-
-    // Sequenza: dente sale → DENTAL da sinistra → CLINIQUE da destra
-    const tl = gsap.timeline({
-      delay: 0.05,
-      onComplete: () => {
-        const wrap = loader.querySelector('.dc-logo-wrap');
-        gsap.to(wrap, {
-          scale: 6, opacity: 0, duration: 0.55, ease: 'power2.in',
-          onComplete: () => {
-            loader.remove();
-            document.documentElement.classList.remove('dc-loading');
-            document.documentElement.style.overflow = '';
-            initPageAnimations();
-          }
-        });
-      }
-    });
-
-    tl.to(tooth,    { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: 'back.out(1.8)' })
-      .to(dental,   { opacity: 1, x: 0, duration: 0.35, ease: 'power3.out' }, '-=0.15')
-      .to(clinique, { opacity: 1, x: 0, duration: 0.35, ease: 'power3.out' }, '-=0.25')
-      .to({}, { duration: 0.4 }); // pausa prima dello zoom-out
-  }
-})();
+  tl.to(dente,    { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: 'back.out(1.8)' })
+    .to(dental,   { opacity: 1, x: 0, duration: 0.32, ease: 'power3.out' }, '-=0.12')
+    .to(clinique, { opacity: 1, x: 0, duration: 0.32, ease: 'power3.out' }, '-=0.22')
+    .to({}, { duration: 0.38 });
+});
 
 
 // ── ANIMAZIONI PAGINA (partono dopo il loader) ────────────────────────────────
