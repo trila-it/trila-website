@@ -446,6 +446,22 @@ section{position:relative;padding:130px 0;}
 }
 .gallery-item:hover::after{opacity:.6;}
 
+@media(max-width:760px){
+  .gallery-track-wrap{overflow:visible;}
+  .gallery-track{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:3px;
+  }
+  .gallery-item{
+    aspect-ratio:1/1;
+  }
+  .gallery-item:first-child{
+    grid-column:1 / -1;
+    aspect-ratio:4/3;
+  }
+}
+
 /* ===== quote / atmosfera ===== */
 .atmos{
   background:var(--antracite);
