@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio Immobiliare Bertini — Vendita immobili a Piombino</title>
+<meta name="description" content="Studio Immobiliare Di Bertini Sandro: vendita e acquisto di appartamenti, ville e case a Piombino, Castiglione della Pescaia e provincia di Livorno.">
+<link rel="icon" href="assets/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/logo.jpg" alt="Studio Immobiliare Bertini">
+      <span class="brand-name">Sandro Bertini<span>Studio Immobiliare</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="index.html#annunci">Immobili</a>
+      <a href="chi-siamo.html">Chi Siamo</a>
+      <a href="contatti.html">Contatti</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="nav-phone" href="tel:+393298129169">
+        <svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        329 812 9169
+      </a>
+      <a href="contatti.html" class="btn btn-primary btn-sm">Contattaci</a>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="container">
+    <h1>La casa giusta, a Piombino, <em>con la persona giusta</em>.</h1>
+    <p class="lead">Studio Immobiliare Sandro Bertini seleziona da anni le migliori occasioni immobiliari sul territorio: appartamenti, ville e case indipendenti, seguite dalla prima visita fino al rogito.</p>
+    <div class="hero-actions">
+      <a href="#annunci" class="btn btn-accent">Scopri gli immobili</a>
+      <a href="contatti.html" class="btn btn-outline-light">Contattaci ora</a>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <form class="search-bar" action="#annunci">
+    <div class="search-field">
+      <label for="loc">Località</label>
+      <select id="loc" name="loc">
+        <option>Tutta la zona</option>
+        <option>Piombino</option>
+        <option>Castiglione della Pescaia</option>
+        <option>Follonica</option>
+        <option>Livorno</option>
+      </select>
+    </div>
+    <div class="search-field">
+      <label for="tipo">Tipo immobile</label>
+      <select id="tipo" name="tipo">
+        <option>Qualsiasi</option>
+        <option>Appartamento</option>
+        <option>Villa / casa indipendente</option>
+        <option>Terreno</option>
+        <option>Box / garage</option>
+      </select>
+    </div>
+    <div class="search-field">
+      <label for="prezzo">Prezzo massimo</label>
+      <select id="prezzo" name="prezzo">
+        <option>Nessun limite</option>
+        <option>150.000 €</option>
+        <option>250.000 €</option>
+        <option>500.000 €</option>
+        <option>1.000.000 €+</option>
+      </select>
+    </div>
+    <div class="search-submit">
+      <button type="submit" aria-label="Cerca">
+        <svg class="icon-md" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      </button>
+    </div>
+  </form>
+</div>
+
+<!-- ===== STATS ===== -->
+<section class="stats">
+  <div class="container">
+    <div class="stat"><strong>226+</strong><span>Annunci pubblicati</span></div>
+    <div class="stat"><strong>1.851</strong><span>Persone che ci seguono</span></div>
+    <div class="stat"><strong>2</strong><span>Zone seguite: Piombino e Costa degli Etruschi</span></div>
+    <div class="stat"><strong>100%</strong><span>Assistenza dalla visita al rogito</span></div>
+  </div>
+</section>
+
+<!-- ===== ANNUNCI ===== -->
+<section class="section" id="annunci">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <span class="eyebrow">Immobili in vendita</span>
+        <h2>I nostri annunci selezionati</h2>
+        <p>Una selezione degli immobili seguiti dallo Studio Bertini, con le foto pubblicate sui nostri canali social.</p>
+      </div>
+      <a href="contatti.html" class="btn btn-outline">Richiedi altri annunci</a>
+    </div>
+
+    <div class="categories">
+      <button class="cat-pill active" data-filter="tutti">Tutti</button>
+      <button class="cat-pill" data-filter="appartamento">Appartamenti</button>
+      <button class="cat-pill" data-filter="villa">Ville e case indipendenti</button>
+    </div>
+
+    <div class="listing-grid">
+
+      <a href="immobile-via-giotto.html" class="card" data-category="appartamento">
+        <div class="card-media">
+          <img src="assets/listings/via-giotto.jpg" alt="Terrazza vista mare dell'appartamento in Via Giotto, Piombino">
+          <span class="badge-new">Vista mare</span>
+        </div>
+        <div class="card-body">
+          <h3>Appartamento vista mare in Via Giotto</h3>
+          <p class="card-location"><svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-11a7 7 0 0 0-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> Salivoli - Ghiaccioni, Piombino</p>
+          <div class="card-meta">
+            <span><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20v-7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v7"/><path d="M2 20h20"/><path d="M6 11V7a2 2 0 0 1 2-2h3"/></svg> 6 locali</span>
+            <span><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/><path d="M4 12V6a2 2 0 0 1 3-1.7"/><path d="M9 19v2M15 19v2"/></svg> 3 bagni</span>
+            <span><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 14-14 4 4L7 21z"/><path d="m14 6 4 4"/><path d="m10 10 2 2"/></svg> 160 m²</span>
+          </div>
+          <div class="card-footer">
+            <span class="card-price">328.000 €</span>
+            <span class="card-link">Scopri di più →</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="immobile-san-rocco.html" class="card" data-category="appartamento">
+        <div class="card-media">
+          <img src="assets/listings/san-rocco.jpg" alt="Interno dell'appartamento a Montemazzano - San Rocco, Piombino">
+          <span class="badge-new">-4%</span>
+        </div>
+        <div class="card-body">
+          <h3>Appartamento a Montemazzano - San Rocco</h3>
+          <p class="card-location"><svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-11a7 7 0 0 0-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> San Rocco - Cotone, Piombino</p>
+          <div class="card-meta">
+            <span><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20v-7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v7"/><path d="M2 20h20"/><path d="M6 11V7a2 2 0 0 1 2-2h3"/></svg> 5 locali</span>
+            <span><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/><path d="M4 12V6a2 2 0 0 1 3-1.7"/><path d="M9 19v2M15 19v2"/></svg> 2 bagni</span>
+            <span><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 14-14 4 4L7 21z"/><path d="m14 6 4 4"/><path d="m10 10 2 2"/></svg> 95 m²</span>
+          </div>
+          <div class="card-footer">
+            <span class="card-price">190.000 €</span>
+            <span class="card-link">Scopri di più →</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="immobile-venturina.html" class="card" data-category="appartamento">
+        <div class="card-media">
+          <img src="assets/listings/venturina.jpg" alt="Cucina del quadrilocale ristrutturato a Venturina Terme">
+          <span class="badge-new">Ristrutturato</span>
+        </div>
+        <div class="card-body">
+          <h3>Quadrilocale ristrutturato in Via Indipendenza</h3>
+          <p class="card-location"><svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-11a7 7 0 0 0-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> Venturina Terme, Campiglia Marittima</p>
+          <div class="card-meta">
+            <span><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20v-7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v7"/><path d="M2 20h20"/><path d="M6 11V7a2 2 0 0 1 2-2h3"/></svg> 4 locali</span>
+            <span><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/><path d="M4 12V6a2 2 0 0 1 3-1.7"/><path d="M9 19v2M15 19v2"/></svg> 2 bagni</span>
+            <span><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 14-14 4 4L7 21z"/><path d="m14 6 4 4"/><path d="m10 10 2 2"/></svg> 100 m²</span>
+          </div>
+          <div class="card-footer">
+            <span class="card-price">189.000 €</span>
+            <span class="card-link">Scopri di più →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 1 -->
+      <a href="immobile-castiglione-della-pescaia.html" class="card" data-category="villa">
+        <div class="card-media">
+          <img src="assets/listings/castiglione-della-pescaia.jpg" alt="Villa fronte mare con giardino a Castiglione della Pescaia">
+        </div>
+        <div class="card-body">
+          <h3>Villa fronte mare con giardino</h3>
+          <p class="card-location"><svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-11a7 7 0 0 0-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> Castiglione della Pescaia</p>
+          <div class="card-meta">
+            <span><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20v-7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v7"/><path d="M2 20h20"/><path d="M6 11V7a2 2 0 0 1 2-2h3"/></svg> 6 locali</span>
+            <span><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/><path d="M4 12V6a2 2 0 0 1 3-1.7"/><path d="M9 19v2M15 19v2"/></svg> 3 bagni</span>
+            <span><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 14-14 4 4L7 21z"/><path d="m14 6 4 4"/><path d="m10 10 2 2"/></svg> 320 m²</span>
+          </div>
+          <div class="card-footer">
+            <span class="card-price">1.480.000 €</span>
+            <span class="card-link">Scopri di più →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 2 -->
+      <a href="immobile-piombino-terrazza.html" class="card" data-category="appartamento">
+        <div class="card-media">
+          <img src="assets/listings/piombino-terrazza.jpg" alt="Appartamento con ampia terrazza a Piombino">
+        </div>
+        <div class="card-body">
+          <h3>Appartamento con ampia terrazza</h3>
+          <p class="card-location"><svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-11a7 7 0 0 0-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> Piombino</p>
+          <div class="card-meta">
+            <span><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20v-7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v7"/><path d="M2 20h20"/><path d="M6 11V7a2 2 0 0 1 2-2h3"/></svg> 3 locali</span>
+            <span><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/><path d="M4 12V6a2 2 0 0 1 3-1.7"/><path d="M9 19v2M15 19v2"/></svg> 1 bagno</span>
+            <span><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 14-14 4 4L7 21z"/><path d="m14 6 4 4"/><path d="m10 10 2 2"/></svg> 90 m²</span>
+          </div>
+          <div class="card-footer">
+            <span class="card-price">186.000 €</span>
+            <span class="card-link">Scopri di più →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 3 -->
+      <a href="immobile-piombino-ingresso-indipendente.html" class="card" data-category="appartamento">
+        <div class="card-media">
+          <img src="assets/listings/piombino-ingresso-indipendente.jpg" alt="Ingresso indipendente con garage a Piombino">
+        </div>
+        <div class="card-body">
+          <h3>Ingresso indipendente con garage</h3>
+          <p class="card-location"><svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-11a7 7 0 0 0-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> Piombino</p>
+          <div class="card-meta">
+            <span><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20v-7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v7"/><path d="M2 20h20"/><path d="M6 11V7a2 2 0 0 1 2-2h3"/></svg> camera + camerina</span>
+            <span><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 6.5 6h11L19 11"/><rect x="3" y="11" width="18" height="6" rx="2"/><circle cx="7.5" cy="17" r="1.2"/><circle cx="16.5" cy="17" r="1.2"/></svg> garage</span>
+            <span><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 14-14 4 4L7 21z"/><path d="m14 6 4 4"/><path d="m10 10 2 2"/></svg> 75 m²</span>
+          </div>
+          <div class="card-footer">
+            <span class="card-price">185.000 €</span>
+            <span class="card-link">Scopri di più →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 4 -->
+      <a href="immobile-piombino-198.html" class="card" data-category="appartamento">
+        <div class="card-media">
+          <img src="assets/listings/piombino-198.jpg" alt="Appartamento luminoso e arredato a Piombino">
+        </div>
+        <div class="card-body">
+          <h3>Appartamento luminoso e arredato</h3>
+          <p class="card-location"><svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-11a7 7 0 0 0-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> Piombino</p>
+          <div class="card-meta">
+            <span><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20v-7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v7"/><path d="M2 20h20"/><path d="M6 11V7a2 2 0 0 1 2-2h3"/></svg> 3 locali</span>
+            <span><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/><path d="M4 12V6a2 2 0 0 1 3-1.7"/><path d="M9 19v2M15 19v2"/></svg> 1 bagno</span>
+            <span><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 14-14 4 4L7 21z"/><path d="m14 6 4 4"/><path d="m10 10 2 2"/></svg> 85 m²</span>
+          </div>
+          <div class="card-footer">
+            <span class="card-price">198.000 €</span>
+            <span class="card-link">Scopri di più →</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== PERCHÉ SCEGLIERCI ===== -->
+<section class="section section-tint">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <span class="eyebrow">Perché scegliere lo Studio Bertini</span>
+        <h2>Un servizio esperto, dalla ricerca al rogito</h2>
+      </div>
+    </div>
+    <div class="feature-grid">
+      <div class="feature">
+        <div class="feature-icon">
+          <svg class="icon-md" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4.4-3-8-6.5-8-11a8 8 0 0 1 16 0c0 4.5-3.6 8-8 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        </div>
+        <h3>Conoscenza del territorio</h3>
+        <p>Anni di esperienza a Piombino e sulla Costa degli Etruschi: conosciamo i quartieri, i prezzi reali e le occasioni migliori.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+          <svg class="icon-md" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <h3>Servizio su misura</h3>
+        <p>Ogni cliente viene seguito personalmente da Sandro Bertini, dalla prima visita fino alla firma dal notaio.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+          <svg class="icon-md" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>
+        </div>
+        <h3>Trasparenza in ogni fase</h3>
+        <p>Prezzi chiari, documentazione in ordine e comunicazione costante: senza sorprese, senza stress.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="section-tight">
+  <div class="container">
+    <div class="cta-band">
+      <div>
+        <h2>Vuoi vendere il tuo immobile a Piombino?</h2>
+        <p>Richiedi una valutazione gratuita: ti richiamiamo entro 24 ore.</p>
+      </div>
+      <a href="contatti.html" class="btn btn-accent">Richiedi una valutazione</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo.jpg" alt="Studio Immobiliare Bertini">
+          <strong>Sandro Bertini<br>Studio Immobiliare</strong>
+        </div>
+        <p>Per vendere e comprare casa a Piombino, senza stress.</p>
+        <div class="social-row" style="margin-top:16px;">
+          <a href="https://www.instagram.com/immobiliare.bertini_piombino/" aria-label="Instagram" target="_blank" rel="noopener">
+            <svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+          </a>
+          <a href="#" aria-label="Facebook">
+            <svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h4>Naviga</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#annunci">Immobili</a></li>
+          <li><a href="chi-siamo.html">Chi Siamo</a></li>
+          <li><a href="contatti.html">Contatti</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Immobili</h4>
+        <ul>
+          <li><a href="immobile-via-giotto.html">Vista mare in Via Giotto</a></li>
+          <li><a href="immobile-san-rocco.html">San Rocco (prezzo ribassato)</a></li>
+          <li><a href="immobile-venturina.html">Quadrilocale a Venturina</a></li>
+          <li><a href="immobile-castiglione-della-pescaia.html">Villa a Castiglione della Pescaia</a></li>
+          <li><a href="immobile-piombino-terrazza.html">Appartamento con terrazza</a></li>
+          <li><a href="immobile-piombino-ingresso-indipendente.html">Ingresso indipendente + garage</a></li>
+          <li><a href="immobile-piombino-198.html">Appartamento luminoso</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contatti</h4>
+        <ul>
+          <li>Via Cesare Lombroso, 68<br>57025 Piombino (LI)</li>
+          <li><a href="tel:+393298129169">329 812 9169</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Studio Immobiliare Di Bertini Sandro. Tutti i diritti riservati.</span>
+      <span>Realizzato da <a href="https://trila.it" target="_blank" rel="noopener">trila.it</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

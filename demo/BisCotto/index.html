@@ -4,389 +4,566 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BisCotto - Pasticceria Artigianale</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Souvenir - Travel Journal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Chewy&family=Great+Vibes&family=Nunito:wght@400;700;800;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DM+Sans:wght@400;500;700;800&family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Special+Elite&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
-    <header>
-        <div>
-            <img src="favicon.ico" alt="BisCotto" class="logo-img">
-        </div>
-
-        <input type="checkbox" id="menu-toggle" class="menu-checkbox">
-        <label for="menu-toggle" class="menu-button">
-            <i class="fa-solid fa-bars"></i>
-        </label>
-
-        <nav>
-            <label for="menu-toggle" class="close-button">
-                <i class="fa-solid fa-xmark"></i>
-            </label>
-
-            <a href="#home"><i class="fa-solid fa-house"></i> Home</a>
-            <a href="#prodotti"><i class="fa-solid fa-cake-candles"></i> Dolcezze</a>
-            <a href="#recensioni"><i class="fa-solid fa-star"></i> Recensioni</a>
-            <a href="#mappa"><i class="fa-solid fa-clock"></i> Orari</a>
-        </nav>
-    </header>
-
-    <section class="hero" id="home">
-        <div class="hero-badge">
-            <h1>BisCotto</h1>
-            <p><i class="fa-solid fa-heart"></i> Fatto a mano, col cuore dentro.</p>
-            <div class="hero-actions">
-                <a href="mailto:pasticceriabiscotto@hotmail.com?subject=Richiesta%20Informazioni%20Pasticceria"
-                    class="btn-contattaci">
-                    <i class="fa-solid fa-envelope"></i> Inviaci un'Email
-                </a>
-                <a href="tel:+390586950323" class="btn-contattaci btn-chiama">
-                    <i class="fa-solid fa-phone"></i> Chiama
-                </a>
+    <main class="app-shell">
+        <header class="topbar">
+            <a class="brand" href="#" aria-label="Souvenir">
+                <span class="brand-mark">S</span>
+                <span>Souvenir</span>
+            </a>
+            <div class="topbar-actions">
+                <button class="ghost-button" id="newPageButton" type="button">Nuova pagina</button>
+                <button class="primary-button" id="exportButton" type="button">Esporta PNG</button>
             </div>
-        </div>
-    </section>
+        </header>
 
-    <section class="chi-siamo-section" id="chi-siamo">
-        <div class="chi-siamo-container">
+        <section class="studio">
+            <aside class="panel trips-panel" aria-label="Viaggi">
+                <div class="section-kicker">Diari</div>
+                <div class="trip-list" id="tripList"></div>
+            </aside>
 
-            <div class="chi-siamo-testo">
-                <span class="chi-siamo-subtitle">La nostra passione</span>
-                <h2>Benvenuti da Elena BisCotto</h2>
-                <div class="divider-cuore"><i class="fa-solid fa-heart"></i></div>
+            <section class="desk" aria-label="Diario aperto">
+                <div class="desk-items" aria-hidden="true">
+                    <div class="loose-ticket">BOARDING<br>PASS</div>
+                    <div class="film-strip"></div>
+                    <div class="pencil"></div>
+                </div>
 
-                <p>
-                    Ogni dolce che esce dal nostro laboratorio racconta una storia fatta di tradizione,
-                    scelta accurata delle materie prime e tanta passione. La nostra pasticceria nasce dal
-                    desiderio di regalare un momento di genuina felicità quotidiana, proponendo ricette
-                    artigianali che profumano di casa.
-                </p>
-                <p>
-                    Dalle colazioni con le nostre soffici brioche fino alle torte personalizzate per i vostri
-                    momenti più importanti, mettiamo lo stesso amore e la stessa cura nei dettagli che trovereste
-                    nella cucina della nonna, con un pizzico di creatività moderna.
-                </p>
+                <div class="book" id="book">
+                    <div class="book-spine"></div>
+                    <article class="page page-left" id="leftPage" aria-label="Pagina sinistra"></article>
+                    <article class="page page-right current" id="rightPage" aria-label="Pagina destra"></article>
+                </div>
 
-                <div class="punti-forza">
-                    <div class="punto">
-                        <i class="fa-solid fa-wheat-awn"></i>
-                        <span>Ingredienti Top</span>
-                    </div>
-                    <div class="punto">
-                        <i class="fa-solid fa-hand-holding-heart"></i>
-                        <span>100% Artigianale</span>
-                    </div>
-                    <div class="punto">
-                        <i class="fa-solid fa-smile-beam"></i>
-                        <span>Fatto con Amore</span>
+                <nav class="page-strip" id="pageStrip" aria-label="Pagine del viaggio"></nav>
+            </section>
+
+            <aside class="panel tools-panel" aria-label="Atelier">
+                <div class="trip-heading">
+                    <span class="section-kicker">Viaggio</span>
+                    <h1 id="tripTitle">Tokyo summer scraps</h1>
+                    <p id="tripMeta">29 Jun - 02 Jul · Japan</p>
+                </div>
+
+                <div class="tool-block">
+                    <div class="tool-title">Pagina</div>
+                    <div class="segmented" aria-label="Pagina attiva">
+                        <button class="active" id="selectRight" type="button">Destra</button>
+                        <button id="selectLeft" type="button">Sinistra</button>
                     </div>
                 </div>
-            </div>
 
-            <div class="chi-siamo-carosello-automatico">
-                <div class="chi-siamo-slider-wrapper">
-                    <img src="noi.jpg" alt="Il laboratorio" class="chi-siamo-slide active">
-                    <img src="noi2.jpg" alt="Elena all'opera" class="chi-siamo-slide">
-                    <img src="noi3.jpg" alt="Materie prime selezionate" class="chi-siamo-slide">
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section class="intro">
-        <div class="icon-divider"><i class="fa-solid fa-stroopwafel"></i></div>
-        <h2>Prodotti Artigianali Tradizionali</h2>
-        <p>Benvenuti nel mondo di Elena, dove ogni dolce racconta una storia di tradizione, cura e passione. Utilizziamo
-            solo ingredienti selezionati per regalarvi un momento di genuina felicità quotidiana.</p>
-    </section>
-
-    <section class="prodotti-section" id="prodotti">
-        <h2><i class="fa-solid fa-cookie-bite" style="color: var(--rosso-logo);"></i> Le Nostre Specialità</h2>
-
-        <div class="prodotti-container">
-
-            <div class="prodotto-card" role="button" tabindex="0" aria-label="Apri le foto delle brioche"
-                data-images="cro.avif,cake.webp,crostatine-alla-marmellata-Ricetta-Crostatine.webp">
-                <span class="foto-hint"><i class="fa-solid fa-images"></i> Clicca per le foto</span>
-                <img src="cro.avif" alt="Brioche artigianali" class="prodotto-img">
-                <div class="prodotto-info">
-                    <h3>Brioche</h3>
-                    <p>Soffici, profumate e perfette per iniziare la giornata con il piede giusto.</p>
-                </div>
-            </div>
-
-            <div class="prodotto-card" role="button" tabindex="0" aria-label="Apri le foto delle crostatine"
-                data-images="cro.avif,cake.webp,crostatine-alla-marmellata-Ricetta-Crostatine.webp">
-                <span class="foto-hint"><i class="fa-solid fa-images"></i> Clicca per le foto</span>
-                <img src="crostatine-alla-marmellata-Ricetta-Crostatine.webp" alt="Crostatine" class="prodotto-img">
-                <div class="prodotto-info">
-                    <h3>Crostatine</h3>
-                    <p>Pasta frolla friabile artigianale con le nostre migliori confetture.</p>
-                </div>
-            </div>
-
-            <div class="prodotto-card" role="button" tabindex="0" aria-label="Apri le foto delle sfoglie"
-                data-images="s1.jpg,s2.jpg,s4.jpg">
-                <span class="foto-hint"><i class="fa-solid fa-images"></i> Clicca per le foto</span>
-                <img src="italian-desssert-english-translation-naples-dessert-pistachio-sfogliatella-shell-shaped-layered-pastry-sweet-custard-like-419891030.webp"
-                    alt="Sfoglie" class="prodotto-img">
-                <div class="prodotto-info">
-                    <h3>Sfoglie</h3>
-                    <p>Croccanti strati di sfoglia che si sciolgono in bocca.</p>
-                </div>
-            </div>
-
-            <div class="prodotto-card" role="button" tabindex="0" aria-label="Apri le foto delle torte per occasioni"
-                data-images="t1.jpg,t2.jpg,t3.jpg,t4.jpg,t5.jpg">
-                <span class="foto-hint"><i class="fa-solid fa-images"></i> Clicca per le foto</span>
-                <img src="cake.webp" alt="Torta" class="prodotto-img">
-                <div class="prodotto-info">
-                    <h3>Torte per Occasioni</h3>
-                    <p>Torte personalizzate per compleanni e momenti speciali da ricordare.</p>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section class="mappa-section" id="mappa">
-        <div class="mappa-orari-container">
-            <div class="orari-box">
-                <h2><i class="fa-solid fa-location-dot"></i> Dove siamo</h2>
-
-                <div class="mappa-wrapper">
-                    <iframe title="Mappa Google di BisCotto Livorno"
-                        src="https://www.google.com/maps?q=BisCotto%20Pasticceria%20Artigianale%20Via%20delle%20Sorgenti%2047%20Livorno&output=embed"
-                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-                <p>Ci trovi in Via delle Sorgenti n°47, Livorno.</p>
-                <a class="btn-mappa"
-                    href="https://www.google.com/maps/search/?api=1&query=BisCotto%20Via%20delle%20Sorgenti%2047%20Livorno"
-                    target="_blank">
-                    <i class="fa-solid fa-route"></i> Apri indicazioni
-                </a>
-            </div>
-
-            <div class="orari-box">
-                <h2><i class="fa-solid fa-calendar-days"></i> Orari di Apertura</h2>
-                <ul class="info-list">
-                    <li><i class="fa-solid fa-check"></i> <span><strong>Lun:</strong> Chiuso</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span><strong>Mar:</strong> 09:00 - 12:30 / 16:00 -
-                            19:30</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span><strong>Mer:</strong> 09:00 - 12:30</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span><strong>Gio - Sab:</strong> 09:00 - 12:30 / 16:00 -
-                            19:30</span></li>
-                    <li><i class="fa-solid fa-star"></i> <span><strong>Domenica:</strong> 09:00 - 12:30</span></li>
-                </ul>
-            </div>
-        </div>
-
-
-    </section>
-
-    <section class="recensioni-section" id="recensioni">
-        <div class="recensioni-header">
-            <span class="chi-siamo-subtitle">Dicono di noi</span>
-            <h2><i class="fa-solid fa-star" style="color: var(--rosso-logo);"></i> Recensioni dei Clienti</h2>
-            <p>Le parole piu belle arrivano da chi passa, assaggia e torna con il sorriso.</p>
-        </div>
-
-        <div class="recensioni-container">
-            <article class="recensione-card">
-                <div class="stelle" aria-label="5 stelle">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                </div>
-                <p>"Torta bellissima e buonissima, oltre le aspettative."</p>
-                <span>Gaia C.</span>
-            </article>
-
-            <article class="recensione-card">
-                <div class="stelle" aria-label="5 stelle">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                </div>
-                <p>"Una piccola pasticceria artigianale piena di cura."</p>
-                <span>Alessio C.</span>
-            </article>
-
-            <article class="recensione-card">
-                <div class="stelle" aria-label="5 stelle">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                </div>
-                <p>"Dolci fantastici, delicati e sempre una meraviglia."</p>
-                <span>Giulia F.</span>
-            </article>
-        </div>
-
-        <a class="btn-recensioni"
-            href="https://www.google.com/maps/search/?api=1&query=BisCotto%20Via%20delle%20Sorgenti%2047%20Livorno"
-            target="_blank">
-            <i class="fa-brands fa-google"></i> Leggi le recensioni su Google
-        </a>
-    </section>
-
-    <footer>
-        <div class="footer-content">
-            <img src="favicon.ico" alt="BisCotto" class="footer-logo">
-
-            <div class="footer-info">
-                <ul class="footer-contacts">
-                    <li><i class="fa-solid fa-phone"></i> <a href="tel:+390586950323">0586 950323</a></li>
-                    <li><i class="fa-solid fa-envelope"></i> <a
-                            href="mailto:pasticceriabiscotto@hotmail.com">pasticceriabiscotto@hotmail.com</a></li>
-                </ul>
-
-                <div class="footer-social">
-                    <a href="https://www.facebook.com/BisCottoLivorno/" target="_blank"><i
-                            class="fa-brands fa-facebook"></i></a>
-                    <a href="https://www.instagram.com/pasticceriabiscotto/" target="_blank"><i
-                            class="fa-brands fa-instagram"></i></a>
+                <div class="tool-block">
+                    <div class="tool-title">Aggiungi</div>
+                    <div class="tool-grid">
+                        <button type="button" data-add="photo">Foto</button>
+                        <button type="button" data-add="receipt">Scontrino</button>
+                        <button type="button" data-add="ticket">Biglietto</button>
+                        <button type="button" data-add="stamp">Timbro</button>
+                        <button type="button" data-add="tape">Tape</button>
+                        <button type="button" data-add="note">Nota</button>
+                    </div>
                 </div>
 
-                <p>&copy; 2026 Pasticceria Elena Biscotto. Tutti i diritti riservati.</p>
-            </div>
-        </div>
-    </footer>
+                <div class="tool-block">
+                    <div class="tool-title">Stile</div>
+                    <div class="swatches" aria-label="Palette">
+                        <button class="swatch active" type="button" style="--swatch:#b6241d" data-accent="#b6241d"
+                            aria-label="Rosso"></button>
+                        <button class="swatch" type="button" style="--swatch:#2d6f86" data-accent="#2d6f86"
+                            aria-label="Blu"></button>
+                        <button class="swatch" type="button" style="--swatch:#477953" data-accent="#477953"
+                            aria-label="Verde"></button>
+                        <button class="swatch" type="button" style="--swatch:#b66f91" data-accent="#b66f91"
+                            aria-label="Rosa"></button>
+                    </div>
+                </div>
 
+                <div class="tool-block sliders">
+                    <label for="ageRange">Carta vissuta</label>
+                    <input id="ageRange" type="range" min="20" max="100" value="72">
+                    <label for="shadowRange">Profondità collage</label>
+                    <input id="shadowRange" type="range" min="20" max="100" value="70">
+                </div>
 
+                <label class="file-import">
+                    <input id="photoInput" type="file" accept="image/*">
+                    <span>Importa foto</span>
+                </label>
+            </aside>
+        </section>
+    </main>
 
-
-    <div id="caroselloModal" class="modal-carosello">
-        <div class="modal-contenuto">
-            <button class="btn-close" id="closeModal">&times;</button>
-
-            <button class="modal-nav-btn btn-prev" id="prevBtn">
-                <i class="fa-solid fa-chevron-left"></i>
-            </button>
-
-            <img src="" alt="Foto Prodotto" id="modalImg" class="modal-img">
-
-            <button class="modal-nav-btn btn-next" id="nextBtn">
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
-        </div>
-    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <script>
-        // Seleziona tutti i link che si trovano all'interno della nav
-        const menuLinks = document.querySelectorAll('nav a');
-        // Seleziona il checkbox che controlla l'apertura del menu
-        const menuToggle = document.getElementById('menu-toggle');
+        const trips = [
+            {
+                id: "tokyo",
+                title: "Tokyo summer scraps",
+                meta: "29 Jun - 02 Jul · Japan",
+                accent: "#b6241d",
+                cover: "journal-tokyo.jpg",
+                pages: [
+                    {
+                        title: "Ueno after dark",
+                        elements: [
+                            { type: "receipt", x: 9, y: 9, r: -3, w: 28, text: ["JR PASS", "TOKYO", "Platform 07", "¥ 6100"] },
+                            { type: "photo", x: 34, y: 12, r: 2, w: 42, src: "journal-tokyo.jpg" },
+                            { type: "ticket", x: 56, y: 8, r: 5, w: 34, text: ["No. 2640", "Ueno Museum", "admit one"] },
+                            { type: "stamp", x: 57, y: 48, r: -8, w: 30, text: "TOKYO" },
+                            { type: "stampbox", x: 12, y: 60, r: 6, w: 22, text: "JPN 06.29" },
+                            { type: "note", x: 11, y: 76, r: -2, w: 58, text: "ramen alle 23:00, luci ovunque, una ricevuta salvata come prova." },
+                            { type: "letters", x: 64, y: 82, r: 3, w: 27, text: "tokyo" },
+                            { type: "tape", x: 28, y: 16, r: -6, w: 22, color: "#b6241d" }
+                        ]
+                    },
+                    {
+                        title: "Museum morning",
+                        elements: [
+                            { type: "photo", x: 12, y: 10, r: -2, w: 55, src: "journal-japan.jpg" },
+                            { type: "receipt", x: 63, y: 14, r: 2, w: 25, text: ["TOKYO", "MUSEUM", "2 tickets", "¥1000"] },
+                            { type: "stamp", x: 38, y: 54, r: 4, w: 36, text: "MUSEUM" },
+                            { type: "note", x: 15, y: 72, r: 1, w: 67, text: "matcha, mochi, biglietti piegati in tasca e quel rosso bellissimo ovunque." },
+                            { type: "tape", x: 48, y: 8, r: 4, w: 24, color: "#d24a42" },
+                            { type: "ticket", x: 9, y: 58, r: -4, w: 28, text: ["7th", "anniversary", "stamp"] }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "california",
+                title: "San Diego map days",
+                meta: "03 Oct - 08 Oct · California",
+                accent: "#2d6f86",
+                cover: "journal-map.jpg",
+                pages: [
+                    {
+                        title: "Pick your destination",
+                        elements: [
+                            { type: "map", x: 7, y: 8, r: -2, w: 58, src: "journal-map.jpg" },
+                            { type: "photo", x: 55, y: 45, r: 3, w: 35, src: "journal-map.jpg" },
+                            { type: "ticket", x: 58, y: 12, r: -4, w: 29, text: ["SAN ISIDRO", "DOWNTOWN", "LA JOLLA"] },
+                            { type: "stamp", x: 43, y: 31, r: 5, w: 34, text: "CALIF." },
+                            { type: "note", x: 14, y: 76, r: -2, w: 70, text: "strade segnate a penna, market bag, sole addosso e una foto storta." },
+                            { type: "tape", x: 52, y: 40, r: -5, w: 26, color: "#2d6f86" }
+                        ]
+                    },
+                    {
+                        title: "Whole foods receipt",
+                        elements: [
+                            { type: "receipt", x: 15, y: 8, r: -2, w: 32, text: ["WHOLE", "FOODS", "tea", "$8.42"] },
+                            { type: "photo", x: 38, y: 18, r: 2, w: 43, src: "journal-map.jpg" },
+                            { type: "stampbox", x: 14, y: 55, r: 6, w: 25, text: "SD OCT 2025" },
+                            { type: "note", x: 18, y: 70, r: -1, w: 62, text: "la pagina sa di receipt paper, mappa piegata male e risate in macchina." },
+                            { type: "letters", x: 55, y: 63, r: 4, w: 30, text: "road" }
+                        ]
+                    }
+                ]
+            }
+        ];
 
-        // Per ogni link, aggiungi un evento di ascolto al "click"
-        menuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                // Se il link rimanda a una sezione interna (inizia con #)
-                if (link.getAttribute('href').startsWith('#')) {
-                    menuToggle.checked = false; // Chiude il menu deselezionando il checkbox
+        const state = {
+            tripIndex: 0,
+            pageIndex: 0,
+            activeSide: "right",
+            accent: trips[0].accent,
+            importedPhoto: null
+        };
+
+        const tripList = document.getElementById("tripList");
+        const pageStrip = document.getElementById("pageStrip");
+        const leftPage = document.getElementById("leftPage");
+        const rightPage = document.getElementById("rightPage");
+        const tripTitle = document.getElementById("tripTitle");
+        const tripMeta = document.getElementById("tripMeta");
+        const toast = document.getElementById("toast");
+
+        function currentTrip() {
+            return trips[state.tripIndex];
+        }
+
+        function currentPageData(offset = 0) {
+            const pages = currentTrip().pages;
+            return pages[(state.pageIndex + offset + pages.length) % pages.length];
+        }
+
+        function renderTrips() {
+            tripList.innerHTML = trips.map((trip, index) => `
+                <button class="trip-card ${index === state.tripIndex ? "active" : ""}" type="button" data-trip="${index}">
+                    <img src="${trip.cover}" alt="">
+                    <span>
+                        <strong>${trip.title}</strong>
+                        <small>${trip.meta}</small>
+                    </span>
+                </button>
+            `).join("");
+
+            tripList.querySelectorAll("button").forEach((button) => {
+                button.addEventListener("click", () => {
+                    state.tripIndex = Number(button.dataset.trip);
+                    state.pageIndex = 0;
+                    state.accent = currentTrip().accent;
+                    render();
+                });
+            });
+        }
+
+        function renderPageStrip() {
+            pageStrip.innerHTML = currentTrip().pages.map((page, index) => `
+                <button class="${index === state.pageIndex ? "active" : ""}" type="button" data-page="${index}">
+                    <span>${String(index + 1).padStart(2, "0")}</span>
+                    <strong>${page.title}</strong>
+                </button>
+            `).join("");
+
+            pageStrip.querySelectorAll("button").forEach((button) => {
+                button.addEventListener("click", () => {
+                    state.pageIndex = Number(button.dataset.page);
+                    render();
+                });
+            });
+        }
+
+        function elementHtml(item, index) {
+            const style = `left:${item.x}%;top:${item.y}%;width:${item.w}%;--r:${item.r || 0}deg;${item.color ? `--tape:${item.color};` : ""}`;
+            const draggable = `data-item="${index}" style="${style}"`;
+
+            if (item.type === "photo" || item.type === "map") {
+                return `<figure class="scrap ${item.type}" ${draggable}><img src="${item.src}" alt=""></figure>`;
+            }
+
+            if (item.type === "receipt") {
+                return `<div class="scrap receipt" ${draggable}>${item.text.map((line, i) => i === 1 ? `<strong>${line}</strong>` : `<span>${line}</span>`).join("")}</div>`;
+            }
+
+            if (item.type === "ticket") {
+                return `<div class="scrap ticket" ${draggable}>${item.text.map((line, i) => i === 1 ? `<strong>${line}</strong>` : `<span>${line}</span>`).join("")}</div>`;
+            }
+
+            if (item.type === "stamp") {
+                return `<div class="scrap stamp" ${draggable}>${item.text}</div>`;
+            }
+
+            if (item.type === "stampbox") {
+                return `<div class="scrap stampbox" ${draggable}>${item.text}</div>`;
+            }
+
+            if (item.type === "letters") {
+                return `<div class="scrap letters" ${draggable}>${item.text.split("").map((letter) => `<span>${letter}</span>`).join("")}</div>`;
+            }
+
+            if (item.type === "tape") {
+                return `<div class="scrap tape" ${draggable}></div>`;
+            }
+
+            return `<p class="scrap note" ${draggable}>${item.text}</p>`;
+        }
+
+        function renderSinglePage(target, page, side) {
+            target.className = `page page-${side} ${state.activeSide === side ? "current" : ""}`;
+            target.style.setProperty("--accent", state.accent);
+            target.innerHTML = `
+                <div class="paper-grain"></div>
+                <header class="page-date">
+                    <span>${page.title}</span>
+                    <span>${currentTrip().meta.split("·")[0].trim()}</span>
+                </header>
+                ${page.elements.map(elementHtml).join("")}
+            `;
+            makeDraggable(target, side);
+        }
+
+        function render() {
+            const trip = currentTrip();
+            tripTitle.textContent = trip.title;
+            tripMeta.textContent = trip.meta;
+            document.documentElement.style.setProperty("--accent", state.accent);
+            renderTrips();
+            renderPageStrip();
+            renderSinglePage(leftPage, currentPageData(1), "left");
+            renderSinglePage(rightPage, currentPageData(0), "right");
+            document.querySelectorAll(".swatch").forEach((button) => {
+                button.classList.toggle("active", button.dataset.accent === state.accent);
+            });
+            document.getElementById("selectRight").classList.toggle("active", state.activeSide === "right");
+            document.getElementById("selectLeft").classList.toggle("active", state.activeSide === "left");
+        }
+
+        function activePageData() {
+            return state.activeSide === "right" ? currentPageData(0) : currentPageData(1);
+        }
+
+        function addItem(type) {
+            const page = activePageData();
+            const base = { x: 42, y: 34, r: Math.round(Math.random() * 8 - 4), w: 28 };
+            const image = state.importedPhoto || currentTrip().cover;
+            const items = {
+                photo: { ...base, type: "photo", w: 34, src: image },
+                receipt: { ...base, type: "receipt", w: 25, text: ["CAFE", "RECEIPT", "table 04", "€ 12.80"] },
+                ticket: { ...base, type: "ticket", w: 31, text: ["No. 108", "DAY PASS", "valid today"] },
+                stamp: { ...base, type: "stamp", w: 28, text: "STAMP" },
+                tape: { ...base, type: "tape", w: 24, color: state.accent },
+                note: { ...base, type: "note", w: 48, text: "scrivi qui quel dettaglio minuscolo che vuoi ricordare." }
+            };
+            page.elements.push(items[type]);
+            render();
+            showToast("Elemento aggiunto");
+        }
+
+        function makeDraggable(pageEl, side) {
+            pageEl.querySelectorAll(".scrap").forEach((node) => {
+                node.addEventListener("pointerdown", (event) => {
+                    const itemIndex = Number(node.dataset.item);
+                    const data = side === "right" ? currentPageData(0) : currentPageData(1);
+                    const item = data.elements[itemIndex];
+                    const rect = pageEl.getBoundingClientRect();
+                    const startX = event.clientX;
+                    const startY = event.clientY;
+                    const originX = item.x;
+                    const originY = item.y;
+                    node.setPointerCapture(event.pointerId);
+                    node.classList.add("dragging");
+
+                    function move(moveEvent) {
+                        item.x = Math.max(1, Math.min(88, originX + ((moveEvent.clientX - startX) / rect.width) * 100));
+                        item.y = Math.max(1, Math.min(88, originY + ((moveEvent.clientY - startY) / rect.height) * 100));
+                        node.style.left = `${item.x}%`;
+                        node.style.top = `${item.y}%`;
+                    }
+
+                    function up() {
+                        node.classList.remove("dragging");
+                        node.removeEventListener("pointermove", move);
+                        node.removeEventListener("pointerup", up);
+                    }
+
+                    node.addEventListener("pointermove", move);
+                    node.addEventListener("pointerup", up);
+                });
+            });
+        }
+
+        function showToast(message) {
+            toast.textContent = message;
+            toast.classList.add("show");
+            clearTimeout(showToast.timer);
+            showToast.timer = setTimeout(() => toast.classList.remove("show"), 1800);
+        }
+
+        function loadCanvasImage(src) {
+            return new Promise((resolve) => {
+                const image = new Image();
+                image.crossOrigin = "anonymous";
+                image.onload = () => resolve(image);
+                image.onerror = () => resolve(null);
+                image.src = src;
+            });
+        }
+
+        function drawWrappedText(context, text, x, y, maxWidth, lineHeight) {
+            const words = text.split(" ");
+            let line = "";
+            words.forEach((word) => {
+                const testLine = `${line}${word} `;
+                if (context.measureText(testLine).width > maxWidth && line) {
+                    context.fillText(line.trim(), x, y);
+                    line = `${word} `;
+                    y += lineHeight;
+                } else {
+                    line = testLine;
                 }
             });
-        });
+            context.fillText(line.trim(), x, y);
+        }
 
+        async function exportCurrentPage() {
+            const data = activePageData();
+            const canvas = document.createElement("canvas");
+            canvas.width = 1600;
+            canvas.height = 2200;
+            const context = canvas.getContext("2d");
+            const pageWidth = canvas.width;
+            const pageHeight = canvas.height;
 
-        document.addEventListener("DOMContentLoaded", () => {
-            // Seleziona tutte le schede prodotto, il pop-up e i controlli
-            const cards = document.querySelectorAll('.prodotto-card');
-            const modal = document.getElementById('caroselloModal');
-            const modalImg = document.getElementById('modalImg');
-            const closeModal = document.getElementById('closeModal');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
+            context.fillStyle = "#f4ead4";
+            context.fillRect(0, 0, pageWidth, pageHeight);
+            context.strokeStyle = "rgba(84, 65, 47, 0.16)";
+            context.lineWidth = 2;
+            for (let x = 0; x < pageWidth; x += 54) {
+                context.beginPath();
+                context.moveTo(x, 0);
+                context.lineTo(x, pageHeight);
+                context.stroke();
+            }
+            for (let y = 0; y < pageHeight; y += 54) {
+                context.beginPath();
+                context.moveTo(0, y);
+                context.lineTo(pageWidth, y);
+                context.stroke();
+            }
 
-            let immaginiAttuali = [];
-            let indiceAttuale = 0;
+            context.fillStyle = "rgba(117, 91, 63, 0.07)";
+            for (let i = 0; i < 900; i += 1) {
+                context.fillRect(Math.random() * pageWidth, Math.random() * pageHeight, 2, 2);
+            }
 
-            function apriCarosello(card) {
-                // Estrae la lista di immagini separate da virgola scritte nel tag HTML
-                const fotoAttr = card.getAttribute('data-images');
+            context.fillStyle = "#675846";
+            context.font = "34px Special Elite, monospace";
+            context.fillText(data.title, 70, 92);
+            context.fillText(currentTrip().meta.split("·")[0].trim(), pageWidth - 390, 92);
 
-                if (fotoAttr) {
-                    immaginiAttuali = fotoAttr.split(',');
-                    indiceAttuale = 0;
+            for (const item of data.elements) {
+                const x = (item.x / 100) * pageWidth;
+                const y = (item.y / 100) * pageHeight;
+                const w = (item.w / 100) * pageWidth;
+                const rotation = ((item.r || 0) * Math.PI) / 180;
+                context.save();
+                context.translate(x, y);
+                context.rotate(rotation);
 
-                    if (immaginiAttuali.length > 0 && immaginiAttuali[0] !== "") {
-                        aggiornaFoto(indiceAttuale);
-                        modal.style.display = 'flex'; // Mostra il carosello
+                if (item.type === "photo" || item.type === "map") {
+                    const image = await loadCanvasImage(item.src);
+                    const h = item.type === "map" ? w * 1.18 : w * 1.28;
+                    context.shadowColor = "rgba(49, 36, 25, 0.28)";
+                    context.shadowBlur = 24;
+                    context.shadowOffsetY = 18;
+                    context.fillStyle = "#fffdf6";
+                    context.fillRect(0, 0, w, h);
+                    context.shadowColor = "transparent";
+                    if (image) {
+                        const pad = 26;
+                        const imageHeight = h - 92;
+                        context.drawImage(image, pad, pad, w - pad * 2, imageHeight);
                     }
+                } else if (item.type === "receipt" || item.type === "ticket") {
+                    const h = w * 1.75;
+                    context.shadowColor = "rgba(49, 36, 25, 0.20)";
+                    context.shadowBlur = 20;
+                    context.shadowOffsetY = 14;
+                    context.fillStyle = item.type === "receipt" ? "#f9f5eb" : "#dce4dc";
+                    context.fillRect(0, 0, w, h);
+                    context.shadowColor = "transparent";
+                    context.fillStyle = "#28241f";
+                    context.font = "32px Special Elite, monospace";
+                    item.text.forEach((line, index) => {
+                        context.fillStyle = index === 1 ? state.accent : "#28241f";
+                        context.font = index === 1 ? "42px Special Elite, monospace" : "32px Special Elite, monospace";
+                        context.fillText(line, 28, 48 + index * 58);
+                    });
+                } else if (item.type === "stamp" || item.type === "stampbox") {
+                    const h = item.type === "stamp" ? w * 0.6 : w * 0.78;
+                    context.strokeStyle = state.accent;
+                    context.fillStyle = state.accent;
+                    context.lineWidth = 8;
+                    context.font = "700 54px Fraunces, serif";
+                    context.textAlign = "center";
+                    if (item.type === "stamp") {
+                        context.beginPath();
+                        context.ellipse(w / 2, h / 2, w / 2, h / 2, 0, 0, Math.PI * 2);
+                        context.stroke();
+                    } else {
+                        context.strokeRect(0, 0, w, h);
+                    }
+                    context.fillText(item.text, w / 2, h / 2 + 18);
+                    context.textAlign = "left";
+                } else if (item.type === "letters") {
+                    const letters = item.text.split("");
+                    letters.forEach((letter, index) => {
+                        context.fillStyle = index % 2 ? state.accent : "#29352b";
+                        context.fillRect(index * 58, index % 2 ? -16 : 0, 48, 62);
+                        context.fillStyle = "#f4ead4";
+                        context.font = "700 40px Fraunces, serif";
+                        context.fillText(letter, index * 58 + 14, index % 2 ? 30 : 46);
+                    });
+                } else if (item.type === "tape") {
+                    context.fillStyle = item.color || state.accent;
+                    context.globalAlpha = 0.72;
+                    context.fillRect(0, 0, w, 42);
+                    context.globalAlpha = 1;
+                } else {
+                    context.fillStyle = "#29231d";
+                    context.font = "64px Caveat, cursive";
+                    drawWrappedText(context, item.text, 0, 52, w, 62);
                 }
+
+                context.restore();
             }
 
-            // Sente il click su ogni singola scheda
-            cards.forEach(card => {
-                card.addEventListener('click', () => {
-                    apriCarosello(card);
-                });
+            const link = document.createElement("a");
+            link.download = `${currentTrip().title.toLowerCase().replaceAll(" ", "-")}-page-${state.pageIndex + 1}.png`;
+            link.href = canvas.toDataURL("image/png");
+            link.click();
+            showToast("PNG esportato");
+        }
 
-                card.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        apriCarosello(card);
-                    }
-                });
-            });
-
-            function aggiornaFoto(index) {
-                modalImg.src = immaginiAttuali[index].trim();
-            }
-
-            // Bottone Avanti
-            nextBtn.addEventListener('click', (e) => {
-                e.stopPropagation(); // Evita che il click chiuda la finestra
-                indiceAttuale = (indiceAttuale + 1) % immaginiAttuali.length;
-                aggiornaFoto(indiceAttuale);
-            });
-
-            // Bottone Indietro
-            prevBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                indiceAttuale = (indiceAttuale - 1 + immaginiAttuali.length) % immaginiAttuali.length;
-                aggiornaFoto(indiceAttuale);
-            });
-
-            // Chiudi premendo sulla X
-            closeModal.addEventListener('click', () => { modal.style.display = 'none'; });
-
-            // Chiudi premendo sullo sfondo scuro fuori dalla foto
-            modal.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
+        document.querySelectorAll("[data-add]").forEach((button) => {
+            button.addEventListener("click", () => addItem(button.dataset.add));
         });
 
-        // CAROSELLO AUTOMATICO SEZIONE CHI SIAMO
-        document.addEventListener("DOMContentLoaded", () => {
-            const slides = document.querySelectorAll('.chi-siamo-slide');
-            let slideAttuale = 0;
-            const tempoCambio = 4000; // Tempo in millisecondi (3000 = 3 secondi)
-
-            // Controlla che ci siano effettivamente delle immagini prima di far partire il timer
-            if (slides.length > 0) {
-                setInterval(() => {
-                    // Rimuove la visibilità dall'immagine attuale
-                    slides[slideAttuale].classList.remove('active');
-
-                    // Passa alla foto successiva (e ricomincia da capo se è l'ultima)
-                    slideAttuale = (slideAttuale + 1) % slides.length;
-
-                    // Mostra la nuova immagine
-                    slides[slideAttuale].classList.add('active');
-                }, tempoCambio);
-            }
+        document.querySelectorAll(".swatch").forEach((button) => {
+            button.addEventListener("click", () => {
+                state.accent = button.dataset.accent;
+                render();
+            });
         });
+
+        document.getElementById("selectRight").addEventListener("click", () => {
+            state.activeSide = "right";
+            render();
+        });
+
+        document.getElementById("selectLeft").addEventListener("click", () => {
+            state.activeSide = "left";
+            render();
+        });
+
+        document.getElementById("newPageButton").addEventListener("click", () => {
+            currentTrip().pages.push({
+                title: `Page ${currentTrip().pages.length + 1}`,
+                elements: [
+                    { type: "photo", x: 18, y: 14, r: -2, w: 44, src: state.importedPhoto || currentTrip().cover },
+                    { type: "note", x: 18, y: 68, r: 1, w: 58, text: "nuova pagina, nuovo pezzo di viaggio." },
+                    { type: "tape", x: 42, y: 11, r: 3, w: 22, color: state.accent }
+                ]
+            });
+            state.pageIndex = currentTrip().pages.length - 1;
+            render();
+            showToast("Pagina creata");
+        });
+
+        document.getElementById("exportButton").addEventListener("click", exportCurrentPage);
+
+        document.getElementById("photoInput").addEventListener("change", (event) => {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = () => {
+                state.importedPhoto = reader.result;
+                addItem("photo");
+            };
+            reader.readAsDataURL(file);
+        });
+
+        document.getElementById("ageRange").addEventListener("input", (event) => {
+            document.documentElement.style.setProperty("--age", event.target.value / 100);
+        });
+
+        document.getElementById("shadowRange").addEventListener("input", (event) => {
+            document.documentElement.style.setProperty("--depth", event.target.value / 100);
+        });
+
+        render();
     </script>
 </body>
 

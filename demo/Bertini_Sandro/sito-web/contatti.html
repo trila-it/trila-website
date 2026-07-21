@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contatti | Studio Immobiliare Bertini</title>
+<meta name="description" content="Contatta lo Studio Immobiliare Di Bertini Sandro a Piombino: telefono, indirizzo, orari e modulo di contatto.">
+<link rel="icon" href="assets/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .hours-table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+  .hours-table td { padding: 9px 0; border-bottom: 1px solid var(--ink-100); }
+  .hours-table td:first-child { color: var(--ink-700); font-weight: 600; }
+  .hours-table td:last-child { text-align: right; color: var(--ink-500); }
+  .hours-table tr.today td { color: var(--olive-700); }
+  .contact-info-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 18px; }
+  .contact-info-list li { display: flex; align-items: flex-start; gap: 14px; }
+  .contact-info-list .ci-icon {
+    width: 40px; height: 40px; border-radius: 50%; background: var(--olive-100);
+    color: var(--olive-700); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/logo.jpg" alt="Studio Immobiliare Bertini">
+      <span class="brand-name">Sandro Bertini<span>Studio Immobiliare</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#annunci">Immobili</a>
+      <a href="chi-siamo.html">Chi Siamo</a>
+      <a href="contatti.html" class="active">Contatti</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="nav-phone" href="tel:+393298129169">
+        <svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        329 812 9169
+      </a>
+      <a href="contatti.html" class="btn btn-primary btn-sm">Contattaci</a>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">Contatti</span>
+    <h1 style="max-width:640px;">Parliamo del tuo prossimo passo immobiliare</h1>
+    <p style="max-width:560px; margin-bottom:40px;">Chiamaci, scrivici o passa in ufficio a Piombino: siamo qui per aiutarti a vendere o comprare senza stress.</p>
+
+    <div class="detail-layout">
+      <div class="agent-card" style="position:static;">
+        <h3 style="margin-bottom:20px;">Inviaci un messaggio</h3>
+        <form data-contact-form>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="nome">Nome e cognome</label>
+              <input type="text" id="nome" name="nome" placeholder="Mario Rossi" required>
+            </div>
+            <div class="form-group">
+              <label for="telefono">Telefono</label>
+              <input type="tel" id="telefono" name="telefono" placeholder="329 000 0000">
+            </div>
+            <div class="form-group full">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="mario.rossi@email.com" required>
+            </div>
+            <div class="form-group full">
+              <label for="motivo">Sono interessato a</label>
+              <select id="motivo" name="motivo">
+                <option>Comprare casa</option>
+                <option>Vendere casa</option>
+                <option>Richiedere una valutazione</option>
+                <option>Altro</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="messaggio">Messaggio</label>
+              <textarea id="messaggio" name="messaggio" rows="5" placeholder="Scrivi qui la tua richiesta..."></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Invia richiesta</button>
+          <p class="form-feedback form-note"></p>
+          <p class="form-note">Modulo dimostrativo: collegalo a un servizio email o CRM per ricevere davvero le richieste.</p>
+        </form>
+      </div>
+
+      <aside>
+        <div class="agent-card" style="position:static; margin-bottom:24px;">
+          <h3 style="margin-bottom:18px;">Informazioni</h3>
+          <ul class="contact-info-list">
+            <li>
+              <span class="ci-icon"><svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-11a7 7 0 0 0-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+              <div><strong>Indirizzo</strong><br>Via Cesare Lombroso, 68<br>57025 Piombino (LI)</div>
+            </li>
+            <li>
+              <span class="ci-icon"><svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+              <div><strong>Telefono</strong><br><a href="tel:+393298129169">329 812 9169</a></div>
+            </li>
+            <li>
+              <span class="ci-icon"><svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></span>
+              <div><strong>Instagram</strong><br><a href="https://www.instagram.com/immobiliare.bertini_piombino/" target="_blank" rel="noopener">@immobiliare.bertini_piombino</a></div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="agent-card" style="position:static;">
+          <h3 style="margin-bottom:18px;">Orari di apertura</h3>
+          <table class="hours-table">
+            <tr><td>Lunedì</td><td>09–12:30, 16–19:30</td></tr>
+            <tr><td>Martedì</td><td>09–12:30, 16–19:30</td></tr>
+            <tr><td>Mercoledì</td><td>09–12:30, 16–19:30</td></tr>
+            <tr><td>Giovedì</td><td>09–12:30, 16–19:30</td></tr>
+            <tr><td>Venerdì</td><td>09–12:30, 16–19:30</td></tr>
+            <tr><td>Sabato</td><td>09–12:30</td></tr>
+            <tr><td>Domenica</td><td>Chiuso</td></tr>
+          </table>
+        </div>
+      </aside>
+    </div>
+
+    <h2 style="margin-top:56px; font-size:1.3rem;">Dove siamo</h2>
+    <div class="map-embed">
+      <iframe src="https://www.google.com/maps?q=Via+Cesare+Lombroso+68,+57025+Piombino+LI&output=embed" loading="lazy" allowfullscreen title="Mappa Studio Immobiliare Bertini"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo.jpg" alt="Studio Immobiliare Bertini">
+          <strong>Sandro Bertini<br>Studio Immobiliare</strong>
+        </div>
+        <p>Per vendere e comprare casa a Piombino, senza stress.</p>
+        <div class="social-row" style="margin-top:16px;">
+          <a href="https://www.instagram.com/immobiliare.bertini_piombino/" aria-label="Instagram" target="_blank" rel="noopener">
+            <svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+          </a>
+          <a href="#" aria-label="Facebook">
+            <svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h4>Naviga</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#annunci">Immobili</a></li>
+          <li><a href="chi-siamo.html">Chi Siamo</a></li>
+          <li><a href="contatti.html">Contatti</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Immobili</h4>
+        <ul>
+          <li><a href="immobile-via-giotto.html">Vista mare in Via Giotto</a></li>
+          <li><a href="immobile-san-rocco.html">San Rocco (prezzo ribassato)</a></li>
+          <li><a href="immobile-venturina.html">Quadrilocale a Venturina</a></li>
+          <li><a href="immobile-castiglione-della-pescaia.html">Villa a Castiglione della Pescaia</a></li>
+          <li><a href="immobile-piombino-terrazza.html">Appartamento con terrazza</a></li>
+          <li><a href="immobile-piombino-ingresso-indipendente.html">Ingresso indipendente + garage</a></li>
+          <li><a href="immobile-piombino-198.html">Appartamento luminoso</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contatti</h4>
+        <ul>
+          <li>Via Cesare Lombroso, 68<br>57025 Piombino (LI)</li>
+          <li><a href="tel:+393298129169">329 812 9169</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Studio Immobiliare Di Bertini Sandro. Tutti i diritti riservati.</span>
+      <span>Realizzato da <a href="https://trila.it" target="_blank" rel="noopener">trila.it</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
