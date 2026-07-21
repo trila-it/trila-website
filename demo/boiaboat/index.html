@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boia Boat — Boat Tour, Canal Tour &amp; Sunset Aperitivo · Livorno, Toscana</title>
+<meta name="description" content="Tour esclusivi in gozzo sorrentino a Livorno: canali, costa e aperitivo al tramonto. Vivi il mare con lo skipper Davide. A 20 min da Pisa e 50 min da Firenze.">
+<meta property="og:title" content="Boia Boat">
+<meta property="og:description" content="Discover Livorno from a different perspective">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,400&family=Manrope:wght@300..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader__logo">
+    <img src="img/logo.webp" alt="Boia Boat">
+    <span class="loader__ring"></span>
+  </div>
+  <div class="loader__inner">
+    <span class="loader__word">BOIA</span>
+    <span class="loader__word">BOAT</span>
+  </div>
+  <div class="loader__bar"><span></span></div>
+  <!-- onde animate del loader -->
+  <svg class="loader__waves" viewBox="0 0 1600 200" preserveAspectRatio="none">
+    <path class="lwave lwave--1" d="M-80,100 C200,160 480,40 800,100 C1120,160 1400,40 1680,100 L1680,200 L-80,200 Z"></path>
+    <path class="lwave lwave--2" d="M-80,120 C200,60 480,180 800,120 C1120,60 1400,180 1680,120 L1680,200 L-80,200 Z"></path>
+  </svg>
+</div>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <a href="#hero" class="nav__logo" data-magnetic>
+    <img src="img/logo.webp" alt="Boia Boat Livorno" class="nav__logo-img">
+    <span>Boia&nbsp;Boat</span>
+  </a>
+  <nav class="nav__links">
+    <a href="#story" data-i18n="nav_story">Storia</a>
+    <a href="#tours" data-i18n="nav_tours">Tour</a>
+    <a href="#how" data-i18n="nav_how">Come funziona</a>
+    <a href="#gallery" data-i18n="nav_gallery">Gallery</a>
+    <a href="#contact" data-i18n="nav_contact">Contatti</a>
+  </nav>
+  <div class="nav__right">
+    <div class="lang-switcher" id="langSwitcher">
+      <button class="lang-btn active" data-lang="it">IT</button>
+      <span>|</span>
+      <button class="lang-btn" data-lang="en">EN</button>
+      <span>|</span>
+      <button class="lang-btn" data-lang="de">DE</button>
+    </div>
+    <a href="#contact" class="btn btn--nav" data-magnetic data-i18n="nav_cta">Prenota ora</a>
+    <button class="nav__burger" id="burger" aria-label="Menu"><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- MOBILE MENU fullscreen -->
+<div class="menu" id="menu">
+  <div class="menu__top">
+    <img src="img/logo.webp" alt="Boia Boat" class="menu__logo">
+  </div>
+  <nav class="menu__links">
+    <a href="#story" data-i18n="nav_story">Storia</a>
+    <a href="#tours" data-i18n="nav_tours">Tour</a>
+    <a href="#how" data-i18n="nav_how">Come funziona</a>
+    <a href="#gallery" data-i18n="nav_gallery">Gallery</a>
+    <a href="#contact" data-i18n="nav_contact">Contatti</a>
+  </nav>
+  <div class="menu__bottom">
+    <div class="menu__lang">
+      <button class="lang-btn active" data-lang="it">IT</button>
+      <span>|</span>
+      <button class="lang-btn" data-lang="en">EN</button>
+      <span>|</span>
+      <button class="lang-btn" data-lang="de">DE</button>
+    </div>
+    <a href="#contact" class="btn btn--solid menu__cta" data-i18n="nav_cta">Prenota ora</a>
+    <a href="https://instagram.com/boiaboat" target="_blank" rel="noopener" class="menu__ig">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      @boiaboat
+    </a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero__bg">
+    <img src="img/hero-2.jpg" alt="Gozzo sorrentino sulla costa di Livorno">
+    <div class="hero__overlay"></div>
+  </div>
+  <div class="hero__content">
+    <p class="hero__eyebrow" data-reveal>Livorno · Toscana</p>
+    <h1 class="hero__title">
+      <span class="line" data-split data-i18n="hero_title1">Discover Livorno</span>
+      <span class="line line--it" data-split data-i18n="hero_title2">from a different perspective</span>
+    </h1>
+    <p class="hero__sub" data-reveal data-i18n="hero_sub">Boat tour, canal tour &amp; sunset aperitivo a bordo del nostro gozzo sorrentino.</p>
+    <div class="hero__actions" data-reveal>
+      <a href="#contact" class="btn btn--solid" data-magnetic data-i18n="hero_cta1">Prenota il tuo tour</a>
+      <a href="#tours" class="btn btn--ghost" data-magnetic data-i18n="hero_cta2">Scopri le esperienze</a>
+    </div>
+  </div>
+  <div class="hero__scroll"><span data-i18n="scroll">Scroll</span><i></i></div>
+  <div class="hero__meta">
+    <div><strong>20 min</strong><span data-i18n="meta_pisa">da Pisa</span></div>
+    <div><strong>50 min</strong><span data-i18n="meta_firenze">da Firenze</span></div>
+    <div><strong>2 min</strong><span data-i18n="meta_mercato">dal Mercato Centrale</span></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee__track">
+    <!-- gruppo A -->
+    <span class="marquee__group">
+      <span>Canal Tour</span><i>•</i><span>Coastal Tour</span><i>•</i><span>Sunset Aperitivo</span><i>•</i><span>Swim Stop</span><i>•</i>
+    </span>
+    <!-- gruppo B (copia identica per loop continuo) -->
+    <span class="marquee__group">
+      <span>Canal Tour</span><i>•</i><span>Coastal Tour</span><i>•</i><span>Sunset Aperitivo</span><i>•</i><span>Swim Stop</span><i>•</i>
+    </span>
+  </div>
+</div>
+<!-- onde sotto il marquee -->
+<div class="waves waves--below-marquee" aria-hidden="true">
+  <svg viewBox="0 0 1600 100" preserveAspectRatio="none">
+    <path class="wave wave--3" d="M-80,40 C200,90 480,10 800,50 C1120,90 1380,20 1680,50 L1680,0 L-80,0 Z"/>
+    <path class="wave wave--2" d="M-80,30 C200,80 480,0 800,35 C1120,70 1380,10 1680,35 L1680,0 L-80,0 Z"/>
+    <path class="wave wave--1" d="M-80,20 C200,60 480,0 800,25 C1120,50 1380,5 1680,25 L1680,0 L-80,0 Z"/>
+  </svg>
+</div>
+
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="story__img">
+    <div class="story__img-wrap" data-parallax>
+      <img src="img/davide.webp" alt="Lo skipper Davide a bordo">
+    </div>
+    <div class="story__badge">
+      <span>Our</span><strong>Skipper</strong>
+    </div>
+  </div>
+  <div class="story__text">
+    <p class="eyebrow" data-reveal data-i18n="story_eyebrow">La nostra storia</p>
+    <h2 data-reveal data-i18n="story_title">Ciao, sono <em>Davide</em></h2>
+    <p data-reveal data-i18n="story_p1">30 anni, cresciuto a Livorno con la passione per il mare e la storia della mia città. Dopo anni passati in un ufficio noioso ho deciso di inseguire il mio sogno: vivere ogni giorno sul mare.</p>
+    <p data-reveal data-i18n="story_p2">Ho trascorso un paio d'anni in Costiera Amalfitana, in un ambiente turistico molto vivace, dove ho fatto esperienza. Ora sono tornato a casa e porto con me tutta la conoscenza e l'entusiasmo raccolti nel mio viaggio.</p>
+    <p data-reveal data-i18n="story_p3">Sali a bordo del nostro classico gozzo sorrentino: ti racconterò tutto ciò che so sulla storia di Livorno, la sua gente e i suoi segreti. <strong>Vi aspettiamo!</strong></p>
+    <a href="#tours" class="link-arrow" data-reveal data-magnetic data-i18n="story_cta">Scopri i nostri momenti in barca
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- TOURS -->
+<section class="tours" id="tours">
+  <div class="section-head">
+    <p class="eyebrow" data-reveal data-i18n="tours_eyebrow">Le esperienze</p>
+    <h2 data-reveal data-i18n="tours_title">Un mondo da scoprire insieme</h2>
+  </div>
+  <div class="tours__grid">
+
+    <article class="tour">
+      <div class="tour__img"><img src="img/gallery-1.jpg" alt="Tour dei canali di Livorno"></div>
+      <div class="tour__body">
+        <span class="tour__tag">Family time</span>
+        <h3>Canal Tour</h3>
+        <p data-i18n="tour1_desc">Naviga tra gli incantevoli canali del quartiere Venezia e scopri gli edifici e la storia di Livorno, dall'Impero Romano alla dominazione dei Medici di Firenze. Ammira le due maestose fortezze che proteggono la città vecchia.</p>
+        <span class="tour__dur">1H</span>
+      </div>
+    </article>
+
+    <article class="tour">
+      <div class="tour__img"><img src="img/gallery-2.jpg" alt="Costa di Livorno dal mare"></div>
+      <div class="tour__body">
+        <span class="tour__tag">Live it real</span>
+        <h3>Coastal Tour</h3>
+        <p data-i18n="tour2_desc">Goditi la costa di Livorno con lo skipper Davide: i Bagni della Regina Margherita, l'Accademia Navale, il Castel Boccale, la Terrazza Mascagni. Su richiesta ci fermiamo per un tuffo rilassante in acque cristalline.</p>
+        <span class="tour__dur">2H · 4H</span>
+      </div>
+    </article>
+
+    <article class="tour">
+      <div class="tour__img"><img src="img/hero-3.jpg" alt="Aperitivo al tramonto in barca"></div>
+      <div class="tour__body">
+        <span class="tour__tag">Golden hour</span>
+        <h3>Sunset Aperitivo</h3>
+        <p data-i18n="tour3_desc">L'esperienza più magica: salpa al tramonto e brinda al sole che cala sul Mediterraneo. Un aperitivo a bordo, i colori del cielo livornese e il rumore dolce delle onde. Da vivere almeno una volta.</p>
+        <span class="tour__dur" data-i18n="tour3_dur">su richiesta</span>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- HOW IT WORKS (fascia amaranto) -->
+<section class="how" id="how">
+  <!-- onda d'ingresso amaranto -->
+  <div class="waves waves--top" aria-hidden="true">
+    <svg viewBox="0 0 1440 150" preserveAspectRatio="none">
+      <path class="wave wave--3" d="M0,80 C360,150 720,10 1080,80 C1260,115 1350,60 1440,80 L1440,0 L0,0 Z"></path>
+      <path class="wave wave--2" d="M0,90 C360,30 720,150 1080,90 C1260,55 1350,110 1440,90 L1440,0 L0,0 Z"></path>
+      <path class="wave wave--1" d="M0,100 C360,150 720,60 1080,110 C1260,135 1350,90 1440,110 L1440,0 L0,0 Z"></path>
+    </svg>
+  </div>
+  <div class="section-head section-head--center">
+    <p class="eyebrow" data-reveal data-i18n="how_eyebrow">How it works</p>
+    <h2 data-reveal data-i18n="how_title">Come funziona</h2>
+  </div>
+  <div class="how__grid">
+    <div class="how__card" data-reveal>
+      <span class="how__num">01</span>
+      <h3 data-i18n="how1_title">La missione</h3>
+      <p data-i18n="how1_desc">Ci dedichiamo a offrire esperienze indimenticabili di noleggio barche in Toscana. La nostra missione è un servizio di alta qualità che ti permetta di esplorare le meraviglie della costa livornese.</p>
+    </div>
+    <div class="how__card" data-reveal>
+      <span class="how__num">02</span>
+      <h3 data-i18n="how2_title">La barca</h3>
+      <p data-i18n="how2_desc">La flotta è un gozzo sorrentino ben equipaggiato, con doccia e cuscineria, pronto per le acque cristalline del Mediterraneo. Mantenuto in perfette condizioni per massima sicurezza e comfort.</p>
+    </div>
+    <div class="how__card" data-reveal>
+      <span class="how__num">03</span>
+      <h3 data-i18n="how3_title">Su misura</h3>
+      <p data-i18n="how3_desc">Offriamo servizi personalizzati per ogni esigenza. Che sia una gita di un'ora o un'escursione di quattro ore, creiamo per te l'esperienza di noleggio barche perfetta.</p>
+    </div>
+  </div>
+  <p class="how__refund" data-reveal data-i18n="how_refund"><strong>Politica rimborsi:</strong> i servizi non sono rimborsabili. In caso di maltempo e/o imprevisti sarà possibile riprogrammare il noleggio senza alcun costo aggiuntivo.</p>
+  <!-- onda d'uscita -->
+  <div class="waves waves--bottom" aria-hidden="true">
+    <svg viewBox="0 0 1440 150" preserveAspectRatio="none">
+      <path class="wave wave--3" d="M0,80 C360,150 720,10 1080,80 C1260,115 1350,60 1440,80 L1440,150 L0,150 Z"></path>
+      <path class="wave wave--2" d="M0,90 C360,30 720,150 1080,90 C1260,55 1350,110 1440,90 L1440,150 L0,150 Z"></path>
+      <path class="wave wave--1" d="M0,100 C360,150 720,60 1080,110 C1260,135 1350,90 1440,110 L1440,150 L0,150 Z"></path>
+    </svg>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="section-head">
+    <p class="eyebrow" data-reveal data-i18n="gallery_eyebrow">Gallery</p>
+    <h2 data-reveal data-i18n="gallery_title">Momenti a bordo</h2>
+  </div>
+  <div class="gallery__grid">
+    <figure class="gallery__item gallery__item--tall" data-reveal><img src="img/hero-2.jpg" alt=""></figure>
+    <figure class="gallery__item" data-reveal><img src="img/gallery-2.jpg" alt=""></figure>
+    <figure class="gallery__item" data-reveal><img src="img/feature-1.jpg" alt=""></figure>
+    <figure class="gallery__item gallery__item--wide" data-reveal><img src="img/hero-3.jpg" alt=""></figure>
+    <figure class="gallery__item" data-reveal><img src="img/feature-2.jpg" alt=""></figure>
+    <figure class="gallery__item gallery__item--tall" data-reveal><img src="img/gallery-1.jpg" alt=""></figure>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="waves waves--top" aria-hidden="true">
+    <svg viewBox="0 0 1440 150" preserveAspectRatio="none">
+      <path class="wave wave--3" d="M0,80 C360,150 720,10 1080,80 C1260,115 1350,60 1440,80 L1440,0 L0,0 Z"></path>
+      <path class="wave wave--2" d="M0,90 C360,30 720,150 1080,90 C1260,55 1350,110 1440,90 L1440,0 L0,0 Z"></path>
+      <path class="wave wave--1" d="M0,100 C360,150 720,60 1080,110 C1260,135 1350,90 1440,110 L1440,0 L0,0 Z"></path>
+    </svg>
+  </div>
+  <div class="contact__inner">
+    <div class="contact__left">
+      <p class="eyebrow" data-reveal data-i18n="contact_eyebrow">Contattaci</p>
+      <h2 data-reveal data-i18n="contact_title">Scrivici.<br>O ancor meglio, <em>vieni a vedere di persona.</em></h2>
+      <p class="contact__note" data-reveal data-i18n="contact_note">Ci trovi nel cuore del centro città, a 2 minuti dal Mercato Centrale.</p>
+
+      <ul class="contact__info">
+        <li data-reveal>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div><strong data-i18n="contact_addr_label">Indirizzo</strong><a href="https://maps.google.com/?q=Scali+degli+Olandesi+12+Livorno" target="_blank" rel="noopener">Scali degli Olandesi 12, Livorno</a></div>
+        </li>
+        <li data-reveal>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <div><strong data-i18n="contact_phone_label">Telefono</strong><a href="tel:+393884304111">+39 388 4304111</a></div>
+        </li>
+        <li data-reveal>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg>
+          <div><strong data-i18n="contact_email_label">Email</strong><a href="mailto:info@boiaboat.com">info@boiaboat.com</a></div>
+        </li>
+        <li data-reveal>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          <div><strong data-i18n="contact_hours_label">Orario</strong><span data-i18n="contact_hours_val">Tutti i giorni · 09:00 – 19:00</span></div>
+        </li>
+      </ul>
+    </div>
+
+    <form class="contact__form" data-reveal onsubmit="return false;">
+      <h3 data-i18n="form_title">Prenota la tua esperienza</h3>
+      <label data-i18n="form_name">Nome
+        <input type="text" name="name" data-i18n-placeholder="form_name_ph" placeholder="Il tuo nome" required>
+      </label>
+      <label data-i18n="form_email">Email *
+        <input type="email" name="email" placeholder="you@email.com" required>
+      </label>
+      <label data-i18n="form_tour">Tour
+        <select name="tour">
+          <option data-i18n="form_tour1">Canal Tour (1H)</option>
+          <option data-i18n="form_tour2">Coastal Tour (2H / 4H)</option>
+          <option data-i18n="form_tour3">Sunset Aperitivo</option>
+          <option data-i18n="form_tour4">Non so ancora, consigliami</option>
+        </select>
+      </label>
+      <label data-i18n="form_msg">Messaggio
+        <textarea name="message" rows="3" data-i18n-placeholder="form_msg_ph" placeholder="Quante persone, data preferita…"></textarea>
+      </label>
+      <button type="submit" class="btn btn--solid btn--full" data-magnetic data-i18n="form_submit">Invia richiesta</button>
+      <p class="contact__privacy" data-i18n="form_privacy">Questo sito è protetto da reCAPTCHA: si applicano la Privacy Policy e i Termini di Google.</p>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__top">
+    <img src="img/logo.webp" alt="Boia Boat Livorno" class="footer__logo-img">
+    <a href="#hero" class="footer__logo">Boia&nbsp;Boat</a>
+    <p data-i18n="footer_tagline">Un mondo da scoprire insieme.</p>
+    <div class="footer__social">
+      <a href="https://instagram.com/boiaboat" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+      <a href="mailto:info@boiaboat.com" aria-label="Email"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg></a>
+      <a href="tel:+393884304111" aria-label="Telefono"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg></a>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span data-i18n="footer_copy">© 2026 Boia Boat — Tutti i diritti riservati.</span>
+    <span>Livorno, Toscana · Made with the sea in mind</span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

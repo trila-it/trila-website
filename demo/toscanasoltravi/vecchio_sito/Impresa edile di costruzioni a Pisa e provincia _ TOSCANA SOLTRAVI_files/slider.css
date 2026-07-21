@@ -1,0 +1,84 @@
+/* FlexSlider Necessary Styles
+*********************************/
+.flexslider {margin: 0; padding: 0;}
+.flexslider .slides > li {display: none; -webkit-backface-visibility: hidden;}
+.flexslider .slides img {max-width: 100%; display: block;}
+
+/* Clearfix for the .slides element */
+.slides:after {content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0;}
+html[xmlns] .slides {display: block;}
+* html .slides {height: 1%;}
+
+/* No JavaScript Fallback */
+/* If you are not using another script, such as Modernizr, make sure you
+ * include js that eliminates this class on page load */
+.no-js .slides > li:first-child {display: block;}
+
+
+#page1 header .bg2{background:url(../images/slider-tail.gif) center bottom repeat-x;}
+.flexslider, .flex-container {position: relative; overflow:hidden; max-height:546px;}
+	.flexslider .slides > li {
+		display:block;
+		width:250px;
+		overflow:hidden;
+		position:relative;
+	}
+	.flexslider .slides img {
+		display: block;
+		max-width: 700px;
+	}
+	.flexslider .hover-img{
+		position:absolute;
+		top:0;
+		left:0;
+		opacity:0;
+	}
+	/* Caption style */
+	.flex-caption {
+		width: 650px;
+		position: absolute;
+		right: -1000px;
+		bottom: -100%;
+		background:url(../images/caption-tail.png) 0 0 repeat;
+		font-family: HelveticaNeueLTStd-BdCn, "Helevetica Neue LT", Helvetica;
+		font-size: 20px;
+				color:#e7e7e7;
+		text-transform:uppercase;
+	}
+		.flex-caption .indents{padding:13px 70px 13px 21px;}
+		.flex-caption .caption-link{
+			display:block;
+			width:25px;
+			height:25px;
+			overflow:hidden;
+			background:url(../images/caption-link.gif) center top no-repeat;
+			position:absolute;
+			top:12px;
+			right:18px;
+			text-align:left;
+		}
+			.flex-caption .caption-link:hover{ background-position:center -45px; background:url(../images/caption-link.gif) center top no-repeat;}
+#responsiveFlag{display:block;}
+
+/*@media only screen and (max-width: 995px){
+	.flexslider .slides img {max-width: 100%;}
+	.flex-control-nav{display:none;}
+	.flex-direction-nav{position: absolute; background:url(../images/caption-tail.png) 0 0 repeat; font:400 21px/25px 'Oswald', sans-serif; color:#e7e7e7; text-transform:uppercase; left: 0; top: 0; width:100%; overflow:hidden;}
+		.flex-direction-nav li{float:left; width:50%;}
+		.flex-direction-nav a{display:block; text-decoration:none; color:#fff; padding:21px;}
+			.flex-direction-nav a:hover{text-decoration:none; background-color:#101010;}
+			.flex-next{text-align:right;}
+	.flex-caption {right: 0; bottom: 0; width:100%;}
+	.flex-caption .caption-link{right:20px;}
+	#responsiveFlag{font-size:0;line-height:0; display:inline;}
+}
+@media only screen and (max-width: 767px){
+	.flex-direction-nav, .flex-caption{font-size:16px; line-height:20px;}
+	.flex-direction-nav a{padding:15px 20px;}
+	.flex-caption .indents{padding:20px 70px 20px 20px;}
+	.flex-caption .caption-link{top:18px;}
+}
+@media only screen and (max-width: 479px){
+	.flex-direction-nav, .flex-caption{font-size:13px; line-height:16px;}
+	.flex-caption .caption-link{top:15px;}
+}*/

@@ -1,0 +1,197 @@
+@import url("../webfonts/Helevetica_Neue_LT/stylesheet.css");
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+img {
+	behavior: url("../js/pngbehavior.htc");
+}
+.sfondoPagina {
+	background-color: #E6E6E6;
+	background-image: url(../images/sfondo-top-pagina.gif);
+	background-repeat: repeat-x;
+	background-position: left top;
+}
+
+
+.titoli {
+	font-family: HelveticaNeueLTStd-BdCn, "Helevetica Neue LT",  Helvetica;
+	font-size: 28px;
+	color: #666666;
+	text-decoration: none;
+	font-weight: normal;
+	line-height: 26px;
+	margin: 0px;
+	padding: 0px;
+}
+.paddingLeft {
+	padding-left: 20px;
+}
+.evidenziato {
+	color: #F1780D;
+	text-decoration: none;
+	line-height: 24px;
+}
+.sottoTitoli {
+	font-family: HelveticaNeueLTStd-BdCn, "Helevetica Neue LT", Helvetica;
+	font-size: 18px;
+	color: #666;
+	text-decoration: none;
+	line-height: 20px;
+}
+.testo {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 13px;
+	color: #666666;
+	text-decoration: none;
+}
+.testoUp {
+	margin: 0px;
+	padding: 0px;
+	top: 0px;
+	position: relative;
+}
+.payOff {
+	font-family: "Helevetica Neue LT", Helvetica, Arial;
+	font-size: 14px;
+	color: #FFF;
+	text-decoration: none;
+	padding-bottom: 2px;
+	letter-spacing: 2px;
+}
+.rigaSxBianca {
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #FFF;
+}
+.testoFooter {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 11px;
+	color: #FFF;
+	text-decoration: none;
+}
+
+.menuFooter a:link, .menuFooter a:visited {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 11px;
+	color: #FFF;
+	text-decoration: none;
+}
+.menuFooter a:hover {
+	text-decoration: underline;
+}
+
+.sfondoTitoliHeader {
+	font-family: HelveticaNeueLTStd-BdCn, "Helevetica Neue LT", Helvetica;
+	font-size: 22px;
+	color: #FFF;
+	text-decoration: none;
+	background-image: url(../images/caption-tail.png);
+	background-repeat: repeat;
+	background-position: left top;
+	line-height: 22px;
+	margin: 0px;
+	padding: 0px;
+}
+.tabBox {
+	font-family: HelveticaNeueLTStd-BdCn, "Helevetica Neue LT", Helvetica;
+	font-size: 24px;
+	color: #FFF;
+	text-decoration: none;
+	background-color: #666;
+	padding-top: 5px;
+	padding-right: 20px;
+	padding-bottom: 1px;
+	padding-left: 20px;
+	/*line-height: 24px;*/
+	height: 40px;
+}
+.sfondoBox {
+	background-color: #FFF;
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-top-color: #CCC;
+	border-bottom-color: #CCC;
+}
+.link {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 11px;
+	color: #F1780D;
+	text-decoration: underline;
+}
+.telefono {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 28px;
+	color: #666666;
+}
+.separatorePuntaggiato {
+	border-left-width: 1px;
+	border-left-style: dotted;
+	border-left-color: #666;
+}
+.menuAnchor a:link, .menuAnchor a:visited {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 13px;
+	color: #F1780D;
+	text-decoration: underline;
+}
+.separatoreMenuAnchor {
+	color: #B0B0B0;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 24px;
+	font-weight: 100;
+}
+.menuAnchor a:hover {
+	color: #666666;
+}
+.testoLink {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 13px;
+	color: #F1780D;
+	text-decoration: underline;
+}
+.testoBanner {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 11px;
+	color: #666;
+	text-decoration: none;
+}
+.bloccoPuntato {
+	position:relative;
+	left:-25px;
+}
+.inputBox {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #999;
+	text-decoration: none;
+	border: 1px solid #CCC;
+	width: 295px;
+	height: 25px;
+}
+.textArea {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #999;
+	text-decoration: none;
+	border: 1px solid #CCC;
+	width: 295px;
+}
+.datiContatti {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 18px;
+	color: #666;
+	text-decoration: none;
+}
+.subText {
+	vertical-align: sub;
+	font-size: 10px;
+}
+.superText {
+	vertical-align: super;
+	font-size: 10px;
+}

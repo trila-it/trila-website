@@ -1,0 +1,143 @@
+/* ══════════════════════════════
+   SALE RIUNIONI
+══════════════════════════════ */
+
+.sale-intro {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 5rem;
+  align-items: start;
+}
+.sale-numbers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--ivory-3);
+  min-width: 280px;
+  align-self: start;
+}
+.sale-num-item {
+  background: var(--white);
+  padding: 1.8rem 1.6rem;
+  text-align: center;
+}
+.sale-num-val { font-family: var(--serif); font-size: 2rem; font-weight: 400; color: var(--terra); display: block; line-height: 1; }
+.sale-num-lbl { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sand); display: block; margin-top: 0.4rem; }
+
+/* Sala card */
+.sala-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  background: var(--white);
+}
+.sala-img { overflow: hidden; min-height: 520px; }
+.sala-img img { transition: transform 1s var(--slow); }
+.sala-card:hover .sala-img img { transform: scale(1.03); }
+.sala-body {
+  padding: 3.5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+}
+.sala-body h2 { font-family: var(--serif); font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 400; color: var(--brown); }
+.sala-body h2 em { font-style: italic; color: var(--terra); }
+.sala-desc { font-size: 0.9rem; font-weight: 300; color: var(--sand); line-height: 1.8; }
+.sala-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+.spec { display: flex; align-items: center; gap: 0.6rem; font-size: 0.8rem; color: var(--brown-2); }
+.spec svg { width: 15px; height: 15px; stroke: var(--terra); fill: none; flex-shrink: 0; }
+
+/* Configurazioni */
+.config-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.config-card {
+  background: var(--white);
+  padding: 2.5rem 2rem;
+  border-top: 2px solid transparent;
+  transition: border-color 0.35s, box-shadow 0.35s;
+}
+.config-card:hover { border-color: var(--terra); box-shadow: 0 10px 36px rgba(42,31,20,0.07); }
+.config-icon { width: 46px; height: 46px; border: 1px solid var(--ivory-3); display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; }
+.config-icon svg { width: 22px; height: 22px; stroke: var(--terra); fill: none; }
+.config-card h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 400; color: var(--brown); margin-bottom: 0.5rem; }
+.config-card p { font-size: 0.83rem; font-weight: 300; color: var(--sand); line-height: 1.75; margin-bottom: 0.8rem; }
+.config-cap { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--terra); }
+
+/* Pacchetti */
+.pacchetti { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; align-items: start; }
+.pack {
+  background: var(--ivory-2);
+  padding: 2.5rem;
+  position: relative;
+}
+.pack-featured {
+  background: var(--brown);
+  transform: translateY(-10px);
+  box-shadow: 0 24px 64px rgba(42,31,20,0.22);
+}
+.pack-badge {
+  position: absolute;
+  top: -12px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--terra);
+  color: var(--white);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.3rem 1rem;
+  white-space: nowrap;
+}
+.pack h3 { font-family: var(--serif); font-size: 1.9rem; font-weight: 400; color: var(--brown); margin-top: 0.2rem; }
+.pack-featured h3 { color: var(--white); }
+.pack-featured .label { color: var(--terra-2); }
+.pack-list { margin: 1.8rem 0; }
+.pack-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.86rem;
+  color: var(--brown-2);
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(42,31,20,0.06);
+}
+.pack-featured .pack-list li { color: rgba(255,255,255,0.7); border-bottom-color: rgba(255,255,255,0.07); }
+.pack-list li:last-child { border-bottom: none; }
+.pack-list svg { width: 13px; height: 13px; stroke: var(--terra-2); fill: none; flex-shrink: 0; }
+
+/* Richiesta (dark bg) */
+.richiesta-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 6rem;
+  align-items: start;
+}
+.richiesta-contact { margin-top: 2.5rem; }
+.contact-tel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  color: var(--white);
+  transition: color 0.3s;
+}
+.contact-tel:hover { color: var(--terra-2); }
+.contact-tel svg { width: 22px; height: 22px; stroke: var(--terra-2); fill: none; }
+.richiesta-form { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 2rem; }
+
+@media (max-width: 1100px) {
+  .sale-intro { grid-template-columns: 1fr; gap: 2.5rem; }
+  .sale-numbers { min-width: auto; max-width: 360px; }
+  .sala-card { grid-template-columns: 1fr; }
+  .sala-img { min-height: 320px; }
+  .sala-body { padding: 2.5rem; }
+  .config-grid { grid-template-columns: repeat(2, 1fr); }
+  .pacchetti { grid-template-columns: 1fr; }
+  .pack-featured { transform: none; }
+  .richiesta-wrap { grid-template-columns: 1fr; gap: 3rem; }
+}
+@media (max-width: 768px) {
+  .config-grid { grid-template-columns: 1fr; }
+  .sala-specs { grid-template-columns: 1fr; }
+}

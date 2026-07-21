@@ -3,3 +3,4 @@ dist/
 demo/badelf-dist/
 *.log
 .angular/
+demo/asianconsulting/config.php

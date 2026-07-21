@@ -1,0 +1,131 @@
+@charset "UTF-8";
+
+/** 
+ * Default CSS Drop-Down Menu Theme
+ *
+ * @file		default.css
+ * @name		Default
+ * @version		0.1.1
+ * @type		transitional
+ * @browsers	Windows: IE5+, Opera7+, Firefox1+
+ *				Mac OS: Safari2+, Firefox2+
+ *
+ * @link		http://www.lwis.net/
+ * @copyright	2008 Live Web Institute. All Rights Reserved.
+ *
+ * Module Classes: *.dir {} *.on {} *.open {} li.hover {} li.first {} li.last {}
+ * Expected directory tag - li
+ *
+ */
+
+
+/*-------------------------------------------------/
+ * @section		Base Drop-Down Styling
+ * @structure	ul (unordered list)
+ *				ul li (list item)
+ *				ul li a (links)
+ *				/*\.class|(li|a):hover/
+ * @level sep	ul
+ */
+
+
+ul.dropdown {
+ font-weight: bold;
+}
+
+	ul.dropdown li {
+		font-family:Helvetica, Arial, sans-serif;
+		font-size:12px;
+		color: #FFF;
+		font-weight: bold;
+		
+		height:45px;
+	 padding: 0px 0px;
+	 /*border-style: solid;
+	 border-width: 0px 0px 0px 0;
+	 border-color: #fff #d9d9d9 #d9d9d9;*/
+	 background-color: #DF4813;
+	 
+	 text-align:center;
+	 /*padding-top:5px;*/
+	 
+	 
+	}
+	
+	.sottomenuSelected{
+		font-family:Helvetica, Arial, sans-serif;
+		font-size:12px;
+		color: #FFF;
+		font-weight: bold;
+		text-align:center;
+		
+		height:45px;
+		background-color: #09548B;	
+	}
+
+	ul.dropdown li.hover,
+	ul.dropdown li:hover {
+	 background-color: #09548B;
+	 color: #FFF;
+	}
+
+	ul.dropdown a:link,
+	ul.dropdown a:visited	{ color: #FFF; text-decoration: none; }
+	ul.dropdown a:hover		{ color: #FFF; }
+	ul.dropdown a:active	{ color: #FFF; }
+
+
+	/* -- level mark -- */
+
+	ul.dropdown ul {
+	 width: 120px;
+	 margin-top: 0px;
+	}
+
+		ul.dropdown ul li {
+			height:25px;
+		 font-weight: bold;
+		 padding-top:15px;
+		 border-bottom:1px solid #C84012;
+		}
+
+
+
+/*-------------------------------------------------/
+ * @section		Support Class `dir`
+ * @level sep	ul, .class
+ */
+
+
+ul.dropdown *.dir {
+ /*padding-right: 20px;
+ background-image: url(images/nav-arrow-down.png);
+ background-position: 100% 50%;
+ background-repeat: no-repeat;*/
+}
+
+
+/* -- Components override -- */
+
+ul.dropdown-horizontal ul *.dir {
+ /*padding-right: 15px;
+ background-image: url(images/nav-arrow-right.png);
+ background-position: 100% 50%;
+ background-repeat: no-repeat;*/
+}
+
+ul.dropdown-upward *.dir {
+ /*background-image: url(images/nav-arrow-top.png);*/
+}
+
+ul.dropdown-vertical *.dir,
+ul.dropdown-upward ul *.dir {
+ /*background-image: url(images/nav-arrow-right.png);*/
+}
+
+ul.dropdown-vertical-rtl *.dir {
+ /*padding-right: 10px;
+ padding-left: 15px;
+ background-image: url(images/nav-arrow-left.png);
+ background-position: 0 50%;*/
+}

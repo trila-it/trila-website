@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c \"import PIL; print\\(PIL.__version__\\)\")",
+      "Bash(python3)",
+      "Bash(python -c ' *)",
+      "Skill(run)",
+      "Skill(run:*)",
+      "Bash(npx --version)",
+      "Bash(npx --yes playwright@1.48.0 --version)",
+      "Bash(npx --yes playwright@1.48.0 install chromium)",
+      "Bash(node shot.js)",
+      "Bash(taskkill //F //IM python.exe)",
+      "Bash(xxd hero.jpg)",
+      "Bash(node shot2.js)",
+      "Bash(node shot3.js)",
+      "Bash(node shot_marquee.js)",
+      "Bash(sed -i 's/localhost:[0-9]*/localhost:8938/' shot_marquee.js)",
+      "Bash(node measure.js)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\andre\\AppData\\Local\\Temp\\claude\\c--Users-andre-Documents-GitHub-trila-website-demo-nenne\\630ea343-7820-427b-92f0-62d6a8f60f84\\scratchpad"
+    ]
+  }
+}

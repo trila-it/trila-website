@@ -1,0 +1,154 @@
+/* ══════════════════════════════
+   CAMERE
+══════════════════════════════ */
+
+.camere-intro {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 5rem;
+  align-items: start;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid var(--ivory-3);
+  margin-bottom: 5rem;
+}
+.camere-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  text-align: right;
+  min-width: 160px;
+}
+.meta-v {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--terra);
+  display: block;
+  line-height: 1;
+}
+.meta-v svg { width: 26px; height: 26px; stroke: var(--terra); fill: none; display: inline; }
+.meta-l {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sand);
+  display: block;
+  margin-top: 0.3rem;
+}
+
+/* Camera card */
+.camera {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 2px;
+  overflow: hidden;
+  background: var(--white);
+}
+.camera.flip { direction: rtl; }
+.camera.flip > * { direction: ltr; }
+
+.camera-img {
+  position: relative;
+  overflow: hidden;
+  min-height: 500px;
+}
+.camera-img img { transition: transform 1s var(--slow); }
+.camera:hover .camera-img img { transform: scale(1.04); }
+
+.camera-badge {
+  position: absolute;
+  top: 1.5rem; left: 1.5rem;
+  background: var(--terra);
+  color: var(--white);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.4rem 1rem;
+  z-index: 2;
+}
+
+.camera-body {
+  padding: 3.5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.camera-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.camera-header h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 2.8vw, 2.5rem);
+  font-weight: 400;
+  color: var(--brown);
+  line-height: 1.15;
+}
+.camera-header h2 em { font-style: italic; color: var(--terra); }
+.camera-desc { font-size: 0.9rem; font-weight: 300; color: var(--sand); line-height: 1.8; margin-top: 0.7rem; max-width: 400px; }
+
+.camera-price { text-align: right; flex-shrink: 0; }
+.camera-price-from { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sand); display: block; }
+.camera-price-val { font-family: var(--serif); font-size: 3rem; font-weight: 400; color: var(--terra); line-height: 1; display: block; }
+.camera-price-night { font-size: 0.72rem; color: var(--sand); }
+
+.camera-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--brown-2);
+  background: var(--ivory);
+  padding: 0.38rem 0.85rem;
+  border: 1px solid var(--ivory-3);
+  border-radius: 2px;
+}
+.tag svg { width: 12px; height: 12px; stroke: var(--terra); fill: none; flex-shrink: 0; }
+
+/* Servizi grid */
+.amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+.amenity-card {
+  background: var(--white);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  text-align: center;
+  transition: box-shadow 0.35s var(--ease);
+}
+.amenity-card:hover { box-shadow: 0 8px 30px rgba(42,31,20,0.07); }
+.amenity-card svg { width: 26px; height: 26px; stroke: var(--terra); fill: none; stroke-width: 1.5; }
+.amenity-card span { font-size: 0.78rem; font-weight: 400; color: var(--brown-2); }
+
+@media (max-width: 1024px) {
+  .camera { grid-template-columns: 1fr; }
+  .camera.flip { direction: ltr; }
+  .camera-img { min-height: 340px; }
+  .camera-body { padding: 2.5rem; }
+  .amenities-grid { grid-template-columns: repeat(2, 1fr); }
+  .camere-intro { grid-template-columns: 1fr; gap: 2.5rem; }
+  .camere-meta { flex-direction: row; text-align: left; }
+}
+@media (max-width: 768px) {
+  .camera-header { flex-direction: column; }
+  .camera-price { text-align: left; }
+  .amenities-grid { grid-template-columns: repeat(2, 1fr); }
+}

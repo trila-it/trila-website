@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prenota — Livornosailing</title>
+<meta name="description" content="Prenota il tuo tour in battello sui Canali Medicei di Livorno. Riserva ora e paga 15 minuti prima dell'imbarco.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/inner.css">
+</head>
+<body>
+<nav class="nav scrolled" id="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo"><img src="scraped/foto/grandi/logo-1-2.jpg" alt="Livornosailing"></a>
+    <ul class="nav__links">
+      <li><a href="index.html#chi-siamo" data-i18n="nav.chiSiamo">Chi Siamo</a></li>
+      <li><a href="battelli.html" data-i18n="nav.battelli">I Battelli</a></li>
+      <li class="has-dropdown"><a href="#">I Tour</a>
+        <ul class="dropdown">
+          <li><a href="tour-standard.html">Tour Standard</a></li>
+          <li><a href="tour-romantico.html">Tour Romantico</a></li>
+          <li><a href="tour-aperitivo.html">Aperitivo del Sabato</a></li>
+          <li><a href="noleggio.html">Noleggio Privato</a></li>
+        </ul>
+      </li>
+      <li><a href="itinerario.html" data-i18n="nav.itinerario">Itinerario</a></li>
+      <li><a href="gallery.html" data-i18n="nav.gallery">Gallery</a></li>
+      <li><a href="contatti.html" data-i18n="nav.contatti">Contatti</a></li>
+    </ul>
+    <div class="lang-switcher"><button class="lang-btn active" data-lang="it" onclick="I18N.set('it')">IT</button><button class="lang-btn" data-lang="en" onclick="I18N.set('en')">EN</button></div><a href="prenota.html" class="btn btn--accent nav__cta" data-i18n="nav.prenota">Prenota</a>
+    <button class="nav__hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu__lang"><button class="lang-btn active" data-lang="it" onclick="I18N.set('it')">IT</button><button class="lang-btn" data-lang="en" onclick="I18N.set('en')">EN</button></div>
+  <ul>
+    <li><a href="tour-standard.html">Tour Standard</a></li>
+    <li><a href="tour-romantico.html">Tour Romantico</a></li>
+    <li><a href="tour-aperitivo.html">Aperitivo Sabato</a></li>
+    <li><a href="itinerario.html" data-i18n="nav.itinerario">Itinerario</a></li>
+    <li><a href="gallery.html" data-i18n="nav.gallery">Gallery</a></li>
+    <li><a href="contatti.html" data-i18n="nav.contatti">Contatti</a></li>
+    <li><a href="prenota.html" class="btn btn--accent">Prenota ora</a></li>
+  </ul>
+</div>
+
+<div style="padding-top:72px;background:var(--grey-l)">
+  <section class="section">
+    <div class="container">
+      <div class="section__header reveal">
+        <p class="section__label">Prenota ora</p>
+        <h1 class="section__title">Riserva il tuo posto</h1>
+        <p class="section__desc">Compila il modulo per prenotare. Non devi pagare adesso — paghi 15 minuti prima dell'imbarco.</p>
+      </div>
+
+      <div class="booking-grid">
+        <div class="booking-form reveal">
+          <h2>Dati prenotazione</h2>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nome">Nome *</label>
+              <input type="text" id="nome" name="nome" placeholder="Il tuo nome" required>
+            </div>
+            <div class="form-group">
+              <label for="cognome">Cognome *</label>
+              <input type="text" id="cognome" name="cognome" placeholder="Il tuo cognome" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" placeholder="tua@email.it" required>
+            </div>
+            <div class="form-group">
+              <label for="telefono">Telefono</label>
+              <input type="tel" id="telefono" name="telefono" placeholder="+39 ...">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="tour">Tour *</label>
+            <select id="tour" name="tour" required>
+              <option value="">Seleziona il tour</option>
+              <option value="standard">Tour Standard (€15 adulti · €7 bambini)</option>
+              <option value="romantico">Tour Romantico Nennella (€20 / €15)</option>
+              <option value="aperitivo">Aperitivo a Bordo — solo sabato ore 19 (€15)</option>
+              <option value="noleggio">Noleggio Privato Dudi (50 pax)</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="data">Data *</label>
+              <input type="date" id="data" name="data" required>
+            </div>
+            <div class="form-group">
+              <label for="persone">N° persone *</label>
+              <input type="number" id="persone" name="persone" min="1" max="50" placeholder="es. 4" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="note">Note (orario preferito, richieste speciali…)</label>
+            <textarea id="note" name="note" placeholder="Per il Tour Romantico specifica l'orario: 11:00 · 12:00 · 14:30"></textarea>
+          </div>
+          <div class="info-box" style="margin-bottom:20px">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/></svg>
+            <p>Questa è una richiesta di prenotazione. Riceverai una conferma via email. Il pagamento avviene in loco, 15 minuti prima dell'imbarco.</p>
+          </div>
+          <button type="submit" class="btn btn--accent form-submit">Invia richiesta di prenotazione</button>
+        </div>
+
+        <div class="inner-sidebar reveal" style="transition-delay:.15s">
+          <div class="price-card">
+            <div class="price-card__header">
+              <p class="price-card__label">Riepilogo prezzi</p>
+              <h3 class="price-card__title">I nostri tour</h3>
+            </div>
+            <div class="price-card__body">
+              <div class="ticket-row">
+                <span>Tour Standard — adulti</span>
+                <strong>€15</strong>
+              </div>
+              <div class="ticket-row">
+                <span>Tour Standard — bambini 5–10</span>
+                <strong>€7</strong>
+              </div>
+              <div class="ticket-row ticket-row--free">
+                <span>Under 5 anni</span>
+                <strong>Gratis</strong>
+              </div>
+              <div class="ticket-row">
+                <span>Tour Romantico Nennella</span>
+                <strong>€20</strong>
+              </div>
+              <div class="ticket-row">
+                <span>Aperitivo Sabato</span>
+                <strong>€15</strong>
+              </div>
+            </div>
+            <div class="price-card__footer">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+              <span>Pagamento in loco · 15 min prima</span>
+            </div>
+          </div>
+
+          <div style="margin-top:24px;background:var(--white);border:1px solid var(--grey-m);border-radius:var(--radius);padding:24px">
+            <p style="font-weight:600;color:var(--navy);margin-bottom:16px;font-size:.9rem">Preferisci contattarci?</p>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <a href="tel:+393471565607" class="btn btn--outline" style="justify-content:center">
+                <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                Chiama Sabrina
+              </a>
+              <a href="https://wa.me/393498961586" class="btn btn--whatsapp" style="justify-content:center" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <!-- REGALO anchor -->
+          <div id="regalo" style="margin-top:24px;background:linear-gradient(135deg,var(--navy),var(--navy2));border-radius:var(--radius);padding:28px;color:white">
+            <p style="font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px">Idea regalo</p>
+            <h3 style="font-family:var(--font-serif);font-size:1.3rem;color:white;margin-bottom:12px">Buoni regalo</h3>
+            <p style="font-size:.85rem;color:rgba(255,255,255,.75);margin-bottom:16px">Adulto €15 · Bambino €7 · Coppia €30 · Importo libero. Validi 1 anno.</p>
+            <a href="mailto:info@livornosailing.it?subject=Buono%20regalo%20tour%20Livornosailing" class="btn btn--accent" style="width:100%;justify-content:center">Acquista il buono</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand"><img src="scraped/foto/grandi/logo-1-2.jpg" alt="Livornosailing" class="footer__logo"><p>Tour guidati in battello lungo i Canali Medicei di Livorno dal 2016.</p></div>
+      <div class="footer__col"><h4>Tour</h4><ul><li><a href="tour-standard.html">Tour Standard</a></li><li><a href="tour-romantico.html">Tour Romantico</a></li><li><a href="tour-aperitivo.html">Aperitivo Sabato</a></li></ul></div>
+      <div class="footer__col"><h4>Info</h4><ul><li><a href="itinerario.html" data-i18n="nav.itinerario">Itinerario</a></li><li><a href="battelli.html" data-i18n="nav.battelli">I Battelli</a></li><li><a href="contatti.html" data-i18n="nav.contatti">Contatti</a></li></ul></div>
+      <div class="footer__col"><h4>Contatti</h4><ul><li><a href="tel:+393471565607">+39 347 15 65 607</a></li><li><a href="tel:+393498961586">+39 349 896 15 86</a></li><li><a href="mailto:info@livornosailing.it">info@livornosailing.it</a></li></ul></div>
+    </div>
+    <div class="footer__bottom"><p>© 2024 Livornosailing di Ceccotti Luca · P.IVA 01837950490</p></div>
+  </div>
+</footer>
+<a href="https://wa.me/393498961586" class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+<script>document.addEventListener("DOMContentLoaded", () => I18N.init());</script>
+</body>
+</html>

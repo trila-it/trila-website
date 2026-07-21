@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cerca Immobili — ProssimaCasa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="search-page">
+
+  <nav class="nav glass-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <img src="prossimacasa_logo.png" alt="ProssimaCasa" height="32" /><span>ProssimaCasa</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="search.html" class="nav-link active">Cerca</a>
+        <a href="#" class="nav-link">Chi siamo</a>
+        <a href="#" class="btn-nav">Accedi</a>
+      </div>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="nav-mobile" id="mobileMenu">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="search.html" class="nav-link active">Cerca</a>
+      <a href="#" class="nav-link">Chi siamo</a>
+      <a href="#" class="nav-link">Accedi</a>
+    </div>
+  </nav>
+
+  <div class="search-layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-inner glass-card">
+        <h3 class="sidebar-title">Filtra risultati</h3>
+
+        <div class="filter-group">
+          <label class="filter-label">Cerca per luogo</label>
+          <div class="input-icon-wrap">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <circle cx="7" cy="7" r="4.5" stroke="#94a3b8" stroke-width="1.4"/>
+              <path d="M11 11l3 3" stroke="#94a3b8" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            <input type="text" class="filter-input" placeholder="Città o indirizzo..." id="cityFilter" />
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Tipologia</label>
+          <div class="type-chips" id="typeChips">
+            <button class="chip active" data-type="all">Tutti</button>
+            <button class="chip" data-type="Appartamento">Appartamento</button>
+            <button class="chip" data-type="Villa">Villa</button>
+            <button class="chip" data-type="Attico">Attico</button>
+            <button class="chip" data-type="Loft">Loft</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Prezzo massimo</label>
+          <div class="range-wrap">
+            <input type="range" class="range-slider" id="priceRange" min="50000" max="2000000" step="10000" value="2000000" />
+            <div class="range-labels">
+              <span>€ 50.000</span>
+              <span id="priceLabel">Tutti</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Camere da letto</label>
+          <div class="type-chips" id="roomChips">
+            <button class="chip active" data-rooms="0">Tutti</button>
+            <button class="chip" data-rooms="1">1+</button>
+            <button class="chip" data-rooms="2">2+</button>
+            <button class="chip" data-rooms="3">3+</button>
+            <button class="chip" data-rooms="4">4+</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Superficie minima (m²)</label>
+          <div class="input-icon-wrap">
+            <input type="number" class="filter-input" placeholder="es. 60" id="sqmFilter" min="0" />
+          </div>
+        </div>
+
+        <button class="btn-primary full-width" id="applyFilters">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <circle cx="7" cy="7" r="4.5" stroke="white" stroke-width="1.4"/>
+            <path d="M11 11l3 3" stroke="white" stroke-width="1.4" stroke-linecap="round"/>
+          </svg>
+          Applica filtri
+        </button>
+        <button class="btn-ghost full-width" id="resetFilters">Reimposta</button>
+      </div>
+    </aside>
+
+    <!-- MAIN RESULTS -->
+    <main class="results-main">
+      <div class="results-header">
+        <div>
+          <h2 class="results-title">Immobili disponibili</h2>
+          <p class="results-count" id="resultsCount">Caricamento...</p>
+        </div>
+        <div class="sort-wrap">
+          <label class="filter-label" style="margin:0">Ordina:</label>
+          <select class="sort-select" id="sortSelect">
+            <option value="default">In evidenza</option>
+            <option value="price-asc">Prezzo crescente</option>
+            <option value="price-desc">Prezzo decrescente</option>
+            <option value="sqm-desc">Superficie maggiore</option>
+          </select>
+        </div>
+      </div>
+      <div class="properties-grid search-grid" id="searchGrid"></div>
+    </main>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="search.js"></script>
+</body>
+</html>
