@@ -1052,6 +1052,7 @@ section{position:relative;padding:130px 0;}
   gap:16px;
   padding:20px 10px 10px;
 }
+.request-success[hidden]{display:none;}
 .request-success svg{width:56px;height:56px;stroke:var(--terracotta);}
 .request-success h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.5rem;color:var(--inchiostro);}
 .request-success p{color:var(--inchiostro-soft);font-size:1rem;line-height:1.7;max-width:340px;}
