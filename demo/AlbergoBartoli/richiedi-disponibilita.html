@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="it">
 <head>
 <meta charset="UTF-8">
@@ -28,6 +28,7 @@
       <a href="le-camere.html">Le Camere</a>
       <a href="colazione.html">La Colazione</a>
       <a href="giardino.html">Il Giardino</a>
+      <a href="tariffe.html">Tariffe</a>
       <a href="contatti.html">Contatti</a>
     </nav>
     <a href="richiedi-disponibilita.html" class="nav-cta active">Richiedi disponibilità</a>
@@ -42,6 +43,7 @@
   <a href="le-camere.html">Le Camere</a>
   <a href="colazione.html">La Colazione</a>
   <a href="giardino.html">Il Giardino</a>
+  <a href="tariffe.html">Tariffe</a>
   <a href="contatti.html">Contatti</a>
   <a href="richiedi-disponibilita.html" class="active">Richiedi disponibilità</a>
 </nav>
@@ -102,15 +104,51 @@
             <label for="telefono">Telefono</label>
             <input type="tel" id="telefono" name="telefono" placeholder="Il vostro numero">
           </div>
+          <div class="form-field"></div>
+        </div>
+
+        <p class="form-section-label">Dati del soggiorno</p>
+
+        <div class="form-row">
           <div class="form-field">
-            <label for="ospiti">Numero ospiti</label>
-            <select id="ospiti" name="ospiti" required>
+            <label for="arrivo">Data di arrivo</label>
+            <input type="date" id="arrivo" name="arrivo" required>
+          </div>
+          <div class="form-field">
+            <label for="partenza">Data di partenza</label>
+            <input type="date" id="partenza" name="partenza" required>
+          </div>
+        </div>
+
+        <div class="form-row form-row-3">
+          <div class="form-field">
+            <label for="adulti">Adulti</label>
+            <select id="adulti" name="adulti" required>
               <option value="" disabled selected>Selezionate</option>
-              <option>1 ospite</option>
-              <option>2 ospiti</option>
-              <option>3 ospiti</option>
-              <option>4 ospiti</option>
-              <option>5 o più ospiti</option>
+              <option>1 adulto</option>
+              <option>2 adulti</option>
+              <option>3 adulti</option>
+              <option>4 adulti</option>
+              <option>5 o più adulti</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="bambini">Bambini (4&ndash;17 anni)</label>
+            <select id="bambini" name="bambini">
+              <option value="" selected>0</option>
+              <option>1 bambino</option>
+              <option>2 bambini</option>
+              <option>3 bambini</option>
+              <option>4 o più bambini</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="bebe">Bebè (0&ndash;3 anni)</label>
+            <select id="bebe" name="bebe">
+              <option value="" selected>0</option>
+              <option>1 bebè</option>
+              <option>2 bebè</option>
+              <option>3 o più bebè</option>
             </select>
           </div>
         </div>
@@ -127,17 +165,6 @@
             </select>
           </div>
           <div class="form-field"></div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-field">
-            <label for="arrivo">Data di arrivo</label>
-            <input type="date" id="arrivo" name="arrivo" required>
-          </div>
-          <div class="form-field">
-            <label for="partenza">Data di partenza</label>
-            <input type="date" id="partenza" name="partenza" required>
-          </div>
         </div>
 
         <div class="form-field form-field-full">
@@ -174,6 +201,7 @@
           <a href="le-camere.html">Le Camere</a>
           <a href="colazione.html">La Colazione</a>
           <a href="giardino.html">Il Giardino</a>
+          <a href="tariffe.html">Tariffe</a>
           <a href="contatti.html">Contatti</a>
         </div>
         <div class="footer-col">

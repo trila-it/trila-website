@@ -994,6 +994,18 @@ section{position:relative;padding:130px 0;}
 
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
 @media(max-width:560px){.form-row{grid-template-columns:1fr;}}
+.form-row-3{grid-template-columns:1fr 1fr 1fr;}
+@media(max-width:700px){.form-row-3{grid-template-columns:1fr;}}
+
+.form-section-label{
+  font-family:'Fraunces', serif;
+  font-weight:600;
+  font-size:1.05rem;
+  color:var(--inchiostro);
+  margin:6px 0 18px;
+  padding-top:14px;
+  border-top:1px solid var(--linea);
+}
 
 .form-field{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
 .form-field-full{margin-bottom:8px;}
