@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Richiedi Disponibilità | Albergo Bartoli Castiglioncello</title>
+<meta name="description" content="Richiedi la disponibilità per il tuo soggiorno all'Albergo Bartoli di Castiglioncello: indica ospiti, camere, date e note, ti risponderemo al più presto.">
+
+<link rel="icon" href="img/logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&amp;family=Cormorant+Garamond:ital@0;1&amp;family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&amp;display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===== TOPBAR ===== -->
+<header class="topbar scrolled">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <span class="brand-name">Albergo Bartoli</span>
+      <span class="brand-sub">Castiglioncello dal 1952</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="le-camere.html">Le Camere</a>
+      <a href="colazione.html">La Colazione</a>
+      <a href="giardino.html">Il Giardino</a>
+      <a href="contatti.html">Contatti</a>
+    </nav>
+    <a href="richiedi-disponibilita.html" class="nav-cta active">Richiedi disponibilità</a>
+    <div class="burger" aria-label="Apri il menu">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="le-camere.html">Le Camere</a>
+  <a href="colazione.html">La Colazione</a>
+  <a href="giardino.html">Il Giardino</a>
+  <a href="contatti.html">Contatti</a>
+  <a href="richiedi-disponibilita.html" class="active">Richiedi disponibilità</a>
+</nav>
+
+<!-- ===== PAGE HERO ===== -->
+<header class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('img/giardino2.jpg')"></div>
+  <div class="container">
+    <span class="eyebrow">Prenota il tuo soggiorno</span>
+    <h1>Richiedi disponibilità</h1>
+    <p>Raccontateci cosa cercate: vi risponderemo al più presto per confermare il vostro soggiorno</p>
+  </div>
+</header>
+
+<!-- ===== FORM RICHIESTA ===== -->
+<section class="request">
+  <div class="container request-layout">
+
+    <div class="request-side reveal">
+      <span class="eyebrow">Perché scrivere a noi</span>
+      <h2 class="section-title">Una risposta diretta, senza intermediari</h2>
+      <p>Compilando questo modulo ci raccontate cosa cercate: numero di ospiti, camere, date del soggiorno e ogni informazione utile. Vi risponderemo personalmente per confermare la disponibilità.</p>
+
+      <div class="request-contacts">
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+          <div>
+            <h4>Oppure chiamateci</h4>
+            <a href="tel:+390586752051">0586 752051</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m3 7 9 6 9-6"/></svg>
+          <div>
+            <h4>O scrivete una email</h4>
+            <a href="mailto:albergobartoli@interfree.it">albergobartoli@interfree.it</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="request-form-wrap reveal">
+      <form class="request-form" id="requestForm">
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="nome">Nome e cognome</label>
+            <input type="text" id="nome" name="nome" placeholder="Il vostro nome" required>
+          </div>
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="voi@esempio.it" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="telefono">Telefono</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="Il vostro numero">
+          </div>
+          <div class="form-field">
+            <label for="ospiti">Numero ospiti</label>
+            <select id="ospiti" name="ospiti" required>
+              <option value="" disabled selected>Selezionate</option>
+              <option>1 ospite</option>
+              <option>2 ospiti</option>
+              <option>3 ospiti</option>
+              <option>4 ospiti</option>
+              <option>5 o più ospiti</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="camere">Numero camere</label>
+            <select id="camere" name="camere" required>
+              <option value="" disabled selected>Selezionate</option>
+              <option>1 camera</option>
+              <option>2 camere</option>
+              <option>3 camere</option>
+              <option>4 o più camere</option>
+            </select>
+          </div>
+          <div class="form-field"></div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="arrivo">Data di arrivo</label>
+            <input type="date" id="arrivo" name="arrivo" required>
+          </div>
+          <div class="form-field">
+            <label for="partenza">Data di partenza</label>
+            <input type="date" id="partenza" name="partenza" required>
+          </div>
+        </div>
+
+        <div class="form-field form-field-full">
+          <label for="note">Note</label>
+          <textarea id="note" name="note" rows="5" placeholder="Vista mare, esigenze particolari, richieste speciali..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary form-submit">Invia richiesta</button>
+
+        <p class="form-hint">Vi risponderemo via email o telefono entro breve per confermare la disponibilità.</p>
+      </form>
+
+      <div class="request-success" id="requestSuccess" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg>
+        <h3>Richiesta inviata</h3>
+        <p>Grazie! Abbiamo ricevuto la vostra richiesta e vi risponderemo al più presto.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="brand-name">Albergo Bartoli</span>
+        <p>Castiglioncello, Livorno. Un'antica villa d'inizio '900, ospitalità di famiglia dal 1952.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Naviga</h4>
+          <a href="le-camere.html">Le Camere</a>
+          <a href="colazione.html">La Colazione</a>
+          <a href="giardino.html">Il Giardino</a>
+          <a href="contatti.html">Contatti</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contatti</h4>
+          <a href="tel:+390586752051">0586 752051</a>
+          <a href="mailto:albergobartoli@interfree.it">albergobartoli@interfree.it</a>
+          <p>Via Martelli, 9, Castiglioncello (LI)</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Albergo Bartoli</span>
+      <span>Castiglioncello, Livorno</span>
+    </div>
+  </div>
+</footer>
+
+<div class="top-btn" aria-label="Torna su">
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

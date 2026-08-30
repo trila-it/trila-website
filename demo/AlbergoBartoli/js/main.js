@@ -134,4 +134,113 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- refresh ScrollTrigger after everything laid out ---------- */
   window.addEventListener('load', () => ScrollTrigger.refresh());
+
+  /* ---------- lightbox for gallery photos, with prev/next ---------- */
+  const lightbox = document.createElement('div');
+  lightbox.className = 'lightbox';
+  lightbox.innerHTML = `
+    <button class="lightbox-nav lightbox-prev" aria-label="Precedente">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
+    <button class="lightbox-nav lightbox-next" aria-label="Successiva">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
+    <div class="lightbox-inner">
+      <button class="lightbox-close" aria-label="Chiudi">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="lightbox-media"></div>
+    </div>`;
+  document.body.appendChild(lightbox);
+  const lightboxMedia = lightbox.querySelector('.lightbox-media');
+  const lightboxPrev = lightbox.querySelector('.lightbox-prev');
+  const lightboxNext = lightbox.querySelector('.lightbox-next');
+
+  let currentGroup = [];
+  let currentIndex = 0;
+
+  function renderLightbox() {
+    const photoEl = currentGroup[currentIndex];
+    lightboxMedia.innerHTML = '';
+    const img = photoEl.querySelector('img');
+    if (img) {
+      const clone = document.createElement('img');
+      clone.src = img.src;
+      clone.alt = img.alt;
+      lightboxMedia.appendChild(clone);
+    } else {
+      const ph = document.createElement('div');
+      ph.className = 'lightbox-placeholder';
+      ph.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>
+        <span>Foto in arrivo</span>`;
+      lightboxMedia.appendChild(ph);
+    }
+    const showNav = currentGroup.length > 1;
+    lightboxPrev.style.display = showNav ? '' : 'none';
+    lightboxNext.style.display = showNav ? '' : 'none';
+  }
+
+  function openLightbox(photoEl) {
+    const group = photoEl.closest('.breakfast-gallery, .room-album-photos, .about-mosaic, .gallery-track');
+    if (group) {
+      currentGroup = Array.from(group.querySelectorAll(':scope > .breakfast-photo, :scope > .room-album-photo, :scope > .about-mosaic-item, :scope > .gallery-item'));
+    } else {
+      currentGroup = [photoEl];
+    }
+    currentIndex = Math.max(0, currentGroup.indexOf(photoEl));
+    renderLightbox();
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function showPrev() {
+    if (!currentGroup.length) return;
+    currentIndex = (currentIndex - 1 + currentGroup.length) % currentGroup.length;
+    renderLightbox();
+  }
+  function showNext() {
+    if (!currentGroup.length) return;
+    currentIndex = (currentIndex + 1) % currentGroup.length;
+    renderLightbox();
+  }
+
+  const lightboxSelectors = [
+    '.room-album-photo',
+    '.breakfast-photo',
+    '.about-frame-inner',
+    '.about-mosaic-item',
+    '.about-family-photo',
+    '.about-duo-item',
+    '.gallery-item'
+  ];
+  document.querySelectorAll(lightboxSelectors.join(',')).forEach((photo) => {
+    photo.classList.add('lightbox-trigger');
+    photo.addEventListener('click', () => openLightbox(photo));
+  });
+  lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+  lightboxPrev.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+  lightboxNext.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') showPrev();
+    if (e.key === 'ArrowRight') showNext();
+  });
+
+  /* ---------- richiedi disponibilità form (no email sending yet) ---------- */
+  const requestForm = document.getElementById('requestForm');
+  if (requestForm) {
+    requestForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const success = document.getElementById('requestSuccess');
+      requestForm.hidden = true;
+      success.hidden = false;
+      success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  }
 });
