@@ -32,7 +32,7 @@
       <a href="contatti.html">Contatti</a>
     </nav>
     <a href="richiedi-disponibilita.html" class="nav-cta">Richiedi disponibilità</a>
-    <div class="burger" aria-label="Apri il menu">
+    <div class="burger" role="button" tabindex="0" aria-label="Apri il menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </div>
   </div>
@@ -45,11 +45,12 @@
   <a href="giardino.html" class="active">Il Giardino</a>
   <a href="tariffe.html">Tariffe</a>
   <a href="contatti.html">Contatti</a>
+  <a href="richiedi-disponibilita.html" class="mobile-nav-cta">Richiedi disponibilità</a>
 </nav>
 
 <!-- ===== PAGE HERO ===== -->
 <header class="page-hero">
-  <div class="page-hero-bg" style="background-image:url('img/giardino5.jpg')"></div>
+  <div class="page-hero-bg" style="background-image:url('img/giardino-fiorito.jpg')"></div>
   <div class="container">
     <span class="eyebrow">Il giardino</span>
     <h1>Una radura incantata</h1>
@@ -68,10 +69,10 @@
     </div>
     <div class="about-mosaic reveal">
       <div class="about-mosaic-item item-tall">
-        <img src="img/giardino1.jpg" alt="Il dondolo nel giardino dell'Albergo Bartoli">
+        <img src="img/giardino-dondolo.jpg" alt="Il dondolo nel giardino dell'Albergo Bartoli">
       </div>
       <div class="about-mosaic-item item-wide">
-        <img src="img/giardino2.jpg" alt="Il salottino esterno nel giardino dell'Albergo Bartoli">
+        <img src="img/giardino-fiorito.jpg" alt="Un angolo fiorito del giardino dell'Albergo Bartoli">
       </div>
       <div class="about-mosaic-item item-small">
         <img src="img/giardino3.jpg" alt="Tavolo e fiori nel giardino dell'Albergo Bartoli">
@@ -147,7 +148,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; 2026 Albergo Bartoli</span>
+      <span>&copy; <span data-current-year></span> Albergo Bartoli</span>
       <span>Castiglioncello, Livorno</span>
     </div>
   </div>

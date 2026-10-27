@@ -32,7 +32,7 @@
       <a href="contatti.html">Contatti</a>
     </nav>
     <a href="richiedi-disponibilita.html" class="nav-cta">Richiedi disponibilità</a>
-    <div class="burger" aria-label="Apri il menu">
+    <div class="burger" role="button" tabindex="0" aria-label="Apri il menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </div>
   </div>
@@ -45,11 +45,12 @@
   <a href="giardino.html">Il Giardino</a>
   <a href="tariffe.html">Tariffe</a>
   <a href="contatti.html">Contatti</a>
+  <a href="richiedi-disponibilita.html" class="mobile-nav-cta">Richiedi disponibilità</a>
 </nav>
 
 <!-- ===== PAGE HERO ===== -->
 <header class="page-hero">
-  <div class="page-hero-bg" style="background-image:url('img/giardino-DSC02546.jpg')"></div>
+  <div class="page-hero-bg" style="background-image:url('img/colazione.jpg')"></div>
   <div class="container">
     <span class="eyebrow">La colazione</span>
     <h1>Il buon giorno si vede dal mattino</h1>
@@ -108,20 +109,6 @@
         <p>Un'accoglienza calorosa, sorridente, senza fretta</p>
       </div>
     </div>
-    <div class="breakfast-gallery" data-stagger style="margin-top:44px">
-      <div class="breakfast-photo placeholder">
-        <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg></span>
-      </div>
-      <div class="breakfast-photo placeholder">
-        <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg></span>
-      </div>
-      <div class="breakfast-photo placeholder">
-        <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg></span>
-      </div>
-      <div class="breakfast-photo placeholder">
-        <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg></span>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -160,7 +147,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; 2026 Albergo Bartoli</span>
+      <span>&copy; <span data-current-year></span> Albergo Bartoli</span>
       <span>Castiglioncello, Livorno</span>
     </div>
   </div>

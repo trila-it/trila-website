@@ -6,6 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   gsap.registerPlugin(ScrollTrigger);
 
+  document.querySelectorAll('[data-current-year]').forEach((el) => {
+    el.textContent = new Date().getFullYear();
+  });
+
   /* ---------- topbar on scroll ---------- */
   const topbar = document.querySelector('.topbar');
   const topBtn = document.querySelector('.top-btn');
@@ -28,15 +32,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const burger = document.querySelector('.burger');
   const mobileNav = document.querySelector('.mobile-nav');
   if (burger && mobileNav) {
-    burger.addEventListener('click', () => {
+    const toggleMobileNav = () => {
       burger.classList.toggle('open');
       mobileNav.classList.toggle('open');
+      burger.setAttribute('aria-expanded', mobileNav.classList.contains('open'));
+      burger.setAttribute('aria-label', mobileNav.classList.contains('open') ? 'Chiudi il menu' : 'Apri il menu');
+    };
+    const closeMobileNav = () => {
+      burger.classList.remove('open');
+      mobileNav.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+      burger.setAttribute('aria-label', 'Apri il menu');
+    };
+    burger.addEventListener('click', toggleMobileNav);
+    burger.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        toggleMobileNav();
+      }
     });
     mobileNav.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        burger.classList.remove('open');
-        mobileNav.classList.remove('open');
-      });
+      a.addEventListener('click', closeMobileNav);
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeMobileNav();
     });
   }
 
@@ -49,8 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .to('.hero-sub', { opacity: 1, y: 0, duration: .8 }, 0.75)
       .to('.hero-desc', { opacity: 1, y: 0, duration: .8 }, 0.9)
       .to('.hero-actions', { opacity: 1, y: 0, duration: .8 }, 1.05)
-      .to('.hero-stamp', { opacity: 1, rotation: 0, duration: 1, ease: 'power2.out' }, 0.9)
-      .to('.hero-scroll', { opacity: 1, duration: .8 }, 1.3);
+      .to('.hero-stamp', { opacity: 1, rotation: 0, duration: 1, ease: 'power2.out' }, 0.9);
   }
 
   /* ---------- generic scroll reveals ---------- */
@@ -184,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function openLightbox(photoEl) {
     const group = photoEl.closest('.breakfast-gallery, .room-album-photos, .about-mosaic, .gallery-track');
     if (group) {
-      currentGroup = Array.from(group.querySelectorAll(':scope > .breakfast-photo, :scope > .room-album-photo, :scope > .about-mosaic-item, :scope > .gallery-item'));
+      currentGroup = Array.from(group.querySelectorAll(':scope > .breakfast-photo, :scope > .room-album-photo:not(.placeholder), :scope > .about-mosaic-item, :scope > .gallery-item'));
     } else {
       currentGroup = [photoEl];
     }
@@ -209,8 +227,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const lightboxSelectors = [
-    '.room-album-photo',
     '.breakfast-photo',
+    '.room-album-photo:not(.placeholder)',
     '.about-frame-inner',
     '.about-mosaic-item',
     '.about-family-photo',

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
 <meta charset="UTF-8">
@@ -32,7 +32,7 @@
       <a href="contatti.html">Contatti</a>
     </nav>
     <a href="richiedi-disponibilita.html" class="nav-cta">Richiedi disponibilità</a>
-    <div class="burger" aria-label="Apri il menu">
+    <div class="burger" role="button" tabindex="0" aria-label="Apri il menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </div>
   </div>
@@ -45,6 +45,7 @@
   <a href="giardino.html">Il Giardino</a>
   <a href="tariffe.html">Tariffe</a>
   <a href="contatti.html">Contatti</a>
+  <a href="richiedi-disponibilita.html" class="mobile-nav-cta">Richiedi disponibilità</a>
 </nav>
 
 <!-- ===== HERO ===== -->
@@ -82,27 +83,7 @@
     </div>
   </div>
 
-  <div class="hero-scroll" style="opacity:0">
-    <span>Scorri</span>
-    <span class="line"></span>
-  </div>
 </section>
-
-<!-- ===== MARQUEE ===== -->
-<div class="marquee-strip">
-  <div class="marquee-track">
-    <span>16 camere singole e doppie</span>
-    <span>A pochi passi dal mare</span>
-    <span>Giardino con pitosfori giganti</span>
-    <span>Colazione fatta in casa</span>
-    <span>Dal 1952</span>
-    <span>16 camere singole e doppie</span>
-    <span>A pochi passi dal mare</span>
-    <span>Giardino con pitosfori giganti</span>
-    <span>Colazione fatta in casa</span>
-    <span>Dal 1952</span>
-  </div>
-</div>
 
 <!-- ===== STORIA / CHI SIAMO ===== -->
 <section class="about" id="storia">
@@ -135,8 +116,7 @@
 
   <div class="container about-grid about-grid-reverse reveal" style="margin-top:90px">
     <div class="about-family-photo">
-      <!-- TODO: sostituire con foto dello staff femminile -->
-      <div class="about-family-placeholder"></div>
+      <img src="img/storia-04.jpg" alt="Lo staff femminile dell'Albergo Bartoli">
     </div>
     <div class="about-family-text">
       <span class="eyebrow">Gestione tutta al femminile</span>
@@ -211,34 +191,34 @@
     </div>
     <div class="breakfast-gallery" data-stagger>
       <div class="breakfast-photo">
-        <img src="img/camera-DSC02539.jpg" alt="Camera dell'Albergo Bartoli con vista sulla costa di Castiglioncello">
+        <img src="img/camera-vista-mare.jpg" alt="La vista sul mare da una camera dell'Albergo Bartoli">
       </div>
       <div class="breakfast-photo">
-        <img src="img/camera-DSC02544.jpg" alt="Interno di una camera dell'Albergo Bartoli">
+        <img src="img/camera-cementine.jpg" alt="Camera doppia con pavimento originale in cementine">
       </div>
       <div class="breakfast-photo">
-        <img src="img/giardino1.jpg" alt="Il dondolo nel giardino dell'Albergo Bartoli">
+        <img src="img/giardino-dondolo.jpg" alt="Il dondolo nel giardino dell'Albergo Bartoli">
       </div>
       <div class="breakfast-photo">
-        <img src="img/giardino2.jpg" alt="Il salottino esterno nel giardino dell'Albergo Bartoli">
+        <img src="img/giardino-fiorito.jpg" alt="Il giardino dell'Albergo Bartoli tra fiori e pitosfori">
       </div>
       <div class="breakfast-photo">
-        <img src="img/camera-DSC02551.jpg" alt="Camera doppia dell'Albergo Bartoli">
+        <img src="img/camera-verde.jpg" alt="Camera doppia con arredi d'epoca">
       </div>
       <div class="breakfast-photo">
-        <img src="img/colazione2.jpg" alt="Crostate fatte in casa con le ricette di famiglia">
+        <img src="img/salotto.jpg" alt="Il salotto dell'Albergo Bartoli">
       </div>
       <div class="breakfast-photo">
-        <img src="img/giardino3.jpg" alt="Tavolo e fiori nel giardino dell'Albergo Bartoli">
+        <img src="img/facciata-albergo.jpg" alt="La facciata dell'Albergo Bartoli, con le persiane verdi">
       </div>
       <div class="breakfast-photo">
-        <img src="img/camera-DSC02547.jpg" alt="Camera dell'Albergo Bartoli">
+        <img src="img/camera-rosa.jpg" alt="Camera dell'Albergo Bartoli con letto matrimoniale">
       </div>
       <div class="breakfast-photo">
         <img src="img/colazione.jpg" alt="La sala colazione dell'Albergo Bartoli">
       </div>
       <div class="breakfast-photo">
-        <img src="img/camera-DSC02554.jpg" alt="Camera dell'Albergo Bartoli">
+        <img src="img/camera-luminosa.jpg" alt="Una camera dell'Albergo Bartoli con pavimento in cementine">
       </div>
     </div>
   </div>
@@ -357,7 +337,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; 2026 Albergo Bartoli</span>
+      <span>&copy; <span data-current-year></span> Albergo Bartoli</span>
       <span>Castiglioncello, Livorno</span>
     </div>
   </div>
