@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function openLightbox(photoEl) {
     const group = photoEl.closest('.breakfast-gallery, .room-album-photos, .about-mosaic, .gallery-track');
     if (group) {
-      currentGroup = Array.from(group.querySelectorAll(':scope > .breakfast-photo, :scope > .room-album-photo:not(.placeholder), :scope > .about-mosaic-item, :scope > .gallery-item'));
+      currentGroup = Array.from(group.querySelectorAll('.breakfast-photo, .room-album-photo:not(.placeholder), .about-mosaic-item, .gallery-item'));
     } else {
       currentGroup = [photoEl];
     }
