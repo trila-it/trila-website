@@ -1,4 +1,5 @@
 .DS_Store
+contact.config.php
 node_modules/
 dist/
 demo/badelf-dist/
