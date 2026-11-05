@@ -1,553 +1,642 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="it">
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <meta name="google-site-verification" content="pNBbociSqYLTDUPaHfdS8z-OTf-pn6K6sgvpF-M8YOM" />
-  <title>Trila – Soluzioni digitali e sviluppo web</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trila – Design e sviluppo di siti web e prodotti digitali</title>
+<meta name="description" content="Trila progetta e sviluppa siti web, e-commerce e web app. Design curato, codice pulito, prestazioni reali.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://trila.it/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://trila.it/">
+<meta property="og:title" content="Trila – Design e sviluppo di siti web e prodotti digitali">
+<meta property="og:description" content="Siti web, e-commerce e web app. Design curato, codice pulito, prestazioni reali.">
+<meta property="og:image" content="assets/img/logo-full.png">
+<link rel="icon" href="assets/img/logo.png">
+<link rel="apple-touch-icon" href="assets/img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --canvas:#ebeadf; --surface:#fff; --sand:#d5cec0; --ink:#000; --coral:#f04923;
+  --muted:#5c574d; --line:rgba(0,0,0,.12);
+  --font:"Inter","Helvetica Neue",Helvetica,Arial,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --track:-.05em;
+  --page:1440px; --gap:clamp(56px,7vw,96px); --sec-space:calc(var(--gap) + clamp(16px,2vw,32px)); --card:clamp(22px,2.4vw,32px);
+  --r:14px; --r-sm:8px; --pill:999px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--canvas);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.5;letter-spacing:-.02em;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--page);margin:0 auto;padding:0 24px}
+h1,h2,h3,h4{letter-spacing:var(--track);line-height:1.02;font-weight:700}
+h1{font-size:clamp(36px,5.4vw,84px);font-weight:800;line-height:.98}
+h2{font-size:clamp(28px,4vw,60px);font-weight:800}
+h3{font-size:20px;line-height:1.2}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.14em}
+.eyebrow:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--coral)}
+.lead{font-size:18px;color:var(--muted);max-width:52ch;line-height:1.55}
+section{margin-top:var(--gap)}
+#servizi,#lavori,#studio,#contatti{margin-top:var(--sec-space)}
+.muted{color:var(--muted)}
 
-  <meta name="description"
-    content="Trila realizza soluzioni digitali moderne: siti web veloci, sviluppo su misura e presenza online efficace. Tecnologia chiara, risultati concreti.">
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:var(--pill);padding:15px 28px;font-size:15px;font-weight:700;letter-spacing:-.02em;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;transition:transform .3s var(--ease),background .25s,color .25s,border-color .25s}
+.btn:hover{background:var(--ink);color:#fff;transform:translateY(-2px)}
+.btn.dark{background:var(--ink);color:#fff}
+.btn.dark:hover{background:var(--coral);border-color:var(--coral)}
+.btn.coral{background:var(--coral);border-color:var(--coral);color:#fff}
+.btn.coral:hover{background:var(--ink);border-color:var(--ink)}
+.btn .arrow{transition:transform .3s var(--ease)}
+.btn:hover .arrow{transform:translate(3px,-3px)}
+.pill-link{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:700;padding-bottom:4px;border-bottom:1px solid var(--ink)}
+.pill-link span{transition:transform .3s var(--ease)}
+.pill-link:hover span{transform:translateX(4px)}
 
-  <meta name="robots" content="index, follow">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta charset="UTF-8">
-  <link rel="canonical" href="https://trila.it/">
+header{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;transition:padding .3s var(--ease)}
+.nav{display:flex;align-items:center;gap:24px;background:rgba(255,255,255,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(0,0,0,.06);border-radius:var(--r);padding:12px 20px 12px 24px;min-height:62px;transition:min-height .3s var(--ease),padding .3s var(--ease)}
+html[data-scroll="1"] header{padding:8px 0}
+html[data-scroll="1"] .nav{min-height:54px;padding:8px 16px 8px 20px}
+.logo{font-size:22px;font-weight:800;letter-spacing:-.06em;display:flex;align-items:center;gap:8px}
+.logo i{width:9px;height:9px;border-radius:50%;background:var(--coral);display:block;transition:transform .4s var(--ease)}
+.logo:hover i{transform:scale(1.6)}
+.links{display:flex;gap:34px;margin:0 auto}
+.links a{position:relative;font-size:15px;font-weight:500;letter-spacing:-.02em}
+.links a:after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:1px;background:var(--coral);transform:scaleX(0);transform-origin:right;transition:transform .3s var(--ease)}
+.links a:hover:after{transform:scaleX(1);transform-origin:left}
+.nav .btn{padding:11px 20px;font-size:14px}
 
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://trila.it/">
-  <meta property="og:title" content="Trila – Soluzioni digitali e sviluppo web">
-  <meta property="og:description"
-    content="Sviluppo web moderno, soluzioni digitali su misura e presenza online professionale.">
-  <meta property="og:image" content="assets/img/logo-full.png">
+/* HERO */
+.hero{position:relative;min-height:100svh;display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center;margin-top:0;padding-top:130px;padding-bottom:var(--sec-space)}
+.hero-copy{position:relative;z-index:2;max-width:640px}
+.hero-copy h1{margin-top:0}
+.hero-copy h1 em{font-style:normal;color:var(--coral)}
+.hero-copy .lead{margin-top:26px;font-size:19px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:44px;font-size:13px;font-weight:500;color:var(--muted)}
+.hero-meta span{display:flex;align-items:center;gap:8px}
+.hero-meta span:before{content:"";width:5px;height:5px;border-radius:50%;background:var(--coral)}
 
+.stage-wrap{position:relative;min-height:580px;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;perspective:1400px;perspective-origin:50% 45%;overflow:visible}
+.stage-wrap:before{content:"";position:absolute;width:min(560px,90%);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,var(--coral) 0%,transparent 62%);opacity:.2;filter:blur(10px)}
+.stage-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,0,0,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.06) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(circle at 50% 45%,#000 0%,transparent 68%);-webkit-mask-image:radial-gradient(circle at 50% 45%,#000 0%,transparent 68%);opacity:.7;transform:rotateX(54deg) scale(1.4);transform-origin:center;animation:gridmove 14s linear infinite}
+@keyframes gridmove{to{background-position:0 64px,64px 0}}
 
-  <!-- Favicons -->
-  <link href="assets/img/logo.png" rel="icon">
-  <link href="assets/img/logo.png" rel="apple-touch-icon">
+.stage{position:relative;width:100%;height:540px;display:flex;align-items:center;justify-content:center;transform-style:preserve-3d;z-index:2}
+.floater{transform-style:preserve-3d;animation:floaty 7s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(-10px)}50%{transform:translateY(14px)}}
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet">
+.device{position:relative;width:238px;height:486px;border-radius:40px;background:linear-gradient(145deg,#242424,#0c0c0c);padding:10px;transform-style:preserve-3d;box-shadow:0 60px 90px -40px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.08) inset;transition:width .95s var(--ease),height .95s var(--ease),border-radius .95s var(--ease),padding .95s var(--ease);will-change:transform}
+.device.laptop{width:560px;height:344px;border-radius:18px;padding:9px}
+.screen{position:relative;width:100%;height:100%;border-radius:30px;overflow:hidden;background:var(--surface);transition:border-radius .95s var(--ease);transform:translateZ(2px)}
+.device.laptop .screen{border-radius:10px}
+.notch{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:72px;height:17px;border-radius:var(--pill);background:#0c0c0c;z-index:5;transition:opacity .5s,transform .5s}
+.device.laptop .notch{opacity:0;transform:translateX(-50%) scale(.4)}
+.shine{position:absolute;inset:0;z-index:4;background:linear-gradient(120deg,rgba(255,255,255,.32) 0%,rgba(255,255,255,0) 34%,rgba(255,255,255,0) 66%,rgba(255,255,255,.12) 100%);pointer-events:none}
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+.screen-ui{position:absolute;inset:0;background:var(--surface);display:flex;flex-direction:column;padding:14px 12px 12px}
+.ui-bar{display:flex;align-items:center;justify-content:space-between;padding:6px 4px 0;margin-bottom:10px}
+.ui-brand{display:flex;align-items:center;gap:5px;font-size:9px;font-weight:800;letter-spacing:-.05em}
+.ui-brand i{width:5px;height:5px;border-radius:50%;background:var(--coral)}
+.ui-nav{display:flex;gap:8px}
+.ui-nav b{display:block;width:16px;height:3px;border-radius:2px;background:rgba(0,0,0,.22)}
+.ui-hero{flex:1;display:flex;flex-direction:column;gap:7px;padding:12px 6px}
+.ui-hero strong{font-size:clamp(18px,2.1vw,30px);letter-spacing:-.06em;line-height:.98;max-width:12ch;font-weight:800}
+.ui-hero strong em{font-style:normal;color:var(--coral)}
+.ui-hero .l{height:4px;border-radius:2px;background:rgba(0,0,0,.14)}
+.ui-hero .l.s{width:62%}
+.ui-hero .l.xs{width:40%}
+.ui-btn{margin-top:6px;width:86px;height:24px;border-radius:var(--pill);background:var(--coral);display:flex;align-items:center;justify-content:center;color:#fff;font-size:8px;font-weight:700;letter-spacing:0}
+.ui-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:auto}
+.ui-tiles div{aspect-ratio:1.3;border-radius:6px;background:var(--sand)}
+.ui-tiles div:nth-child(2){background:#cfc7b7}
+.ui-tiles div:nth-child(3){background:var(--ink)}
+.device.laptop .screen-ui{padding:18px 20px 16px}
+.device.laptop .ui-hero{flex-direction:row;align-items:flex-end;justify-content:space-between;gap:24px;padding:16px 6px 18px}
+.device.laptop .ui-hero>div{flex:1}
+.device.laptop .ui-tiles{max-width:280px;width:42%;margin:0 0 0 auto;grid-template-columns:repeat(2,1fr);gap:8px}
+.device.laptop .ui-tiles div{aspect-ratio:1.6}
+.device.laptop .ui-tiles div:nth-child(3){display:none}
+.device.laptop .ui-btn{width:104px;height:28px}
 
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
+.deck{position:absolute;top:calc(100% - 18px);left:0;width:100%;height:190px;border-radius:0 0 16px 16px;transform-origin:top center;transform:rotateX(76deg) scaleY(.7);opacity:0;transition:transform .95s var(--ease),opacity .5s;background:linear-gradient(180deg,#2b2b2b,#151515);box-shadow:0 40px 50px -30px rgba(0,0,0,.6);overflow:hidden}
+.device.laptop .deck{opacity:1;transform:rotateX(74deg) scaleY(1)}
+.keyboard{position:absolute;inset:14px 18px 46px;background-image:linear-gradient(rgba(255,255,255,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.1) 1px,transparent 1px);background-size:100% 17px,26px 100%;opacity:.55}
+.trackpad{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);width:120px;height:26px;border-radius:7px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.04)}
 
-  <!-- =======================================================
-  * Template Name: QuickStart
-  * Template URL: https://bootstrapmade.com/quickstart-bootstrap-startup-website-template/
-  * Updated: Aug 07 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+.chip{position:absolute;z-index:3;background:var(--surface);border-radius:var(--pill);padding:10px 16px;font-size:12px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;box-shadow:0 18px 30px -20px rgba(0,0,0,.4);animation:chipfloat 6s ease-in-out infinite}
+.chip:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--coral)}
+.chip.a{top:12%;left:2%;animation-delay:-1s}
+.chip.b{top:24%;right:0;animation-delay:-3s}
+.chip.c{bottom:18%;left:6%;animation-delay:-2s}
+.chip.d{bottom:9%;right:8%;animation-delay:-4.5s}
+@keyframes chipfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+.mode-switch{display:flex;gap:4px;background:rgba(0,0,0,.06);border-radius:var(--pill);padding:4px;margin-top:18px;z-index:3}
+.mode-switch button{border:0;background:transparent;border-radius:var(--pill);padding:9px 18px;font-family:inherit;font-size:12px;font-weight:700;letter-spacing:-.01em;color:var(--muted);cursor:pointer;transition:.25s}
+.mode-switch button.active{background:var(--ink);color:#fff}
+
+.scroll-hint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);z-index:3}
+.scroll-hint:after{content:"";width:1px;height:26px;background:var(--ink);animation:scrolldot 2s var(--ease) infinite}
+@keyframes scrolldot{0%,100%{transform:scaleY(.4);opacity:.3}50%{transform:scaleY(1);opacity:1}}
+
+/* MARQUEE */
+.marquee{margin-top:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;overflow:clip;contain:paint;max-width:100vw;padding:clamp(20px,2.4vw,30px) 0}
+.marquee-track{display:flex;width:max-content;animation:marquee 34s linear infinite}
+.marquee-group{display:flex;align-items:center;gap:clamp(52px,6vw,88px);padding-right:clamp(52px,6vw,88px)}
+.client-logo{display:flex;align-items:center;justify-content:center;height:clamp(40px,3.8vw,50px)}
+.client-logo img{height:100%;width:auto;max-width:190px;object-fit:contain;mix-blend-mode:multiply;filter:grayscale(1);opacity:.7;transition:filter .3s,opacity .3s}
+.client-logo:hover img{filter:grayscale(0);opacity:1}
+.client-logo.is-dark img{filter:grayscale(1) contrast(1.5) brightness(.3);opacity:1}
+.client-logo.is-dark:hover img{filter:grayscale(0);opacity:1}
+.client-logo.is-large{width:clamp(160px,14vw,190px);height:clamp(36px,3vw,42px);flex:none;overflow:hidden}
+.client-logo.is-large img{width:100%;height:auto;max-width:none;max-height:none}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* SECTIONS */
+.sec-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:clamp(24px,4vw,40px)}
+.sec-head h2{max-width:18ch}
+.sec-head .lead{max-width:34ch;font-size:16px}
+
+.grid{display:grid;gap:16px}
+.services{grid-template-columns:repeat(2,1fr)}
+.card{position:relative;background:var(--surface);border-radius:var(--r);padding:clamp(26px,3vw,40px);display:flex;flex-direction:column;gap:18px;min-height:240px;border:1px solid rgba(0,0,0,.05);transform-style:preserve-3d;transition:transform .35s var(--ease),background .35s}
+.card:hover{background:#fff}
+.card .idx{font-size:12px;font-weight:700;color:var(--coral);letter-spacing:.08em}
+.card h3{font-size:clamp(24px,2.4vw,34px);font-weight:800}
+.card p{font-size:15px;color:var(--muted);max-width:42ch;margin-top:auto}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags span{font-size:11px;font-weight:700;letter-spacing:.02em;padding:6px 11px;border-radius:var(--pill);background:var(--canvas);color:var(--muted)}
+.card .pill-link{margin-top:2px;font-size:13px;align-self:flex-start}
+.card:after{content:"";position:absolute;right:26px;top:26px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);transition:.35s var(--ease)}
+.card:hover:after{background:var(--coral);border-color:var(--coral);transform:scale(1.08)}
+
+.works{grid-template-columns:repeat(3,1fr)}
+.work{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:4/3;background:var(--sand);transform-style:preserve-3d;transition:transform .4s var(--ease)}
+.work img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease),filter .5s;filter:saturate(.85)}
+.work:hover img{transform:scale(1.06);filter:saturate(1)}
+.work .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(0,0,0,.72));display:flex;flex-direction:column;justify-content:flex-end;gap:6px;padding:26px;color:#fff}
+.work .overlay .tag{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.8}
+.work .overlay h3{font-size:24px;font-weight:800}
+.work .overlay .go{position:absolute;top:22px;right:22px;width:44px;height:44px;border-radius:50%;background:#fff;color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:18px;transform:scale(.8);opacity:0;transition:.35s var(--ease)}
+.work:hover .overlay .go{transform:scale(1);opacity:1}
+
+.studio{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:stretch}
+.studio-main{background:var(--ink);color:#fff;border-radius:var(--r);padding:clamp(32px,4vw,56px);display:flex;flex-direction:column;justify-content:space-between;gap:48px;position:relative;overflow:hidden}
+.studio-main:before{content:"";position:absolute;right:-120px;bottom:-140px;width:380px;height:380px;border-radius:50%;background:var(--coral);opacity:.9;transition:transform .8s var(--ease)}
+.studio-main:hover:before{transform:scale(1.15)}
+.studio-main h2{position:relative;z-index:1;max-width:14ch}
+.studio-main p{position:relative;z-index:1;color:rgba(255,255,255,.7);max-width:42ch;font-size:16px}
+.studio-main .pill-link{position:relative;z-index:1;border-color:#fff;color:#fff;align-self:flex-start}
+.principles{display:flex;flex-direction:column;gap:16px}
+.principle{background:var(--surface);border-radius:var(--r);padding:26px 28px;flex:1;display:flex;gap:20px;align-items:flex-start;border:1px solid rgba(0,0,0,.05);transition:transform .35s var(--ease),background .35s}
+.principle:hover{transform:translateX(6px)}
+.principle .n{font-size:12px;font-weight:700;color:var(--coral);padding-top:4px}
+.principle h3{font-size:20px;margin-bottom:6px}
+.principle p{font-size:14px;color:var(--muted);max-width:36ch}
+
+.contact{background:var(--coral);border-radius:var(--r);padding:clamp(32px,4.5vw,64px);color:#fff;position:relative;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,56px);align-items:start}
+.contact:after{content:"";position:absolute;right:-100px;top:-100px;width:320px;height:320px;border-radius:50%;border:1px solid rgba(255,255,255,.35);animation:spin 22s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.contact .eyebrow{color:#fff;position:relative;z-index:1}
+.contact .eyebrow:before{background:#fff}
+.contact h2{position:relative;z-index:1;margin-top:20px;max-width:16ch}
+.contact p{position:relative;z-index:1;margin-top:18px;font-size:17px;max-width:44ch;color:rgba(255,255,255,.9)}
+.contact-info{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.contact-info a{font-size:14px;font-weight:700;padding:10px 16px;border-radius:var(--pill);background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4)}
+.contact-form-wrap{position:relative;z-index:1}
+.contact-form{background:#fff;border-radius:var(--r);padding:clamp(20px,2.6vw,28px);display:flex;flex-direction:column;gap:16px;color:var(--ink)}
+.contact-form label{display:flex;flex-direction:column;gap:7px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.contact-form .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.contact-form input,.contact-form textarea,.contact-form select{width:100%;font-family:inherit;font-size:16px;letter-spacing:-.02em;color:var(--ink);background:var(--canvas);border:1px solid transparent;border-radius:10px;padding:12px 14px;outline:none;transition:border-color .2s,background .2s}
+.contact-form input:focus,.contact-form textarea:focus,.contact-form select:focus{border-color:var(--coral);background:#fff}
+.contact-form textarea{resize:vertical;min-height:110px}
+.contact-form select{cursor:pointer}
+.form-foot{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;margin-top:2px}
+.contact-form .btn{background:var(--ink);border-color:var(--ink);color:#fff;padding:13px 22px}
+.contact-form .btn:hover{background:var(--coral);border-color:var(--coral)}
+.form-note{font-size:12px;color:var(--muted);letter-spacing:0;line-height:1.4}
+
+footer{padding-block:clamp(32px,6vw,72px)!important;}
+.foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:32px;border-top:1px solid var(--line);padding-top:clamp(32px,3.5vw,48px)}
+.foot .links{margin:0;gap:24px}
+.foot small{font-size:13px;color:var(--muted)}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:1260px){
+  .hero{grid-template-columns:1fr;min-height:auto;padding-top:120px;gap:8px}
+  .hero-copy{max-width:720px}
+}
+@media(min-width:621px) and (max-width:900px){
+  .stage{transform:scale(.98)}
+}
+@media(max-width:1100px){
+  .stage-wrap{min-height:500px}
+  .studio{grid-template-columns:1fr}
+  .contact{grid-template-columns:1fr}
+}
+@media(max-width:900px){
+  .links{display:none}
+  .nav .btn{margin-left:auto}
+  .stage-wrap{min-height:480px}
+  .works{grid-template-columns:1fr 1fr}
+  .works .work:last-child{grid-column:1/-1;aspect-ratio:16/9}
+}
+@media(max-width:620px){
+  :root{--gap:48px;--card:22px}
+  .wrap{padding:0 16px}
+  .hero{padding-top:120px;padding-bottom:var(--sec-space)}
+  .hero-copy h1{font-size:clamp(40px,9.5vw,54px)}
+  .hero-copy .lead{font-size:20px}
+  .hero-actions{gap:10px}
+  .hero-actions .btn{flex:1;padding:13px 18px}
+  .hero-meta{margin-top:32px}
+  .stage-wrap{min-height:340px;perspective:1000px}
+  .stage{height:330px;transform:scale(.56)}
+  .services{grid-template-columns:1fr}
+  .stage-wrap .chip{display:none}
+  .mode-switch{margin-top:10px}
+  .works{grid-template-columns:1fr}
+  .works .work:last-child{grid-column:auto;aspect-ratio:4/3}
+  .contact{padding:28px 22px}
+  .contact-form .field-row{grid-template-columns:1fr}
+  .nav{padding:10px 14px 10px 18px;min-height:54px}
+  .logo{font-size:20px}
+  .foot{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:420px){
+  .stage{transform:scale(.5)}
+}
+@media(max-width:360px){
+  .stage{transform:scale(.44)}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation:none!important;transition-duration:.001ms!important}
+  .reveal{opacity:1;transform:none}
+}
+.grid-clip{position:absolute;inset:0;overflow:hidden;overflow:clip;pointer-events:none}
+</style>
 </head>
+<body>
 
-<body class="index-page">
+<header>
+  <div class="wrap">
+    <nav class="nav" aria-label="Navigazione principale">
+      <a href="#" class="logo"><i></i>Trila</a>
+      <div class="links">
+        <a href="#servizi">Servizi</a>
+        <a href="#lavori">Lavori</a>
+        <a href="#studio">Studio</a>
+        <a href="#contatti">Contatti</a>
+      </div>
+      <a href="#contatti" class="btn dark">Inizia un progetto <span class="arrow">↗</span></a>
+    </nav>
+  </div>
+</header>
 
-  <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center">
-
-      <a href="index.html" class="logo d-flex align-items-center me-auto">
-        <img src="assets/img/logo-full.png" alt="">
-      </a>
-
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="index.html#hero" class="active">Home</a></li>
-          <li><a href="index.html#chi-siamo">Chi siamo</a></li>
-          <li><a href="index.html#servizi">Servizi</a></li>
-          <li><a href="index.html#lavori">Lavori</a></li>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
-
-      <a class="btn-getstarted" href="index.html#contattaci">Contattaci</a>
-
+<main>
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <h1 id="hero-title">Costruiamo il tuo prossimo <em>prodotto digitale</em>.</h1>
+      <p class="lead">Siti web, e-commerce e applicazioni. Design curato, codice pulito e prestazioni reali.</p>
+      <div class="hero-actions">
+        <a href="#contatti" class="btn dark">Inizia un progetto <span class="arrow">↗</span></a>
+        <a href="#lavori" class="btn">Guarda i lavori</a>
+      </div>
+      <div class="hero-meta">
+        <span>Web design</span>
+        <span>E-commerce</span>
+        <span>Web app</span>
+      </div>
     </div>
-  </header>
 
-  <main class="main">
-
-    <!-- Hero Section -->
-    <section id="hero" class="hero section">
-      <div class="hero-bg">
-        <img src="assets/img/hero-bg-light.webp" alt="">
-      </div>
-      <div class="container text-center">
-        <div class="d-flex flex-column justify-content-center align-items-center">
-          <h1 data-aos="fade-up">Progettazione e sviluppo di <span>siti web</span> professionali e <span>software web
-              gestionali</span> per aziende e attività</h1>
-          <p data-aos="fade-up" data-aos-delay="100" class="mt-3 mb-5">Inizia il tuo progetto oggi<br></p>
-          <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-            <a href="#chi-siamo" class="btn-get-started">Contattaci</a>
-            <a href="#lavori" class="btn-watch-video d-flex align-items-center"><span>Vedi i Lavori</span></a>
+    <div class="stage-wrap" aria-label="Anteprima 3D del progetto su mobile e desktop">
+      <div class="grid-clip" aria-hidden="true"><div class="stage-grid"></div></div>
+      <div class="chip a" aria-hidden="true">UI/UX</div>
+      <div class="chip b" aria-hidden="true">Sviluppo web</div>
+      <div class="chip c" aria-hidden="true">Performance</div>
+      <div class="chip d" aria-hidden="true">3D</div>
+      <div class="stage">
+        <div class="floater">
+          <div class="device" id="device">
+            <div class="notch" aria-hidden="true"></div>
+            <div class="screen">
+              <div class="screen-ui">
+                <div class="ui-bar">
+                  <span class="ui-brand"><i></i>Trila</span>
+                  <span class="ui-nav"><b></b><b></b><b></b></span>
+                </div>
+                <div class="ui-hero">
+                  <div>
+                    <strong>Design che <em>funziona</em>.</strong>
+                    <div class="l" style="margin-top:10px"></div>
+                    <div class="l s" style="margin-top:6px"></div>
+                    <div class="ui-btn">Scopri</div>
+                  </div>
+                  <div class="ui-tiles"><div></div><div></div><div></div></div>
+                </div>
+              </div>
+              <div class="shine" aria-hidden="true"></div>
+            </div>
+            <div class="deck" aria-hidden="true">
+              <div class="keyboard"></div>
+              <div class="trackpad"></div>
+            </div>
           </div>
         </div>
       </div>
+      <div class="mode-switch" role="group" aria-label="Vista dispositivo">
+        <button type="button" data-mode="phone" class="active">Mobile</button>
+        <button type="button" data-mode="laptop">Desktop</button>
+      </div>
+    </div>
+  </section>
 
-    </section><!-- /Hero Section -->
+  <div class="marquee" role="region" aria-label="Loghi dei clienti">
+    <div class="marquee-track" id="client-track"></div>
+  </div>
 
+  <section id="servizi" class="wrap" aria-labelledby="servizi-title">
+    <div class="sec-head reveal">
+      <div>
+        <span class="eyebrow">Servizi</span>
+        <h2 id="servizi-title" style="margin-top:18px">Cosa possiamo costruire</h2>
+      </div>
+    </div>
+    <div class="grid services">
+      <article class="card tilt reveal" style="--d:.05s">
+        <span class="idx">01</span>
+        <h3>Siti web</h3>
+        <p>Design e sviluppo di siti veloci, accessibili e facili da aggiornare.</p>
+        <div class="tags"><span>Design</span><span>SEO</span><span>CMS</span></div>
+        <a href="#contatti" class="pill-link">Scopri di più <span>→</span></a>
+      </article>
+      <article class="card tilt reveal" style="--d:.1s">
+        <span class="idx">02</span>
+        <h3>E-commerce</h3>
+        <p>Negozi online completi: catalogo, pagamenti e gestione degli ordini.</p>
+        <div class="tags"><span>Catalogo</span><span>Checkout</span><span>Integrazioni</span></div>
+        <a href="#contatti" class="pill-link">Scopri di più <span>→</span></a>
+      </article>
+      <article class="card tilt reveal" style="--d:.15s">
+        <span class="idx">03</span>
+        <h3>Web app</h3>
+        <p>Applicazioni su misura per processi, dati e team.</p>
+        <div class="tags"><span>Dashboard</span><span>API</span><span>Automazioni</span></div>
+        <a href="#contatti" class="pill-link">Scopri di più <span>→</span></a>
+      </article>
+      <article class="card tilt reveal" style="--d:.2s">
+        <span class="idx">04</span>
+        <h3>Restyling</h3>
+        <p>Audit e ottimizzazione per siti esistenti: più veloci, più chiari.</p>
+        <div class="tags"><span>Audit</span><span>UX</span><span>Speed</span></div>
+        <a href="#contatti" class="pill-link">Scopri di più <span>→</span></a>
+      </article>
+    </div>
+  </section>
 
-    <!-- About Section -->
-    <section id="chi-siamo" class="about section">
+  <section id="lavori" class="wrap" aria-labelledby="lavori-title">
+    <div class="sec-head reveal">
+      <div>
+        <span class="eyebrow">Lavori</span>
+        <h2 id="lavori-title" style="margin-top:18px">Progetti recenti</h2>
+      </div>
+      <p class="lead">Siti e applicazioni realizzati per attività e aziende.</p>
+    </div>
+    <div class="grid works">
+      <a class="work reveal" style="--d:.05s" href="https://asianconsulting.it" target="_blank" rel="noopener">
+        <img src="assets/img/works/asianconsulting-prev.jpg" alt="Asian Consulting" loading="lazy">
+        <div class="overlay"><span class="go">↗</span><span class="tag">Sito web</span><h3>Asian Consulting</h3></div>
+      </a>
+      <a class="work reveal" style="--d:.1s" href="https://ristorantelacueva.it" target="_blank" rel="noopener">
+        <img src="assets/img/portfolio-2.jpg" alt="Ristorante la Cueva" loading="lazy">
+        <div class="overlay"><span class="go">↗</span><span class="tag">Sito + gestionale</span><h3>Ristorante la Cueva</h3></div>
+      </a>
+      <a class="work reveal" style="--d:.15s" href="https://misahotel.com" target="_blank" rel="noopener">
+        <img src="assets/img/works/misahotel-prev.jpg" alt="Misa Hotel" loading="lazy">
+        <div class="overlay"><span class="go">↗</span><span class="tag">Sito + gestionale</span><h3>Misa Hotel</h3></div>
+      </a>
+    </div>
+  </section>
 
-      <div class="container">
-
-        <div class="row gy-4">
-
-          <!-- Testo Chi Siamo -->
-          <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
-            <p class="who-we-are">Chi Siamo</p>
-            <h3>Portiamo la tua visione online</h3>
-            <p class="fst-italic">
-              Siamo un team di giovani sviluppatori e dedicati a creare siti web, web app ed e-commerce che uniscono
-              estetica e performance.
-            </p>
-            <ul>
-              <li><i class="bi bi-check-circle"></i> <span>Siti web professionali, responsive e ottimizzati per
-                  SEO.</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>E-commerce completi e sicuri, pronti per vendere
-                  online.</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Web app e gestionali su misura per semplificare i processi
-                  aziendali.</span></li>
-            </ul>
-            <a href="#contattaci" class="read-more">
-              <span>Fissa un'appuntamento</span><i class="bi bi-arrow-right"></i>
-            </a>
-          </div>
-
-          <!-- Immagini -->
-          <div class="col-lg-6 about-images" data-aos="fade-up" data-aos-delay="200">
-            <div class="row gy-4">
-              <div class="col-lg-6">
-                <img src="assets/img/about-company-1.jpg" class="img-fluid rounded" alt="Team al lavoro">
-              </div>
-              <div class="col-lg-6">
-                <div class="row gy-4">
-                  <div class="col-lg-12">
-                    <img src="assets/img/about-company-2.jpg" class="img-fluid rounded" alt="Progetti in corso">
-                  </div>
-                  <div class="col-lg-12">
-                    <img src="assets/img/about-company-3.jpg" class="img-fluid rounded" alt="Design creativo">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
+  <section id="studio" class="wrap" aria-labelledby="studio-title">
+    <div class="studio">
+      <div class="studio-main reveal">
+        <div>
+          <span class="eyebrow" style="color:#fff">Studio</span>
+          <h2 id="studio-title" style="margin-top:18px">Design, codice, dettagli.</h2>
         </div>
-
-      </div>
-
-    </section><!-- /About Section -->
-
-
-    <!-- Clients Section -->
-    <section id="clients" class="clients section">
-
-      <div class="container" data-aos="fade-up">
-
-        <div class="row gy-4">
-
-          <div class="col-xl-2 col-md-3 col-6 client-logo">
-            <img src="assets/img/clients/client-1.png" class="img-fluid" alt="">
-          </div><!-- End Client Item -->
-
-          <div class="col-xl-2 col-md-3 col-6 client-logo">
-            <img src="assets/img/clients/client-2.png" class="img-fluid" alt="">
-          </div><!-- End Client Item -->
-
-          <div class="col-xl-2 col-md-3 col-6 client-logo">
-            <img src="assets/img/clients/client-3.png" class="img-fluid" alt="">
-          </div><!-- End Client Item -->
-
-          <div class="col-xl-2 col-md-3 col-6 client-logo">
-            <img src="assets/img/clients/client-4.png" class="img-fluid" alt="">
-          </div><!-- End Client Item -->
-
-          <div class="col-xl-2 col-md-3 col-6 client-logo">
-            <img src="assets/img/clients/client-5.png" class="img-fluid" alt="">
-          </div><!-- End Client Item -->
-
-          <div class="col-xl-2 col-md-3 col-6 client-logo">
-            <img src="assets/img/clients/client-6.png" class="img-fluid" alt="">
-          </div><!-- End Client Item -->
-
-        </div>
-
-      </div>
-
-    </section><!-- /Clients Section -->
-
-
-
-    <!-- Services Section -->
-    <section id="servizi" class="services section light-background">
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Servizi</h2>
-        <p>Siti web, Restyling e Web App gestionali su misura</p>
-      </div>
-      <div class="container">
-        <div class="row g-5">
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="service-item item-cyan position-relative">
-              <i class="bi bi-code-slash icon"></i>
-              <div>
-                <h3>Siti Web Professionali</h3>
-                <p>Progettiamo siti web moderni, responsive e ottimizzati per convertire visitatori in clienti.</p>
-                <a href="#contattaci" class="read-more stretched-link">Contattaci <i class="bi bi-arrow-right"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="service-item item-orange position-relative">
-              <i class="bi bi-arrow-repeat icon"></i>
-              <div>
-                <h3>Restyling Siti Web</h3>
-                <p>Rinnoviamo il tuo sito esistente rendendolo moderno, veloce e funzionale.</p>
-                <a href="#contattaci" class="read-more stretched-link">Contattaci <i class="bi bi-arrow-right"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="service-item item-indigo position-relative">
-              <i class="bi bi-app-indicator icon"></i>
-              <div>
-                <h3>Web App Gestionali su Misura</h3>
-                <p>Creiamo applicazioni web personalizzate per gestire clienti, ordini e dati aziendali in modo semplice
-                  e sicuro.</p>
-                <a href="#contattaci" class="read-more stretched-link">Contattaci <i class="bi bi-arrow-right"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="700">
-            <div class="service-item item-teal position-relative">
-              <i class="bi bi-cart-fill icon"></i> <!-- icona dentro il riquadro colorato -->
-              <div>
-                <h3>E-commerce professionali</h3>
-                <p>Creazione di negozi online completi e facili da gestire, integrati con sistemi di pagamento sicuri e
-                  ottimizzati per la vendita.</p>
-                <a href="#contattaci" class="read-more stretched-link">Scopri di più <i
-                    class="bi bi-arrow-right"></i></a>
-              </div>
-            </div>
-          </div>
-
-
+        <div>
+          <p>Un team ristretto che progetta e sviluppa in prima persona. Niente passaggi intermedi: parli direttamente con chi costruisce il tuo progetto.</p>
+          <a href="#contatti" class="pill-link" style="margin-top:24px">Lavora con noi <span>→</span></a>
         </div>
       </div>
-      <!-- Services CTA -->
-      <div class="text-center mt-5 section about" data-aos="fade-up">
-        <h3>Hai un progetto concreto in mente?</h3>
-        <p class="my-3">
-          Parliamo insieme di come trasformarlo in realtà
-        </p>
-        <div class="mt-3" style="color: transparent;">
-          ds
-        </div>
-        <a href="#contattaci" class="std-btn">
-          Prenota una call
-        </a>
+      <div class="principles">
+        <article class="principle reveal" style="--d:.05s">
+          <span class="n">01</span>
+          <div><h3>Interfacce chiare</h3><p>Meno attrito, più risultati. Ogni schermata ha uno scopo preciso.</p></div>
+        </article>
+        <article class="principle reveal" style="--d:.1s">
+          <span class="n">02</span>
+          <div><h3>Prestazioni reali</h3><p>Siti leggeri, caricamenti rapidi ed esperienze fluide su ogni dispositivo.</p></div>
+        </article>
+        <article class="principle reveal" style="--d:.15s">
+          <span class="n">03</span>
+          <div><h3>Supporto diretto</h3><p>Risposte rapide e aggiornamenti costanti, dal lancio in poi.</p></div>
+        </article>
       </div>
+    </div>
+  </section>
 
-    </section>
-
-
-
-    <!-- Works / Portfolio Section -->
-    <section id="lavori" class="portfolio section">
-      <div class="container">
-
-        <div class="container section-title" data-aos="fade-up">
-          <h2>I nostri lavori più recenti</h2>
-          <p>Scopri i progetti che abbiamo realizzato e lasciati ispirare</p>
-        </div>
-
-        <div class="row g-4" data-aos="fade-up" data-aos-delay="100">
-
-          <!-- Lavoro 1 -->
-          <div class="col-lg-4 col-md-6 portfolio-item">
-            <a href="https://ristorantelacueva.it" target="_blank" class="portfolio-card-link">
-              <div class="portfolio-card">
-                <div class="portfolio-image-wrapper">
-                  <img src="assets/img/portfolio-2.jpg" class="img-fluid portfolio-img" alt="Ristorante la Cueva">
-                  <div class="portfolio-overlay">
-                    <i class="bi bi-arrow-right-circle"></i>
-                  </div>
-                </div>
-                <div class="portfolio-content">
-                  <h4>Ristorante la Cueva</h4>
-                  <p>Sito web con gestionale per prenotazioni</p>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <!-- Lavoro 2 -->
-          <div class="col-lg-4 col-md-6 portfolio-item">
-            <a href="https://studiodentisticomadam.it" target="_blank" class="portfolio-card-link">
-              <div class="portfolio-card">
-                <div class="portfolio-image-wrapper">
-                  <img src="assets/img/portfolio-1.jpg" class="img-fluid portfolio-img" alt="Studio Dentistico Madam">
-                  <div class="portfolio-overlay">
-                    <i class="bi bi-arrow-right-circle"></i>
-                  </div>
-                </div>
-                <div class="portfolio-content">
-                  <h4>Studio Dentistico Madam</h4>
-                  <p>Sito web attività</p>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <!-- Lavoro 3 -->
-          <div class="col-lg-4 col-md-6 portfolio-item">
-            <a href="https://dronecutstudio.it/t" target="_blank" class="portfolio-card-link">
-              <div class="portfolio-card">
-                <div class="portfolio-image-wrapper">
-                  <img src="assets/img/portfolio-3.jpg" class="img-fluid portfolio-img" alt="Dronecut Studio">
-                  <div class="portfolio-overlay">
-                    <i class="bi bi-arrow-right-circle"></i>
-                  </div>
-                </div>
-                <div class="portfolio-content">
-                  <h4>Dronecut Studio</h4>
-                  <p>Sito web attività</p>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <!-- Lavoro 4 -->
-          <div class="col-lg-4 col-md-6 portfolio-item">
-            <a href="https://dogsandcompany.it" target="_blank" class="portfolio-card-link">
-              <div class="portfolio-card">
-                <div class="portfolio-image-wrapper">
-                  <img src="assets/img/portfolio-4.jpg" class="img-fluid portfolio-img" alt="Dogs & Company">
-                  <div class="portfolio-overlay">
-                    <i class="bi bi-arrow-right-circle"></i>
-                  </div>
-                </div>
-                <div class="portfolio-content">
-                  <h4>Dogs & Company</h4>
-                  <p>Sito web attività</p>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <!-- Lavoro 5 -->
-          <div class="col-lg-4 col-md-6 portfolio-item">
-            <div class="portfolio-card">
-              <div class="portfolio-image-wrapper">
-                <img src="assets/img/portfolio-5.jpg" class="img-fluid portfolio-img"
-                  alt="Il Casale Pomodoro e Basilico">
-                <div class="portfolio-overlay no-link">
-                  <i class="bi bi-eye"></i>
-                </div>
-              </div>
-              <div class="portfolio-content">
-                <h4>Il Casale Pomodoro e Basilico</h4>
-                <p>Gestionale personalizzato per prenotazioni</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Lavoro 6 -->
-          <div class="col-lg-4 col-md-6 portfolio-item">
-            <a href="https://lemotif.it" target="_blank" class="portfolio-card-link">
-              <div class="portfolio-card">
-                <div class="portfolio-image-wrapper">
-                  <img src="assets/img/portfolio-6.jpg" class="img-fluid portfolio-img" alt="Lemotif Profumeria">
-                  <div class="portfolio-overlay">
-                    <i class="bi bi-arrow-right-circle"></i>
-                  </div>
-                </div>
-                <div class="portfolio-content">
-                  <h4>Lemotif Profumeria</h4>
-                  <p>E-commerce Shopify</p>
-                </div>
-              </div>
-            </a>
-          </div>
-
-
-          <!-- Lavoro 7 -->
-          <div class="col-lg-4 col-md-6 portfolio-item mx-auto">
-            <a href="https://oggismettopersempre.it" target="_blank" class="portfolio-card-link">
-              <div class="portfolio-card">
-                <div class="portfolio-image-wrapper">
-                  <img src="assets/img/portfolio-7.jpg" class="img-fluid portfolio-img" alt="Oggi Smetto Per Sempre">
-                  <div class="portfolio-overlay">
-                    <i class="bi bi-arrow-right-circle"></i>
-                  </div>
-                </div>
-                <div class="portfolio-content">
-                  <h4>Oggi Smetto Per Sempre</h4>
-                  <p>Sito web attività</p>
-                </div>
-              </div>
-            </a>
-          </div>
-
+  <section id="contatti" class="wrap" aria-labelledby="contatti-title">
+    <div class="contact reveal">
+      <div>
+        <span class="eyebrow">Contatti</span>
+        <h2 id="contatti-title">Raccontaci il progetto.</h2>
+        <p>Scrivici due righe su cosa vuoi costruire. Ti rispondiamo con una proposta chiara e i prossimi passi.</p>
+        <div class="contact-info">
+          <a href="tel:+393703616061">370 361 6061</a>
+          <a href="mailto:info@trila.it">info@trila.it</a>
         </div>
       </div>
-    </section><!-- /Works Section -->
-
-
-
-
-
-    <!-- Contact Section -->
-    <section id="contattaci" class="contact section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Contattaci</h2>
-        <p>Parliamone in modo diretto. Una call, zero perdite di tempo.</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <!-- Info -->
-        <div class="row gy-4 mb-4">
-
-          <div class="col-lg-4 col-md-6">
-            <div class="info-item d-flex flex-column justify-content-center align-items-center">
-              <i class="bi bi-telephone"></i>
-              <h3>Telefono</h3>
-              <p>370 361 6061</p>
-            </div>
+      <div class="contact-form-wrap">
+        <form class="contact-form" id="contact-form" novalidate>
+          <div class="field-row">
+            <label for="cf-name">Nome<input id="cf-name" name="name" type="text" autocomplete="name" required placeholder="Il tuo nome"></label>
+            <label for="cf-email">Email<input id="cf-email" name="email" type="email" autocomplete="email" required placeholder="nome@email.it"></label>
           </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="info-item d-flex flex-column justify-content-center align-items-center">
-              <i class="bi bi-envelope"></i>
-              <h3>Email</h3>
-              <p>info@trila.it</p>
-            </div>
+          <label for="cf-budget">Budget indicativo
+            <select id="cf-budget" name="budget">
+              <option value="">Seleziona (facoltativo)</option>
+              <option value="Meno di 600 €">&lt; 600 €</option>
+              <option value="600–1100 €">600–1100 €</option>
+              <option value="1100–2000 €">1100–2000 €</option>
+              <option value="2000 €+">2000 €+</option>
+            </select>
+          </label>
+          <label for="cf-message">Messaggio<textarea id="cf-message" name="message" rows="4" required placeholder="Raccontaci cosa vuoi costruire..."></textarea></label>
+          <div class="form-foot">
+            <button class="btn dark" type="submit">Invia richiesta <span class="arrow">↗</span></button>
+            <span class="form-note" id="form-note">Rispondiamo entro un giorno lavorativo.</span>
           </div>
-
-          <div class="col-lg-4 col-md-12">
-            <div class="info-item d-flex flex-column justify-content-center align-items-center">
-              <i class="bi bi-calendar-check"></i>
-              <h3>Call su appuntamento</h3>
-              <p>Call programmate, così lavoriamo meglio.</p>
-            </div>
-          </div>
-
-        </div><!-- End Info -->
-
-        <!-- Calendario -->
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="calendar-wrapper" data-aos="fade-up" data-aos-delay="200">
-              <iframe src="https://calendly.com/andrea-bonacci20/30min"
-                style="width: 100%; height: 650px; border: 0; overflow: hidden;" loading="lazy">
-              </iframe>
-            </div>
-          </div>
-        </div><!-- End Calendar -->
-
+        </form>
       </div>
+    </div>
+  </section>
+</main>
 
-    </section><!-- /Contact Section -->
+<footer class="wrap">
+  <div class="foot">
+    <a href="#" class="logo"><i></i>Trila</a>
+    <div class="links">
+      <a href="#servizi">Servizi</a>
+      <a href="#lavori">Lavori</a>
+      <a href="#studio">Studio</a>
+      <a href="#contatti">Contatti</a>
+    </div>
+    <small>© <span id="year">2026</span> Trila</small>
+  </div>
+</footer>
 
+<script src="clients.js"></script>
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    <footer id="footer" class="footer position-relative light-background">
+  var track = document.getElementById('client-track');
+  if(track && window.CLIENTS && window.CLIENTS.length){
+    var base = 'assets/img/clients/';
+    var darkLogos = ['client-2.png', 'client-7.png', 'albergobartoli.png'];
+    var sets = Math.max(1, Math.ceil(9 / window.CLIENTS.length));
+    function buildGroup(hidden){
+      var g = document.createElement('div');
+      g.className = 'marquee-group';
+      if(hidden){ g.setAttribute('aria-hidden', 'true'); }
+      for(var r = 0; r < sets; r++){
+        window.CLIENTS.forEach(function(file){
+          var cell = document.createElement('div');
+          cell.className = 'client-logo';
+          var img = document.createElement('img');
+          img.src = base + file;
+          img.alt = '';
+          img.loading = 'lazy';
+          if(darkLogos.indexOf(file) !== -1){ cell.classList.add('is-dark'); }
+          if(file === 'albergobartoli.png'){ cell.classList.add('is-large'); }
+          cell.appendChild(img);
+          g.appendChild(cell);
+        });
+      }
+      return g;
+    }
+    track.appendChild(buildGroup(false));
+    track.appendChild(buildGroup(true));
+  }
 
-      <div class="container footer-top">
-        <div class="row gy-4">
+  var device = document.getElementById('device');
+  var stage = document.querySelector('.stage-wrap');
+  var mode = 'phone';
+  var timer;
 
-          <!-- Brand -->
-          <div class="col-lg-4 col-md-6 footer-about">
-            <a href="/" class="logo d-flex align-items-center">
-              <img src="assets/img/logo-full.png" alt="Trila – sviluppo siti web e web app" class="footer-logo">
-            </a>
-            <p class="mt-3">
-              Sviluppiamo siti web, web app ed e-commerce su misura.
-              Lavoriamo online, per clienti che vogliono soluzioni concrete.
-            </p>
-          </div>
+  function setMode(m){
+    mode = m;
+    device.classList.toggle('laptop', m === 'laptop');
+    document.querySelectorAll('[data-mode]').forEach(function(b){
+      b.classList.toggle('active', b.dataset.mode === m);
+    });
+  }
+  function cycle(){
+    setMode(mode === 'phone' ? 'laptop' : 'phone');
+  }
+  function restart(){
+    clearInterval(timer);
+    timer = setInterval(cycle, 6000);
+  }
+  setMode('phone');
+  if(!reduce) restart();
 
-          <!-- Contatti -->
-          <div class="col-lg-4 col-md-6 footer-links">
-            <h4>Contatti</h4>
-            <ul>
-              <li><strong>Telefono: &nbsp;</strong> 370 361 6061</li>
-              <li><strong>Email: &nbsp;</strong> info@trila.it</li>
-              <li><strong>Vediamoci: &nbsp;</strong> call su appuntamento</li>
-            </ul>
-          </div>
+  document.querySelectorAll('[data-mode]').forEach(function(b){
+    b.addEventListener('click', function(){
+      setMode(b.dataset.mode);
+      restart();
+    });
+  });
 
-          <!-- Link utili -->
-          <div class="col-lg-4 col-md-12 footer-links">
-            <h4>Link</h4>
-            <ul>
-              <li><a href="#chi-siamo">Chi siamo</a></li>
-              <li><a href="#servizi">Servizi</a></li>
-              <li><a href="#contact">Prenota una call</a></li>
-            </ul>
-          </div>
+  var tx = -8, ty = -16, cx = tx, cy = ty;
+  if(!reduce && stage){
+    stage.addEventListener('pointermove', function(e){
+      var r = stage.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width - .5;
+      var py = (e.clientY - r.top) / r.height - .5;
+      ty = -16 + px * 34;
+      tx = -8 - py * 24;
+    });
+    stage.addEventListener('pointerleave', function(){ tx = -8; ty = -16; });
+    (function anim(){
+      cx += (tx - cx) * .08;
+      cy += (ty - cy) * .08;
+      device.style.transform = 'translateX(-20px) rotateX(' + cx.toFixed(2) + 'deg) rotateY(' + cy.toFixed(2) + 'deg)';
+      requestAnimationFrame(anim);
+    })();
+  } else {
+    device.style.transform = 'translateX(-20px) rotateX(-8deg) rotateY(-16deg)';
+  }
 
-        </div>
-      </div>
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, {threshold:.12, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
 
-      <div class="container copyright text-center mt-4">
-        <p>
-          © <span id="year"></span> <strong>Trila</strong> · Tutti i diritti riservati
-        </p>
-      </div>
+  if(!reduce){
+    document.querySelectorAll('.tilt').forEach(function(card){
+      card.addEventListener('pointermove', function(e){
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - .5;
+        var py = (e.clientY - r.top) / r.height - .5;
+        card.style.transform = 'perspective(900px) rotateX(' + (-py*8).toFixed(2) + 'deg) rotateY(' + (px*10).toFixed(2) + 'deg) translateY(-4px)';
+      });
+      card.addEventListener('pointerleave', function(){ card.style.transform = ''; });
+    });
+    document.querySelectorAll('.work').forEach(function(card){
+      card.addEventListener('pointermove', function(e){
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - .5;
+        var py = (e.clientY - r.top) / r.height - .5;
+        card.style.transform = 'perspective(1000px) rotateX(' + (-py*6).toFixed(2) + 'deg) rotateY(' + (px*8).toFixed(2) + 'deg)';
+      });
+      card.addEventListener('pointerleave', function(){ card.style.transform = ''; });
+    });
+  }
 
-    </footer>
+  function onScroll(){
+    document.documentElement.setAttribute('data-scroll', window.scrollY > 20 ? '1' : '0');
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
 
-    <script>
-      document.getElementById("year").textContent = new Date().getFullYear();
-    </script>
+  var form = document.getElementById('contact-form');
+  if(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      if(!form.checkValidity()){ form.reportValidity(); return; }
+      var d = new FormData(form);
+      var subject = 'Nuovo progetto — ' + (d.get('name') || '');
+      var body = 'Nome: ' + (d.get('name') || '') + '\nEmail: ' + (d.get('email') || '') + '\nBudget: ' + (d.get('budget') || 'non indicato') + '\n\n' + (d.get('message') || '');
+      window.location.href = 'mailto:info@trila.it?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      var note = document.getElementById('form-note');
+      if(note){ note.textContent = 'Si aprirà il tuo client email. Oppure scrivi a info@trila.it.'; }
+    });
+  }
 
-
-    <!-- Scroll Top -->
-    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
-        class="bi bi-arrow-up-short"></i></a>
-
-    <!-- Preloader -->
-    <div id="preloader"></div>
-
-    <!-- Vendor JS Files -->
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
-    <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-
-    <!-- Main JS File -->
-    <script src="assets/js/main.js"></script>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PLB7HDW6MX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag('js', new Date());
-
-      gtag('config', 'G-PLB7HDW6MX');
-    </script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+})();
+</script>
 </body>
-
 </html>
