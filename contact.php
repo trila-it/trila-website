@@ -14,6 +14,7 @@ if (!is_array($data)) {
 }
 
 $name = isset($data['name']) ? trim($data['name']) : '';
+$businessName = isset($data['business_name']) ? trim($data['business_name']) : '';
 $email = isset($data['email']) ? trim($data['email']) : '';
 $budget = isset($data['budget']) ? trim($data['budget']) : '';
 $message = isset($data['message']) ? trim($data['message']) : '';
@@ -54,7 +55,7 @@ $payload = [
     'to' => $recipients,
     'reply_to' => $email,
     'subject' => 'Nuovo progetto - ' . $name,
-    'text' => "Nome: {$name}\nEmail: {$email}\nBudget: " . ($budget !== '' ? $budget : 'non indicato') . "\n\n{$message}",
+    'text' => "Nome: {$name}\n" . ($businessName !== '' ? "Attività: {$businessName}\n" : '') . "Email: {$email}\nBudget: " . ($budget !== '' ? $budget : 'non indicato') . "\n\n{$message}",
 ];
 
 $ch = curl_init('https://api.resend.com/emails');
