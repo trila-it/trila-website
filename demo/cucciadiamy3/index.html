@@ -1,0 +1,1123 @@
+<doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="La Cuccia di Amy, pet shop a Livorno: alimentazione, snack naturali e accessori per cani e gatti.">
+  <title>La Cuccia di Amy — Pet shop a Livorno</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preload" as="image" href="logo-loader.webp" type="image/webp">
+  <link rel="preload" as="image" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #292a24;
+      --muted: #73746b;
+      --green: #526746;
+      --green-dark: #3e5336;
+      --cream: #f7f6f0;
+      --orange: #e4a126;
+      --mint: #e8f1eb;
+      --peach: #fbefe4;
+      --lilac: #f0edf5;
+      --sky: #e9f4fb;
+      --rose: #fbeff2;
+      --teal: #2f7f72;
+      --coral: #d96c4f;
+      --line: #e9e9e2;
+      font-family: "DM Sans", sans-serif;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    * { box-sizing: border-box; }
+    html { min-width: 320px; scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: #fff; }
+    a { color: inherit; text-decoration: none; }
+    .page { width: min(1240px, calc(100% - 72px)); margin: 0 auto; }
+
+    .loader {
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 50% 45%, rgba(255,255,255,.98) 0%, rgba(255,255,255,.86) 28%, transparent 62%),
+        #f7f6f0;
+      opacity: 1;
+      transition: opacity .65s ease, visibility .65s ease;
+    }
+    .loader.is-leaving { opacity: 0; visibility: hidden; pointer-events: none; }
+    .loader-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px;
+      text-align: center;
+    }
+    .loader-mark {
+      position: relative;
+      width: clamp(220px, 36vw, 340px);
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      animation: mark-appear .9s cubic-bezier(.16,1,.3,1) both, mark-float 3s 1s ease-in-out infinite;
+    }
+    .loader-logo {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 18px 22px rgba(41,42,36,.12));
+      transition: opacity .42s ease, transform .55s cubic-bezier(.2,.8,.2,1);
+    }
+    .loader-logo-open { opacity: 1; transform: scale(1) rotate(0); }
+    .loader-logo-final { opacity: 0; transform: scale(.72) rotate(-8deg); }
+    .loader.is-swapping .loader-logo-open { opacity: 0; transform: scale(.76) rotate(8deg); }
+    .loader.is-swapping .loader-logo-final { opacity: 1; transform: scale(1) rotate(0); }
+    .loader-title {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: .22em;
+      margin: 42px 0 0;
+      color: var(--ink);
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 700;
+      letter-spacing: -.075em;
+      line-height: 1;
+    }
+    .loader-title span {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(24px) rotate(3deg);
+      animation: word-appear .65s cubic-bezier(.16,1,.3,1) forwards;
+    }
+    .loader-title span:nth-child(1) { animation-delay: .6s; }
+    .loader-title span:nth-child(2) { animation-delay: .78s; }
+    .loader-title span:nth-child(3) { animation-delay: .96s; }
+    .loader-title span:nth-child(4) { color: var(--green); animation-delay: 1.14s; }
+    .loader-caption {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: caption-appear .6s 1.45s ease forwards;
+    }
+    .loader-paw {
+      position: absolute;
+      color: var(--green);
+      opacity: 0;
+      animation: paw-drift 2.5s ease-in-out infinite;
+    }
+    .loader-paw svg { display: block; width: 100%; height: 100%; }
+    .loader-paw-one { top: 17%; left: 20%; width: 35px; height: 35px; animation-delay: .2s; }
+    .loader-paw-two { right: 19%; bottom: 20%; width: 25px; height: 25px; color: var(--orange); animation-delay: .8s; }
+    .loader-paw-three { top: 22%; right: 23%; width: 18px; height: 18px; animation-delay: 1.2s; }
+    @keyframes mark-appear {
+      from { opacity: 0; transform: scale(.55) rotate(-12deg); filter: blur(8px); }
+      to { opacity: 1; transform: scale(1) rotate(0); filter: blur(0); }
+    }
+    @keyframes mark-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -7px; } }
+    @keyframes word-appear { to { opacity: 1; transform: translateY(0) rotate(0); } }
+    @keyframes caption-appear { to { opacity: .75; } }
+    @keyframes paw-drift {
+      0% { opacity: 0; transform: translateY(12px) scale(.7) rotate(-15deg); }
+      35%, 70% { opacity: .5; }
+      100% { opacity: 0; transform: translateY(-18px) scale(1.05) rotate(10deg); }
+    }
+    @media (max-width: 480px) {
+      .loader-content { padding: 24px; }
+      .loader-mark { width: min(76vw, 300px); }
+      .loader-title { margin-top: 36px; }
+      .loader-paw-one { left: 8%; }
+      .loader-paw-two { right: 6%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .loader-mark, .loader-title span, .loader-caption, .loader-paw {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+      .loader-logo { transition-duration: .01ms; }
+      .loader { transition-duration: .15s; }
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      height: 132px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.96);
+    }
+    .nav-group {
+      display: flex;
+      align-items: center;
+      gap: clamp(14px, 2.4vw, 32px);
+    }
+    .nav-link {
+      color: var(--muted);
+      font-size: 16px;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: color .2s ease;
+    }
+    .nav-link:hover { color: var(--green); }
+    .nav-right { justify-self: end; }
+    .brand {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      font-family: "Manrope", sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -.055em;
+      white-space: nowrap;
+    }
+    .brand img { width: 78px; height: 78px; object-fit: cover; }
+    .brand-name {
+      display: block;
+      font-size: 16px;
+      line-height: 1.1;
+    }
+    .nav-action {
+      justify-self: end;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 12px 17px;
+      border-radius: 7px;
+      background: var(--green);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: background .2s ease, transform .2s ease;
+    }
+    .nav-action:hover { transform: translateY(-2px); background: var(--green-dark); }
+    .menu-toggle { display: none; }
+
+    .hero {
+      position: relative;
+      min-height: min(730px, calc(100svh - 105px));
+      display: grid;
+      grid-template-columns: 1.02fr .98fr;
+      align-items: center;
+      gap: 58px;
+      padding: 66px 0 74px;
+      isolation: isolate;
+    }
+    .hero::before {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      content: "";
+      background-image:
+        radial-gradient(circle at 12% 18%, rgba(228,161,38,.12), transparent 22%),
+        radial-gradient(circle at 88% 20%, rgba(47,127,114,.1), transparent 20%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='104' height='104' viewBox='0 0 104 104' fill='%23526746'%3E%3Cellipse cx='52' cy='60' rx='17' ry='13'/%3E%3Cellipse cx='28' cy='39' rx='8' ry='11' transform='rotate(-25 28 39)'/%3E%3Cellipse cx='45' cy='27' rx='8' ry='11' transform='rotate(-8 45 27)'/%3E%3Cellipse cx='63' cy='27' rx='8' ry='11' transform='rotate(8 63 27)'/%3E%3Cellipse cx='80' cy='39' rx='8' ry='11' transform='rotate(25 80 39)'/%3E%3C/svg%3E");
+      background-position: 0 0, 0 0, 18px 12px;
+      background-size: auto, auto, 104px 104px;
+      opacity: 1;
+      pointer-events: none;
+    }
+    .copy { max-width: 565px; padding: 0 0 16px 3px; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--green) 10%, #fff);
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 25px 0 20px;
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(48px, 6vw, 78px);
+      font-weight: 600;
+      letter-spacing: -.075em;
+      line-height: 1.04;
+    }
+    h1 em { color: var(--green); font-style: normal; }
+    .intro {
+      max-width: 440px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+    .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 23px; margin-top: 33px; }
+    .button {
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 23px;
+      border-radius: 7px;
+      background: var(--green);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      transition: background .2s ease, transform .2s ease;
+    }
+    .button:hover { transform: translateY(-2px); background: var(--green-dark); }
+    .social {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .social svg { width: 16px; height: 16px; color: var(--green); }
+    .social:hover { color: var(--green); }
+    .hero-foot {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 25px;
+      margin-top: 58px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .hero-foot span { display: inline-flex; align-items: center; gap: 8px; }
+    .hero-foot b { color: var(--green); font-size: 14px; }
+
+    .visual {
+      position: relative;
+      min-height: 500px;
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+    }
+    .visual::before {
+      position: absolute;
+      z-index: -1;
+      width: min(435px, 86%);
+      aspect-ratio: 1;
+      content: "";
+      border-radius: 47% 53% 55% 45% / 49% 44% 56% 51%;
+      background: var(--cream);
+      transform: rotate(-8deg);
+    }
+    .visual::after {
+      position: absolute;
+      z-index: -2;
+      top: 50%;
+      left: 50%;
+      width: 480px;
+      aspect-ratio: 1;
+      content: "";
+      border: 1px solid #eeeee8;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .mascot {
+      width: min(350px, 74%);
+      aspect-ratio: .78;
+      overflow: hidden;
+      border: 9px solid rgba(255,255,255,.86);
+      border-radius: 48% 48% 18px 18px;
+      background: #fff;
+      box-shadow: 0 24px 70px rgba(58, 60, 47, .12);
+      transform: rotate(-3deg);
+    }
+    .mascot img { width: 100%; height: 100%; object-fit: cover; object-position: center 42%; }
+    .sticker {
+      position: absolute;
+      top: 8%;
+      right: 3%;
+      width: 104px;
+      height: 104px;
+      display: grid;
+      place-content: center;
+      border: 1px solid rgba(82,103,70,.15);
+      border-radius: 50%;
+      background: #fff;
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 1.6;
+      text-align: center;
+      text-transform: uppercase;
+      transform: rotate(9deg);
+    }
+    .sticker span { display: block; color: var(--orange); font-size: 19px; line-height: 1.2; }
+    .floating-card {
+      position: absolute;
+      right: 1%;
+      bottom: 11%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 17px;
+      border: 1px solid #f0f0eb;
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 12px 35px rgba(50, 51, 41, .08);
+    }
+    .floating-icon {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #f4f5ef;
+      color: var(--green);
+      font-size: 18px;
+    }
+    .floating-card strong { display: block; font-size: 12px; }
+    .floating-card small { display: block; margin-top: 2px; color: var(--muted); font-size: 10px; }
+    .spark {
+      position: absolute;
+      top: 24%;
+      left: 8%;
+      color: var(--orange);
+      font-size: 26px;
+    }
+    .about {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      align-items: center;
+      gap: clamp(42px, 8vw, 112px);
+      padding-top: 44px;
+      padding-bottom: 112px;
+      scroll-margin-top: 40px;
+    }
+    .about-photo {
+      position: relative;
+      isolation: isolate;
+      margin: 0;
+    }
+    .about-photo img {
+      width: 100%;
+      aspect-ratio: 1.48;
+      display: block;
+      border: 8px solid #fff;
+      border-radius: 22px;
+      object-fit: cover;
+      object-position: center 36%;
+      box-shadow: 0 24px 70px rgba(58,60,47,.12);
+    }
+    .about-paw {
+      position: absolute;
+      z-index: 1;
+      width: 47px;
+      height: 47px;
+      color: var(--orange);
+      pointer-events: none;
+    }
+    .about-paw svg { width: 100%; height: 100%; }
+    .about-paw-one { top: -30px; right: 12%; transform: rotate(18deg); }
+    .about-paw-two { bottom: -27px; left: 13%; width: 35px; height: 35px; color: var(--green); transform: rotate(-17deg); }
+    .about-copy { max-width: 470px; }
+    .about h2 {
+      margin: 20px 0 22px;
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(38px, 4.4vw, 58px);
+      font-weight: 600;
+      letter-spacing: -.07em;
+      line-height: 1.06;
+    }
+    .about h2 em { color: var(--green); font-style: normal; }
+    .about-copy p {
+      margin: 0 0 15px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.85;
+    }
+    .services {
+      padding-top: 40px;
+      padding-bottom: 112px;
+      scroll-margin-top: 40px;
+    }
+    .services-heading {
+      max-width: 650px;
+      margin-bottom: 42px;
+    }
+    .services h2 {
+      margin: 18px 0 14px;
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(40px, 5vw, 62px);
+      font-weight: 600;
+      letter-spacing: -.075em;
+      line-height: 1.04;
+    }
+    .services h2 em { color: var(--green); font-style: normal; }
+    .services-heading p {
+      max-width: 510px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+    .services-heading .eyebrow::after {
+      width: 7px;
+      height: 7px;
+      content: "";
+      border-radius: 50%;
+      background: var(--orange);
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .service-card {
+      --service-accent: var(--green);
+      --service-tint: var(--mint);
+      position: relative;
+      min-height: 230px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 28px;
+      border: 1px solid color-mix(in srgb, var(--service-accent) 18%, var(--line));
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--service-tint), #fff 60%);
+      isolation: isolate;
+      overflow: hidden;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+    .service-card:nth-child(2) { --service-accent: #b85c2e; --service-tint: #fff1e8; }
+    .service-card:nth-child(3) { --service-accent: #6b5ca5; --service-tint: #f3efff; }
+    .service-card:nth-child(4) { --service-accent: var(--teal); --service-tint: #e8f6f3; }
+    .service-card::before {
+      position: absolute;
+      z-index: -1;
+      top: -60px;
+      right: -48px;
+      width: 180px;
+      aspect-ratio: 1;
+      content: "";
+      border: 1px solid color-mix(in srgb, var(--service-accent) 15%, transparent);
+      border-radius: 50%;
+      box-shadow: 0 0 0 16px color-mix(in srgb, var(--service-accent) 4%, transparent),
+        0 0 0 32px color-mix(in srgb, var(--service-accent) 3%, transparent);
+      transition: transform .35s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      border-color: color-mix(in srgb, var(--service-accent) 36%, white);
+      box-shadow: 0 18px 42px rgba(41,42,36,.07);
+    }
+    .service-card:hover::before { transform: scale(1.12); }
+    .service-icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 23px;
+      border-radius: 13px;
+      background: color-mix(in srgb, var(--service-accent) 12%, white);
+      color: var(--service-accent);
+    }
+    .service-icon svg { width: 24px; height: 24px; }
+    .service-kicker {
+      position: absolute;
+      top: 24px;
+      right: 23px;
+      padding: 6px 10px;
+      border: 1px solid color-mix(in srgb, var(--service-accent) 17%, white);
+      border-radius: 999px;
+      background: rgba(255,255,255,.72);
+      color: var(--service-accent);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .service-card h3 {
+      margin: 0 0 10px;
+      font-family: "Manrope", sans-serif;
+      font-size: 21px;
+      font-weight: 700;
+      letter-spacing: -.04em;
+    }
+    .service-card p {
+      max-width: 45ch;
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+    .service-more::after {
+      width: 5px;
+      height: 5px;
+      align-self: center;
+      margin-left: 9px;
+      content: "";
+      border-radius: 50%;
+      background: var(--service-accent);
+      transition: transform .2s ease;
+    }
+    .service-more { color: var(--service-accent); }
+    .service-more:hover::after { transform: scale(1.7); }
+    .service-more {
+      display: inline-flex;
+      margin-top: auto;
+      padding-top: 20px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 700;
+      text-underline-offset: 4px;
+    }
+    .service-more:hover { text-decoration: underline; }
+    .store {
+      padding-top: 40px;
+      padding-bottom: 104px;
+      scroll-margin-top: 40px;
+    }
+    .store-heading,
+    .contact-heading {
+      max-width: 650px;
+      margin-bottom: 34px;
+    }
+    .store h2,
+    .contact h2 {
+      margin: 18px 0 14px;
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(40px, 5vw, 58px);
+      font-weight: 600;
+      letter-spacing: -.075em;
+      line-height: 1.04;
+    }
+    .store h2 em,
+    .contact h2 em { color: var(--green); font-style: normal; }
+    .store-heading p,
+    .contact-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+    .store-layout {
+      position: relative;
+      min-height: 420px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--cream);
+    }
+    .store-info {
+      position: absolute;
+      z-index: 1;
+      top: 24px;
+      left: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      max-width: min(340px, calc(100% - 48px));
+      padding: 26px;
+      border: 1px solid rgba(233,233,226,.9);
+      border-radius: 13px;
+      background: rgba(255,255,255,.94);
+      box-shadow: 0 12px 35px rgba(41,42,36,.12);
+      backdrop-filter: blur(10px);
+    }
+    .store-info h3 {
+      margin: 0 0 12px;
+      font-family: "Manrope", sans-serif;
+      font-size: 25px;
+      letter-spacing: -.04em;
+    }
+    .store-address {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .store-map-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      margin-top: 25px;
+      padding: 0 18px;
+      border-radius: 7px;
+      background: var(--green);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      transition: background .2s ease, transform .2s ease;
+    }
+    .store-map-link:hover { transform: translateY(-2px); background: var(--green-dark); }
+    .store-map {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #e8e9e1;
+    }
+    .contact {
+      padding-top: 42px;
+      padding-bottom: 104px;
+      scroll-margin-top: 40px;
+    }
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 40px;
+      padding: clamp(28px, 5vw, 56px);
+      border-radius: 16px;
+      background: var(--cream);
+    }
+    .contact-heading { margin: 0; }
+    .contact-heading h2 { margin-top: 16px; }
+    .contact-list {
+      display: grid;
+      gap: 12px;
+      min-width: min(100%, 290px);
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      transition: transform .2s ease, border-color .2s ease;
+    }
+    .contact-link:hover { transform: translateY(-2px); border-color: rgba(82,103,70,.4); }
+    .contact-link svg {
+      width: 21px;
+      height: 21px;
+      flex: 0 0 auto;
+      padding: 8px;
+      box-sizing: content-box;
+      border-radius: 10px;
+      background: var(--mint);
+      color: var(--green);
+    }
+    .contact-link:nth-child(2) svg { background: var(--peach); color: #bb7624; }
+    .contact-link small { display: block; margin-bottom: 2px; color: var(--muted); font-size: 10px; }
+    .contact-link strong { display: block; font-size: 13px; }
+    .site-footer {
+      border-top: 1px solid var(--line);
+      background: #fbfbf8;
+    }
+    .footer-inner {
+      min-height: 124px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .footer-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: "Manrope", sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: -.045em;
+    }
+    .footer-brand img { width: 52px; height: 52px; object-fit: cover; }
+    .footer-note { color: var(--muted); font-size: 12px; }
+
+    @media (max-width: 800px) {
+      .page { width: min(100% - 44px, 620px); }
+      .nav { height: 112px; }
+      .nav-link { font-size: 14px; }
+      .nav-action { padding: 10px 12px; font-size: 14px; }
+      .brand img { width: 66px; height: 66px; }
+      .brand-name { font-size: 13px; }
+      .hero { min-height: auto; grid-template-columns: 1fr; gap: 8px; padding: 60px 0 48px; }
+      .copy { max-width: 600px; }
+      h1 { max-width: 560px; font-size: clamp(50px, 10vw, 72px); }
+      .intro { max-width: 490px; }
+      .hero-foot { margin-top: 39px; }
+      .visual { min-height: 430px; margin-top: 5px; }
+      .visual::after { width: min(430px, 90vw); }
+      .mascot { width: min(320px, 69%); }
+      .sticker { right: 9%; }
+      .floating-card { right: 7%; bottom: 8%; }
+      .about { grid-template-columns: 1fr; gap: 34px; padding-top: 36px; padding-bottom: 78px; }
+      .about-copy { order: -1; }
+      .about-photo { width: min(100%, 560px); }
+      .about-copy { max-width: 600px; }
+      .about h2 { max-width: 520px; }
+      .services { padding-top: 24px; padding-bottom: 78px; }
+      .store-layout { min-height: 360px; }
+      .store-info { padding: 22px; }
+      .contact-layout { grid-template-columns: 1fr; gap: 28px; }
+      .contact-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 480px) {
+      .page { width: calc(100% - 38px); }
+      .nav { height: 100px; }
+      .brand { gap: 2px; }
+      .brand { grid-column: 2; justify-self: center; }
+      .brand img { width: 60px; height: 60px; }
+      .brand-name { font-size: 12px; }
+      .menu-toggle {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        min-width: 52px;
+        min-height: 58px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        padding: 5px;
+        border: 0;
+        background: transparent;
+        color: var(--green);
+        cursor: pointer;
+        transform: translateY(-50%);
+      }
+      .menu-toggle svg { width: 29px; height: 29px; }
+      .menu-toggle-label { color: var(--ink); font-size: 10px; font-weight: 700; letter-spacing: .04em; }
+      .nav-group { display: none; }
+      .nav.menu-open {
+        position: fixed;
+        z-index: 100;
+        inset: 0;
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 48px;
+        margin: 0;
+        padding: 28px 24px 48px;
+        overflow-y: auto;
+        border: 0;
+        background: #fff;
+      }
+      .menu-open .brand { order: -1; }
+      .menu-open .brand img { width: 92px; height: 92px; }
+      .menu-open .brand-name { font-size: 17px; }
+      .menu-open .nav-group,
+      .menu-open .nav-right {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-self: auto;
+        gap: 24px;
+        width: 100%;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+      .menu-open .nav-link,
+      .menu-open .nav-action { font-size: 20px; }
+      .menu-open .nav-action { padding: 13px 22px; }
+      .menu-open .menu-toggle { position: fixed; top: 28px; right: 19px; transform: none; }
+      .hero { padding-top: 47px; }
+      .hero::before { background-size: 84px 84px; opacity: .035; }
+      h1 { margin-top: 20px; font-size: clamp(45px, 12vw, 58px); }
+      .intro { font-size: 14px; }
+      .actions { gap: 18px; margin-top: 27px; }
+      .button { min-height: 48px; padding: 0 17px; }
+      .hero-foot { gap: 10px 17px; margin-top: 33px; font-size: 11px; }
+      .visual { min-height: 355px; }
+      .mascot { width: min(270px, 72%); border-width: 7px; }
+      .sticker { top: 5%; right: 1%; width: 82px; height: 82px; font-size: 8px; }
+      .sticker span { font-size: 16px; }
+      .floating-card { right: -2%; bottom: 5%; padding: 10px 12px; }
+      .floating-icon { width: 31px; height: 31px; }
+      .floating-card strong { font-size: 11px; }
+      .floating-card small { font-size: 9px; }
+      .spark { top: 17%; left: 1%; }
+      .about { gap: 28px; padding-top: 24px; padding-bottom: 62px; }
+      .about-photo img { border-width: 6px; border-radius: 16px; }
+      .about-paw-one { top: -20px; right: 9%; width: 36px; height: 36px; }
+      .about-paw-two { bottom: -20px; left: 10%; width: 28px; height: 28px; }
+      .about h2 { margin: 16px 0; font-size: 40px; }
+      .about-copy p { font-size: 14px; }
+      .services { padding-top: 12px; padding-bottom: 62px; }
+      .services-heading { margin-bottom: 28px; }
+      .services h2 { margin: 16px 0 12px; font-size: 40px; }
+      .services-heading p { font-size: 14px; }
+      .services-grid { grid-template-columns: 1fr; gap: 12px; }
+      .service-card { min-height: 0; padding: 22px; }
+      .service-icon { width: 42px; height: 42px; margin-bottom: 17px; }
+      .service-card h3 { font-size: 19px; }
+      .store { padding-top: 12px; padding-bottom: 58px; }
+      .store-heading, .contact-heading { margin-bottom: 24px; }
+      .store h2, .contact h2 { margin: 16px 0 12px; font-size: 40px; }
+      .store-heading p, .contact-heading p { font-size: 14px; }
+      .store-layout { min-height: 390px; }
+      .store-info { top: 16px; left: 16px; max-width: calc(100% - 32px); padding: 20px; }
+      .store-info h3 { font-size: 22px; }
+      .store-address { font-size: 14px; }
+      .contact { padding-top: 12px; padding-bottom: 58px; }
+      .contact-layout { gap: 22px; padding: 24px; }
+      .contact-list { grid-template-columns: 1fr; gap: 10px; }
+      .footer-inner { min-height: 104px; }
+      .footer-brand img { width: 44px; height: 44px; }
+      .footer-brand { font-size: 12px; }
+      .footer-note { font-size: 10px; text-align: right; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="loader" role="status" aria-label="La Cuccia di Amy si sta caricando">
+    <span class="loader-paw loader-paw-one" aria-hidden="true">
+      <svg viewBox="0 0 40 40" fill="currentColor"><ellipse cx="20" cy="25" rx="9" ry="7"/><ellipse cx="8.5" cy="16" rx="4" ry="5.5" transform="rotate(-25 8.5 16)"/><ellipse cx="17" cy="10" rx="4" ry="5.5" transform="rotate(-8 17 10)"/><ellipse cx="25" cy="10" rx="4" ry="5.5" transform="rotate(8 25 10)"/><ellipse cx="33" cy="16" rx="4" ry="5.5" transform="rotate(25 33 16)"/></svg>
+    </span>
+    <span class="loader-paw loader-paw-two" aria-hidden="true">
+      <svg viewBox="0 0 40 40" fill="currentColor"><ellipse cx="20" cy="25" rx="9" ry="7"/><ellipse cx="8.5" cy="16" rx="4" ry="5.5" transform="rotate(-25 8.5 16)"/><ellipse cx="17" cy="10" rx="4" ry="5.5" transform="rotate(-8 17 10)"/><ellipse cx="25" cy="10" rx="4" ry="5.5" transform="rotate(8 25 10)"/><ellipse cx="33" cy="16" rx="4" ry="5.5" transform="rotate(25 33 16)"/></svg>
+    </span>
+    <span class="loader-paw loader-paw-three" aria-hidden="true">
+      <svg viewBox="0 0 40 40" fill="currentColor"><ellipse cx="20" cy="25" rx="9" ry="7"/><ellipse cx="8.5" cy="16" rx="4" ry="5.5" transform="rotate(-25 8.5 16)"/><ellipse cx="17" cy="10" rx="4" ry="5.5" transform="rotate(-8 17 10)"/><ellipse cx="25" cy="10" rx="4" ry="5.5" transform="rotate(8 25 10)"/><ellipse cx="33" cy="16" rx="4" ry="5.5" transform="rotate(25 33 16)"/></svg>
+    </span>
+    <div class="loader-content">
+      <div class="loader-mark" aria-hidden="true">
+        <img class="loader-logo loader-logo-open" src="logo-loader.webp" alt="">
+        <img class="loader-logo loader-logo-final" src="logo.png" alt="">
+      </div>
+      <p class="loader-title" aria-label="La Cuccia di Amy">
+        <span aria-hidden="true">La</span><span aria-hidden="true">Cuccia</span><span aria-hidden="true">di</span><span aria-hidden="true">Amy</span>
+      </p>
+      <p class="loader-caption">Ogni zampa è a casa</p>
+    </div>
+  </div>
+  <header class="page nav">
+    <nav class="nav-group" aria-label="Navigazione principale">
+      <a class="nav-link" href="#inizio">Home</a>
+      <a class="nav-link" href="#servizi">Servizi</a>
+    </nav>
+    <a class="brand" href="#inizio" aria-label="La Cuccia di Amy, home">
+      <img src="logo.png" alt="">
+      <span class="brand-name">LA CUCCIA DI AMY</span>
+    </a>
+    <nav class="nav-group nav-right" aria-label="Contatti">
+      <a class="nav-link" href="#negozio">Negozio</a>
+      <a class="nav-action" href="#contattaci">
+        Contattaci
+      </a>
+    </nav>
+    <button class="menu-toggle" type="button" aria-label="Apri menu" aria-expanded="false">
+      <svg viewBox="0 0 40 40" fill="currentColor" aria-hidden="true">
+        <ellipse cx="20" cy="25" rx="9" ry="7"/>
+        <ellipse cx="8.5" cy="16" rx="4" ry="5.5" transform="rotate(-25 8.5 16)"/>
+        <ellipse cx="17" cy="10" rx="4" ry="5.5" transform="rotate(-8 17 10)"/>
+        <ellipse cx="25" cy="10" rx="4" ry="5.5" transform="rotate(8 25 10)"/>
+        <ellipse cx="33" cy="16" rx="4" ry="5.5" transform="rotate(25 33 16)"/>
+      </svg>
+      <span class="menu-toggle-label">Menu</span>
+    </button>
+  </header>
+
+  <main id="inizio" class="page hero">
+    <section class="copy" aria-labelledby="hero-title">
+      <span class="eyebrow">Per chi ami, ogni giorno</span>
+      <h1 id="hero-title">Più cura.<br>Più <em>code felici.</em></h1>
+      <p class="intro">
+        Il pet shop di quartiere dove trovare il meglio per cani e gatti:
+        alimentazione scelta con cura, snack naturali e accessori speciali.
+      </p>
+      <div class="actions">
+        <a class="button" href="https://maps.google.com/?q=Via+Provinciale+Pisana+33,+Livorno" target="_blank" rel="noreferrer">
+          Passa in negozio
+        </a>
+        <a class="social" href="https://www.instagram.com/lacucciadiamy/" target="_blank" rel="noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="17.5" cy="6.8" r="1" fill="currentColor"/>
+          </svg>
+          Seguici su Instagram
+        </a>
+      </div>
+      <div class="hero-foot" aria-label="Servizi">
+        <span><b aria-hidden="true">✳</b> Alimentazione naturale</span>
+        <span><b aria-hidden="true">✳</b> Consegne a domicilio</span>
+        <span><b aria-hidden="true">✳</b> Spedizioni in tutta Italia</span>
+      </div>
+    </section>
+
+    <div class="visual" aria-label="Illustrazione del logo La Cuccia di Amy">
+      <span class="spark" aria-hidden="true">✳</span>
+      <div class="mascot"><img src="hero.webp" alt="Un cane al guinzaglio in una passeggiata all'aperto"></div>
+      <div class="sticker" aria-label="BARF dal 2024"><span>✳</span>BARF<br>dal 2024</div>
+      <div class="floating-card">
+        <span class="floating-icon" aria-hidden="true">♡</span>
+        <span><strong>Piccole attenzioni,</strong><small>grande amore per loro</small></span>
+      </div>
+    </div>
+  </main>
+  <section id="chi-siamo" class="page about" aria-labelledby="about-title">
+    <figure class="about-photo">
+      <img src="IMG_2956.JPG" alt="Amy insieme al suo cane" loading="lazy">
+      <span class="about-paw about-paw-one" aria-hidden="true">
+        <svg viewBox="0 0 40 40" fill="currentColor"><ellipse cx="20" cy="25" rx="9" ry="7"/><ellipse cx="8.5" cy="16" rx="4" ry="5.5" transform="rotate(-25 8.5 16)"/><ellipse cx="17" cy="10" rx="4" ry="5.5" transform="rotate(-8 17 10)"/><ellipse cx="25" cy="10" rx="4" ry="5.5" transform="rotate(8 25 10)"/><ellipse cx="33" cy="16" rx="4" ry="5.5" transform="rotate(25 33 16)"/></svg>
+      </span>
+      <span class="about-paw about-paw-two" aria-hidden="true">
+        <svg viewBox="0 0 40 40" fill="currentColor"><ellipse cx="20" cy="25" rx="9" ry="7"/><ellipse cx="8.5" cy="16" rx="4" ry="5.5" transform="rotate(-25 8.5 16)"/><ellipse cx="17" cy="10" rx="4" ry="5.5" transform="rotate(-8 17 10)"/><ellipse cx="25" cy="10" rx="4" ry="5.5" transform="rotate(8 25 10)"/><ellipse cx="33" cy="16" rx="4" ry="5.5" transform="rotate(25 33 16)"/></svg>
+      </span>
+    </figure>
+    <div class="about-copy">
+      <span class="eyebrow">Chi siamo</span>
+      <h2 id="about-title">Una famiglia, <em>tante zampette.</em></h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Da La Cuccia di Amy ogni amico a quattro zampe trova attenzioni, ascolto e una selezione pensata con il cuore.</p>
+      <p>Aliquam erat volutpat. Ci piace conoscere ogni musetto, consigliare con cura e accompagnare le famiglie nella scelta del meglio, ogni giorno.</p>
+    </div>
+  </section>
+  <section id="servizi" class="page services" aria-labelledby="services-title">
+    <div class="services-heading">
+      <span class="eyebrow">Quello che facciamo</span>
+      <h2 id="services-title">Tutto il meglio,<br><em>per ogni zampetta.</em></h2>
+      <p>Dall'alimentazione scelta con cura agli accessori speciali: troviamo insieme quello che fa stare bene il tuo compagno di vita.</p>
+    </div>
+    <div class="services-grid">
+      <article class="service-card">
+        <span class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13h16l-2 7H6l-2-7Z"/><path d="M7 10c1.1-1 1.8-2 2-3M12 10c1.1-1 1.8-2 2-3M17 10c1.1-1 1.8-2 2-3"/></svg>
+        </span>
+        <span class="service-kicker">Ricette naturali</span>
+        <h3>BARF e menu casalinghi</h3>
+        <p>Menu completi e stagionali, con ingredienti naturali e ricette formulate con il supporto di veterinari esperti.</p>
+        <a class="service-more" href="https://www.instagram.com/lacucciadiamy/" target="_blank" rel="noreferrer" aria-label="Scopri di più su BARF e menu casalinghi">Scopri di più</a>
+      </article>
+      <article class="service-card">
+        <span class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5 12 4l8 4.5v9L12 22l-8-4.5v-9Z"/><path d="m4.5 8.8 7.5 4.3 7.5-4.3M12 13v8.5M8 6.2l8 4.6"/></svg>
+        </span>
+        <span class="service-kicker">Cani, gatti e altri</span>
+        <h3>Cibo per tanti amici</h3>
+        <p>Alimenti per cani e gatti, oltre a cibo congelato per rettili — serpenti inclusi — e rapaci.</p>
+        <a class="service-more" href="https://www.instagram.com/lacucciadiamy/" target="_blank" rel="noreferrer" aria-label="Scopri di più sugli alimenti per animali">Scopri di più</a>
+      </article>
+      <article class="service-card">
+        <span class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10Z"/><path d="M8 12h8M12 8v8"/></svg>
+        </span>
+        <span class="service-kicker">Fatti con amore</span>
+        <h3>Snack e accessori</h3>
+        <p>Masticativi e snack naturali del nostro brand, giochi e guinzaglieria artigianale, personalizzabile e su ordinazione.</p>
+        <a class="service-more" href="https://www.instagram.com/lacucciadiamy/" target="_blank" rel="noreferrer" aria-label="Scopri di più su snack e accessori">Scopri di più</a>
+      </article>
+      <article class="service-card">
+        <span class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v11H3zM14 11h4l3 3v4h-7z"/><circle cx="7.5" cy="19" r="2"/><circle cx="18" cy="19" r="2"/><path d="M6 4h6M4 2h7"/></svg>
+        </span>
+        <span class="service-kicker">Arriviamo da te</span>
+        <h3>Consegna e spedizione</h3>
+        <p>Portiamo la spesa a casa tua e spediamo in tutta Italia, così le cose buone arrivano dove sei.</p>
+        <a class="service-more" href="https://www.instagram.com/lacucciadiamy/" target="_blank" rel="noreferrer" aria-label="Scopri di più su consegne e spedizioni">Scopri di più</a>
+      </article>
+    </div>
+  </section>
+  <section id="negozio" class="page store" aria-labelledby="store-title">
+    <div class="store-heading">
+      <span class="eyebrow">Dove siamo</span>
+      <h2 id="store-title">Ci trovi a <em>Livorno.</em></h2>
+      <p>Vieni a trovarci in negozio: ti aspettiamo con tante idee e consigli per i tuoi amici animali.</p>
+    </div>
+    <div class="store-layout">
+      <div class="store-info">
+        <h3>La Cuccia di Amy</h3>
+        <p class="store-address">Via Provinciale Pisana, 33<br>Livorno</p>
+        <a class="store-map-link" href="https://maps.google.com/?q=Via+Provinciale+Pisana+33,+Livorno" target="_blank" rel="noreferrer">Apri in Google Maps</a>
+      </div>
+      <iframe
+        class="store-map"
+        title="Mappa: La Cuccia di Amy, Via Provinciale Pisana 33, Livorno"
+        src="https://maps.google.com/maps?q=Via%20Provinciale%20Pisana%2033%2C%20Livorno&z=15&output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </section>
+  <section id="contattaci" class="page contact" aria-labelledby="contact-title">
+    <div class="contact-layout">
+      <div class="contact-heading">
+        <span class="eyebrow">Siamo qui per te</span>
+        <h2 id="contact-title">Facciamo <em>due chiacchiere?</em></h2>
+        <p>Per informazioni, consigli o per trovare insieme la soluzione giusta, contattaci.</p>
+      </div>
+      <div class="contact-list">
+        <a class="contact-link" href="tel:+39346497136">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3H4a1 1 0 0 0-1 1c0 9.4 7.6 17 17 17a1 1 0 0 0 1-1v-3l-5-2-2 3a15 15 0 0 1-8-8l3-2-2-5Z"/></svg>
+          <span><small>Chiamaci</small><strong>+39 346 497136</strong></span>
+        </a>
+        <a class="contact-link" href="https://www.instagram.com/lacucciadiamy/" target="_blank" rel="noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
+          <span><small>Seguici e scrivici</small><strong>@lacucciadiamy</strong></span>
+        </a>
+      </div>
+    </div>
+  </section>
+  <footer class="site-footer">
+    <div class="page footer-inner">
+      <a class="footer-brand" href="#inizio" aria-label="La Cuccia di Amy, torna all'inizio">
+        <img src="logo.png" alt="">
+        <span>LA CUCCIA DI AMY</span>
+      </a>
+      <span class="footer-note">Un posto speciale per ogni zampetta.</span>
+    </div>
+  </footer>
+  <script>
+    const loader = document.querySelector(".loader");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const swapDelay = reduceMotion ? 100 : 1850;
+    const leaveDelay = reduceMotion ? 250 : 2850;
+    window.setTimeout(() => loader.classList.add("is-swapping"), swapDelay);
+    window.setTimeout(() => {
+      loader.classList.add("is-leaving");
+      window.setTimeout(() => loader.remove(), 700);
+    }, leaveDelay);
+
+    const header = document.querySelector(".nav");
+    const menuToggle = document.querySelector(".menu-toggle");
+
+    function setMenuOpen(open) {
+      header.classList.toggle("menu-open", open);
+      document.body.style.overflow = open ? "hidden" : "";
+      menuToggle.setAttribute("aria-expanded", String(open));
+      menuToggle.setAttribute("aria-label", open ? "Chiudi menu" : "Apri menu");
+      menuToggle.querySelector(".menu-toggle-label").textContent = open ? "Chiudi" : "Menu";
+    }
+
+    menuToggle.addEventListener("click", () => {
+      setMenuOpen(menuToggle.getAttribute("aria-expanded") !== "true");
+    });
+    header.querySelectorAll(".nav-group a").forEach(link => {
+      link.addEventListener("click", () => setMenuOpen(false));
+    });
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") setMenuOpen(false);
+    });
+  </script>
+</body>
+</html>
